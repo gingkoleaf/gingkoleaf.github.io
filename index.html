@@ -324,6 +324,149 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/16/vm-network/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="daybreak.gx">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gingko Leaf">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/16/vm-network/" class="post-title-link" itemprop="url">vm_network</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-16 13:36:26 / 修改时间：13:42:13" itemprop="dateCreated datePublished" datetime="2019-05-16T13:36:26+08:00">2019-05-16</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://blog.csdn.net/yushupan/article/details/78404395" target="_blank" rel="noopener">TODO1</a><br><a href="https://blog.csdn.net/chichi123137/article/details/82670257" target="_blank" rel="noopener">TODO2</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/15/centos-usage/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -790,7 +933,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-16 02:45:46" itemprop="dateModified" datetime="2019-05-16T02:45:46+08:00">2019-05-16</time>
+                <time title="修改时间：2019-05-16 14:01:04" itemprop="dateModified" datetime="2019-05-16T14:01:04+08:00">2019-05-16</time>
               
             
           </span>
@@ -886,7 +1029,14 @@
 <h2 id="扩容"><a href="#扩容" class="headerlink" title="扩容"></a>扩容</h2><h3 id="扩容LV"><a href="#扩容LV" class="headerlink" title="扩容LV"></a>扩容LV</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># lvs</span></span><br><span class="line">  LV   VG     Attr       LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert</span><br><span class="line">  lv1  vg0    -wi-ao---- 88.00m                                                    </span><br><span class="line">[root@localhost ~]<span class="comment"># lvextend -L +100m /dev/vg0/lv1 </span></span><br><span class="line">  Size of logical volume vg0/lv1 changed from 88.00 MiB (22 extents) to 188.00 MiB (47 extents).</span><br><span class="line">  Logical volume vg0/lv1 successfully resized.</span><br><span class="line">[root@localhost ~]<span class="comment"># lvs</span></span><br><span class="line">  LV   VG     Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert</span><br><span class="line">  lv1  vg0    -wi-ao---- 188.00m </span><br><span class="line">[root@localhost ~]<span class="comment"># df -ha</span></span><br><span class="line">Filesystem               Size  Used Avail Use% Mounted on</span><br><span class="line">/dev/mapper/vg0-lv1       82M  1.6M   76M   2% /usr1    <span class="comment"># LV已经扩容但是文件系统大小还时原来大小</span></span><br><span class="line">[root@localhost ~]<span class="comment"># resize2fs /dev/vg0/lv1 </span></span><br><span class="line">resize2fs 1.42.9 (28-Dec-2013)</span><br><span class="line">Filesystem at /dev/vg0/lv1 is mounted on /usr1; on-line resizing required</span><br><span class="line">old_desc_blocks = 1, new_desc_blocks = 1</span><br><span class="line">The filesystem on /dev/vg0/lv1 is now 192512 blocks long.</span><br><span class="line">[root@localhost ~]<span class="comment"># df -ha</span></span><br><span class="line">Filesystem               Size  Used Avail Use% Mounted on</span><br><span class="line">/dev/mapper/vg0-lv1      178M  1.6M  169M   1% /usr1    <span class="comment"># 已经扩容</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># lvs |grep lv1</span></span><br><span class="line">  lv1  vg0    -wi-ao---- 188.00m                                                    </span><br><span class="line">[root@localhost ~]<span class="comment"># lvextend -l +50%FREE /dev/vg0/lv1 </span></span><br><span class="line">  Size of logical volume vg0/lv1 changed from 188.00 MiB (47 extents) to 244.00 MiB (61 extents).</span><br><span class="line">  Logical volume vg0/lv1 successfully resized.</span><br><span class="line">[root@localhost ~]<span class="comment"># lvs |grep lv1</span></span><br><span class="line">  lv1  vg0    -wi-ao---- 244.00m                                                    </span><br><span class="line">[root@localhost ~]<span class="comment"># df -ha |grep lv1</span></span><br><span class="line">/dev/mapper/vg0-lv1      178M  1.6M  169M   1% /usr1</span><br><span class="line">[root@localhost ~]<span class="comment"># resize2fs /dev/mapper/vg0-lv1 </span></span><br><span class="line">resize2fs 1.42.9 (28-Dec-2013)</span><br><span class="line">Filesystem at /dev/mapper/vg0-lv1 is mounted on /usr1; on-line resizing required</span><br><span class="line">old_desc_blocks = 1, new_desc_blocks = 1</span><br><span class="line">The filesystem on /dev/mapper/vg0-lv1 is now 249856 blocks long.</span><br><span class="line">[root@localhost ~]<span class="comment"># df -ha |grep lv1</span></span><br><span class="line">/dev/mapper/vg0-lv1      233M  2.1M  220M   1% /usr1</span><br></pre></td></tr></table></figure>
 <p>lvextend 中 <code>-L</code> 和 <code>-l</code> 参数中如果没有使用 <code>+</code> 号，则表示扩容到指定大小</p>
-<h2 id="缩减容量"><a href="#缩减容量" class="headerlink" title="缩减容量"></a>缩减容量</h2>
+<h3 id="扩容VG"><a href="#扩容VG" class="headerlink" title="扩容VG"></a>扩容VG</h3><p>当VG中没有空闲资源时需要先扩容VG才能扩容LV</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># pvs</span></span><br><span class="line">  PV         VG     Fmt  Attr PSize   PFree </span><br><span class="line">  /dev/sdb1  vg0    lvm2 a--  296.00m 52.00m</span><br><span class="line">[root@localhost ~]<span class="comment"># pvcreate /dev/sdc1 </span></span><br><span class="line">  Physical volume <span class="string">"/dev/sdc1"</span> successfully created.</span><br><span class="line">[root@localhost ~]<span class="comment"># pvs</span></span><br><span class="line">  PV         VG     Fmt  Attr PSize   PFree</span><br><span class="line">  /dev/sdb1  vg0    lvm2 a--  296.00m  52.00m</span><br><span class="line">  /dev/sdc1         lvm2 ---  511.00m 511.00m</span><br><span class="line">[root@localhost ~]<span class="comment"># vgs</span></span><br><span class="line">  VG     <span class="comment">#PV #LV #SN Attr   VSize   VFree </span></span><br><span class="line">  vg0      1   1   0 wz--n- 296.00m 52.00m</span><br><span class="line">[root@localhost ~]<span class="comment"># vgextend vg0 /dev/sdc1 </span></span><br><span class="line">  Volume group <span class="string">"vg0"</span> successfully extended</span><br><span class="line">[root@localhost ~]<span class="comment"># vgs</span></span><br><span class="line">  VG     <span class="comment">#PV #LV #SN Attr   VSize   VFree  </span></span><br><span class="line">  vg0      2   1   0 wz--n- 804.00m 560.00m</span><br><span class="line">[root@localhost ~]<span class="comment"># </span></span><br><span class="line">[root@localhost ~]<span class="comment"># lvs</span></span><br><span class="line">  LV   VG     Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert</span><br><span class="line">  lv1  vg0    -wi<span class="_">-a</span>----- 244.00m</span><br><span class="line">[root@localhost ~]<span class="comment"># lvextend -l +100%FREE /dev/vg0/lv1 </span></span><br><span class="line">  Size of logical volume vg0/lv1 changed from 244.00 MiB (61 extents) to 804.00 MiB (201 extents).</span><br><span class="line">  Logical volume vg0/lv1 successfully resized.</span><br><span class="line">[root@localhost ~]<span class="comment"># lvs</span></span><br><span class="line">  LV   VG     Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert</span><br><span class="line">  lv1  vg0    -wi<span class="_">-a</span>----- 804.00m</span><br></pre></td></tr></table></figure>
+<h2 id="缩减容量"><a href="#缩减容量" class="headerlink" title="缩减容量"></a>缩减容量</h2><ul>
+<li>先umount设备</li>
+<li>缩减文件系统大小</li>
+<li>缩减LV大小</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># umount -l /usr1</span></span><br><span class="line">[root@localhost ~]<span class="comment"># resize2fs /dev/mapper/vg0-lv1 100M</span></span><br><span class="line">resize2fs 1.42.9 (28-Dec-2013)</span><br><span class="line">Please run <span class="string">'e2fsck -f /dev/mapper/vg0-lv1'</span> first.</span><br><span class="line">[root@localhost ~]<span class="comment"># e2fsck -f /dev/mapper/vg0-lv1 </span></span><br><span class="line">e2fsck 1.42.9 (28-Dec-2013)</span><br><span class="line">Pass 1: Checking inodes, blocks, and sizes</span><br><span class="line">Pass 2: Checking directory structure</span><br><span class="line">Pass 3: Checking directory connectivity</span><br><span class="line">Pass 4: Checking reference counts</span><br><span class="line">Pass 5: Checking group summary information</span><br><span class="line">/dev/mapper/vg0-lv1: 2369/206848 files (6.4% non-contiguous), 61211/823296 blocks</span><br><span class="line">[root@localhost ~]<span class="comment"># </span></span><br><span class="line">[root@localhost ~]<span class="comment"># resize2fs /dev/mapper/vg0-lv1 100M</span></span><br><span class="line">resize2fs 1.42.9 (28-Dec-2013)</span><br><span class="line">Resizing the filesystem on /dev/mapper/vg0-lv1 to 102400 (1k) blocks.</span><br><span class="line">The filesystem on /dev/mapper/vg0-lv1 is now 102400 blocks long.</span><br><span class="line">[root@localhost ~]<span class="comment"># lvreduce -L 100M /dev/mapper/vg0-lv1 </span></span><br><span class="line">  WARNING: Reducing active logical volume to 100.00 MiB.</span><br><span class="line">  THIS MAY DESTROY YOUR DATA (filesystem etc.)</span><br><span class="line">Do you really want to reduce vg0/lv1? [y/n]: y</span><br><span class="line">  Size of logical volume vg0/lv1 changed from 804.00 MiB (201 extents) to 100.00 MiB (25 extents).</span><br><span class="line">  Logical volume vg0/lv1 successfully resized.</span><br><span class="line">[root@localhost ~]<span class="comment"># lvs</span></span><br><span class="line">  LV   VG     Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert</span><br><span class="line">  lv1  vg0    -wi<span class="_">-a</span>----- 100.00m  </span><br><span class="line">[root@localhost /]<span class="comment"># vgs</span></span><br><span class="line">  VG     <span class="comment">#PV #LV #SN Attr   VSize   VFree  </span></span><br><span class="line">  vg0      2   1   0 wz--n- 804.00m 704.00m</span><br><span class="line">[root@localhost /]<span class="comment"># pvs</span></span><br><span class="line">  PV         VG     Fmt  Attr PSize   PFree  </span><br><span class="line">  /dev/sdb1  vg0    lvm2 a--  296.00m 196.00m</span><br><span class="line">  /dev/sdc1  vg0    lvm2 a--  508.00m 508.00m</span><br></pre></td></tr></table></figure>
           
         
       
@@ -1781,7 +1931,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
