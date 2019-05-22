@@ -324,6 +324,184 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/23/maven-usage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="daybreak.gx">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gingko Leaf">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/23/maven-usage/" class="post-title-link" itemprop="url">maven 使用总结</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-23 01:03:21 / 修改时间：02:06:31" itemprop="dateCreated datePublished" datetime="2019-05-23T01:03:21+08:00">2019-05-23</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/构建工具/" itemprop="url" rel="index"><span itemprop="name">构建工具</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/构建工具/maven/" itemprop="url" rel="index"><span itemprop="name">maven</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="http://maven.apache.org/index.html" target="_blank" rel="noopener">maven官方文档</a></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>下载<a href="http://maven.apache.org/download.cgi" target="_blank" rel="noopener">二进制包</a>后解压即可，然后配置环境变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">'export M2_HOME=/usr/local/apache_maven_xxx'</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">echo</span> <span class="string">'export PATH=$M2_HOME/bin:$PATH'</span> &gt;&gt; /etc/profile</span><br></pre></td></tr></table></figure>
+<p>执行<code>mvn -v</code>查看版本，同时确认是否安装配置OK</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/16/vm-network/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -529,7 +707,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-16 01:03:08" itemprop="dateModified" datetime="2019-05-16T01:03:08+08:00">2019-05-16</time>
+                <time title="修改时间：2019-05-23 02:17:08" itemprop="dateModified" datetime="2019-05-23T02:17:08+08:00">2019-05-23</time>
               
             
           </span>
@@ -630,6 +808,8 @@
 </table>
 <h3 id="查看软件包详情"><a href="#查看软件包详情" class="headerlink" title="查看软件包详情"></a>查看软件包详情</h3><p>  <code>yum info wget</code></p>
 <h3 id="查看软件包依赖"><a href="#查看软件包依赖" class="headerlink" title="查看软件包依赖"></a>查看软件包依赖</h3><p>  <code>yum deplist wget</code></p>
+<h2 id="工具安装与配置"><a href="#工具安装与配置" class="headerlink" title="工具安装与配置"></a>工具安装与配置</h2><h3 id="openjdk安装"><a href="#openjdk安装" class="headerlink" title="openjdk安装"></a>openjdk安装</h3><p>通过yum工具安装的位置为 <code>/usr/lib/jvm/java-xxx</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install java-11-openjdk-devel.x86_64</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"export JAVA_HOME=/usr/lib/jvm/java-11-openjdk"</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">echo</span> <span class="string">'export PATH=$JAVA_HOME/bin:$PATH'</span> &gt;&gt; /etc/profile</span><br></pre></td></tr></table></figure>
 
           
         
@@ -748,7 +928,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-15 23:22:27" itemprop="dateModified" datetime="2019-05-15T23:22:27+08:00">2019-05-15</time>
+                <time title="修改时间：2019-05-23 01:05:07" itemprop="dateModified" datetime="2019-05-23T01:05:07+08:00">2019-05-23</time>
               
             
           </span>
@@ -773,6 +953,13 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/构建工具/" itemprop="url" rel="index"><span itemprop="name">构建工具</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/构建工具/makefile/" itemprop="url" rel="index"><span itemprop="name">makefile</span></a></span>
 
                 
                 
@@ -933,7 +1120,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-16 14:01:04" itemprop="dateModified" datetime="2019-05-16T14:01:04+08:00">2019-05-16</time>
+                <time title="修改时间：2019-05-17 01:16:05" itemprop="dateModified" datetime="2019-05-17T01:16:05+08:00">2019-05-17</time>
               
             
           </span>
@@ -1007,9 +1194,11 @@
 <li>PV: Physical Volume 物理卷</li>
 <li>VG: Volume Group 卷组，由一个或多个PV组成。可以在其上创建一个或多个LV</li>
 <li>LV: Logical Volume 逻辑卷，在其上可以创建文件系统</li>
-<li>PE: Physical Extent 物理块，每个PV都会被划分成PE，它是可以被LVM寻址的最小单元</li>
+<li>PE: Physical Extent 物理扩展盘区，每个PV都会被划分成PE，它是可以被LVM寻址的最小单元</li>
+<li>LE: Logical Extent 逻辑扩展盘区，</li>
 </ul>
 <h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>1) 物理磁盘被格式化为PV，空间被划分为一个个PE<br>2) 不同的PV加入到同一个VG中，其对应的所有PE都进入VG的PE池中<br>3) LVM从PE池中选择PE创建LV，不同物理盘中的PE可能会划分到同一个LV中<br>4) 在LV上创建文件系统后就可以挂载使用了<br>5) 对LV的扩容和缩减其实就是相应的增加或减少PE数量</p>
+<p>创建逻辑卷时，定义了逻辑扩展盘区与物理扩展盘区的映射关系。</p>
 <h2 id="创建流程"><a href="#创建流程" class="headerlink" title="创建流程"></a>创建流程</h2><h3 id="创建分区"><a href="#创建分区" class="headerlink" title="创建分区"></a>创建分区</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# fdisk /dev/sdb</span><br><span class="line">Welcome to fdisk (util-linux 2.23.2).</span><br><span class="line"></span><br><span class="line">Changes will remain in memory only, until you decide to write them.</span><br><span class="line">Be careful before using the write command.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Command (m for help): n</span><br><span class="line">Partition type:</span><br><span class="line">   p   primary (0 primary, 0 extended, 4 free)</span><br><span class="line">   e   extended</span><br><span class="line">Select (default p): p</span><br><span class="line">Partition number (1-4, default 1): </span><br><span class="line">First sector (2048-2097151, default 2048): </span><br><span class="line">Using default value 2048</span><br><span class="line">Last sector, +sectors or +size&#123;K,M,G&#125; (2048-2097151, default 2097151): +300M</span><br><span class="line">Partition 1 of type Linux and of size 300 MiB is set</span><br><span class="line"></span><br><span class="line">Command (m for help): p</span><br><span class="line"></span><br><span class="line">Disk /dev/sdb: 1073 MB, 1073741824 bytes, 2097152 sectors</span><br><span class="line">Units = sectors of 1 * 512 = 512 bytes</span><br><span class="line">Sector size (logical/physical): 512 bytes / 512 bytes</span><br><span class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</span><br><span class="line">Disk label type: dos</span><br><span class="line">Disk identifier: 0x233e2ebd</span><br><span class="line"></span><br><span class="line">   Device Boot      Start         End      Blocks   Id  System</span><br><span class="line">/dev/sdb1            2048      616447      307200   83  Linux</span><br><span class="line"></span><br><span class="line">Command (m for help): t</span><br><span class="line">Selected partition 1</span><br><span class="line">Hex code (type L to list all codes): 8e</span><br><span class="line">Changed type of partition 'Linux' to 'Linux LVM'</span><br><span class="line"></span><br><span class="line">Command (m for help): p</span><br><span class="line"></span><br><span class="line">Disk /dev/sdb: 1073 MB, 1073741824 bytes, 2097152 sectors</span><br><span class="line">Units = sectors of 1 * 512 = 512 bytes</span><br><span class="line">Sector size (logical/physical): 512 bytes / 512 bytes</span><br><span class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</span><br><span class="line">Disk label type: dos</span><br><span class="line">Disk identifier: 0x233e2ebd</span><br><span class="line"></span><br><span class="line">   Device Boot      Start         End      Blocks   Id  System</span><br><span class="line">/dev/sdb1            2048      616447      307200   8e  Linux LVM</span><br><span class="line"></span><br><span class="line">Command (m for help): w</span><br><span class="line">The partition table has been altered!</span><br><span class="line"></span><br><span class="line">Calling ioctl() to re-read partition table.</span><br><span class="line">Syncing disks.</span><br></pre></td></tr></table></figure>
 <h3 id="创建pv"><a href="#创建pv" class="headerlink" title="创建pv"></a>创建pv</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># pvcreate /dev/sdb1</span></span><br><span class="line">  Physical volume <span class="string">"/dev/sdb1"</span> successfully created.</span><br><span class="line">[root@localhost ~]<span class="comment"># pvs</span></span><br><span class="line">  PV         VG     Fmt  Attr PSize   PFree  </span><br><span class="line">  /dev/sdb1         lvm2 ---  300.00m 300.00m</span><br><span class="line">[root@localhost ~]<span class="comment"># pvdisplay /dev/sdb1</span></span><br><span class="line">  --- Physical volume ---</span><br><span class="line">  PV Name               /dev/sdb1</span><br><span class="line">  VG Name               vg0</span><br><span class="line">  PV Size               300.00 MiB / not usable 4.00 MiB</span><br><span class="line">  Allocatable           yes </span><br><span class="line">  PE Size               4.00 MiB</span><br><span class="line">  Total PE              74</span><br><span class="line">  Free PE               74</span><br><span class="line">  Allocated PE          0</span><br><span class="line">  PV UUID               8dqEi7-haMt-ciIM-ib2e-AUxp-f7ym-bCvlfw</span><br></pre></td></tr></table></figure>
 <h3 id="创建vg"><a href="#创建vg" class="headerlink" title="创建vg"></a>创建vg</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># vgcreate vg0 /dev/sdb1</span></span><br><span class="line">  Volume group <span class="string">"vg0"</span> successfully created</span><br><span class="line">[root@localhost ~]<span class="comment"># vgs</span></span><br><span class="line">  VG     <span class="comment">#PV #LV #SN Attr   VSize   VFree  </span></span><br><span class="line">  vg0      1   0   0 wz--n- 296.00m 296.00m</span><br><span class="line">[root@localhost ~]<span class="comment"># vgdisplay vg0</span></span><br><span class="line">  --- Volume group ---</span><br><span class="line">  VG Name               vg0</span><br><span class="line">  System ID             </span><br><span class="line">  Format                lvm2</span><br><span class="line">  Metadata Areas        1</span><br><span class="line">  Metadata Sequence No  1</span><br><span class="line">  VG Access             <span class="built_in">read</span>/write</span><br><span class="line">  VG Status             resizable</span><br><span class="line">  MAX LV                0</span><br><span class="line">  Cur LV                0</span><br><span class="line">  Open LV               0</span><br><span class="line">  Max PV                0</span><br><span class="line">  Cur PV                1</span><br><span class="line">  Act PV                1</span><br><span class="line">  VG Size               296.00 MiB</span><br><span class="line">  PE Size               4.00 MiB</span><br><span class="line">  Total PE              74</span><br><span class="line">  Alloc PE / Size       0 / 0           <span class="comment">#已分配的PE数量</span></span><br><span class="line">  Free  PE / Size       74 / 296.00 MiB <span class="comment">#剩余的PE数量</span></span><br><span class="line">  VG UUID               3FH6og-yXLt-NaL3-uehk-9lrJ-c4TD-r0z6Sa</span><br></pre></td></tr></table></figure>
@@ -1021,6 +1210,7 @@
 <li>10%VG, 表示10%的VG总大小</li>
 <li>20%FREE, 表示VG中剩余空间的20%</li>
 <li>30%PVS, 表示PV集合中剩余空间的30%</li>
+<li>该参数后面跟数值(非百分比)时，表示包含多少个PE大小。</li>
 </ul>
 </li>
 </ul>
@@ -1037,6 +1227,7 @@
 <li>缩减LV大小</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># umount -l /usr1</span></span><br><span class="line">[root@localhost ~]<span class="comment"># resize2fs /dev/mapper/vg0-lv1 100M</span></span><br><span class="line">resize2fs 1.42.9 (28-Dec-2013)</span><br><span class="line">Please run <span class="string">'e2fsck -f /dev/mapper/vg0-lv1'</span> first.</span><br><span class="line">[root@localhost ~]<span class="comment"># e2fsck -f /dev/mapper/vg0-lv1 </span></span><br><span class="line">e2fsck 1.42.9 (28-Dec-2013)</span><br><span class="line">Pass 1: Checking inodes, blocks, and sizes</span><br><span class="line">Pass 2: Checking directory structure</span><br><span class="line">Pass 3: Checking directory connectivity</span><br><span class="line">Pass 4: Checking reference counts</span><br><span class="line">Pass 5: Checking group summary information</span><br><span class="line">/dev/mapper/vg0-lv1: 2369/206848 files (6.4% non-contiguous), 61211/823296 blocks</span><br><span class="line">[root@localhost ~]<span class="comment"># </span></span><br><span class="line">[root@localhost ~]<span class="comment"># resize2fs /dev/mapper/vg0-lv1 100M</span></span><br><span class="line">resize2fs 1.42.9 (28-Dec-2013)</span><br><span class="line">Resizing the filesystem on /dev/mapper/vg0-lv1 to 102400 (1k) blocks.</span><br><span class="line">The filesystem on /dev/mapper/vg0-lv1 is now 102400 blocks long.</span><br><span class="line">[root@localhost ~]<span class="comment"># lvreduce -L 100M /dev/mapper/vg0-lv1 </span></span><br><span class="line">  WARNING: Reducing active logical volume to 100.00 MiB.</span><br><span class="line">  THIS MAY DESTROY YOUR DATA (filesystem etc.)</span><br><span class="line">Do you really want to reduce vg0/lv1? [y/n]: y</span><br><span class="line">  Size of logical volume vg0/lv1 changed from 804.00 MiB (201 extents) to 100.00 MiB (25 extents).</span><br><span class="line">  Logical volume vg0/lv1 successfully resized.</span><br><span class="line">[root@localhost ~]<span class="comment"># lvs</span></span><br><span class="line">  LV   VG     Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert</span><br><span class="line">  lv1  vg0    -wi<span class="_">-a</span>----- 100.00m  </span><br><span class="line">[root@localhost /]<span class="comment"># vgs</span></span><br><span class="line">  VG     <span class="comment">#PV #LV #SN Attr   VSize   VFree  </span></span><br><span class="line">  vg0      2   1   0 wz--n- 804.00m 704.00m</span><br><span class="line">[root@localhost /]<span class="comment"># pvs</span></span><br><span class="line">  PV         VG     Fmt  Attr PSize   PFree  </span><br><span class="line">  /dev/sdb1  vg0    lvm2 a--  296.00m 196.00m</span><br><span class="line">  /dev/sdc1  vg0    lvm2 a--  508.00m 508.00m</span><br></pre></td></tr></table></figure>
+<h2 id="快照"><a href="#快照" class="headerlink" title="快照"></a>快照</h2>
           
         
       
@@ -1931,7 +2122,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1972,7 +2163,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">12</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2009,7 +2204,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
