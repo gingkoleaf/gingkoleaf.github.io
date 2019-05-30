@@ -324,6 +324,197 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/30/jenkins/jenkins-pipeline-parallel/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="daybreak.gx">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gingko Leaf">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/30/jenkins/jenkins-pipeline-parallel/" class="post-title-link" itemprop="url">pipeline并行任务配置</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-30 13:00:38 / 修改时间：13:58:40" itemprop="dateCreated datePublished" datetime="2019-05-30T13:00:38+08:00">2019-05-30</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/持续集成/" itemprop="url" rel="index"><span itemprop="name">持续集成</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/持续集成/jenkins/" itemprop="url" rel="index"><span itemprop="name">jenkins</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/持续集成/jenkins/pipeline/" itemprop="url" rel="index"><span itemprop="name">pipeline</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="静态并行任务配置"><a href="#静态并行任务配置" class="headerlink" title="静态并行任务配置"></a>静态并行任务配置</h2><h3 id="声明式"><a href="#声明式" class="headerlink" title="声明式"></a>声明式</h3><ol>
+<li>在<code>stage</code>中可以通过<code>parallel</code>块来嵌套多个<code>stage</code>实现并行运行</li>
+<li><code>parallel</code>块中的<code>stage</code>除了不能再次嵌套<code>parallel</code>外和普通<code>stage</code>一样，也可以通过<code>stages</code>包含一些列顺序执行的<code>stage</code></li>
+<li>每个<code>stage</code>中有且只能有一个<code>steps</code>、<code>stages</code>或者<code>parallel</code></li>
+<li>所有包含<code>parallel</code>的<code>stage</code>都不能包含<code>agent</code>和<code>tools</code></li>
+</ol>
+<h4 id="EXAMPLE-1"><a href="#EXAMPLE-1" class="headerlink" title="EXAMPLE-1"></a>EXAMPLE-1</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    options &#123;</span><br><span class="line">        timestamps()</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(&apos;init&apos;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo &quot;init start&quot;</span><br><span class="line">                sleep 5</span><br><span class="line">                echo &apos;init end&apos;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage(&apos;build&apos;) &#123;</span><br><span class="line">            parallel &#123;</span><br><span class="line">                stage(&apos;x86 build&apos;) &#123;</span><br><span class="line">                    steps &#123;</span><br><span class="line">                        echo &apos;x86 build start&apos;</span><br><span class="line">                        sleep 5</span><br><span class="line">                        echo &apos;x86 build end&apos;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                stage(&apos;arm build&apos;) &#123;</span><br><span class="line">                    steps &#123;</span><br><span class="line">                        echo &apos;arm build start&apos;</span><br><span class="line">                        sleep 3</span><br><span class="line">                        echo &apos;arm build end&apos;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>blueOcean如下图所示<br><img src="/img/jenkins_example_1.bmp" alt="example_1"></p>
+<h4 id="EXAMPLE-2"><a href="#EXAMPLE-2" class="headerlink" title="EXAMPLE-2"></a>EXAMPLE-2</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    options &#123;</span><br><span class="line">        timestamps()</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(&apos;init&apos;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo &quot;init start&quot;</span><br><span class="line">                sleep 5</span><br><span class="line">                echo &apos;init end&apos;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage(&apos;build&apos;) &#123;</span><br><span class="line">            parallel &#123;</span><br><span class="line">                stage(&apos;x86 build&apos;) &#123;</span><br><span class="line">                    steps &#123;</span><br><span class="line">                        echo &apos;x86 build start&apos;</span><br><span class="line">                        sleep 5</span><br><span class="line">                        echo &apos;x86 build end&apos;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                stage(&apos;arm build&apos;) &#123;</span><br><span class="line">                    stages &#123;</span><br><span class="line">                        stage(&apos;arm-master build&apos;) &#123;</span><br><span class="line">                            steps &#123;</span><br><span class="line">                                echo &apos;arm master build start&apos;</span><br><span class="line">                                sleep 3</span><br><span class="line">                                echo &apos;arm master build end&apos;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                        stage(&apos;arm develop build&apos;) &#123;</span><br><span class="line">                            steps &#123;</span><br><span class="line">                                echo &apos;arm develop build start&apos;</span><br><span class="line">                                sleep 3</span><br><span class="line">                                echo &apos;arm develop build end&apos;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>blueOcean如下图所示<br><img src="/img/jenkins_example_2.bmp" alt="example_1"></p>
+<h3 id="脚本式"><a href="#脚本式" class="headerlink" title="脚本式"></a>脚本式</h3><h2 id="动态创建并行任务"><a href="#动态创建并行任务" class="headerlink" title="动态创建并行任务"></a>动态创建并行任务</h2>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/23/maven-usage/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -369,12 +560,24 @@
                 
               
 
-              <time title="创建时间：2019-05-23 01:03:21 / 修改时间：02:06:31" itemprop="dateCreated datePublished" datetime="2019-05-23T01:03:21+08:00">2019-05-23</time>
+              <time title="创建时间：2019-05-23 01:03:21" itemprop="dateCreated datePublished" datetime="2019-05-23T01:03:21+08:00">2019-05-23</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-30 12:58:04" itemprop="dateModified" datetime="2019-05-30T12:58:04+08:00">2019-05-30</time>
               
             
           </span>
@@ -446,6 +649,35 @@
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>下载<a href="http://maven.apache.org/download.cgi" target="_blank" rel="noopener">二进制包</a>后解压即可，然后配置环境变量</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">'export M2_HOME=/usr/local/apache_maven_xxx'</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">echo</span> <span class="string">'export PATH=$M2_HOME/bin:$PATH'</span> &gt;&gt; /etc/profile</span><br></pre></td></tr></table></figure>
 <p>执行<code>mvn -v</code>查看版本，同时确认是否安装配置OK</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p>maven的配置文件有三个级别</p>
+<ol>
+<li>项目级，位于项目workspace目录下的pom.xml</li>
+<li>用户级，位于~/.m2/settings.xml，通过<code>mvn -s /path/to/settings.xml</code>可以覆盖用户级配置文件</li>
+<li>全局级，位于${M2_HOME}/conf/settings.xml，通过<code>mvn -gs /path/to/settings.xml</code>可以覆盖全局配置文件</li>
+</ol>
+<h3 id="配置项目"><a href="#配置项目" class="headerlink" title="配置项目"></a>配置项目</h3><table>
+<thead>
+<tr>
+<th>标签</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>localRepository</td>
+<td>String</td>
+<td>本地仓库路径，默认位于<code>~/.m2/repository</code>目录，当maven获取jar包时首先从本地获取，如果本地仓库中没有，再从远程仓库下载</td>
+</tr>
+<tr>
+<td>mirrors</td>
+<td>List<mirror></mirror></td>
+<td>配置仓库的下载镜像</td>
+</tr>
+</tbody>
+</table>
+<h3 id="阿里镜像"><a href="#阿里镜像" class="headerlink" title="阿里镜像"></a>阿里镜像</h3><p><a href="https://help.aliyun.com/document_detail/102512.html?spm=a2c40.aliyun_maven_repo.0.0.36183054c2VGCz" target="_blank" rel="noopener">公共代理库使用文档</a></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>alimaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>aliyun maven<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/mvn/view<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
           
         
@@ -707,7 +939,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-23 02:17:08" itemprop="dateModified" datetime="2019-05-23T02:17:08+08:00">2019-05-23</time>
+                <time title="修改时间：2019-05-23 12:59:12" itemprop="dateModified" datetime="2019-05-23T12:59:12+08:00">2019-05-23</time>
               
             
           </span>
@@ -1345,7 +1577,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-16 01:39:27" itemprop="dateModified" datetime="2019-05-16T01:39:27+08:00">2019-05-16</time>
+                <time title="修改时间：2019-05-30 13:20:27" itemprop="dateModified" datetime="2019-05-30T13:20:27+08:00">2019-05-30</time>
               
             
           </span>
@@ -1376,7 +1608,7 @@
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/持续集成/Jenkins/" itemprop="url" rel="index"><span itemprop="name">Jenkins</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/持续集成/jenkins/" itemprop="url" rel="index"><span itemprop="name">jenkins</span></a></span>
 
                 
                 
@@ -1421,7 +1653,7 @@
 <li><a href="https://updates.jenkins.io/update-center.json" target="_blank" rel="noopener">Jenkins插件默认升级站点配置</a></li>
 <li><a href="https://github.com/MovingBlocks/GroovyJenkins/blob/master/src/main/groovy/AddSSHNodeToJenkins.groovy" target="_blank" rel="noopener">groovy实现添加slave</a></li>
 </ul>
-<h2 id="shared-lib"><a href="#shared-lib" class="headerlink" title="shared-lib"></a>shared-lib</h2><h2 id="pipeline代码调试"><a href="#pipeline代码调试" class="headerlink" title="pipeline代码调试"></a>pipeline代码调试</h2><h2 id="问题总结"><a href="#问题总结" class="headerlink" title="问题总结"></a>问题总结</h2><h3 id="Multijob不能调用pipeline任务"><a href="#Multijob不能调用pipeline任务" class="headerlink" title="Multijob不能调用pipeline任务"></a>Multijob不能调用pipeline任务</h3><p><a href="https://issues.jenkins-ci.org/browse/JENKINS-38825" target="_blank" rel="noopener">升级Multijob插件到1.32及以上</a></p>
+<h2 id="pipeline使用"><a href="#pipeline使用" class="headerlink" title="pipeline使用"></a>pipeline使用</h2><h3 id="1-并行任务配置"><a href="#1-并行任务配置" class="headerlink" title="1. 并行任务配置"></a>1. <a href="/2019/05/30/jenkins/jenkins-pipeline-parallel">并行任务配置</a></h3><h2 id="shared-lib"><a href="#shared-lib" class="headerlink" title="shared-lib"></a>shared-lib</h2><h2 id="pipeline代码调试"><a href="#pipeline代码调试" class="headerlink" title="pipeline代码调试"></a>pipeline代码调试</h2><h2 id="问题总结"><a href="#问题总结" class="headerlink" title="问题总结"></a>问题总结</h2><h3 id="Multijob不能调用pipeline任务"><a href="#Multijob不能调用pipeline任务" class="headerlink" title="Multijob不能调用pipeline任务"></a>Multijob不能调用pipeline任务</h3><p><a href="https://issues.jenkins-ci.org/browse/JENKINS-38825" target="_blank" rel="noopener">升级Multijob插件到1.32及以上</a></p>
 <h3 id="admin密码丢失"><a href="#admin密码丢失" class="headerlink" title="admin密码丢失"></a>admin密码丢失</h3><ul>
 <li>初始密码: <code>${jenkins_home}/secrets/initialAdminPassword</code></li>
 <li><p>修改过密码后忘记<br>1) 将 <code>${jenkins_home}/config.xml</code> 文件中以下内容修改为false</p>
@@ -2122,7 +2354,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2167,7 +2399,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">14</span>
+                      
+                    
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>

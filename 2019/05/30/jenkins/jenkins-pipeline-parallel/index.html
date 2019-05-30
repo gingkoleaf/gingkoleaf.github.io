@@ -96,18 +96,21 @@
 
 
 
-  <meta name="description" content="vscode配置12345678&amp;#123;  &quot;workbench.colorTheme&quot;: &quot;One Dark Pro&quot;,  &quot;workbench.iconTheme&quot;: &quot;vscode-icons&quot;,  &quot;editor.renderWhitespace&quot;: &quot;all&quot;,  &quot;editor.renderControlCharacters&quot;: true,  &quot;window.zoomLevel&quot;:">
-<meta name="keywords" content="总结,vscode">
+  <meta name="description" content="静态并行任务配置声明式 在stage中可以通过parallel块来嵌套多个stage实现并行运行 parallel块中的stage除了不能再次嵌套parallel外和普通stage一样，也可以通过stages包含一些列顺序执行的stage 每个stage中有且只能有一个steps、stages或者parallel 所有包含parallel的stage都不能包含agent和tools  EXAMPL">
+<meta name="keywords" content="jenkins,pipeline">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vscode使用总结">
-<meta property="og:url" content="http://yoursite.com/2019/05/13/vscode-usage/index.html">
+<meta property="og:title" content="pipeline并行任务配置">
+<meta property="og:url" content="http://yoursite.com/2019/05/30/jenkins/jenkins-pipeline-parallel/index.html">
 <meta property="og:site_name" content="Gingko Leaf">
-<meta property="og:description" content="vscode配置12345678&amp;#123;  &quot;workbench.colorTheme&quot;: &quot;One Dark Pro&quot;,  &quot;workbench.iconTheme&quot;: &quot;vscode-icons&quot;,  &quot;editor.renderWhitespace&quot;: &quot;all&quot;,  &quot;editor.renderControlCharacters&quot;: true,  &quot;window.zoomLevel&quot;:">
+<meta property="og:description" content="静态并行任务配置声明式 在stage中可以通过parallel块来嵌套多个stage实现并行运行 parallel块中的stage除了不能再次嵌套parallel外和普通stage一样，也可以通过stages包含一些列顺序执行的stage 每个stage中有且只能有一个steps、stages或者parallel 所有包含parallel的stage都不能包含agent和tools  EXAMPL">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-14T16:04:26.401Z">
+<meta property="og:image" content="http://yoursite.com/img/jenkins_example_1.bmp">
+<meta property="og:image" content="http://yoursite.com/img/jenkins_example_2.bmp">
+<meta property="og:updated_time" content="2019-05-30T05:58:40.674Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vscode使用总结">
-<meta name="twitter:description" content="vscode配置12345678&amp;#123;  &quot;workbench.colorTheme&quot;: &quot;One Dark Pro&quot;,  &quot;workbench.iconTheme&quot;: &quot;vscode-icons&quot;,  &quot;editor.renderWhitespace&quot;: &quot;all&quot;,  &quot;editor.renderControlCharacters&quot;: true,  &quot;window.zoomLevel&quot;:">
+<meta name="twitter:title" content="pipeline并行任务配置">
+<meta name="twitter:description" content="静态并行任务配置声明式 在stage中可以通过parallel块来嵌套多个stage实现并行运行 parallel块中的stage除了不能再次嵌套parallel外和普通stage一样，也可以通过stages包含一些列顺序执行的stage 每个stage中有且只能有一个steps、stages或者parallel 所有包含parallel的stage都不能包含agent和tools  EXAMPL">
+<meta name="twitter:image" content="http://yoursite.com/img/jenkins_example_1.bmp">
 
 
 
@@ -115,7 +118,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/05/13/vscode-usage/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/30/jenkins/jenkins-pipeline-parallel/">
 
 
 
@@ -125,7 +128,7 @@
   };
 </script>
 
-  <title>vscode使用总结 | Gingko Leaf</title>
+  <title>pipeline并行任务配置 | Gingko Leaf</title>
   
 
 
@@ -328,7 +331,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/13/vscode-usage/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/30/jenkins/jenkins-pipeline-parallel/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="daybreak.gx">
@@ -345,7 +348,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">vscode使用总结
+          <h1 class="post-title" itemprop="name headline">pipeline并行任务配置
 
               
             
@@ -371,24 +374,12 @@
                 
               
 
-              <time title="创建时间：2019-05-13 08:26:00" itemprop="dateCreated datePublished" datetime="2019-05-13T08:26:00+08:00">2019-05-13</time>
+              <time title="创建时间：2019-05-30 13:00:38 / 修改时间：13:58:40" itemprop="dateCreated datePublished" datetime="2019-05-30T13:00:38+08:00">2019-05-30</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-05-15 00:04:26" itemprop="dateModified" datetime="2019-05-15T00:04:26+08:00">2019-05-15</time>
               
             
           </span>
@@ -412,7 +403,21 @@
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/vscode/" itemprop="url" rel="index"><span itemprop="name">vscode</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/持续集成/" itemprop="url" rel="index"><span itemprop="name">持续集成</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/持续集成/jenkins/" itemprop="url" rel="index"><span itemprop="name">jenkins</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/持续集成/jenkins/pipeline/" itemprop="url" rel="index"><span itemprop="name">pipeline</span></a></span>
 
                 
                 
@@ -447,8 +452,17 @@
       
 
       
-        <h2 id="vscode配置"><a href="#vscode配置" class="headerlink" title="vscode配置"></a>vscode配置</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"workbench.colorTheme"</span>: <span class="string">"One Dark Pro"</span>,</span><br><span class="line">  <span class="attr">"workbench.iconTheme"</span>: <span class="string">"vscode-icons"</span>,</span><br><span class="line">  <span class="attr">"editor.renderWhitespace"</span>: <span class="string">"all"</span>,</span><br><span class="line">  <span class="attr">"editor.renderControlCharacters"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"window.zoomLevel"</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="attr">"editor.fontSize"</span>: <span class="number">16</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+        <h2 id="静态并行任务配置"><a href="#静态并行任务配置" class="headerlink" title="静态并行任务配置"></a>静态并行任务配置</h2><h3 id="声明式"><a href="#声明式" class="headerlink" title="声明式"></a>声明式</h3><ol>
+<li>在<code>stage</code>中可以通过<code>parallel</code>块来嵌套多个<code>stage</code>实现并行运行</li>
+<li><code>parallel</code>块中的<code>stage</code>除了不能再次嵌套<code>parallel</code>外和普通<code>stage</code>一样，也可以通过<code>stages</code>包含一些列顺序执行的<code>stage</code></li>
+<li>每个<code>stage</code>中有且只能有一个<code>steps</code>、<code>stages</code>或者<code>parallel</code></li>
+<li>所有包含<code>parallel</code>的<code>stage</code>都不能包含<code>agent</code>和<code>tools</code></li>
+</ol>
+<h4 id="EXAMPLE-1"><a href="#EXAMPLE-1" class="headerlink" title="EXAMPLE-1"></a>EXAMPLE-1</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    options &#123;</span><br><span class="line">        timestamps()</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(&apos;init&apos;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo &quot;init start&quot;</span><br><span class="line">                sleep 5</span><br><span class="line">                echo &apos;init end&apos;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage(&apos;build&apos;) &#123;</span><br><span class="line">            parallel &#123;</span><br><span class="line">                stage(&apos;x86 build&apos;) &#123;</span><br><span class="line">                    steps &#123;</span><br><span class="line">                        echo &apos;x86 build start&apos;</span><br><span class="line">                        sleep 5</span><br><span class="line">                        echo &apos;x86 build end&apos;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                stage(&apos;arm build&apos;) &#123;</span><br><span class="line">                    steps &#123;</span><br><span class="line">                        echo &apos;arm build start&apos;</span><br><span class="line">                        sleep 3</span><br><span class="line">                        echo &apos;arm build end&apos;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>blueOcean如下图所示<br><img src="/img/jenkins_example_1.bmp" alt="example_1"></p>
+<h4 id="EXAMPLE-2"><a href="#EXAMPLE-2" class="headerlink" title="EXAMPLE-2"></a>EXAMPLE-2</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    options &#123;</span><br><span class="line">        timestamps()</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(&apos;init&apos;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo &quot;init start&quot;</span><br><span class="line">                sleep 5</span><br><span class="line">                echo &apos;init end&apos;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage(&apos;build&apos;) &#123;</span><br><span class="line">            parallel &#123;</span><br><span class="line">                stage(&apos;x86 build&apos;) &#123;</span><br><span class="line">                    steps &#123;</span><br><span class="line">                        echo &apos;x86 build start&apos;</span><br><span class="line">                        sleep 5</span><br><span class="line">                        echo &apos;x86 build end&apos;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                stage(&apos;arm build&apos;) &#123;</span><br><span class="line">                    stages &#123;</span><br><span class="line">                        stage(&apos;arm-master build&apos;) &#123;</span><br><span class="line">                            steps &#123;</span><br><span class="line">                                echo &apos;arm master build start&apos;</span><br><span class="line">                                sleep 3</span><br><span class="line">                                echo &apos;arm master build end&apos;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                        stage(&apos;arm develop build&apos;) &#123;</span><br><span class="line">                            steps &#123;</span><br><span class="line">                                echo &apos;arm develop build start&apos;</span><br><span class="line">                                sleep 3</span><br><span class="line">                                echo &apos;arm develop build end&apos;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>blueOcean如下图所示<br><img src="/img/jenkins_example_2.bmp" alt="example_1"></p>
+<h3 id="脚本式"><a href="#脚本式" class="headerlink" title="脚本式"></a>脚本式</h3><h2 id="动态创建并行任务"><a href="#动态创建并行任务" class="headerlink" title="动态创建并行任务"></a>动态创建并行任务</h2>
       
     </div>
 
@@ -471,9 +485,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/总结/" rel="tag"># 总结</a>
+            <a href="/tags/jenkins/" rel="tag"># jenkins</a>
           
-            <a href="/tags/vscode/" rel="tag"># vscode</a>
+            <a href="/tags/pipeline/" rel="tag"># pipeline</a>
           
         </div>
       
@@ -486,8 +500,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/13/npm-usage/" rel="next" title="npm使用总结">
-                <i class="fa fa-chevron-left"></i> npm使用总结
+              <a href="/2019/05/23/maven-usage/" rel="next" title="maven 使用总结">
+                <i class="fa fa-chevron-left"></i> maven 使用总结
               </a>
             
           </div>
@@ -495,10 +509,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/13/jenkins/" rel="prev" title="jenkins使用总结">
-                jenkins使用总结 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -705,7 +715,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#vscode配置"><span class="nav-number">1.</span> <span class="nav-text">vscode配置</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#静态并行任务配置"><span class="nav-number">1.</span> <span class="nav-text">静态并行任务配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#声明式"><span class="nav-number">1.1.</span> <span class="nav-text">声明式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#EXAMPLE-1"><span class="nav-number">1.1.1.</span> <span class="nav-text">EXAMPLE-1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#EXAMPLE-2"><span class="nav-number">1.1.2.</span> <span class="nav-text">EXAMPLE-2</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#脚本式"><span class="nav-number">1.2.</span> <span class="nav-text">脚本式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态创建并行任务"><span class="nav-number">2.</span> <span class="nav-text">动态创建并行任务</span></a></li></ol></div>
             
 
           </div>

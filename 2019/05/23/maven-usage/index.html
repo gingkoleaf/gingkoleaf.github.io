@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="maven官方文档 安装下载二进制包后解压即可，然后配置环境变量 12echo &apos;export M2_HOME=/usr/local/apache_maven_xxx&apos; &amp;gt;&amp;gt; /etc/profileecho &apos;export PATH=$M2_HOME/bin:$PATH&apos; &amp;gt;&amp;gt; /etc/profile 执行mvn -v查看版本，同时确认是否安装配置OK">
+  <meta name="description" content="maven官方文档 安装下载二进制包后解压即可，然后配置环境变量 12echo &apos;export M2_HOME=/usr/local/apache_maven_xxx&apos; &amp;gt;&amp;gt; /etc/profileecho &apos;export PATH=$M2_HOME/bin:$PATH&apos; &amp;gt;&amp;gt; /etc/profile 执行mvn -v查看版本，同时确认是否安装配置OK 配置配置文件ma">
 <meta name="keywords" content="总结,maven">
 <meta property="og:type" content="article">
 <meta property="og:title" content="maven 使用总结">
 <meta property="og:url" content="http://yoursite.com/2019/05/23/maven-usage/index.html">
 <meta property="og:site_name" content="Gingko Leaf">
-<meta property="og:description" content="maven官方文档 安装下载二进制包后解压即可，然后配置环境变量 12echo &apos;export M2_HOME=/usr/local/apache_maven_xxx&apos; &amp;gt;&amp;gt; /etc/profileecho &apos;export PATH=$M2_HOME/bin:$PATH&apos; &amp;gt;&amp;gt; /etc/profile 执行mvn -v查看版本，同时确认是否安装配置OK">
+<meta property="og:description" content="maven官方文档 安装下载二进制包后解压即可，然后配置环境变量 12echo &apos;export M2_HOME=/usr/local/apache_maven_xxx&apos; &amp;gt;&amp;gt; /etc/profileecho &apos;export PATH=$M2_HOME/bin:$PATH&apos; &amp;gt;&amp;gt; /etc/profile 执行mvn -v查看版本，同时确认是否安装配置OK 配置配置文件ma">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-22T18:06:31.090Z">
+<meta property="og:updated_time" content="2019-05-30T04:58:04.611Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="maven 使用总结">
-<meta name="twitter:description" content="maven官方文档 安装下载二进制包后解压即可，然后配置环境变量 12echo &apos;export M2_HOME=/usr/local/apache_maven_xxx&apos; &amp;gt;&amp;gt; /etc/profileecho &apos;export PATH=$M2_HOME/bin:$PATH&apos; &amp;gt;&amp;gt; /etc/profile 执行mvn -v查看版本，同时确认是否安装配置OK">
+<meta name="twitter:description" content="maven官方文档 安装下载二进制包后解压即可，然后配置环境变量 12echo &apos;export M2_HOME=/usr/local/apache_maven_xxx&apos; &amp;gt;&amp;gt; /etc/profileecho &apos;export PATH=$M2_HOME/bin:$PATH&apos; &amp;gt;&amp;gt; /etc/profile 执行mvn -v查看版本，同时确认是否安装配置OK 配置配置文件ma">
 
 
 
@@ -371,12 +371,24 @@
                 
               
 
-              <time title="创建时间：2019-05-23 01:03:21 / 修改时间：02:06:31" itemprop="dateCreated datePublished" datetime="2019-05-23T01:03:21+08:00">2019-05-23</time>
+              <time title="创建时间：2019-05-23 01:03:21" itemprop="dateCreated datePublished" datetime="2019-05-23T01:03:21+08:00">2019-05-23</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-30 12:58:04" itemprop="dateModified" datetime="2019-05-30T12:58:04+08:00">2019-05-30</time>
               
             
           </span>
@@ -446,6 +458,35 @@
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>下载<a href="http://maven.apache.org/download.cgi" target="_blank" rel="noopener">二进制包</a>后解压即可，然后配置环境变量</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">'export M2_HOME=/usr/local/apache_maven_xxx'</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">echo</span> <span class="string">'export PATH=$M2_HOME/bin:$PATH'</span> &gt;&gt; /etc/profile</span><br></pre></td></tr></table></figure>
 <p>执行<code>mvn -v</code>查看版本，同时确认是否安装配置OK</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p>maven的配置文件有三个级别</p>
+<ol>
+<li>项目级，位于项目workspace目录下的pom.xml</li>
+<li>用户级，位于~/.m2/settings.xml，通过<code>mvn -s /path/to/settings.xml</code>可以覆盖用户级配置文件</li>
+<li>全局级，位于${M2_HOME}/conf/settings.xml，通过<code>mvn -gs /path/to/settings.xml</code>可以覆盖全局配置文件</li>
+</ol>
+<h3 id="配置项目"><a href="#配置项目" class="headerlink" title="配置项目"></a>配置项目</h3><table>
+<thead>
+<tr>
+<th>标签</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>localRepository</td>
+<td>String</td>
+<td>本地仓库路径，默认位于<code>~/.m2/repository</code>目录，当maven获取jar包时首先从本地获取，如果本地仓库中没有，再从远程仓库下载</td>
+</tr>
+<tr>
+<td>mirrors</td>
+<td>List<mirror></mirror></td>
+<td>配置仓库的下载镜像</td>
+</tr>
+</tbody>
+</table>
+<h3 id="阿里镜像"><a href="#阿里镜像" class="headerlink" title="阿里镜像"></a>阿里镜像</h3><p><a href="https://help.aliyun.com/document_detail/102512.html?spm=a2c40.aliyun_maven_repo.0.0.36183054c2VGCz" target="_blank" rel="noopener">公共代理库使用文档</a></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>alimaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>aliyun maven<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/mvn/view<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -493,6 +534,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/30/jenkins/jenkins-pipeline-parallel/" rel="prev" title="pipeline并行任务配置">
+                pipeline并行任务配置 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -561,7 +606,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -606,7 +651,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">14</span>
+                      
+                    
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -697,7 +744,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件"><span class="nav-number">2.1.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置项目"><span class="nav-number">2.2.</span> <span class="nav-text">配置项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阿里镜像"><span class="nav-number">2.3.</span> <span class="nav-text">阿里镜像</span></a></li></ol></li></ol></div>
             
 
           </div>
