@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[pipeline并行任务配置]]></title>
+    <url>%2F2019%2F05%2F30%2Fjenkins%2Fjenkins-pipeline-parallel%2F</url>
+    <content type="text"><![CDATA[静态并行任务配置声明式 在stage中可以通过parallel块来嵌套多个stage实现并行运行 parallel块中的stage除了不能再次嵌套parallel外和普通stage一样，也可以通过stages包含一些列顺序执行的stage 每个stage中有且只能有一个steps、stages或者parallel 所有包含parallel的stage都不能包含agent和tools EXAMPLE-1 stage级别并行123456789101112131415161718192021222324252627282930313233pipeline &#123; agent any options &#123; timestamps() &#125; stages &#123; stage(&apos;init&apos;) &#123; steps &#123; echo &quot;init start&quot; sleep 5 echo &apos;init end&apos; &#125; &#125; stage(&apos;build&apos;) &#123; parallel &#123; stage(&apos;x86 build&apos;) &#123; steps &#123; echo &apos;x86 build start&apos; sleep 5 echo &apos;x86 build end&apos; &#125; &#125; stage(&apos;arm build&apos;) &#123; steps &#123; echo &apos;arm build start&apos; sleep 3 echo &apos;arm build end&apos; &#125; &#125; &#125; &#125; &#125;&#125; blueOcean如下图所示 EXAMPLE-2 并行stage中多个stage串行1234567891011121314151617181920212223242526272829303132333435363738394041424344454647pipeline &#123; agent any options &#123; timestamps() &#125; stages &#123; stage(&apos;init&apos;) &#123; steps &#123; echo &quot;init start&quot; sleep 5 echo &apos;init end&apos; &#125; &#125; stage(&apos;build&apos;) &#123; parallel &#123; stage(&apos;x86 build&apos;) &#123; agent &#123; label &apos;master&apos; &#125; steps &#123; echo &apos;x86 build start&apos; sleep 5 echo &apos;x86 build end&apos; &#125; &#125; stage(&apos;arm build&apos;) &#123; stages &#123; stage(&apos;arm-master build&apos;) &#123; steps &#123; echo &apos;arm master build start&apos; sleep 3 echo &apos;arm master build end&apos; &#125; &#125; stage(&apos;arm develop build&apos;) &#123; steps &#123; echo &apos;arm develop build start&apos; sleep 3 echo &apos;arm develop build end&apos; &#125; &#125; &#125; &#125; &#125; &#125; &#125;&#125; blueOcean如下图所示 EXAMPLE-4 step级别并行12345678910111213141516171819202122232425262728pipeline &#123; agent any options &#123; timestamps() &#125; stages &#123; stage(&apos;init&apos;) &#123; steps &#123; echo &quot;init start&quot; sleep 5 echo &apos;init end&apos; &#125; &#125; stage(&apos;build&apos;) &#123; steps &#123; parallel &apos;x86 build&apos;: &#123; echo &apos;x86 build start&apos; sleep 3 echo &apos;x86 build end&apos; &#125;, &apos;arm build&apos;: &#123; echo &apos;arm build start&apos; sleep 3 echo &apos;arm build end&apos; &#125; &#125; &#125; &#125;&#125; blueOcean如下图所示 脚本式EXAMPLE-312345678910111213141516171819202122232425script &#123; node(&apos;master&apos;) &#123; stage(&apos;init&apos;) &#123; echo &apos;init&apos; &#125; stage(&apos;build&apos;) &#123; parallel &apos;build x86&apos;: &#123; stage(&apos;build x86 step1&apos;) &#123; echo &apos;build x86 step1 start&apos; sleep 5 echo &apos;build x86 step1 end&apos; &#125; stage(&apos;build x86 step2&apos;) &#123; echo &apos;build x86 step 2 start&apos; sleep 5 echo &apos;build x86 step 2 end&apos; &#125; &#125;, &apos;build arm&apos;: &#123; echo &apos;build arm start&apos; sleep 6 echo &apos;build arm end&apos; &#125; &#125; &#125;&#125; blueOcean如下图所示 动态创建并行任务EXAMPLE-51234567891011121314151617181920212223242526272829303132333435363738def jobs = [&apos;jobA&apos;, &apos;jobB&apos;, &apos;jobC&apos;]def parallelStagesMap = jobs.collectEntries &#123; def jobName -&gt; [&quot;$&#123;jobName&#125;&quot;, generateJobStage(jobName)]&#125;def generateJobStage(String jobName) &#123; return &#123; node(&apos;master&apos;) &#123; stage(&quot;stage: $&#123;jobName&#125;&quot;) &#123; echo &quot;$&#123;jobName&#125; start&quot; sleep 5 echo &quot;job end&quot; &#125; &#125; &#125;&#125;pipeline &#123; agent any options &#123; timestamps() &#125; stages &#123; stage(&apos;non-parallel stage&apos;) &#123; steps &#123; echo &apos;this is non-parallel stage&apos; &#125; &#125; stage(&apos;parallel stage&apos;) &#123; steps &#123; script &#123; parallel parallelStagesMap &#125; &#125; &#125; &#125;&#125;]]></content>
+      <categories>
+        <category>tool</category>
+        <category>持续集成</category>
+        <category>jenkins</category>
+        <category>pipeline</category>
+      </categories>
+      <tags>
+        <tag>jenkins</tag>
+        <tag>pipeline</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[maven 使用总结]]></title>
+    <url>%2F2019%2F05%2F23%2Fmaven-usage%2F</url>
+    <content type="text"><![CDATA[maven官方文档 安装下载二进制包后解压即可，然后配置环境变量 12echo 'export M2_HOME=/usr/local/apache_maven_xxx' &gt;&gt; /etc/profileecho 'export PATH=$M2_HOME/bin:$PATH' &gt;&gt; /etc/profile 执行mvn -v查看版本，同时确认是否安装配置OK 配置配置文件maven的配置文件有三个级别 项目级，位于项目workspace目录下的pom.xml 用户级，位于~/.m2/settings.xml，通过mvn -s /path/to/settings.xml可以覆盖用户级配置文件 全局级，位于${M2_HOME}/conf/settings.xml，通过mvn -gs /path/to/settings.xml可以覆盖全局配置文件 配置项目 标签 类型 说明 localRepository String 本地仓库路径，默认位于~/.m2/repository目录，当maven获取jar包时首先从本地获取，如果本地仓库中没有，再从远程仓库下载 mirrors List 配置仓库的下载镜像 阿里镜像公共代理库使用文档 12345678&lt;mirrors&gt; &lt;mirror&gt; &lt;id&gt;alimaven&lt;/id&gt; &lt;name&gt;aliyun maven&lt;/name&gt; &lt;url&gt;http://maven.aliyun.com/mvn/view&lt;/url&gt; &lt;mirrorOf&gt;central&lt;/mirrorOf&gt; &lt;/mirror&gt;&lt;/mirrors&gt;]]></content>
+      <categories>
+        <category>tool</category>
+        <category>构建工具</category>
+        <category>maven</category>
+      </categories>
+      <tags>
+        <tag>总结</tag>
+        <tag>maven</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[vm_network]]></title>
+    <url>%2F2019%2F05%2F16%2Fvm-network%2F</url>
+    <content type="text"><![CDATA[TODO1TODO2]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[centos使用总结]]></title>
+    <url>%2F2019%2F05%2F15%2Fcentos-usage%2F</url>
+    <content type="text"><![CDATA[最小化安装IP配置修改 /etc/sysconfig/network-scripts/ifcfg-xxx 文件 123456789TYPE=EthernetBOOTPROTO=static #网卡引导方式 static/DHCPONBOOT=yes #网卡开机启动IPADDR=192.168.0.150NETMASK=255.255.255.0GATEWAY=192.168.0.1HWADDR=xx:xx:xx:xx:xx:xxDNS1=x.x.x.xDNS2=x.x.x.x 然后重启网络服务 systemctl restart network 配置国内镜像源12345cat /etc/centos-releasemv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bakwget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repoyum clean allyum makecache yum命令搜索命令属于哪些包 yum search xxx yum provides xxx yum list 命令 描述 yum list [all] 所有已安装和可以安装的包 yum list available 所有可以安装的包 yum list installed 所有已经安装的包 yum list updates 所有可以升级的包 yum list extra 所有已经安装但不在repository的包 查看软件包详情 yum info wget 查看软件包依赖 yum deplist wget 工具安装与配置openjdk安装通过yum工具安装的位置为 /usr/lib/jvm/java-xxx 123yum install java-11-openjdk-devel.x86_64echo "export JAVA_HOME=/usr/lib/jvm/java-11-openjdk" &gt;&gt; /etc/profileecho 'export PATH=$JAVA_HOME/bin:$PATH' &gt;&gt; /etc/profile]]></content>
+      <categories>
+        <category>linux</category>
+        <category>centos</category>
+      </categories>
+      <tags>
+        <tag>总结</tag>
+        <tag>centos</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[makefile使用总结]]></title>
+    <url>%2F2019%2F05%2F14%2Fmakefile-usage%2F</url>
+    <content type="text"><![CDATA[常用链接跟我一起写Makefile重制版GUN Make手册 makefile中添加打印信息1234warn_msg="warning..."$(info "infomation output")$(warning "warn: $(warn_msg)")$(error "error message") 常用参数 -n, --just-print 打印make过程中执行的所有命令但是并不会真正执行 --print-data-base make过程中会显示GNU信息、执行的命令以及make的内部数据库。数据库里面的数据分为以下几类1) variables 会列出每个变量及描述性注释2) directories 列出了将会被make检查的目录3) implicit rules 包含了所有内置和用户自定义的模式规则4) pattern-specific variables 定义在makefile中的模式专属变量5) files(explicit rules) 与特定文件有关的自定义和后缀规则6) vpath search paths]]></content>
+      <categories>
+        <category>tool</category>
+        <category>构建工具</category>
+        <category>makefile</category>
+      </categories>
+      <tags>
+        <tag>总结</tag>
+        <tag>make</tag>
+        <tag>makefile</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[lvm使用]]></title>
+    <url>%2F2019%2F05%2F13%2Flvm%2F</url>
+    <content type="text"><![CDATA[LVM(Logic Volume Manager)逻辑卷管理，它是linux环境下对磁盘分区进行管理的一种机制。 TODO 基本术语 PV: Physical Volume 物理卷 VG: Volume Group 卷组，由一个或多个PV组成。可以在其上创建一个或多个LV LV: Logical Volume 逻辑卷，在其上可以创建文件系统 PE: Physical Extent 物理扩展盘区，每个PV都会被划分成PE，它是可以被LVM寻址的最小单元 LE: Logical Extent 逻辑扩展盘区， 基本原理1) 物理磁盘被格式化为PV，空间被划分为一个个PE2) 不同的PV加入到同一个VG中，其对应的所有PE都进入VG的PE池中3) LVM从PE池中选择PE创建LV，不同物理盘中的PE可能会划分到同一个LV中4) 在LV上创建文件系统后就可以挂载使用了5) 对LV的扩容和缩减其实就是相应的增加或减少PE数量 创建逻辑卷时，定义了逻辑扩展盘区与物理扩展盘区的映射关系。 创建流程创建分区12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152[root@localhost ~]# fdisk /dev/sdbWelcome to fdisk (util-linux 2.23.2).Changes will remain in memory only, until you decide to write them.Be careful before using the write command.Command (m for help): nPartition type: p primary (0 primary, 0 extended, 4 free) e extendedSelect (default p): pPartition number (1-4, default 1): First sector (2048-2097151, default 2048): Using default value 2048Last sector, +sectors or +size&#123;K,M,G&#125; (2048-2097151, default 2097151): +300MPartition 1 of type Linux and of size 300 MiB is setCommand (m for help): pDisk /dev/sdb: 1073 MB, 1073741824 bytes, 2097152 sectorsUnits = sectors of 1 * 512 = 512 bytesSector size (logical/physical): 512 bytes / 512 bytesI/O size (minimum/optimal): 512 bytes / 512 bytesDisk label type: dosDisk identifier: 0x233e2ebd Device Boot Start End Blocks Id System/dev/sdb1 2048 616447 307200 83 LinuxCommand (m for help): tSelected partition 1Hex code (type L to list all codes): 8eChanged type of partition 'Linux' to 'Linux LVM'Command (m for help): pDisk /dev/sdb: 1073 MB, 1073741824 bytes, 2097152 sectorsUnits = sectors of 1 * 512 = 512 bytesSector size (logical/physical): 512 bytes / 512 bytesI/O size (minimum/optimal): 512 bytes / 512 bytesDisk label type: dosDisk identifier: 0x233e2ebd Device Boot Start End Blocks Id System/dev/sdb1 2048 616447 307200 8e Linux LVMCommand (m for help): wThe partition table has been altered!Calling ioctl() to re-read partition table.Syncing disks. 创建pv12345678910111213141516[root@localhost ~]# pvcreate /dev/sdb1 Physical volume "/dev/sdb1" successfully created.[root@localhost ~]# pvs PV VG Fmt Attr PSize PFree /dev/sdb1 lvm2 --- 300.00m 300.00m[root@localhost ~]# pvdisplay /dev/sdb1 --- Physical volume --- PV Name /dev/sdb1 VG Name vg0 PV Size 300.00 MiB / not usable 4.00 MiB Allocatable yes PE Size 4.00 MiB Total PE 74 Free PE 74 Allocated PE 0 PV UUID 8dqEi7-haMt-ciIM-ib2e-AUxp-f7ym-bCvlfw 创建vg1234567891011121314151617181920212223242526[root@localhost ~]# vgcreate vg0 /dev/sdb1 Volume group "vg0" successfully created[root@localhost ~]# vgs VG #PV #LV #SN Attr VSize VFree vg0 1 0 0 wz--n- 296.00m 296.00m[root@localhost ~]# vgdisplay vg0 --- Volume group --- VG Name vg0 System ID Format lvm2 Metadata Areas 1 Metadata Sequence No 1 VG Access read/write VG Status resizable MAX LV 0 Cur LV 0 Open LV 0 Max PV 0 Cur PV 1 Act PV 1 VG Size 296.00 MiB PE Size 4.00 MiB Total PE 74 Alloc PE / Size 0 / 0 #已分配的PE数量 Free PE / Size 74 / 296.00 MiB #剩余的PE数量 VG UUID 3FH6og-yXLt-NaL3-uehk-9lrJ-c4TD-r0z6Sa 创建lv12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455[root@localhost ~]# lvcreate -L 100m -n lv0 vg0 Logical volume "lv0" created.[root@localhost ~]# lvs LV VG Attr LSize Pool Origin Data% Meta% Move Log Cpy%Sync Convert lv0 vg0 -wi-a----- 100.00m [root@localhost ~]# lvdisplay /dev/vg0/lv0 --- Logical volume --- LV Path /dev/vg0/lv0 LV Name lv0 VG Name vg0 LV UUID Plb1kl-JGcg-0UfR-W3Ue-tDBc-D5Tc-tj6X0n LV Write Access read/write LV Creation host, time localhost.localdomain, 2019-05-16 02:02:27 +0800 LV Status available # open 0 LV Size 100.00 MiB Current LE 25 Segments 1 Allocation inherit Read ahead sectors auto - currently set to 8192 Block device 253:2[root@localhost ~]# pvdisplay /dev/sdb1 --- Physical volume --- PV Name /dev/sdb1 VG Name vg0 PV Size 300.00 MiB / not usable 4.00 MiB Allocatable yes PE Size 4.00 MiB Total PE 74 Free PE 49 Allocated PE 25 # 可以看到已经有PE被分配出去了 PV UUID 8dqEi7-haMt-ciIM-ib2e-AUxp-f7ym-bCvlfw[root@localhost ~]# vgdisplay vg0 --- Volume group --- VG Name vg0 System ID Format lvm2 Metadata Areas 1 Metadata Sequence No 2 VG Access read/write VG Status resizable MAX LV 0 Cur LV 1 Open LV 0 Max PV 0 Cur PV 1 Act PV 1 VG Size 296.00 MiB PE Size 4.00 MiB Total PE 74 Alloc PE / Size 25 / 100.00 MiB # 可以看到已经有PE被分配出去了 Free PE / Size 49 / 196.00 MiB VG UUID 3FH6og-yXLt-NaL3-uehk-9lrJ-c4TD-r0z6Sa 创建LV时LV的大小有以下两种方式指定 通过-L参数，表示物理大小 通过-l参数，使用相关VG/LV或PV大小的百分比来指定 10%VG, 表示10%的VG总大小 20%FREE, 表示VG中剩余空间的20% 30%PVS, 表示PV集合中剩余空间的30% 该参数后面跟数值(非百分比)时，表示包含多少个PE大小。 12345678910111213[root@localhost ~]# lvremove /dev/vg0/lv0Do you really want to remove active logical volume vg0/lv0? [y/n]: y Logical volume "lv0" successfully removed[root@localhost ~]# lvcreate -l 30%VG -n lv1 vg0 Logical volume "lv1" created.[root@localhost ~]# lvs LV VG Attr LSize Pool Origin Data% Meta% Move Log Cpy%Sync Convert lv1 vg0 -wi-a----- 88.00m [root@localhost ~]# vgs VG #PV #LV #SN Attr VSize VFree centos 1 2 0 wz--n- &lt;9.00g 0 vg0 1 1 0 wz--n- 296.00m 208.00m[root@localhost ~]# 格式化文件系统1234567891011121314151617181920212223242526272829303132333435[root@localhost ~]# mkfs.ext3 /dev/vg0/lv1mke2fs 1.42.9 (28-Dec-2013)Filesystem label=OS type: LinuxBlock size=1024 (log=0)Fragment size=1024 (log=0)Stride=0 blocks, Stripe width=0 blocks22528 inodes, 90112 blocks4505 blocks (5.00%) reserved for the super userFirst data block=1Maximum filesystem blocks=6737100811 block groups8192 blocks per group, 8192 fragments per group2048 inodes per groupSuperblock backups stored on blocks: 8193, 24577, 40961, 57345, 73729Allocating group tables: done Writing inode tables: done Creating journal (4096 blocks): doneWriting superblocks and filesystem accounting information: done [root@localhost ~]# fdisk -l /dev/vg0/lv1 Disk /dev/vg0/lv1: 92 MB, 92274688 bytes, 180224 sectorsUnits = sectors of 1 * 512 = 512 bytesSector size (logical/physical): 512 bytes / 512 bytesI/O size (minimum/optimal): 512 bytes / 512 bytes[root@localhost ~]# mkdir /usr1[root@localhost ~]# mount /dev/vg0/lv1 /usr1[root@localhost ~]# df -haFilesystem Size Used Avail Use% Mounted on/dev/mapper/vg0-lv1 82M 1.6M 76M 2% /usr1[root@localhost ~]# 扩容扩容LV1234567891011121314151617181920[root@localhost ~]# lvs LV VG Attr LSize Pool Origin Data% Meta% Move Log Cpy%Sync Convert lv1 vg0 -wi-ao---- 88.00m [root@localhost ~]# lvextend -L +100m /dev/vg0/lv1 Size of logical volume vg0/lv1 changed from 88.00 MiB (22 extents) to 188.00 MiB (47 extents). Logical volume vg0/lv1 successfully resized.[root@localhost ~]# lvs LV VG Attr LSize Pool Origin Data% Meta% Move Log Cpy%Sync Convert lv1 vg0 -wi-ao---- 188.00m [root@localhost ~]# df -haFilesystem Size Used Avail Use% Mounted on/dev/mapper/vg0-lv1 82M 1.6M 76M 2% /usr1 # LV已经扩容但是文件系统大小还时原来大小[root@localhost ~]# resize2fs /dev/vg0/lv1 resize2fs 1.42.9 (28-Dec-2013)Filesystem at /dev/vg0/lv1 is mounted on /usr1; on-line resizing requiredold_desc_blocks = 1, new_desc_blocks = 1The filesystem on /dev/vg0/lv1 is now 192512 blocks long.[root@localhost ~]# df -haFilesystem Size Used Avail Use% Mounted on/dev/mapper/vg0-lv1 178M 1.6M 169M 1% /usr1 # 已经扩容 12345678910111213141516[root@localhost ~]# lvs |grep lv1 lv1 vg0 -wi-ao---- 188.00m [root@localhost ~]# lvextend -l +50%FREE /dev/vg0/lv1 Size of logical volume vg0/lv1 changed from 188.00 MiB (47 extents) to 244.00 MiB (61 extents). Logical volume vg0/lv1 successfully resized.[root@localhost ~]# lvs |grep lv1 lv1 vg0 -wi-ao---- 244.00m [root@localhost ~]# df -ha |grep lv1/dev/mapper/vg0-lv1 178M 1.6M 169M 1% /usr1[root@localhost ~]# resize2fs /dev/mapper/vg0-lv1 resize2fs 1.42.9 (28-Dec-2013)Filesystem at /dev/mapper/vg0-lv1 is mounted on /usr1; on-line resizing requiredold_desc_blocks = 1, new_desc_blocks = 1The filesystem on /dev/mapper/vg0-lv1 is now 249856 blocks long.[root@localhost ~]# df -ha |grep lv1/dev/mapper/vg0-lv1 233M 2.1M 220M 1% /usr1 lvextend 中 -L 和 -l 参数中如果没有使用 + 号，则表示扩容到指定大小 扩容VG当VG中没有空闲资源时需要先扩容VG才能扩容LV 123456789101112131415161718192021222324252627[root@localhost ~]# pvs PV VG Fmt Attr PSize PFree /dev/sdb1 vg0 lvm2 a-- 296.00m 52.00m[root@localhost ~]# pvcreate /dev/sdc1 Physical volume "/dev/sdc1" successfully created.[root@localhost ~]# pvs PV VG Fmt Attr PSize PFree /dev/sdb1 vg0 lvm2 a-- 296.00m 52.00m /dev/sdc1 lvm2 --- 511.00m 511.00m[root@localhost ~]# vgs VG #PV #LV #SN Attr VSize VFree vg0 1 1 0 wz--n- 296.00m 52.00m[root@localhost ~]# vgextend vg0 /dev/sdc1 Volume group "vg0" successfully extended[root@localhost ~]# vgs VG #PV #LV #SN Attr VSize VFree vg0 2 1 0 wz--n- 804.00m 560.00m[root@localhost ~]# [root@localhost ~]# lvs LV VG Attr LSize Pool Origin Data% Meta% Move Log Cpy%Sync Convert lv1 vg0 -wi-a----- 244.00m[root@localhost ~]# lvextend -l +100%FREE /dev/vg0/lv1 Size of logical volume vg0/lv1 changed from 244.00 MiB (61 extents) to 804.00 MiB (201 extents). Logical volume vg0/lv1 successfully resized.[root@localhost ~]# lvs LV VG Attr LSize Pool Origin Data% Meta% Move Log Cpy%Sync Convert lv1 vg0 -wi-a----- 804.00m 缩减容量 先umount设备 缩减文件系统大小 缩减LV大小 123456789101112131415161718192021222324252627282930313233[root@localhost ~]# umount -l /usr1[root@localhost ~]# resize2fs /dev/mapper/vg0-lv1 100Mresize2fs 1.42.9 (28-Dec-2013)Please run 'e2fsck -f /dev/mapper/vg0-lv1' first.[root@localhost ~]# e2fsck -f /dev/mapper/vg0-lv1 e2fsck 1.42.9 (28-Dec-2013)Pass 1: Checking inodes, blocks, and sizesPass 2: Checking directory structurePass 3: Checking directory connectivityPass 4: Checking reference countsPass 5: Checking group summary information/dev/mapper/vg0-lv1: 2369/206848 files (6.4% non-contiguous), 61211/823296 blocks[root@localhost ~]# [root@localhost ~]# resize2fs /dev/mapper/vg0-lv1 100Mresize2fs 1.42.9 (28-Dec-2013)Resizing the filesystem on /dev/mapper/vg0-lv1 to 102400 (1k) blocks.The filesystem on /dev/mapper/vg0-lv1 is now 102400 blocks long.[root@localhost ~]# lvreduce -L 100M /dev/mapper/vg0-lv1 WARNING: Reducing active logical volume to 100.00 MiB. THIS MAY DESTROY YOUR DATA (filesystem etc.)Do you really want to reduce vg0/lv1? [y/n]: y Size of logical volume vg0/lv1 changed from 804.00 MiB (201 extents) to 100.00 MiB (25 extents). Logical volume vg0/lv1 successfully resized.[root@localhost ~]# lvs LV VG Attr LSize Pool Origin Data% Meta% Move Log Cpy%Sync Convert lv1 vg0 -wi-a----- 100.00m [root@localhost /]# vgs VG #PV #LV #SN Attr VSize VFree vg0 2 1 0 wz--n- 804.00m 704.00m[root@localhost /]# pvs PV VG Fmt Attr PSize PFree /dev/sdb1 vg0 lvm2 a-- 296.00m 196.00m /dev/sdc1 vg0 lvm2 a-- 508.00m 508.00m 快照]]></content>
+      <categories>
+        <category>linux</category>
+        <category>tool</category>
+        <category>lvm</category>
+      </categories>
+      <tags>
+        <tag>lvm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[jenkins使用总结]]></title>
+    <url>%2F2019%2F05%2F13%2Fjenkins%2F</url>
+    <content type="text"><![CDATA[常用链接 pipeline steps reference pipeline scm step(checkout) apache groovy doc SAP shared lib repo Jenkins插件默认升级站点配置 groovy实现添加slave pipeline使用官方pipeline示例并行任务配置Jenkins pipeline控制并行执行job个数shared-libpipeline代码调试问题总结Multijob不能调用pipeline任务升级Multijob插件到1.32及以上 admin密码丢失 初始密码: ${jenkins_home}/secrets/initialAdminPassword 修改过密码后忘记1) 将 ${jenkins_home}/config.xml 文件中以下内容修改为false 1&lt;useSecurity&gt;true&lt;/useSecurity&gt; 2) 重启jenkins服务3) 系统管理 -&gt; 全局安全配置 中 启用安全4) 系统管理 -&gt; 管理用户 中 重置密码]]></content>
+      <categories>
+        <category>tool</category>
+        <category>持续集成</category>
+        <category>jenkins</category>
+      </categories>
+      <tags>
+        <tag>总结</tag>
+        <tag>jenkins</tag>
+        <tag>pipeline</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[vscode使用总结]]></title>
+    <url>%2F2019%2F05%2F13%2Fvscode-usage%2F</url>
+    <content type="text"><![CDATA[vscode配置12345678&#123; "workbench.colorTheme": "One Dark Pro", "workbench.iconTheme": "vscode-icons", "editor.renderWhitespace": "all", "editor.renderControlCharacters": true, "window.zoomLevel": 0, "editor.fontSize": 16&#125;]]></content>
+      <categories>
+        <category>tool</category>
+        <category>vscode</category>
+      </categories>
+      <tags>
+        <tag>总结</tag>
+        <tag>vscode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[npm使用总结]]></title>
+    <url>%2F2019%2F05%2F13%2Fnpm-usage%2F</url>
+    <content type="text"><![CDATA[npm使用淘宝镜像临时使用1npm --registry https://registry.npm.taobao.org 永久设置1npm config set registry https://registry.npm.taobao.org 该方式等同于在~/.npmrc文件中添加registry=https://registry.npm.taobao.org可以通过npm config get registry确认是否生效 使用cnpm1npm install cnpm -g --registry https://registry.npm.taobao.org cnpm和npm用法完全一致，只是在执行命令时将npm改为cnpm]]></content>
+      <categories>
+        <category>tool</category>
+        <category>npm</category>
+      </categories>
+      <tags>
+        <tag>总结</tag>
+        <tag>npm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hexo搭建blog]]></title>
+    <url>%2F2019%2F05%2F12%2Fhexo-blog%2F</url>
+    <content type="text"><![CDATA[Hexo是一个快速、简洁且高效的博客框架。具体内容请参考官网文档。 主题Next修改参考官方文档 依赖 nodejs github个人仓库 git hexo安装12345npm install -g hexo-clihexo init blogcd blognpm installnpm install hexo-deployer-git --save _config.yml配置123456language: zh-CN # 网站使用的语言，取值参考themes下面的languages目录中的配置timezone: Asia/Shanghaideploy: type: git # path和username要一致，且git中repo的命令必须为name.github.io repo: git@github.com:path/username.github.io.git 常用hexo命令 hexo init [folder]新建一个网站，如果未指定folder，则默认在当前位置创建 hexo new [layout] 新建文章，如果未指定layout，则使用_config.yml中的default_layout代替 hexo generate [option]生成静态文件，可以简写为hexo g。option: -d,–deploy 文件生成后立即部署 -w,–watch 监视文件变化 hexo server启动服务器。默认访问路径为 http://localhost:4000。可以简写为`hexo s` hexo deploy部署网站。可以简写为hexo d。可以通过指定-g参数指定部署前先生成静态文件。 hexo clean清除缓存文件(db.json)和已生成的静态文件(public/*) Front-matter 参数 描述 备注 layout 布局 title 文章标题 data 创建时间 updated 更新时间 comments 开启评论 默认值:true tags 标签(不适用于分页) 配置多个时，标签没有顺序和层次 categories 分类(不适用于分页) 配置多个时，分类具有顺序和层次 Next增加站内搜索 安装插件 12npm install hexo-generator-search --savenpm install hexo-generator-searchdb --save 修改hexo配置 在hexo目录下的_config.yml中增加以下内容 12345search: path: search.xml field: post format: html limit: 10000 next主题增加搜索入口 在themes/next/_config.yml文件中打开local_search 1234local_search: enable: true trigger: auto top_n_per_article: 1]]></content>
+      <categories>
+        <category>framework</category>
+        <category>blog</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+</search>

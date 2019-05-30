@@ -278,11 +278,40 @@
 
       
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
     </ul>
   
 
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
   
 </nav>
 
@@ -369,12 +398,24 @@
                 
               
 
-              <time title="创建时间：2019-05-30 13:00:38 / 修改时间：13:58:40" itemprop="dateCreated datePublished" datetime="2019-05-30T13:00:38+08:00">2019-05-30</time>
+              <time title="创建时间：2019-05-30 13:00:38" itemprop="dateCreated datePublished" datetime="2019-05-30T13:00:38+08:00">2019-05-30</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-31 01:15:25" itemprop="dateModified" datetime="2019-05-31T01:15:25+08:00">2019-05-31</time>
               
             
           </span>
@@ -455,11 +496,16 @@
 <li>每个<code>stage</code>中有且只能有一个<code>steps</code>、<code>stages</code>或者<code>parallel</code></li>
 <li>所有包含<code>parallel</code>的<code>stage</code>都不能包含<code>agent</code>和<code>tools</code></li>
 </ol>
-<h4 id="EXAMPLE-1"><a href="#EXAMPLE-1" class="headerlink" title="EXAMPLE-1"></a>EXAMPLE-1</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    options &#123;</span><br><span class="line">        timestamps()</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(&apos;init&apos;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo &quot;init start&quot;</span><br><span class="line">                sleep 5</span><br><span class="line">                echo &apos;init end&apos;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage(&apos;build&apos;) &#123;</span><br><span class="line">            parallel &#123;</span><br><span class="line">                stage(&apos;x86 build&apos;) &#123;</span><br><span class="line">                    steps &#123;</span><br><span class="line">                        echo &apos;x86 build start&apos;</span><br><span class="line">                        sleep 5</span><br><span class="line">                        echo &apos;x86 build end&apos;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                stage(&apos;arm build&apos;) &#123;</span><br><span class="line">                    steps &#123;</span><br><span class="line">                        echo &apos;arm build start&apos;</span><br><span class="line">                        sleep 3</span><br><span class="line">                        echo &apos;arm build end&apos;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="EXAMPLE-1-stage级别并行"><a href="#EXAMPLE-1-stage级别并行" class="headerlink" title="EXAMPLE-1 stage级别并行"></a>EXAMPLE-1 stage级别并行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    options &#123;</span><br><span class="line">        timestamps()</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(&apos;init&apos;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo &quot;init start&quot;</span><br><span class="line">                sleep 5</span><br><span class="line">                echo &apos;init end&apos;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage(&apos;build&apos;) &#123;</span><br><span class="line">            parallel &#123;</span><br><span class="line">                stage(&apos;x86 build&apos;) &#123;</span><br><span class="line">                    steps &#123;</span><br><span class="line">                        echo &apos;x86 build start&apos;</span><br><span class="line">                        sleep 5</span><br><span class="line">                        echo &apos;x86 build end&apos;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                stage(&apos;arm build&apos;) &#123;</span><br><span class="line">                    steps &#123;</span><br><span class="line">                        echo &apos;arm build start&apos;</span><br><span class="line">                        sleep 3</span><br><span class="line">                        echo &apos;arm build end&apos;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>blueOcean如下图所示<br><img src="/img/jenkins_example_1.bmp" alt="example_1"></p>
-<h4 id="EXAMPLE-2"><a href="#EXAMPLE-2" class="headerlink" title="EXAMPLE-2"></a>EXAMPLE-2</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    options &#123;</span><br><span class="line">        timestamps()</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(&apos;init&apos;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo &quot;init start&quot;</span><br><span class="line">                sleep 5</span><br><span class="line">                echo &apos;init end&apos;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage(&apos;build&apos;) &#123;</span><br><span class="line">            parallel &#123;</span><br><span class="line">                stage(&apos;x86 build&apos;) &#123;</span><br><span class="line">                    steps &#123;</span><br><span class="line">                        echo &apos;x86 build start&apos;</span><br><span class="line">                        sleep 5</span><br><span class="line">                        echo &apos;x86 build end&apos;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                stage(&apos;arm build&apos;) &#123;</span><br><span class="line">                    stages &#123;</span><br><span class="line">                        stage(&apos;arm-master build&apos;) &#123;</span><br><span class="line">                            steps &#123;</span><br><span class="line">                                echo &apos;arm master build start&apos;</span><br><span class="line">                                sleep 3</span><br><span class="line">                                echo &apos;arm master build end&apos;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                        stage(&apos;arm develop build&apos;) &#123;</span><br><span class="line">                            steps &#123;</span><br><span class="line">                                echo &apos;arm develop build start&apos;</span><br><span class="line">                                sleep 3</span><br><span class="line">                                echo &apos;arm develop build end&apos;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>blueOcean如下图所示<br><img src="/img/jenkins_example_2.bmp" alt="example_1"></p>
-<h3 id="脚本式"><a href="#脚本式" class="headerlink" title="脚本式"></a>脚本式</h3><h2 id="动态创建并行任务"><a href="#动态创建并行任务" class="headerlink" title="动态创建并行任务"></a>动态创建并行任务</h2>
+<h4 id="EXAMPLE-2-并行stage中多个stage串行"><a href="#EXAMPLE-2-并行stage中多个stage串行" class="headerlink" title="EXAMPLE-2 并行stage中多个stage串行"></a>EXAMPLE-2 并行stage中多个stage串行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    options &#123;</span><br><span class="line">        timestamps()</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(&apos;init&apos;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo &quot;init start&quot;</span><br><span class="line">                sleep 5</span><br><span class="line">                echo &apos;init end&apos;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage(&apos;build&apos;) &#123;</span><br><span class="line">            parallel &#123;</span><br><span class="line">                stage(&apos;x86 build&apos;) &#123;</span><br><span class="line">                    agent &#123;</span><br><span class="line">                        label &apos;master&apos;</span><br><span class="line">                    &#125;</span><br><span class="line">                    steps &#123;</span><br><span class="line">                        echo &apos;x86 build start&apos;</span><br><span class="line">                        sleep 5</span><br><span class="line">                        echo &apos;x86 build end&apos;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                stage(&apos;arm build&apos;) &#123;</span><br><span class="line">                    stages &#123;</span><br><span class="line">                        stage(&apos;arm-master build&apos;) &#123;</span><br><span class="line">                            steps &#123;</span><br><span class="line">                                echo &apos;arm master build start&apos;</span><br><span class="line">                                sleep 3</span><br><span class="line">                                echo &apos;arm master build end&apos;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                        stage(&apos;arm develop build&apos;) &#123;</span><br><span class="line">                            steps &#123;</span><br><span class="line">                                echo &apos;arm develop build start&apos;</span><br><span class="line">                                sleep 3</span><br><span class="line">                                echo &apos;arm develop build end&apos;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>blueOcean如下图所示<br><img src="/img/jenkins_example_2.bmp" alt="example_2"></p>
+<h4 id="EXAMPLE-4-step级别并行"><a href="#EXAMPLE-4-step级别并行" class="headerlink" title="EXAMPLE-4 step级别并行"></a>EXAMPLE-4 step级别并行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    options &#123;</span><br><span class="line">        timestamps()</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(&apos;init&apos;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo &quot;init start&quot;</span><br><span class="line">                sleep 5</span><br><span class="line">                echo &apos;init end&apos;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage(&apos;build&apos;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                parallel &apos;x86 build&apos;: &#123;</span><br><span class="line">                    echo &apos;x86 build start&apos;</span><br><span class="line">                    sleep 3</span><br><span class="line">                    echo &apos;x86 build end&apos;</span><br><span class="line">                &#125;, &apos;arm build&apos;: &#123;</span><br><span class="line">                    echo &apos;arm build start&apos;</span><br><span class="line">                    sleep 3</span><br><span class="line">                    echo &apos;arm build end&apos;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>blueOcean如下图所示<br><img src="/img/jenkins_example_4.png" alt="example_4"></p>
+<h3 id="脚本式"><a href="#脚本式" class="headerlink" title="脚本式"></a>脚本式</h3><h4 id="EXAMPLE-3"><a href="#EXAMPLE-3" class="headerlink" title="EXAMPLE-3"></a>EXAMPLE-3</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">script &#123;</span><br><span class="line">    node(&apos;master&apos;) &#123;</span><br><span class="line">        stage(&apos;init&apos;) &#123;</span><br><span class="line">            echo &apos;init&apos;</span><br><span class="line">        &#125;</span><br><span class="line">        stage(&apos;build&apos;) &#123;</span><br><span class="line">            parallel &apos;build x86&apos;: &#123;</span><br><span class="line">                stage(&apos;build x86 step1&apos;) &#123;</span><br><span class="line">                    echo &apos;build x86 step1 start&apos;</span><br><span class="line">                    sleep 5</span><br><span class="line">                    echo &apos;build x86 step1 end&apos;</span><br><span class="line">                &#125;</span><br><span class="line">                stage(&apos;build x86 step2&apos;) &#123;</span><br><span class="line">                    echo &apos;build x86 step 2 start&apos;</span><br><span class="line">                    sleep 5</span><br><span class="line">                    echo &apos;build x86 step 2 end&apos;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;, &apos;build arm&apos;: &#123;</span><br><span class="line">                echo &apos;build arm start&apos;</span><br><span class="line">                sleep 6</span><br><span class="line">                echo &apos;build arm end&apos;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>blueOcean如下图所示<br><img src="/img/jenkins_example_3.png" alt="example_3"></p>
+<h2 id="动态创建并行任务"><a href="#动态创建并行任务" class="headerlink" title="动态创建并行任务"></a>动态创建并行任务</h2><h3 id="EXAMPLE-5"><a href="#EXAMPLE-5" class="headerlink" title="EXAMPLE-5"></a>EXAMPLE-5</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">def jobs = [&apos;jobA&apos;, &apos;jobB&apos;, &apos;jobC&apos;]</span><br><span class="line"></span><br><span class="line">def parallelStagesMap = jobs.collectEntries &#123; def jobName -&gt;</span><br><span class="line">    [&quot;$&#123;jobName&#125;&quot;, generateJobStage(jobName)]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">def generateJobStage(String jobName) &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">        node(&apos;master&apos;) &#123;</span><br><span class="line">            stage(&quot;stage: $&#123;jobName&#125;&quot;) &#123;</span><br><span class="line">                echo &quot;$&#123;jobName&#125; start&quot;</span><br><span class="line">                sleep 5</span><br><span class="line">                echo &quot;job end&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    options &#123;</span><br><span class="line">        timestamps()</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(&apos;non-parallel stage&apos;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                echo &apos;this is non-parallel stage&apos;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        stage(&apos;parallel stage&apos;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                script &#123;</span><br><span class="line">                    parallel parallelStagesMap</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
           
         
       
@@ -1577,7 +1623,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-30 13:20:27" itemprop="dateModified" datetime="2019-05-30T13:20:27+08:00">2019-05-30</time>
+                <time title="修改时间：2019-05-31 01:15:32" itemprop="dateModified" datetime="2019-05-31T01:15:32+08:00">2019-05-31</time>
               
             
           </span>
@@ -1653,7 +1699,7 @@
 <li><a href="https://updates.jenkins.io/update-center.json" target="_blank" rel="noopener">Jenkins插件默认升级站点配置</a></li>
 <li><a href="https://github.com/MovingBlocks/GroovyJenkins/blob/master/src/main/groovy/AddSSHNodeToJenkins.groovy" target="_blank" rel="noopener">groovy实现添加slave</a></li>
 </ul>
-<h2 id="pipeline使用"><a href="#pipeline使用" class="headerlink" title="pipeline使用"></a>pipeline使用</h2><h3 id="1-并行任务配置"><a href="#1-并行任务配置" class="headerlink" title="1. 并行任务配置"></a>1. <a href="/2019/05/30/jenkins/jenkins-pipeline-parallel">并行任务配置</a></h3><h2 id="shared-lib"><a href="#shared-lib" class="headerlink" title="shared-lib"></a>shared-lib</h2><h2 id="pipeline代码调试"><a href="#pipeline代码调试" class="headerlink" title="pipeline代码调试"></a>pipeline代码调试</h2><h2 id="问题总结"><a href="#问题总结" class="headerlink" title="问题总结"></a>问题总结</h2><h3 id="Multijob不能调用pipeline任务"><a href="#Multijob不能调用pipeline任务" class="headerlink" title="Multijob不能调用pipeline任务"></a>Multijob不能调用pipeline任务</h3><p><a href="https://issues.jenkins-ci.org/browse/JENKINS-38825" target="_blank" rel="noopener">升级Multijob插件到1.32及以上</a></p>
+<h2 id="pipeline使用"><a href="#pipeline使用" class="headerlink" title="pipeline使用"></a>pipeline使用</h2><h3 id="官方pipeline示例"><a href="#官方pipeline示例" class="headerlink" title="官方pipeline示例"></a><a href="https://jenkins.io/doc/pipeline/examples/" target="_blank" rel="noopener">官方pipeline示例</a></h3><h3 id="并行任务配置"><a href="#并行任务配置" class="headerlink" title="并行任务配置"></a><a href="/2019/05/30/jenkins/jenkins-pipeline-parallel">并行任务配置</a></h3><h3 id="Jenkins-pipeline控制并行执行job个数"><a href="#Jenkins-pipeline控制并行执行job个数" class="headerlink" title="Jenkins pipeline控制并行执行job个数"></a><a href="http://www.lujun.org.cn/?p=4025" target="_blank" rel="noopener">Jenkins pipeline控制并行执行job个数</a></h3><h2 id="shared-lib"><a href="#shared-lib" class="headerlink" title="shared-lib"></a>shared-lib</h2><h2 id="pipeline代码调试"><a href="#pipeline代码调试" class="headerlink" title="pipeline代码调试"></a>pipeline代码调试</h2><h2 id="问题总结"><a href="#问题总结" class="headerlink" title="问题总结"></a>问题总结</h2><h3 id="Multijob不能调用pipeline任务"><a href="#Multijob不能调用pipeline任务" class="headerlink" title="Multijob不能调用pipeline任务"></a>Multijob不能调用pipeline任务</h3><p><a href="https://issues.jenkins-ci.org/browse/JENKINS-38825" target="_blank" rel="noopener">升级Multijob插件到1.32及以上</a></p>
 <h3 id="admin密码丢失"><a href="#admin密码丢失" class="headerlink" title="admin密码丢失"></a>admin密码丢失</h3><ul>
 <li>初始密码: <code>${jenkins_home}/secrets/initialAdminPassword</code></li>
 <li><p>修改过密码后忘记<br>1) 将 <code>${jenkins_home}/config.xml</code> 文件中以下内容修改为false</p>
@@ -2143,7 +2189,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-13 08:48:18" itemprop="dateModified" datetime="2019-05-13T08:48:18+08:00">2019-05-13</time>
+                <time title="修改时间：2019-05-31 00:21:12" itemprop="dateModified" datetime="2019-05-31T00:21:12+08:00">2019-05-31</time>
               
             
           </span>
@@ -2211,7 +2257,7 @@
 <li>github个人仓库</li>
 <li>git</li>
 </ul>
-<h3 id="hexo安装"><a href="#hexo安装" class="headerlink" title="hexo安装"></a>hexo安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br><span class="line">$ hexo init blog</span><br><span class="line">$ <span class="built_in">cd</span> blog</span><br><span class="line">$ npm install</span><br><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<h3 id="hexo安装"><a href="#hexo安装" class="headerlink" title="hexo安装"></a>hexo安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br><span class="line">hexo init blog</span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">npm install</span><br><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
 <h3 id="config-yml配置"><a href="#config-yml配置" class="headerlink" title="_config.yml配置"></a>_config.yml配置</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">language:</span> <span class="string">zh-CN</span> <span class="comment"># 网站使用的语言，取值参考themes下面的languages目录中的配置</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">Asia/Shanghai</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line">  <span class="comment"># path和username要一致，且git中repo的命令必须为name.github.io</span></span><br><span class="line"><span class="attr">  repo:</span> <span class="string">git@github.com:path/username.github.io.git</span></span><br></pre></td></tr></table></figure>
 <h3 id="常用hexo命令"><a href="#常用hexo命令" class="headerlink" title="常用hexo命令"></a>常用hexo命令</h3><ul>
 <li>hexo init [folder]<br>新建一个网站，如果未指定folder，则默认在当前位置创建</li>
@@ -2271,6 +2317,20 @@
 </tr>
 </tbody>
 </table>
+<h3 id="Next增加站内搜索"><a href="#Next增加站内搜索" class="headerlink" title="Next增加站内搜索"></a>Next增加站内搜索</h3><ol>
+<li>安装插件</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-search --save</span><br><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>修改hexo配置</li>
+</ol>
+<p>在hexo目录下的<code>_config.yml</code>中增加以下内容</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">search:</span></span><br><span class="line"><span class="attr">  path:</span> <span class="string">search.xml</span></span><br><span class="line"><span class="attr">  field:</span> <span class="string">post</span></span><br><span class="line"><span class="attr">  format:</span> <span class="string">html</span></span><br><span class="line"><span class="attr">  limit:</span> <span class="number">10000</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>next主题增加搜索入口</li>
+</ol>
+<p>在<code>themes/next/_config.yml</code>文件中打开local_search</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">local_search:</span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  trigger:</span> <span class="string">auto</span></span><br><span class="line"><span class="attr">  top_n_per_article:</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
 
           
         
@@ -2629,6 +2689,326 @@
 
 
   
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
 
 
 
