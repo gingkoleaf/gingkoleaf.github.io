@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="maven官方文档 安装下载二进制包后解压即可，然后配置环境变量 12echo &apos;export M2_HOME=/usr/local/apache_maven_xxx&apos; &amp;gt;&amp;gt; /etc/profileecho &apos;export PATH=$M2_HOME/bin:$PATH&apos; &amp;gt;&amp;gt; /etc/profile 执行mvn -v查看版本，同时确认是否安装配置OK 配置超级POM配">
+  <meta name="description" content="maven官方文档易百教程maven库查询 安装下载二进制包后解压即可，然后配置环境变量 12echo &apos;export M2_HOME=/usr/local/apache_maven_xxx&apos; &amp;gt;&amp;gt; /etc/profileecho &apos;export PATH=$M2_HOME/bin:$PATH&apos; &amp;gt;&amp;gt; /etc/profile 执行mvn -v查看版本，同时确认是否安装配">
 <meta name="keywords" content="总结,maven">
 <meta property="og:type" content="article">
 <meta property="og:title" content="maven 使用总结">
 <meta property="og:url" content="http://yoursite.com/2019/05/23/maven-usage/index.html">
 <meta property="og:site_name" content="Gingko Leaf">
-<meta property="og:description" content="maven官方文档 安装下载二进制包后解压即可，然后配置环境变量 12echo &apos;export M2_HOME=/usr/local/apache_maven_xxx&apos; &amp;gt;&amp;gt; /etc/profileecho &apos;export PATH=$M2_HOME/bin:$PATH&apos; &amp;gt;&amp;gt; /etc/profile 执行mvn -v查看版本，同时确认是否安装配置OK 配置超级POM配">
+<meta property="og:description" content="maven官方文档易百教程maven库查询 安装下载二进制包后解压即可，然后配置环境变量 12echo &apos;export M2_HOME=/usr/local/apache_maven_xxx&apos; &amp;gt;&amp;gt; /etc/profileecho &apos;export PATH=$M2_HOME/bin:$PATH&apos; &amp;gt;&amp;gt; /etc/profile 执行mvn -v查看版本，同时确认是否安装配">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-01T01:09:22.503Z">
+<meta property="og:updated_time" content="2019-06-10T17:14:26.659Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="maven 使用总结">
-<meta name="twitter:description" content="maven官方文档 安装下载二进制包后解压即可，然后配置环境变量 12echo &apos;export M2_HOME=/usr/local/apache_maven_xxx&apos; &amp;gt;&amp;gt; /etc/profileecho &apos;export PATH=$M2_HOME/bin:$PATH&apos; &amp;gt;&amp;gt; /etc/profile 执行mvn -v查看版本，同时确认是否安装配置OK 配置超级POM配">
+<meta name="twitter:description" content="maven官方文档易百教程maven库查询 安装下载二进制包后解压即可，然后配置环境变量 12echo &apos;export M2_HOME=/usr/local/apache_maven_xxx&apos; &amp;gt;&amp;gt; /etc/profileecho &apos;export PATH=$M2_HOME/bin:$PATH&apos; &amp;gt;&amp;gt; /etc/profile 执行mvn -v查看版本，同时确认是否安装配">
 
 
 
@@ -417,7 +417,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-01 09:09:22" itemprop="dateModified" datetime="2019-06-01T09:09:22+08:00">2019-06-01</time>
+                <time title="修改时间：2019-06-11 01:14:26" itemprop="dateModified" datetime="2019-06-11T01:14:26+08:00">2019-06-11</time>
               
             
           </span>
@@ -483,7 +483,7 @@
       
 
       
-        <p><a href="http://maven.apache.org/index.html" target="_blank" rel="noopener">maven官方文档</a></p>
+        <p><a href="http://maven.apache.org/index.html" target="_blank" rel="noopener">maven官方文档</a><br><a href="https://www.yiibai.com/maven/" target="_blank" rel="noopener">易百教程</a><br><a href="https://mvnrepository.com/" target="_blank" rel="noopener">maven库查询</a></p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>下载<a href="http://maven.apache.org/download.cgi" target="_blank" rel="noopener">二进制包</a>后解压即可，然后配置环境变量</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">'export M2_HOME=/usr/local/apache_maven_xxx'</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">echo</span> <span class="string">'export PATH=$M2_HOME/bin:$PATH'</span> &gt;&gt; /etc/profile</span><br></pre></td></tr></table></figure>
 <p>执行<code>mvn -v</code>查看版本，同时确认是否安装配置OK</p>
@@ -521,11 +521,20 @@
 <li>repo,repo1 = repo or repo1</li>
 <li>*,!repo1 = everything except repo1</li>
 </ol>
-<h3 id="阿里镜像"><a href="#阿里镜像" class="headerlink" title="阿里镜像"></a>阿里镜像</h3><p><a href="https://help.aliyun.com/document_detail/102512.html?spm=a2c40.aliyun_maven_repo.0.0.36183054c2VGCz" target="_blank" rel="noopener">公共代理库使用文档</a></p>
+<h3 id="镜像设置"><a href="#镜像设置" class="headerlink" title="镜像设置"></a>镜像设置</h3><h4 id="阿里镜像"><a href="#阿里镜像" class="headerlink" title="阿里镜像"></a>阿里镜像</h4><p><a href="https://help.aliyun.com/document_detail/102512.html?spm=a2c40.aliyun_maven_repo.0.0.36183054c2VGCz" target="_blank" rel="noopener">公共代理库使用文档</a></p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>alimavenpublic<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>aliyun maven public<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/repository/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central,jcenter<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="华为镜像"><a href="#华为镜像" class="headerlink" title="华为镜像"></a><a href="https://mirrors.huaweicloud.com/" target="_blank" rel="noopener">华为镜像</a></h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>huaweicloud<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>https://mirrors.huaweicloud.com/repository/maven/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h2 id="Maven仓库"><a href="#Maven仓库" class="headerlink" title="Maven仓库"></a>Maven仓库</h2><p>对于Maven来说，仓库只有两类: 本地仓库和远程仓库。<br>当Maven根据坐标寻找构件时，首先查找本地仓库，如果本地仓库存在此构件，则直接使用；<br>如果本地仓库没有此构件，或需要查看构件是否有更新，Maven会去远程仓库查找，找到后下载到本地仓库再使用，如果没有找到则报错。</p>
 <p>对于远程仓库，根据仓库的提供者又可以分为: 中央仓库、其他公开库和私服<br>中央仓库是Maven自带的远程仓库，它包含了绝大部分开源的构件。默认情况下，当本地仓库没有找到需要的构件时，Maven会尝试从中央仓库下载。</p>
-<h2 id="Maven常用命令"><a href="#Maven常用命令" class="headerlink" title="Maven常用命令"></a>Maven常用命令</h2><h3 id="使用archetype创建Maven项目"><a href="#使用archetype创建Maven项目" class="headerlink" title="使用archetype创建Maven项目"></a>使用archetype创建Maven项目</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate</span><br></pre></td></tr></table></figure>
+<h2 id="Maven常用命令"><a href="#Maven常用命令" class="headerlink" title="Maven常用命令"></a>Maven常用命令</h2><h3 id="Help命令"><a href="#Help命令" class="headerlink" title="Help命令"></a>Help命令</h3><h4 id="查看某个插件的详情"><a href="#查看某个插件的详情" class="headerlink" title="查看某个插件的详情"></a>查看某个插件的详情</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn <span class="built_in">help</span>:describe -Dplugin=xxx -Ddetail</span><br></pre></td></tr></table></figure>
+<p>plugin可以使用下面三种方式指定:</p>
+<ul>
+<li>插件前缀, 如 ‘help’</li>
+<li>groupId:artifactId, 如 ‘org.apache.maven.plugins:maven-help-plugin’</li>
+<li>groupId:artifactId:version, 如 ‘org.apache.maven.plugins:maven-help-plugin:2.0’</li>
+</ul>
+<h4 id="查看某个插件的指定命令的帮助"><a href="#查看某个插件的指定命令的帮助" class="headerlink" title="查看某个插件的指定命令的帮助"></a>查看某个插件的指定命令的帮助</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:<span class="built_in">help</span> -Ddetail -Dgoal=generate</span><br></pre></td></tr></table></figure>
+<h3 id="使用archetype创建Maven项目"><a href="#使用archetype创建Maven项目" class="headerlink" title="使用archetype创建Maven项目"></a>使用archetype创建Maven项目</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate</span><br><span class="line">mvn -U archetype:generate -Dfilter=io.jenkins.archetypes:</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -645,7 +654,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -692,7 +701,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -731,7 +744,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -760,6 +775,10 @@
                     <a href="https://opsx.alibaba.com/?lang=zh-CN" title="https://opsx.alibaba.com/?lang=zh-CN" rel="noopener" target="_blank">阿里巴巴开源镜像站</a>
                   </li>
                 
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mirrors.huaweicloud.com/" title="https://mirrors.huaweicloud.com/" rel="noopener" target="_blank">华为开源镜像站</a>
+                  </li>
+                
               </ul>
             </div>
           
@@ -783,7 +802,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#超级POM"><span class="nav-number">2.1.</span> <span class="nav-text">超级POM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件"><span class="nav-number">2.2.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置项目"><span class="nav-number">2.3.</span> <span class="nav-text">配置项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阿里镜像"><span class="nav-number">2.4.</span> <span class="nav-text">阿里镜像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven仓库"><span class="nav-number">3.</span> <span class="nav-text">Maven仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven常用命令"><span class="nav-number">4.</span> <span class="nav-text">Maven常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用archetype创建Maven项目"><span class="nav-number">4.1.</span> <span class="nav-text">使用archetype创建Maven项目</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#超级POM"><span class="nav-number">2.1.</span> <span class="nav-text">超级POM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件"><span class="nav-number">2.2.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置项目"><span class="nav-number">2.3.</span> <span class="nav-text">配置项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#镜像设置"><span class="nav-number">2.4.</span> <span class="nav-text">镜像设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#阿里镜像"><span class="nav-number">2.4.1.</span> <span class="nav-text">阿里镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#华为镜像"><span class="nav-number">2.4.2.</span> <span class="nav-text">华为镜像</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven仓库"><span class="nav-number">3.</span> <span class="nav-text">Maven仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven常用命令"><span class="nav-number">4.</span> <span class="nav-text">Maven常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Help命令"><span class="nav-number">4.1.</span> <span class="nav-text">Help命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查看某个插件的详情"><span class="nav-number">4.1.1.</span> <span class="nav-text">查看某个插件的详情</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看某个插件的指定命令的帮助"><span class="nav-number">4.1.2.</span> <span class="nav-text">查看某个插件的指定命令的帮助</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用archetype创建Maven项目"><span class="nav-number">4.2.</span> <span class="nav-text">使用archetype创建Maven项目</span></a></li></ol></li></ol></div>
             
 
           </div>
