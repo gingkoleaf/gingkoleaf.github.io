@@ -9,8 +9,9 @@
         <category>centos</category>
       </categories>
       <tags>
-        <tag>yum</tag>
         <tag>centos</tag>
+        <tag>yum</tag>
+        <tag>TODO</tag>
       </tags>
   </entry>
   <entry>
@@ -28,19 +29,20 @@
   <entry>
     <title><![CDATA[git内部原理]]></title>
     <url>%2F2019%2F06%2F30%2Fgit%2Fgit-internals%2F</url>
-    <content type="text"><![CDATA[概述Git从根本上说是一个基于内容寻址(content-addressable)的文件系统，并在此之上提供一个VCS的用户界面。 最初git只是为VCS提供的一套工具集，而不是一个完成的VCS，所以git存在一系列命令能完成一些底层操作，这些命令被设计为能以Unix-style连接(chained)在一起，或者可以被脚本调用。这些命令被称为底层(plumbing)命令。相对应的那些更友好(user-friendly)的命令被称为高层(porcelain)命令。 通常情况下，不会在命令行中直接使用这些底层命令，它们更多被用于构建新的命令或用于自定义的脚本。 .git目录在执行完git init命令后，会生成一个.git目录。该目录里面包含了几乎所有的git存储和操作的对象。如果你想备份或克隆一个你的repo，只需要将copy该目录即可。 .git目录内容如下: 1234567891011$ ls -F1COMMIT_EDITMSGconfig # 包含所有特有(project-specific)的配置项description # 该文件仅用于GitWeb程序，无需关注HEAD # imp，hooks/ # 保存服务端和客户端的git钩子脚本index # imp,info/ # 该目录下的exclude文件用于保存不希望配置在.gitignore文件中的忽略模式logs/objects/ # imp, 存储所有的数据内容，包括所有文件的历史版本和commit信息refs/ # imp, 文件HEAD、index和目录objects、refs是git系统的核心组成部分。 参考资料 ProGit]]></content>
+    <content type="text"><![CDATA[概述Git从根本上说是一个基于内容寻址(content-addressable)的文件系统，并在此之上提供一个VCS的用户界面。 最初git只是为VCS提供的一套工具集，而不是一个完成的VCS，所以git存在一系列命令能完成一些底层操作，这些命令被设计为能以Unix-style连接(chained)在一起，或者可以被脚本调用。这些命令被称为底层(plumbing)命令。相对应的那些更友好(user-friendly)的命令被称为高层(porcelain)命令。 通常情况下，不会在命令行中直接使用这些底层命令，它们更多被用于构建新的命令或用于自定义的脚本。 .git目录在执行完git init命令后，会生成一个.git目录。该目录里面包含了几乎所有的git存储和操作的对象。如果你想备份或克隆一个你的repo，只需要将copy该目录即可。 一个已经有提交记录的.git目录内容如下: 123456789101112131415161718192021222324252627282930313233[root@localhost .git]# tree -F ..├── branches/├── config # 包含所有特有(project-specific)的配置项├── description # 该文件仅用于GitWeb程序，无需关注├── HEAD # imp├── hooks/ # 保存服务端和客户端的git钩子脚本├── index # imp├── info/ # 该目录下的exclude文件用于保存不希望配置在.gitignore文件中的忽略模式│ └── exclude├── logs/│ ├── HEAD│ └── refs/│ ├── heads/│ │ └── master│ └── remotes/│ └── origin/│ └── HEAD├── objects/ # imp, 存储所有的数据内容，包括所有文件的历史版本和commit信息│ ├── info/│ └── pack/│ ├── pack-de504965c4952729b475b8075c814b171ef83bf8.idx│ └── pack-de504965c4952729b475b8075c814b171ef83bf8.pack├── packed-refs└── refs/ # imp ├── heads/ │ └── master ├── remotes/ │ └── origin/ │ └── HEAD └── tags/16 directories, 24 files 文件HEAD、index和目录objects、refs是git系统的核心组成部分。 git初始化时的.git目录如下： 123456789101112131415[root@localhost .git]# tree -F ..├── branches/├── config├── description├── HEAD├── hooks/├── info/│ └── exclude├── objects/│ ├── info/│ └── pack/└── refs/ ├── heads/ └── tags/ 底层命令git最核心部分是一个key-value的数据库。 hash-object命令该命令可以计算指定对象的object ID，并且通过指定参数(-w)将指定对象写入数据库中。该ID是个SHA-1哈希值，通过将待存储的数据内容(指定对象内容)加一个头部信息(header)一起做SHA-1校验运算得到的校验和。 命令格式 12git hash-object [-t &lt;type&gt;] [-w] [--path=&lt;file&gt;|--no-filters] [--stdin [--literally]] [--] &lt;file&gt;…​git hash-object [-t &lt;type&gt;] [-w] --stdin-paths [--no-filters] 命令参数 -t &lt;type>: 对象类型， 默认为数据对象blob object -w: 设置该参数表示要将对象内容写入数据库 –stdin: 表示从标准输入读取对象内容 –stdin-paths: 表示从标准输入读取保存对象内容的文件名，每行表示一个文件 –: 标记后续参数类型，即 – 后面的参数会被解析为file 命令例子 12345678910111213[root@localhost gitNewTest]# find .git/objects -type f[root@localhost gitNewTest]# echo "hello world" |git hash-object -w --stdin3b18e512dba79e4c8300dd08aeb37f8e728b8dad[root@localhost gitNewTest]# find .git/objects -type f.git/objects/3b/18e512dba79e4c8300dd08aeb37f8e728b8dad[root@localhost gitNewTest]# tree .git/objects/.git/objects/├── 3b # SHA-1哈希值前两个字符做目录│ └── 18e512dba79e4c8300dd08aeb37f8e728b8dad # SHA-1哈希值剩余38个字符做文件名├── info└── pack3 directories, 1 file cat-object命令该命令用于显示指定对象的信息 命令格式 12git cat-file (-t [--allow-unknown-type]| -s [--allow-unknown-type]| -e | -p | &lt;type&gt; | --textconv | --filters ) [--path=&lt;path&gt;] &lt;object&gt;git cat-file (--batch | --batch-check) [ --textconv | --filters ] [--follow-symlinks] 命令参数 -t: 显示对象类型 -s: 显示对象大小(bytes) -e: 如果对象存在且是有效的，则命令正常返回0；如果对象无效，则命令返回非零值，并在标准错误输入打印错误信息 -p: 显示对象内容 –batch: 从标准输入读取对象id，显示对象信息(类型、大小)和对象内容 –batch-check: 从标准输入读取对象id，显示对象信息(类型、大小) 命令例子 12345678910111213141516171819202122232425262728293031323334[root@localhost gitNewTest]# find .git/objects/ -type f.git/objects/3b/18e512dba79e4c8300dd08aeb37f8e728b8dad[root@localhost gitNewTest]# git cat-file -p 3b18e512hello world[root@localhost gitNewTest]# git cat-file -s 3b18e51212[root@localhost gitNewTest]# git cat-file -t 3b18e512blob[root@localhost gitNewTest]# git cat-file -e 3b18e512[root@localhost gitNewTest]# echo $?0[root@localhost gitNewTest]# git cat-file -e 3b18e513fatal: Not a valid object name 3b18e513[root@localhost gitNewTest]# echo $?128[root@localhost gitNewTest]# git cat-file -t 3b18e513fatal: Not a valid object name 3b18e513[root@localhost gitNewTest]# echo $?128[root@localhost gitNewTest]# git cat-file --batch3b18e5123b18e512dba79e4c8300dd08aeb37f8e728b8dad blob 12hello world3333333333 missing^C[root@localhost gitNewTest]# git cat-file --batch-check3b18e5123b18e512dba79e4c8300dd08aeb37f8e728b8dad blob 12adcesadces missing^C[root@localhost gitNewTest]# git对象数据对象(blob object)树对象(tree object)提交对象(commit object)标签对象(tag object)参考资料 ProGit]]></content>
       <categories>
         <category>tool</category>
         <category>git</category>
       </categories>
       <tags>
+        <tag>TODO</tag>
         <tag>git</tag>
       </tags>
   </entry>
   <entry>
     <title><![CDATA[git diff命令详解]]></title>
     <url>%2F2019%2F06%2F29%2Fgit%2Fgit-cmd-diff%2F</url>
-    <content type="text"><![CDATA[命令回显说明git diff命令的回显采用的时GNU diff命令合并格式的变体 linux下通过diff -u file_a file_b来显示diff的合并格式 内容增删12345678910111213141516171819202122232425262728293031&gt; git diff HEAD~1 HEADdiff --git a/README.md b/README.md # 表示显示内容为git格式的diffindex ae50fdb..54e2aab 100644 # ae50fab..54e2aab表示两个版本对象的哈希值 # 100644表示对象的模式(普通文件， 644权限)--- a/README.md # --- 表示变动前的版本+++ b/README.md # +++ 表示变动后的版本@@ -5,6 +5,7 @@ # 该行表示变动的位置，由两个@表示开头和结尾 # - 表示 文件a/README.md， + 表示文件b/README.md # 5,6 表示下方显示内容为a/README.md的第5行开始，连续6行 # 5,7 表示下方显示内容为b/README.md的第5行开始，连续7行 b c d+new line e f gdiff --git a/newfile b/newfileindex fd54aa0..2d3a259 100644--- a/newfile+++ b/newfile@@ -1,5 +1,7 @@ add new file 1-2-3++ds+honda+toyta 新增文件1234567891011diff --git a/newfile3 b/newfile3new file mode 100644index 0000000..d4afdcc--- /dev/null+++ b/newfile3@@ -0,0 +1,5 @@+add new file3++new file++new file end 删除文件12345678910111213diff --git a/newfile b/newfiledeleted file mode 100644index 2d3a259..0000000--- a/newfile+++ /dev/null@@ -1,7 +0,0 @@-add new file-1--ds-honda-toyta- 重命名文件12345678910111213141516diff --git a/deletefile b/newfile2similarity index 89%rename from deletefilerename to newfile2index 08cb754..389cecf 100644--- a/deletefile+++ b/newfile2@@ -1,8 +1,6 @@ file tobe rename 1 2-3-4 5 6 7]]></content>
+    <content type="text"><![CDATA[命令格式12345678git diff [&lt;options&gt;] [--] [&lt;path&gt;..] # 默认表示比较工作区与暂存区git diff [&lt;options&gt;] HEAD [--] [&lt;path&gt;..] # 表示比较工作区与本地版本库最新版本git diff [&lt;options&gt;] commitid [--] [&lt;path&gt;..] # 表示比较工作区与指定commit id版本git diff [&lt;options&gt;] --cached [--] [&lt;path&gt;..] # 表示比较暂存区与本地库最新版本git diff [&lt;options&gt;] --cached commitid [--] [&lt;path&gt;..] # 表示比较暂存区与指定commit id版本git diff [&lt;options&gt;] commitid commitid [--] [&lt;path&gt;..] # 表示比较两次commitid之间的差异 命令参数 –raw: 显示原始的差异格式，如下: 123[root@localhost gitTest]# git diff --cached --raw:000000 100644 0000000 31d115c A addfile:100644 100644 389cecf 1f09c93 M newfile2 –stat: 显示差异统计结果，如下： 1234[root@localhost gitTest]# git diff --cached --stataddfile | 5 +++++newfile2 | 3 +--2 files changed, 6 insertions(+), 2 deletions(-) –shortstat: 只显示--stat的最后一行内容 12[root@localhost gitTest]# git diff --cached --shortstat2 files changed, 6 insertions(+), 2 deletions(-) –numstat: 只显示增加和删除的行数统计 123[root@localhost gitTest]# git diff --cached --numstat5 0 addfile1 2 newfile2 –name-only: 只显示哪些文件有差异 123[root@localhost gitTest]# git diff --cached --name-onlyaddfilenewfile2 使用git diff打补丁将工作区与本地仓库的差异做成补丁git diff &gt; patch_name 检验补丁是否能使用，如果没有任何输出表示可以顺利接受该补丁git apply –check patch_name 在另外一个地方应用补丁git apply patch_name 命令回显说明git diff命令的回显采用的时GNU diff命令合并格式的变体 linux下通过diff -u file_a file_b来显示diff的合并格式 内容增删12345678910111213141516171819202122232425262728293031&gt; git diff HEAD~1 HEADdiff --git a/README.md b/README.md # 表示显示内容为git格式的diffindex ae50fdb..54e2aab 100644 # ae50fab..54e2aab表示两个版本对象的哈希值 # 100644表示对象的模式(普通文件， 644权限)--- a/README.md # --- 表示变动前的版本+++ b/README.md # +++ 表示变动后的版本@@ -5,6 +5,7 @@ # 该行表示变动的位置，由两个@表示开头和结尾 # - 表示 文件a/README.md， + 表示文件b/README.md # 5,6 表示下方显示内容为a/README.md的第5行开始，连续6行 # 5,7 表示下方显示内容为b/README.md的第5行开始，连续7行 b c d+new line e f gdiff --git a/newfile b/newfileindex fd54aa0..2d3a259 100644--- a/newfile+++ b/newfile@@ -1,5 +1,7 @@ add new file 1-2-3++ds+honda+toyta 新增文件1234567891011diff --git a/newfile3 b/newfile3new file mode 100644index 0000000..d4afdcc--- /dev/null+++ b/newfile3@@ -0,0 +1,5 @@+add new file3++new file++new file end 删除文件12345678910111213diff --git a/newfile b/newfiledeleted file mode 100644index 2d3a259..0000000--- a/newfile+++ /dev/null@@ -1,7 +0,0 @@-add new file-1--ds-honda-toyta- 重命名文件12345678910111213141516diff --git a/deletefile b/newfile2similarity index 89%rename from deletefilerename to newfile2index 08cb754..389cecf 100644--- a/deletefile+++ b/newfile2@@ -1,8 +1,6 @@ file tobe rename 1 2-3-4 5 6 7]]></content>
       <categories>
         <category>tool</category>
         <category>git</category>
@@ -52,7 +54,7 @@
   <entry>
     <title><![CDATA[git使用总结]]></title>
     <url>%2F2019%2F06%2F29%2Fgit%2Fgit-usage%2F</url>
-    <content type="text"><![CDATA[常用术语 VCS: Version Control System 版本控制系统 DVCS: Distributed Version Control System 分布式版本控制系统 CVCS: Centralized Version Control System 中心式版本控制系统 Git内部原理Git命令git diff]]></content>
+    <content type="text"><![CDATA[githubProGit 常用术语 VCS: Version Control System 版本控制系统 DVCS: Distributed Version Control System 分布式版本控制系统 CVCS: Centralized Version Control System 中心式版本控制系统 源码安装安装依赖 123yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel asciidoc xmlto docbook2xatp-get install libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev asciidoc xmlto docbook2x 编码编译安装 1234567wget https://github.com/git/git/archive/v2.22.0.tar.gztar xvf v2.22.0.tar.gzcd git-2.22.0make configure./configure --prefix=/usrmake all doc infomake install install-doc install-html install-info Git内部原理Git命令git diff]]></content>
       <categories>
         <category>tool</category>
         <category>git</category>
@@ -169,9 +171,9 @@
         <category>makefile</category>
       </categories>
       <tags>
+        <tag>总结</tag>
         <tag>make</tag>
         <tag>makefile</tag>
-        <tag>总结</tag>
       </tags>
   </entry>
   <entry>
@@ -224,8 +226,8 @@
         <category>npm</category>
       </categories>
       <tags>
-        <tag>总结</tag>
         <tag>npm</tag>
+        <tag>总结</tag>
       </tags>
   </entry>
   <entry>

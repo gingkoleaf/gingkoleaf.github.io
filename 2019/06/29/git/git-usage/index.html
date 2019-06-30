@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="常用术语 VCS: Version Control System 版本控制系统 DVCS: Distributed Version Control System 分布式版本控制系统 CVCS: Centralized Version Control System 中心式版本控制系统  Git内部原理Git命令git diff">
+  <meta name="description" content="githubProGit 常用术语 VCS: Version Control System 版本控制系统 DVCS: Distributed Version Control System 分布式版本控制系统 CVCS: Centralized Version Control System 中心式版本控制系统  源码安装安装依赖 123yum install curl-devel expat-dev">
 <meta name="keywords" content="总结,git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git使用总结">
 <meta property="og:url" content="http://yoursite.com/2019/06/29/git/git-usage/index.html">
 <meta property="og:site_name" content="Gingko Leaf">
-<meta property="og:description" content="常用术语 VCS: Version Control System 版本控制系统 DVCS: Distributed Version Control System 分布式版本控制系统 CVCS: Centralized Version Control System 中心式版本控制系统  Git内部原理Git命令git diff">
+<meta property="og:description" content="githubProGit 常用术语 VCS: Version Control System 版本控制系统 DVCS: Distributed Version Control System 分布式版本控制系统 CVCS: Centralized Version Control System 中心式版本控制系统  源码安装安装依赖 123yum install curl-devel expat-dev">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-29T17:40:08.178Z">
+<meta property="og:updated_time" content="2019-06-30T03:24:21.167Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git使用总结">
-<meta name="twitter:description" content="常用术语 VCS: Version Control System 版本控制系统 DVCS: Distributed Version Control System 分布式版本控制系统 CVCS: Centralized Version Control System 中心式版本控制系统  Git内部原理Git命令git diff">
+<meta name="twitter:description" content="githubProGit 常用术语 VCS: Version Control System 版本控制系统 DVCS: Distributed Version Control System 分布式版本控制系统 CVCS: Centralized Version Control System 中心式版本控制系统  源码安装安装依赖 123yum install curl-devel expat-dev">
 
 
 
@@ -417,7 +417,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-30 01:40:08" itemprop="dateModified" datetime="2019-06-30T01:40:08+08:00">2019-06-30</time>
+                <time title="修改时间：2019-06-30 11:24:21" itemprop="dateModified" datetime="2019-06-30T11:24:21+08:00">2019-06-30</time>
               
             
           </span>
@@ -483,11 +483,16 @@
       
 
       
-        <h2 id="常用术语"><a href="#常用术语" class="headerlink" title="常用术语"></a>常用术语</h2><ul>
+        <p><a href="https://github.com/git/git" target="_blank" rel="noopener">github</a><br><a href="https://git-scm.com/book/en/v2" target="_blank" rel="noopener">ProGit</a></p>
+<h2 id="常用术语"><a href="#常用术语" class="headerlink" title="常用术语"></a>常用术语</h2><ul>
 <li>VCS: Version Control System 版本控制系统</li>
 <li>DVCS: Distributed Version Control System 分布式版本控制系统</li>
 <li>CVCS: Centralized Version Control System 中心式版本控制系统</li>
 </ul>
+<h2 id="源码安装"><a href="#源码安装" class="headerlink" title="源码安装"></a>源码安装</h2><p>安装依赖</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel asciidoc xmlto docbook2x</span><br><span class="line"></span><br><span class="line">atp-get install libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev asciidoc xmlto docbook2x</span><br></pre></td></tr></table></figure>
+<p>编码编译安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/git/git/archive/v2.22.0.tar.gz</span><br><span class="line">tar xvf v2.22.0.tar.gz</span><br><span class="line">cd git-2.22.0</span><br><span class="line">make configure</span><br><span class="line">./configure --prefix=/usr</span><br><span class="line">make all doc info</span><br><span class="line">make install install-doc install-html install-info</span><br></pre></td></tr></table></figure>
 <h2 id="Git内部原理"><a href="#Git内部原理" class="headerlink" title="Git内部原理"></a><a href="/2019/06/30/git/git-internals">Git内部原理</a></h2><h2 id="Git命令"><a href="#Git命令" class="headerlink" title="Git命令"></a>Git命令</h2><h3 id="git-diff"><a href="#git-diff" class="headerlink" title="git diff"></a><a href="/2019/06/29/git/git-cmd-diff/">git diff</a></h3>
       
     </div>
@@ -737,7 +742,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">16</span>
+                      
+                    
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -801,7 +808,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用术语"><span class="nav-number">1.</span> <span class="nav-text">常用术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git内部原理"><span class="nav-number">2.</span> <span class="nav-text">Git内部原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git命令"><span class="nav-number">3.</span> <span class="nav-text">Git命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git-diff"><span class="nav-number">3.1.</span> <span class="nav-text">git diff</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用术语"><span class="nav-number">1.</span> <span class="nav-text">常用术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源码安装"><span class="nav-number">2.</span> <span class="nav-text">源码安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git内部原理"><span class="nav-number">3.</span> <span class="nav-text">Git内部原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git命令"><span class="nav-number">4.</span> <span class="nav-text">Git命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git-diff"><span class="nav-number">4.1.</span> <span class="nav-text">git diff</span></a></li></ol></li></ol></div>
             
 
           </div>

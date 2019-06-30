@@ -97,14 +97,14 @@
 
 
   <meta name="description" content="概述Git从根本上说是一个基于内容寻址(content-addressable)的文件系统，并在此之上提供一个VCS的用户界面。 最初git只是为VCS提供的一套工具集，而不是一个完成的VCS，所以git存在一系列命令能完成一些底层操作，这些命令被设计为能以Unix-style连接(chained)在一起，或者可以被脚本调用。这些命令被称为底层(plumbing)命令。相对应的那些更友好(user">
-<meta name="keywords" content="git">
+<meta name="keywords" content="TODO,git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git内部原理">
 <meta property="og:url" content="http://yoursite.com/2019/06/30/git/git-internals/index.html">
 <meta property="og:site_name" content="Gingko Leaf">
 <meta property="og:description" content="概述Git从根本上说是一个基于内容寻址(content-addressable)的文件系统，并在此之上提供一个VCS的用户界面。 最初git只是为VCS提供的一套工具集，而不是一个完成的VCS，所以git存在一系列命令能完成一些底层操作，这些命令被设计为能以Unix-style连接(chained)在一起，或者可以被脚本调用。这些命令被称为底层(plumbing)命令。相对应的那些更友好(user">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-29T16:58:02.273Z">
+<meta property="og:updated_time" content="2019-06-30T07:01:16.242Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git内部原理">
 <meta name="twitter:description" content="概述Git从根本上说是一个基于内容寻址(content-addressable)的文件系统，并在此之上提供一个VCS的用户界面。 最初git只是为VCS提供的一套工具集，而不是一个完成的VCS，所以git存在一系列命令能完成一些底层操作，这些命令被设计为能以Unix-style连接(chained)在一起，或者可以被脚本调用。这些命令被称为底层(plumbing)命令。相对应的那些更友好(user">
@@ -400,7 +400,7 @@
                 
               
 
-              <time title="创建时间：2019-06-30 00:06:53 / 修改时间：00:58:02" itemprop="dateCreated datePublished" datetime="2019-06-30T00:06:53+08:00">2019-06-30</time>
+              <time title="创建时间：2019-06-30 00:06:53 / 修改时间：15:01:16" itemprop="dateCreated datePublished" datetime="2019-06-30T00:06:53+08:00">2019-06-30</time>
             
 
             
@@ -475,10 +475,40 @@
 <p>最初git只是为VCS提供的一套工具集，而不是一个完成的VCS，所以git存在一系列命令能完成一些底层操作，这些命令被设计为能以Unix-style连接(chained)在一起，或者可以被脚本调用。这些命令被称为底层(plumbing)命令。相对应的那些更友好(user-friendly)的命令被称为高层(porcelain)命令。</p>
 <p>通常情况下，不会在命令行中直接使用这些底层命令，它们更多被用于构建新的命令或用于自定义的脚本。</p>
 <h2 id="git目录"><a href="#git目录" class="headerlink" title=".git目录"></a>.git目录</h2><p>在执行完<code>git init</code>命令后，会生成一个<code>.git</code>目录。该目录里面包含了几乎所有的git存储和操作的对象。如果你想备份或克隆一个你的repo，只需要将copy该目录即可。</p>
-<p>.git目录内容如下:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls -F1</span></span><br><span class="line">COMMIT_EDITMSG</span><br><span class="line">config              # 包含所有特有(project-specific)的配置项</span><br><span class="line">description         # 该文件仅用于GitWeb程序，无需关注</span><br><span class="line">HEAD        # imp，</span><br><span class="line">hooks/      # 保存服务端和客户端的git钩子脚本</span><br><span class="line">index       # imp,</span><br><span class="line">info/       # 该目录下的exclude文件用于保存不希望配置在.gitignore文件中的忽略模式</span><br><span class="line">logs/</span><br><span class="line">objects/    # imp, 存储所有的数据内容，包括所有文件的历史版本和commit信息</span><br><span class="line">refs/       # imp,</span><br></pre></td></tr></table></figure>
+<p>一个已经有提交记录的.git目录内容如下:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost .git]# tree -F .</span><br><span class="line">.</span><br><span class="line">├── branches/</span><br><span class="line">├── config                      # 包含所有特有(project-specific)的配置项</span><br><span class="line">├── description                 # 该文件仅用于GitWeb程序，无需关注</span><br><span class="line">├── HEAD                        # imp</span><br><span class="line">├── hooks/                      # 保存服务端和客户端的git钩子脚本</span><br><span class="line">├── index                       # imp</span><br><span class="line">├── info/                       # 该目录下的exclude文件用于保存不希望配置在.gitignore文件中的忽略模式</span><br><span class="line">│   └── exclude</span><br><span class="line">├── logs/</span><br><span class="line">│   ├── HEAD</span><br><span class="line">│   └── refs/</span><br><span class="line">│       ├── heads/</span><br><span class="line">│       │   └── master</span><br><span class="line">│       └── remotes/</span><br><span class="line">│           └── origin/</span><br><span class="line">│               └── HEAD</span><br><span class="line">├── objects/                        # imp, 存储所有的数据内容，包括所有文件的历史版本和commit信息</span><br><span class="line">│   ├── info/</span><br><span class="line">│   └── pack/</span><br><span class="line">│       ├── pack-de504965c4952729b475b8075c814b171ef83bf8.idx</span><br><span class="line">│       └── pack-de504965c4952729b475b8075c814b171ef83bf8.pack</span><br><span class="line">├── packed-refs</span><br><span class="line">└── refs/                           # imp</span><br><span class="line">    ├── heads/</span><br><span class="line">    │   └── master</span><br><span class="line">    ├── remotes/</span><br><span class="line">    │   └── origin/</span><br><span class="line">    │       └── HEAD</span><br><span class="line">    └── tags/</span><br><span class="line"></span><br><span class="line">16 directories, 24 files</span><br></pre></td></tr></table></figure>
 <p>文件HEAD、index和目录objects、refs是git系统的核心组成部分。</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<p>git初始化时的.git目录如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost .git]# tree -F .</span><br><span class="line">.</span><br><span class="line">├── branches/</span><br><span class="line">├── config</span><br><span class="line">├── description</span><br><span class="line">├── HEAD</span><br><span class="line">├── hooks/</span><br><span class="line">├── info/</span><br><span class="line">│   └── exclude</span><br><span class="line">├── objects/</span><br><span class="line">│   ├── info/</span><br><span class="line">│   └── pack/</span><br><span class="line">└── refs/</span><br><span class="line">    ├── heads/</span><br><span class="line">    └── tags/</span><br></pre></td></tr></table></figure>
+<h2 id="底层命令"><a href="#底层命令" class="headerlink" title="底层命令"></a>底层命令</h2><p>git最核心部分是一个key-value的数据库。</p>
+<h3 id="hash-object命令"><a href="#hash-object命令" class="headerlink" title="hash-object命令"></a>hash-object命令</h3><p>该命令可以计算指定对象的object ID，并且通过指定参数(-w)将指定对象写入数据库中。该ID是个SHA-1哈希值，通过将待存储的数据内容(指定对象内容)加一个头部信息(header)一起做SHA-1校验运算得到的校验和。</p>
+<p>命令格式</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git hash-object [-t &lt;type&gt;] [-w] [--path=&lt;file&gt;|--no-filters] [--stdin [--literally]] [--] &lt;file&gt;…​</span><br><span class="line">git hash-object [-t &lt;type&gt;] [-w] --stdin-paths [--no-filters]</span><br></pre></td></tr></table></figure>
+<p>命令参数</p>
+<ul>
+<li>-t &lt;type>: 对象类型， 默认为数据对象blob object</li>
+<li>-w: 设置该参数表示要将对象内容写入数据库</li>
+<li>–stdin: 表示从标准输入读取对象内容</li>
+<li>–stdin-paths: 表示从标准输入读取保存对象内容的文件名，每行表示一个文件</li>
+<li>–: 标记后续参数类型，即 – 后面的参数会被解析为file</li>
+</ul>
+<p>命令例子</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost gitNewTest]# find .git/objects -type f</span><br><span class="line">[root@localhost gitNewTest]# echo "hello world" |git hash-object -w --stdin</span><br><span class="line">3b18e512dba79e4c8300dd08aeb37f8e728b8dad</span><br><span class="line">[root@localhost gitNewTest]# find .git/objects -type f</span><br><span class="line">.git/objects/3b/18e512dba79e4c8300dd08aeb37f8e728b8dad</span><br><span class="line">[root@localhost gitNewTest]# tree .git/objects/</span><br><span class="line">.git/objects/</span><br><span class="line">├── 3b                                          # SHA-1哈希值前两个字符做目录</span><br><span class="line">│   └── 18e512dba79e4c8300dd08aeb37f8e728b8dad  # SHA-1哈希值剩余38个字符做文件名</span><br><span class="line">├── info</span><br><span class="line">└── pack</span><br><span class="line"></span><br><span class="line">3 directories, 1 file</span><br></pre></td></tr></table></figure>
+<h3 id="cat-object命令"><a href="#cat-object命令" class="headerlink" title="cat-object命令"></a>cat-object命令</h3><p>该命令用于显示指定对象的信息</p>
+<p>命令格式</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git cat-file (-t [--allow-unknown-type]| -s [--allow-unknown-type]| -e | -p | &lt;type&gt; | --textconv | --filters ) [--path=&lt;path&gt;] &lt;object&gt;</span><br><span class="line">git cat-file (--batch | --batch-check) [ --textconv | --filters ] [--follow-symlinks]</span><br></pre></td></tr></table></figure>
+<p>命令参数</p>
+<ul>
+<li>-t: 显示对象类型</li>
+<li>-s: 显示对象大小(bytes)</li>
+<li>-e: 如果对象存在且是有效的，则命令正常返回0；如果对象无效，则命令返回非零值，并在标准错误输入打印错误信息</li>
+<li>-p: 显示对象内容</li>
+<li>–batch: 从标准输入读取对象id，显示对象信息(类型、大小)和对象内容</li>
+<li>–batch-check: 从标准输入读取对象id，显示对象信息(类型、大小)</li>
+</ul>
+<p>命令例子</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost gitNewTest]# find .git/objects/ -type f</span><br><span class="line">.git/objects/3b/18e512dba79e4c8300dd08aeb37f8e728b8dad</span><br><span class="line">[root@localhost gitNewTest]# git cat-file -p 3b18e512</span><br><span class="line">hello world</span><br><span class="line">[root@localhost gitNewTest]# git cat-file -s 3b18e512</span><br><span class="line">12</span><br><span class="line">[root@localhost gitNewTest]# git cat-file -t 3b18e512</span><br><span class="line">blob</span><br><span class="line">[root@localhost gitNewTest]# git cat-file -e 3b18e512</span><br><span class="line">[root@localhost gitNewTest]# echo $?</span><br><span class="line">0</span><br><span class="line">[root@localhost gitNewTest]# git cat-file -e 3b18e513</span><br><span class="line">fatal: Not a valid object name 3b18e513</span><br><span class="line">[root@localhost gitNewTest]# echo $?</span><br><span class="line">128</span><br><span class="line">[root@localhost gitNewTest]# git cat-file -t 3b18e513</span><br><span class="line">fatal: Not a valid object name 3b18e513</span><br><span class="line">[root@localhost gitNewTest]# echo $?</span><br><span class="line">128</span><br><span class="line">[root@localhost gitNewTest]# git cat-file --batch</span><br><span class="line">3b18e512</span><br><span class="line">3b18e512dba79e4c8300dd08aeb37f8e728b8dad blob 12</span><br><span class="line">hello world</span><br><span class="line"></span><br><span class="line">33333</span><br><span class="line">33333 missing</span><br><span class="line">^C</span><br><span class="line">[root@localhost gitNewTest]# git cat-file --batch-check</span><br><span class="line">3b18e512</span><br><span class="line">3b18e512dba79e4c8300dd08aeb37f8e728b8dad blob 12</span><br><span class="line">adces</span><br><span class="line">adces missing</span><br><span class="line">^C</span><br><span class="line">[root@localhost gitNewTest]#</span><br></pre></td></tr></table></figure>
+<h2 id="git对象"><a href="#git对象" class="headerlink" title="git对象"></a>git对象</h2><h3 id="数据对象-blob-object"><a href="#数据对象-blob-object" class="headerlink" title="数据对象(blob object)"></a>数据对象(blob object)</h3><h3 id="树对象-tree-object"><a href="#树对象-tree-object" class="headerlink" title="树对象(tree object)"></a>树对象(tree object)</h3><h3 id="提交对象-commit-object"><a href="#提交对象-commit-object" class="headerlink" title="提交对象(commit object)"></a>提交对象(commit object)</h3><h3 id="标签对象-tag-object"><a href="#标签对象-tag-object" class="headerlink" title="标签对象(tag object)"></a>标签对象(tag object)</h3><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
 <li><a href="https://git-scm.com/book/zh/v2" target="_blank" rel="noopener">ProGit</a></li>
 </ul>
 
@@ -527,6 +557,8 @@
     <footer class="post-footer">
       
         <div class="post-tags">
+          
+            <a href="/tags/TODO/" rel="tag"># TODO</a>
           
             <a href="/tags/git/" rel="tag"># git</a>
           
@@ -728,7 +760,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">16</span>
+                      
+                    
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -792,7 +826,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git目录"><span class="nav-number">2.</span> <span class="nav-text">.git目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git目录"><span class="nav-number">2.</span> <span class="nav-text">.git目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#底层命令"><span class="nav-number">3.</span> <span class="nav-text">底层命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hash-object命令"><span class="nav-number">3.1.</span> <span class="nav-text">hash-object命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cat-object命令"><span class="nav-number">3.2.</span> <span class="nav-text">cat-object命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git对象"><span class="nav-number">4.</span> <span class="nav-text">git对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据对象-blob-object"><span class="nav-number">4.1.</span> <span class="nav-text">数据对象(blob object)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树对象-tree-object"><span class="nav-number">4.2.</span> <span class="nav-text">树对象(tree object)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提交对象-commit-object"><span class="nav-number">4.3.</span> <span class="nav-text">提交对象(commit object)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标签对象-tag-object"><span class="nav-number">4.4.</span> <span class="nav-text">标签对象(tag object)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
             
 
           </div>
