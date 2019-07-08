@@ -45,9 +45,9 @@
         <category>centos</category>
       </categories>
       <tags>
-        <tag>yum</tag>
-        <tag>centos</tag>
         <tag>TODO</tag>
+        <tag>centos</tag>
+        <tag>yum</tag>
       </tags>
   </entry>
   <entry>
@@ -207,9 +207,9 @@
         <category>makefile</category>
       </categories>
       <tags>
-        <tag>总结</tag>
         <tag>make</tag>
         <tag>makefile</tag>
+        <tag>总结</tag>
       </tags>
   </entry>
   <entry>
@@ -249,8 +249,8 @@
         <category>vscode</category>
       </categories>
       <tags>
-        <tag>vscode</tag>
         <tag>总结</tag>
+        <tag>vscode</tag>
       </tags>
   </entry>
   <entry>
