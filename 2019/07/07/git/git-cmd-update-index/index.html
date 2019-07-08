@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Gingko Leaf">
 <meta property="og:description" content="通常该命令用于将工作区(working tree)中的内容注册到暂存区(index) 命令格式git update-index         [–add] [–remove | –force-remove] [–replace]         [–refresh] [-q] [–unmerged] [–ignore-missing]         [(–cacheinfo &amp;lt;mode&amp;gt;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-08T10:10:54.551Z">
+<meta property="og:updated_time" content="2019-07-08T15:32:00.537Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git-update-index命令">
 <meta name="twitter:description" content="通常该命令用于将工作区(working tree)中的内容注册到暂存区(index) 命令格式git update-index         [–add] [–remove | –force-remove] [–replace]         [–refresh] [-q] [–unmerged] [–ignore-missing]         [(–cacheinfo &amp;lt;mode&amp;gt;">
@@ -417,7 +417,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-08 18:10:54" itemprop="dateModified" datetime="2019-07-08T18:10:54+08:00">2019-07-08</time>
+                <time title="修改时间：2019-07-08 23:32:00" itemprop="dateModified" datetime="2019-07-08T23:32:00+08:00">2019-07-08</time>
               
             
           </span>
@@ -486,10 +486,9 @@
         <p>通常该命令用于将工作区(working tree)中的内容注册到暂存区(index)</p>
 <h2 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h2><p>git update-index<br>         [–add] [–remove | –force-remove] [–replace]<br>         [–refresh] [-q] [–unmerged] [–ignore-missing]<br>         [(–cacheinfo &lt;mode>,&lt;object>,&lt;file>)…​]<br>         [–chmod=(+|-)x]<br>         [–[no-]assume-unchanged]<br>         [–[no-]skip-worktree]<br>         [–[no-]fsmonitor-valid]<br>         [–ignore-submodules]<br>         [–[no-]split-index]<br>         [–[no-|test-|force-]untracked-cache]<br>         [–[no-]fsmonitor]<br>         [–really-refresh] [–unresolve] [–again | -g]<br>         [–info-only] [–index-info]<br>         [-z] [–stdin] [–index-version &lt;n>]<br>         [–verbose]<br>         [–] [&lt;file>…​]</p>
 <h2 id="命令参数选项"><a href="#命令参数选项" class="headerlink" title="命令参数选项"></a>命令参数选项</h2><ul>
-<li>–add: 如果指定的文件不在暂存区(index)中，则将其加入暂存区。命令默认行为是忽略工作区中新增的文件。</li>
-<li>–remove: 如果指定文件在暂存区中，但是在工作区中已经被删除，则将其从暂存区(index)中删除。命令默认行为是忽略工作区中被删除的文件。</li>
+<li>–add: 如果指定的文件不在暂存区(index)中，则将其加入暂存区。</li>
 </ul>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><h3 id="增加工作区新文件到暂存区"><a href="#增加工作区新文件到暂存区" class="headerlink" title="增加工作区新文件到暂存区"></a>增加工作区新文件到暂存区</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost git_update_index]# git init</span><br><span class="line">Initialized empty Git repository in /root/git_update_index/.git/</span><br><span class="line">[root@localhost git_update_index]# find .git/objects/ -type f</span><br><span class="line">[root@localhost git_update_index]# echo 'version 1' &gt; text.txt</span><br><span class="line">[root@localhost git_update_index]# git status</span><br><span class="line">On branch master</span><br><span class="line"></span><br><span class="line">No commits yet</span><br><span class="line"></span><br><span class="line">Untracked files:</span><br><span class="line">  (use "git add &lt;file&gt;..." to include in what will be committed)</span><br><span class="line"></span><br><span class="line">        text.txt</span><br><span class="line"></span><br><span class="line">nothing added to commit but untracked files present (use "git add" to track)</span><br><span class="line">[root@localhost git_update_index]# git update-index --add text.txt </span><br><span class="line">[root@localhost git_update_index]# git status</span><br><span class="line">On branch master</span><br><span class="line"></span><br><span class="line">No commits yet</span><br><span class="line"></span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use "git rm --cached &lt;file&gt;..." to unstage)</span><br><span class="line"></span><br><span class="line">        new file:   text.txt</span><br><span class="line"></span><br><span class="line">[root@localhost git_update_index]#</span><br></pre></td></tr></table></figure>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><h3 id="增加工作区新文件到暂存区"><a href="#增加工作区新文件到暂存区" class="headerlink" title="增加工作区新文件到暂存区"></a>增加工作区新文件到暂存区</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost git_update_index]# git init</span><br><span class="line">Initialized empty Git repository in /root/git_update_index/.git/</span><br><span class="line">[root@localhost git_update_index]# find .git/objects/ -type f</span><br><span class="line">[root@localhost git_update_index]# echo 'version 1' &gt; text.txt</span><br><span class="line">[root@localhost git_update_index]# git status</span><br><span class="line">On branch master</span><br><span class="line"></span><br><span class="line">No commits yet</span><br><span class="line"></span><br><span class="line">Untracked files:</span><br><span class="line">  (use "git add &lt;file&gt;..." to include in what will be committed)</span><br><span class="line"></span><br><span class="line">        text.txt</span><br><span class="line"></span><br><span class="line">nothing added to commit but untracked files present (use "git add" to track)</span><br><span class="line">[root@localhost git_update_index]# git update-index --add text.txt</span><br><span class="line">[root@localhost git_update_index]# git status</span><br><span class="line">On branch master</span><br><span class="line"></span><br><span class="line">No commits yet</span><br><span class="line"></span><br><span class="line">Changes to be committed:</span><br><span class="line">  (use "git rm --cached &lt;file&gt;..." to unstage)</span><br><span class="line"></span><br><span class="line">        new file:   text.txt</span><br><span class="line"></span><br><span class="line">[root@localhost git_update_index]# find .git/objects/ -type f</span><br><span class="line">.git/objects/83/baae61804e65cc73a7201a7252750c76066a30</span><br><span class="line">[root@localhost git_update_index]# git cat-file -p 83baae6</span><br><span class="line">version 1</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -560,6 +559,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/07/08/git/git-cmd-ls-files/" rel="prev" title="git-ls-files命令">
+                git-ls-files命令 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -627,7 +630,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
