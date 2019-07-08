@@ -99,14 +99,14 @@
   <meta name="description" content="命令格式12345678git diff [&amp;lt;options&amp;gt;] [--] [&amp;lt;path&amp;gt;..]           # 默认表示比较工作区与暂存区git diff [&amp;lt;options&amp;gt;] HEAD [--] [&amp;lt;path&amp;gt;..]      # 表示比较工作区与本地版本库最新版本git diff [&amp;lt;options&amp;gt;] commitid">
 <meta name="keywords" content="git">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git diff命令详解">
+<meta property="og:title" content="git-diff命令">
 <meta property="og:url" content="http://yoursite.com/2019/06/29/git/git-cmd-diff/index.html">
 <meta property="og:site_name" content="Gingko Leaf">
 <meta property="og:description" content="命令格式12345678git diff [&amp;lt;options&amp;gt;] [--] [&amp;lt;path&amp;gt;..]           # 默认表示比较工作区与暂存区git diff [&amp;lt;options&amp;gt;] HEAD [--] [&amp;lt;path&amp;gt;..]      # 表示比较工作区与本地版本库最新版本git diff [&amp;lt;options&amp;gt;] commitid">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-30T08:07:35.864Z">
+<meta property="og:updated_time" content="2019-07-07T04:00:01.186Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git diff命令详解">
+<meta name="twitter:title" content="git-diff命令">
 <meta name="twitter:description" content="命令格式12345678git diff [&amp;lt;options&amp;gt;] [--] [&amp;lt;path&amp;gt;..]           # 默认表示比较工作区与暂存区git diff [&amp;lt;options&amp;gt;] HEAD [--] [&amp;lt;path&amp;gt;..]      # 表示比较工作区与本地版本库最新版本git diff [&amp;lt;options&amp;gt;] commitid">
 
 
@@ -125,7 +125,7 @@
   };
 </script>
 
-  <title>git diff命令详解 | Gingko Leaf</title>
+  <title>git-diff命令 | Gingko Leaf</title>
   
 
 
@@ -374,7 +374,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">git diff命令详解
+          <h1 class="post-title" itemprop="name headline">git-diff命令
 
               
             
@@ -417,7 +417,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-30 16:07:35" itemprop="dateModified" datetime="2019-06-30T16:07:35+08:00">2019-06-30</time>
+                <time title="修改时间：2019-07-07 12:00:01" itemprop="dateModified" datetime="2019-07-07T12:00:01+08:00">2019-07-07</time>
               
             
           </span>
@@ -484,7 +484,7 @@
 
       
         <h3 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git diff [&lt;options&gt;] [--] [&lt;path&gt;..]           # 默认表示比较工作区与暂存区</span><br><span class="line">git diff [&lt;options&gt;] HEAD [--] [&lt;path&gt;..]      # 表示比较工作区与本地版本库最新版本</span><br><span class="line">git diff [&lt;options&gt;] commitid [--] [&lt;path&gt;..]  # 表示比较工作区与指定commit id版本</span><br><span class="line"></span><br><span class="line">git diff [&lt;options&gt;] --cached [--] [&lt;path&gt;..]           # 表示比较暂存区与本地库最新版本</span><br><span class="line">git diff [&lt;options&gt;] --cached commitid [--] [&lt;path&gt;..]  # 表示比较暂存区与指定commit id版本</span><br><span class="line"></span><br><span class="line">git diff [&lt;options&gt;] commitid commitid [--] [&lt;path&gt;..]  # 表示比较两次commitid之间的差异</span><br></pre></td></tr></table></figure>
-<h3 id="命令参数"><a href="#命令参数" class="headerlink" title="命令参数"></a>命令参数</h3><ul>
+<h3 id="命令参数选项"><a href="#命令参数选项" class="headerlink" title="命令参数选项"></a>命令参数选项</h3><ul>
 <li><p>–raw: 显示原始的差异格式，如下:</p>
   <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost gitTest]# git diff --cached --raw</span><br><span class="line">:000000 100644 0000000 31d115c A        addfile</span><br><span class="line">:100644 100644 389cecf 1f09c93 M        newfile2</span><br></pre></td></tr></table></figure>
 </li>
@@ -651,7 +651,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -823,7 +823,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令格式"><span class="nav-number">1.</span> <span class="nav-text">命令格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令参数"><span class="nav-number">2.</span> <span class="nav-text">命令参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用git-diff打补丁"><span class="nav-number">3.</span> <span class="nav-text">使用git diff打补丁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令回显说明"><span class="nav-number">4.</span> <span class="nav-text">命令回显说明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内容增删"><span class="nav-number">4.1.</span> <span class="nav-text">内容增删</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#新增文件"><span class="nav-number">4.2.</span> <span class="nav-text">新增文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除文件"><span class="nav-number">4.3.</span> <span class="nav-text">删除文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重命名文件"><span class="nav-number">4.4.</span> <span class="nav-text">重命名文件</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令格式"><span class="nav-number">1.</span> <span class="nav-text">命令格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令参数选项"><span class="nav-number">2.</span> <span class="nav-text">命令参数选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用git-diff打补丁"><span class="nav-number">3.</span> <span class="nav-text">使用git diff打补丁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令回显说明"><span class="nav-number">4.</span> <span class="nav-text">命令回显说明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内容增删"><span class="nav-number">4.1.</span> <span class="nav-text">内容增删</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#新增文件"><span class="nav-number">4.2.</span> <span class="nav-text">新增文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除文件"><span class="nav-number">4.3.</span> <span class="nav-text">删除文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重命名文件"><span class="nav-number">4.4.</span> <span class="nav-text">重命名文件</span></a></li></ol></li></ol></div>
             
 
           </div>
