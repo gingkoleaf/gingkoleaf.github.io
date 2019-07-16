@@ -57,9 +57,9 @@
         <category>centos</category>
       </categories>
       <tags>
+        <tag>TODO</tag>
         <tag>centos</tag>
         <tag>yum</tag>
-        <tag>TODO</tag>
       </tags>
   </entry>
   <entry>
@@ -83,8 +83,8 @@
         <category>git</category>
       </categories>
       <tags>
-        <tag>TODO</tag>
         <tag>git</tag>
+        <tag>TODO</tag>
       </tags>
   </entry>
   <entry>
@@ -102,7 +102,7 @@
   <entry>
     <title><![CDATA[git使用总结]]></title>
     <url>%2F2019%2F06%2F29%2Fgit%2Fgit-usage%2F</url>
-    <content type="text"><![CDATA[githubProGit 常用术语 VCS: Version Control System 版本控制系统 DVCS: Distributed Version Control System 分布式版本控制系统 CVCS: Centralized Version Control System 中心式版本控制系统 源码安装安装依赖 123yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel asciidoc xmlto docbook2xatp-get install libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev asciidoc xmlto docbook2x 编码编译安装 1234567wget https://github.com/git/git/archive/v2.22.0.tar.gztar xvf v2.22.0.tar.gzcd git-2.22.0make configure./configure --prefix=/usrmake all doc infomake install install-doc install-html install-info Git内部原理Git命令高层命令git diff底层命令git最核心部分是一个key-value的数据库。 hash-object命令cat-object命令update-index命令ls-files命令]]></content>
+    <content type="text"><![CDATA[githubProGit 常用术语 VCS: Version Control System 版本控制系统 DVCS: Distributed Version Control System 分布式版本控制系统 CVCS: Centralized Version Control System 中心式版本控制系统 源码安装安装依赖 123yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel asciidoc xmlto docbook2xatp-get install libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev asciidoc xmlto docbook2x 编码编译安装 1234567wget https://github.com/git/git/archive/v2.22.0.tar.gztar xvf v2.22.0.tar.gzcd git-2.22.0make configure./configure --prefix=/usrmake all doc infomake install install-doc install-html install-info Git内部原理Git命令高层命令git diffgit commit底层命令git最核心部分是一个key-value的数据库。 hash-object命令cat-object命令update-index命令ls-files命令]]></content>
       <categories>
         <category>tool</category>
         <category>git</category>
