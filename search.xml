@@ -1,6 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Centos下jenkins的安装]]></title>
+    <url>%2F2019%2F07%2F16%2Fcentos%2Fcentos-jenkins-install%2F</url>
+    <content type="text"><![CDATA[通过设置jenkins官方repo仓库下载1234sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.reposudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.keyyum install jenkinscat /etc/rc.d/init.d/jenkins 安装后，jenkins.war默认地址为JENKINS_WAR=”/usr/lib/jenkins/jenkins.war” jenkins的config地址为JENKINS_CONFIG=/etc/sysconfig/jenkins 下载rpm安装12wget https://pkg.jenkins.io/redhat-stable/jenkins-2.176.1-1.1.noarch.rpmrpm -ivh jenkins-2.176.1-1.1.noarch.rpm 下载war包12wget http://mirrors.jenkins.io/war-stable/latest/jenkins.warjava -jar jenkins.war 虚拟机中启动jenkins后不能访问 关闭防火墙 123systemctl status firewalldsystemctl stop firewalldsystemctl disable firewalld]]></content>
+      <categories>
+        <category>linux</category>
+        <category>centos</category>
+      </categories>
+      <tags>
+        <tag>centos</tag>
+        <tag>jenkins</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Jenkins通过Grab下载依赖失败]]></title>
+    <url>%2F2019%2F07%2F16%2Fgroovy%2Fjenkins-groovy-grape%2F</url>
+    <content type="text"><![CDATA[官方文档极客学院翻译 问题描述在使用Jenkins的 pipeline as code 特性时，遇到使用第三方jar的情况，使用了@Grab(group=&#39;org.restlet&#39;, module=&#39;org.restlet&#39;, version=&#39;1.1.6&#39;)注解，但是在Jenkins job运行时下载依赖失败。 解决方法grape默认时采用maven的 mvnrepository.com 来搜索依赖包，出问题的Jenkins master上是不能访问该仓库的，所以下载依赖失败。 在${JENKINS_HOME}/.groovy/目录下新增文件grapeConfig.xml，指定仓库地址为内网仓库或可访问的maven镜像仓库。 12345678&lt;ivysettings&gt; &lt;settings defaultResolver="downloadGrapes"/&gt; &lt;resolvers&gt; &lt;chain name="downloadGrapes"&gt; &lt;ibiblio name="public" root="https://mirrors.huaweicloud.com/repository/maven/" m2compatible="true"/&gt; &lt;/chain&gt; &lt;/resolvers&gt;&lt;/ivysettings&gt; grapeConfig.xml的默认配置为 123456789101112131415&lt;ivysettings&gt; &lt;settings defaultResolver="downloadGrapes"/&gt; &lt;resolvers&gt; &lt;chain name="downloadGrapes" returnFirst="true"&gt; &lt;filesystem name="cachedGrapes"&gt; &lt;ivy pattern="$&#123;user.home&#125;/.groovy/grapes/[organisation]/[module]/ivy-[revision].xml"/&gt; &lt;artifact pattern="$&#123;user.home&#125;/.groovy/grapes/[organisation]/[module]/[type]s/[artifact]-[revision](-[classifier]).[ext]"/&gt; &lt;/filesystem&gt; &lt;ibiblio name="localm2" root="file:$&#123;user.home&#125;/.m2/repository/" checkmodified="true" changingPattern=".*" changingMatcher="regexp" m2compatible="true"/&gt; &lt;!-- todo add 'endorsed groovy extensions' resolver here --&gt; &lt;ibiblio name="jcenter" root="https://jcenter.bintray.com/" m2compatible="true"/&gt; &lt;ibiblio name="ibiblio" m2compatible="true"/&gt; &lt;/chain&gt; &lt;/resolvers&gt;&lt;/ivysettings&gt; Jenkins中grape下载的第三方jar默认是缓存在${JENKINS_HOME}/.groovy/grapes/目录下。可以通过添加Jenkins的启动参数-Dgroovy.grape.report.downloads=true 和 -Divy.message.logger.level=4，在jenkins的日志中观察第三方依赖的下载过程。]]></content>
+      <categories>
+        <category>language</category>
+        <category>groovy</category>
+      </categories>
+      <tags>
+        <tag>jenkins</tag>
+        <tag>groovy</tag>
+        <tag>grape</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[git-commit命令]]></title>
+    <url>%2F2019%2F07%2F16%2Fgit%2Fgit-cmd-commit%2F</url>
+    <content type="text"><![CDATA[git commit –amend建议 git commit –amend 命令使用在未push到远端的场景。 提交还未push到远端在某次修改时，修改了README.md文件，同时新增了amendTest文件。但是在commit的时候，只提交了README.md，忘记了amendTest文件。 1234567891011121314151617181920212223242526272829303132333435363738[root@localhost gitTest]# git statusOn branch masterYour branch is up to date with 'origin/master'.Changes not staged for commit: (use "git add &lt;file&gt;..." to update what will be committed) (use "git checkout -- &lt;file&gt;..." to discard changes in working directory) modified: README.mdUntracked files: (use "git add &lt;file&gt;..." to include in what will be committed) amendTestno changes added to commit (use "git add" and/or "git commit -a")[root@localhost gitTest]# git commit -am 'add amendTest file'[master ce1e058] add amendTest file 1 file changed, 1 insertion(+)[root@localhost gitTest]# git statusOn branch masterYour branch is ahead of 'origin/master' by 1 commit. (use "git push" to publish your local commits)Untracked files: (use "git add &lt;file&gt;..." to include in what will be committed) amendTestnothing added to commit but untracked files present (use "git add" to track)[root@localhost gitTest]# git log -n 3 --onelinea889479 (HEAD -&gt; master) add amendTest file11843d7 (origin/master, origin/HEAD) updatebf2a12f update[root@localhost gitTest]# git diff --stat HEAD~1 HEAD README.md | 1 + 1 file changed, 1 insertion(+)[root@localhost gitTest]# 此时，如果想将amendTest文件提交，同时不产生新的commit记录(即新提交内容合并到上一次提交中)，可以使用git commit --amend命令 123456789101112131415161718192021222324252627[root@localhost gitTest]# git add .[root@localhost gitTest]# git commit --amendadd amendTest file# Please enter the commit message for your changes. Lines starting# with '#' will be ignored, and an empty message aborts the commit.## Date: Sun Jun 30 15:00:20 2019 +0800## On branch master# Your branch is ahead of 'origin/master' by 1 commit.# (use "git push" to publish your local commits)## Changes to be committed:# modified: README.md# new file: amendTest Date: Sun Jun 30 15:00:20 2019 +0800 2 files changed, 2 insertions(+) create mode 100644 amendTest[root@localhost gitTest]# git log -n 3 --onelined2a42e9 (HEAD -&gt; master) add amendTest file11843d7 (origin/master, origin/HEAD) updatebf2a12f update[root@localhost gitTest]# git diff --stat HEAD~1 HEAD README.md | 1 + amendTest | 1 + 2 files changed, 2 insertions(+) 使用该git commit --amend命令后，会生成一个新的commitid，合并本次提交与上一次提交内容。 提交已经push到远端如果上一次commit已经push到远端，使用git commit --amend提交后，在push到远端时会被拒绝，通过git status提示发现当前分支与origin/master已经分叉 通过git pull将origin/master代码merge过来后，重新push可以推送成功 但是通过git log可以发现远端仍是有两次提交记录。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485[root@localhost gitTest]# git log -n 3 --onelinee30f084 (HEAD -&gt; master) add amendTest file11843d7 (origin/master, origin/HEAD) updatebf2a12f update[root@localhost gitTest]# git push origin masterEnumerating objects: 5, done.Counting objects: 100% (5/5), done.Compressing objects: 100% (3/3), done.Writing objects: 100% (3/3), 404 bytes | 202.00 KiB/s, done.Total 3 (delta 0), reused 0 (delta 0)To github.com:daybreakgx/gitTest.git 11843d7..e30f084 master -&gt; master[root@localhost gitTest]# git log -n 3 --onelinee30f084 (HEAD -&gt; master, origin/master, origin/HEAD) add amendTest file11843d7 updatebf2a12f update[root@localhost gitTest]# git add .[root@localhost gitTest]# git commit --amend[master 7e0656c] add amendTest file add 2 Date: Sun Jun 30 15:25:00 2019 +0800 2 files changed, 2 insertions(+) create mode 100644 amendTest[root@localhost gitTest]# git statusOn branch masterYour branch and 'origin/master' have diverged,and have 1 and 1 different commits each, respectively. (use "git pull" to merge the remote branch into yours)nothing to commit, working tree clean[root@localhost gitTest]# git log -n 3 --oneline7e0656c (HEAD -&gt; master) add amendTest file add 211843d7 updatebf2a12f update[root@localhost gitTest]# git push origin masterTo github.com:daybreakgx/gitTest.git ! [rejected] master -&gt; master (non-fast-forward)error: failed to push some refs to 'git@github.com:daybreakgx/gitTest.git'hint: Updates were rejected because the tip of your current branch is behindhint: its remote counterpart. Integrate the remote changes (e.g.hint: 'git pull ...') before pushing again.hint: See the 'Note about fast-forwards' in 'git push --help' for details.[root@localhost gitTest]# git pullMerge made by the 'recursive' strategy.[root@localhost gitTest]# git statusOn branch masterYour branch is ahead of 'origin/master' by 2 commits. (use "git push" to publish your local commits)nothing to commit, working tree clean[root@localhost gitTest]# git push origin masterEnumerating objects: 6, done.Counting objects: 100% (6/6), done.Compressing objects: 100% (3/3), done.Writing objects: 100% (4/4), 437 bytes | 218.00 KiB/s, done.Total 4 (delta 2), reused 0 (delta 0)remote: Resolving deltas: 100% (2/2), completed with 1 local object.To github.com:daybreakgx/gitTest.git e30f084..bef9cc4 master -&gt; master[root@localhost gitTest]# git log --graph* commit bef9cc49c27913ca9924378dd50c0ef50f6d8d48 (HEAD -&gt; master, origin/master, origin/HEAD)|\ Merge: 7e0656c e30f084| | Author: daybreakgx &lt;daybreak.gx@gmail.com&gt;| | Date: Sun Jun 30 15:27:59 2019 +0800| | | | Merge branch 'master' of github.com:daybreakgx/gitTest| | | * commit e30f08487acfe730bfa241e0042a55503d41b791| | Author: daybreakgx &lt;daybreak.gx@gmail.com&gt;| | Date: Sun Jun 30 15:25:00 2019 +0800| | | | add amendTest file| | * | commit 7e0656c521428142bd248153050918a7a5f5d0ab|/ Author: daybreakgx &lt;daybreak.gx@gmail.com&gt;| Date: Sun Jun 30 15:25:00 2019 +0800| | add amendTest file add 2| * commit 11843d78157ea67dc2d4768366c1f6c446d93071| Author: daybreakgx &lt;daybreak.gx@gmail.com&gt;| Date: Sun Jun 30 14:58:02 2019 +0800| | update 撤销git commit –amend]]></content>
+      <categories>
+        <category>tool</category>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[git-ls-files命令]]></title>
     <url>%2F2019%2F07%2F08%2Fgit%2Fgit-cmd-ls-files%2F</url>
     <content type="text"><![CDATA[该命令用于显示暂存区(index)或工作区(working tree)的文件信息 命令格式git ls-files [-z] [-t] [-v] [-f] (–[cached|deleted|others|ignored|stage|unmerged|killed|modified]) (-[c|d|o|i|s|u|k|m]) [–eol] [-x &lt;pattern>|–exclude=&lt;pattern>] [-X &lt;file>|–exclude-from=&lt;file>] [–exclude-per-directory=&lt;file>] [–exclude-standard] [–error-unmatch] [–with-tree=&lt;tree-ish>] [–full-name] [–recurse-submodules] [–abbrev] [–] [&lt;file>…​] 命令参数选项 -c, –cached: 显示暂存区中的文件 -d, –deleted: 显示删除了的文件 -m, –modified: 显示修改了的文件 -i, –ignored: 显示忽略了的文件(满足忽略模式的) -o, –others: 显示其他类型的文件(如未追踪的) -s, –stage: 按照如下格式显示文件内容[&lt;tag\&gt;] &lt;mode\&gt; &lt;object\&gt; &lt;stage\&gt; &lt;file\&gt;]]></content>
@@ -57,9 +96,9 @@
         <category>centos</category>
       </categories>
       <tags>
-        <tag>TODO</tag>
         <tag>centos</tag>
         <tag>yum</tag>
+        <tag>TODO</tag>
       </tags>
   </entry>
   <entry>
@@ -83,8 +122,8 @@
         <category>git</category>
       </categories>
       <tags>
-        <tag>git</tag>
         <tag>TODO</tag>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -127,7 +166,7 @@
   <entry>
     <title><![CDATA[groovy使用总结]]></title>
     <url>%2F2019%2F06%2F13%2Fgroovy%2Fgroovy-usage%2F</url>
-    <content type="text"><![CDATA[Apache Groovy基于Java平台的一种功能强大、可选类型的动态语言。它的目的在于通过简洁、熟悉和易于学习的语法来提升开发人员的效率。Groovy代码动态地编译成运行于Java虚拟机（JVM）上的Java字节码，并可以与其他Java代码和库进行互操作。由于其运行在JVM上的特性，Groovy可以使用其他Java语言编写的库。 官网文档 闭包]]></content>
+    <content type="text"><![CDATA[Apache Groovy基于Java平台的一种功能强大、可选类型的动态语言。它的目的在于通过简洁、熟悉和易于学习的语法来提升开发人员的效率。Groovy代码动态地编译成运行于Java虚拟机（JVM）上的Java字节码，并可以与其他Java代码和库进行互操作。由于其运行在JVM上的特性，Groovy可以使用其他Java语言编写的库。 官网文档 闭包grape依赖管理]]></content>
       <categories>
         <category>language</category>
         <category>groovy</category>
@@ -219,9 +258,9 @@
         <category>makefile</category>
       </categories>
       <tags>
+        <tag>总结</tag>
         <tag>make</tag>
         <tag>makefile</tag>
-        <tag>总结</tag>
       </tags>
   </entry>
   <entry>
@@ -240,7 +279,7 @@
   <entry>
     <title><![CDATA[jenkins使用总结]]></title>
     <url>%2F2019%2F05%2F13%2Fjenkins%2Fjenkins%2F</url>
-    <content type="text"><![CDATA[常用链接 pipeline steps reference pipeline scm step(checkout) apache groovy doc SAP shared lib repo Jenkins插件默认升级站点配置 groovy实现添加slave 官方wiki pipeline使用官方pipeline示例并行任务配置Jenkins pipeline控制并行执行job个数shared-libpipeline代码调试问题总结Multijob不能调用pipeline任务升级Multijob插件到1.32及以上 admin密码丢失 初始密码: ${jenkins_home}/secrets/initialAdminPassword 修改过密码后忘记1) 将 ${jenkins_home}/config.xml 文件中以下内容修改为false 1&lt;useSecurity&gt;true&lt;/useSecurity&gt; 2) 重启jenkins服务3) 系统管理 -&gt; 全局安全配置 中 启用安全4) 系统管理 -&gt; 管理用户 中 重置密码]]></content>
+    <content type="text"><![CDATA[常用链接 pipeline steps reference pipeline scm step(checkout) apache groovy doc SAP shared lib repo Jenkins插件默认升级站点配置 groovy实现添加slave 官方wiki pipeline使用官方pipeline示例并行任务配置Jenkins pipeline控制并行执行job个数shared-libpipeline代码调试问题总结centos安装jenkinsJenkins中使用Grab下载第三方JarMultijob不能调用pipeline任务升级Multijob插件到1.32及以上 admin密码丢失 初始密码: ${jenkins_home}/secrets/initialAdminPassword 修改过密码后忘记1) 将 ${jenkins_home}/config.xml 文件中以下内容修改为false 1&lt;useSecurity&gt;true&lt;/useSecurity&gt; 2) 重启jenkins服务3) 系统管理 -&gt; 全局安全配置 中 启用安全4) 系统管理 -&gt; 管理用户 中 重置密码]]></content>
       <categories>
         <category>tool</category>
         <category>持续集成</category>
@@ -274,8 +313,8 @@
         <category>npm</category>
       </categories>
       <tags>
-        <tag>总结</tag>
         <tag>npm</tag>
+        <tag>总结</tag>
       </tags>
   </entry>
   <entry>
