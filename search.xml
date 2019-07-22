@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[pipeline序列化问题]]></title>
+    <url>%2F2019%2F07%2F22%2Fjenkins%2Fjenkins-serialization%2F</url>
+    <content type="text"><![CDATA[Jenkins支持所有运行的job都可以在服务重启时中断、暂停在服务重启后恢复运行。为了实现这一点，Jenkins pipeline中定义的所有变量都必须是可序列化的。类似的，Jenkins也必须能序列化构建中节点和子job之间的全局变量的状态。 遇到java.io.NotSerializableException问题的一般方法 将不可序列化的代码封装在一个用@NonCPS注释的函数中。这告诉Jenkins函数包含不可序列化的部分，必须在不停顿的情况下执行。 尝试取消不可序列化变量的定义 更多详细信息参见链接 json解析 12345678910111213import groovy.json.JsonSlurperClassic @NonCPSdef jsonParse(def json) &#123; new groovy.json.JsonSlurperClassic().parseText(json)&#125;node('master') &#123; def config = jsonParse(readFile("config.json")) def db = config["database"]["address"] ...&#125; 参考1参考2]]></content>
+      <categories>
+        <category>tool</category>
+        <category>持续集成</category>
+        <category>jenkins</category>
+      </categories>
+      <tags>
+        <tag>jenkins</tag>
+        <tag>pipeline</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[git-log命令]]></title>
+    <url>%2F2019%2F07%2F22%2Fgit%2Fgit-cmd-log%2F</url>
+    <content type="text"><![CDATA[命令格式1git log [&lt;options&gt;] [&lt;revision range&gt;] [[--] &lt;path&gt;…​] 命令参数选项 选项 说明 -p 以补丁格式显示每次提交之间的差异 –stat 显示每次提交的文件修改统计信息 –shortstat 只显示 –stat 中最后的行数修改添加移除统计 –name-only 仅在提交信息后显示已修改的文件清单 –name-status 显示新增、修改、删除的文件清单 –abbrev-commit 仅显示 SHA-1 的前几个字符，而非所有的 40 个字符 –relative-date 使用较短的相对时间显示（比如”2 weeks ago”） –graph 显示 ASCII 图形表示的分支合并历史 –pretty 使用其他格式显示历史提交信息。可用的选项包括 oneline，short，full，fuller 和 format（后跟指定格式，格式见下表） –oneline –pretty=oneline –abbrev-commit 的简化用法 -(n) 仅显示最近的 n 条提交 –since, –after 仅显示指定时间之后的提交, 可以使用各种时间格式，比如说具体的某一天（”2008-01-15”），或者是多久以前（”2 years 1 day 3 minutes ago”） –until, –before 仅显示指定时间之前的提交 –author 仅显示指定作者相关的提交 –committer 仅显示指定提交者相关的提交 format常用的格式占位符写法及其代表的意义。 选项 说明 %H 提交对象（commit）的完整哈希字串 %h 提交对象的简短哈希字串 %T 树对象（tree）的完整哈希字串 %t 树对象的简短哈希字串 %P 父对象（parent）的完整哈希字串 %p 父对象的简短哈希字串 %an 作者（author）的名字 %ae 作者的电子邮件地址 %ad 作者修订日期（可以用 -date= 选项定制格式） %ar 作者修订日期，按多久以前的方式显示 %cn 提交者(committer)的名字 ce 提交者的电子邮件地址 %cd 提交日期 %cr 提交日期，按多久以前的方式显示 %s 提交说明]]></content>
+      <categories>
+        <category>tool</category>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Centos下jenkins的安装]]></title>
     <url>%2F2019%2F07%2F16%2Fcentos%2Fcentos-jenkins-install%2F</url>
     <content type="text"><![CDATA[通过设置jenkins官方repo仓库下载1234sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.reposudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.keyyum install jenkinscat /etc/rc.d/init.d/jenkins 安装后，jenkins.war默认地址为JENKINS_WAR=”/usr/lib/jenkins/jenkins.war” jenkins的config地址为JENKINS_CONFIG=/etc/sysconfig/jenkins 下载rpm安装12wget https://pkg.jenkins.io/redhat-stable/jenkins-2.176.1-1.1.noarch.rpmrpm -ivh jenkins-2.176.1-1.1.noarch.rpm 下载war包12wget http://mirrors.jenkins.io/war-stable/latest/jenkins.warjava -jar jenkins.war 虚拟机中启动jenkins后不能访问 关闭防火墙 123systemctl status firewalldsystemctl stop firewalldsystemctl disable firewalld]]></content>
@@ -141,7 +167,7 @@
   <entry>
     <title><![CDATA[git使用总结]]></title>
     <url>%2F2019%2F06%2F29%2Fgit%2Fgit-usage%2F</url>
-    <content type="text"><![CDATA[githubProGit 常用术语 VCS: Version Control System 版本控制系统 DVCS: Distributed Version Control System 分布式版本控制系统 CVCS: Centralized Version Control System 中心式版本控制系统 源码安装安装依赖 123yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel asciidoc xmlto docbook2xatp-get install libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev asciidoc xmlto docbook2x 编码编译安装 1234567wget https://github.com/git/git/archive/v2.22.0.tar.gztar xvf v2.22.0.tar.gzcd git-2.22.0make configure./configure --prefix=/usrmake all doc infomake install install-doc install-html install-info Git内部原理Git命令高层命令git diffgit commit底层命令git最核心部分是一个key-value的数据库。 hash-object命令cat-object命令update-index命令ls-files命令]]></content>
+    <content type="text"><![CDATA[githubProGit 常用术语 VCS: Version Control System 版本控制系统 DVCS: Distributed Version Control System 分布式版本控制系统 CVCS: Centralized Version Control System 中心式版本控制系统 源码安装安装依赖 123yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel asciidoc xmlto docbook2xatp-get install libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev asciidoc xmlto docbook2x 编码编译安装 1234567wget https://github.com/git/git/archive/v2.22.0.tar.gztar xvf v2.22.0.tar.gzcd git-2.22.0make configure./configure --prefix=/usrmake all doc infomake install install-doc install-html install-info Git内部原理Git命令高层命令git diffgit commitgit log底层命令git最核心部分是一个key-value的数据库。 hash-object命令cat-object命令update-index命令ls-files命令]]></content>
       <categories>
         <category>tool</category>
         <category>git</category>
@@ -258,9 +284,9 @@
         <category>makefile</category>
       </categories>
       <tags>
-        <tag>总结</tag>
         <tag>make</tag>
         <tag>makefile</tag>
+        <tag>总结</tag>
       </tags>
   </entry>
   <entry>
@@ -279,7 +305,7 @@
   <entry>
     <title><![CDATA[jenkins使用总结]]></title>
     <url>%2F2019%2F05%2F13%2Fjenkins%2Fjenkins%2F</url>
-    <content type="text"><![CDATA[常用链接 pipeline steps reference pipeline scm step(checkout) apache groovy doc SAP shared lib repo Jenkins插件默认升级站点配置 groovy实现添加slave 官方wiki pipeline使用官方pipeline示例并行任务配置Jenkins pipeline控制并行执行job个数shared-libpipeline代码调试问题总结centos安装jenkinsJenkins中使用Grab下载第三方JarMultijob不能调用pipeline任务升级Multijob插件到1.32及以上 admin密码丢失 初始密码: ${jenkins_home}/secrets/initialAdminPassword 修改过密码后忘记1) 将 ${jenkins_home}/config.xml 文件中以下内容修改为false 1&lt;useSecurity&gt;true&lt;/useSecurity&gt; 2) 重启jenkins服务3) 系统管理 -&gt; 全局安全配置 中 启用安全4) 系统管理 -&gt; 管理用户 中 重置密码]]></content>
+    <content type="text"><![CDATA[常用链接 pipeline steps reference pipeline scm step(checkout) apache groovy doc SAP shared lib repo Jenkins插件默认升级站点配置 groovy实现添加slave 官方wiki pipeline_demo_sharedlib pipeline_demo_jenkinsfile pipeline使用官方pipeline示例并行任务配置Jenkins pipeline控制并行执行job个数shared-libpipeline代码调试问题总结centos安装jenkinsJenkins中使用Grab下载第三方JarJenkins序列化Multijob不能调用pipeline任务升级Multijob插件到1.32及以上 admin密码丢失 初始密码: ${jenkins_home}/secrets/initialAdminPassword 修改过密码后忘记1) 将 ${jenkins_home}/config.xml 文件中以下内容修改为false 1&lt;useSecurity&gt;true&lt;/useSecurity&gt; 2) 重启jenkins服务3) 系统管理 -&gt; 全局安全配置 中 启用安全4) 系统管理 -&gt; 管理用户 中 重置密码]]></content>
       <categories>
         <category>tool</category>
         <category>持续集成</category>
@@ -313,8 +339,8 @@
         <category>npm</category>
       </categories>
       <tags>
-        <tag>npm</tag>
         <tag>总结</tag>
+        <tag>npm</tag>
       </tags>
   </entry>
   <entry>
