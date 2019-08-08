@@ -1,9 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[bash中字典使用]]></title>
+    <url>%2F2019%2F08%2F08%2Flinux%2Fbash-dict%2F</url>
+    <content type="text"><![CDATA[bash版本号 12bash --versionGNU bash, version 4.2.46(2)-release bash中字典使用举例 字典声明赋值 与数组不同，字典使用前必须先声明 12345# Declare dict person 必须先声明declare -A person# 使用 () 赋值person=([name]="john" [age]="18") 字典读取及遍历12345678910111213141516171819202122declare -A person# 根据key读取字典内容person=([name]="lucy" [age]="22")echo $&#123;person["name"]&#125; # lucy# 读取不存在的key时，返回为空if [[ $&#123;person["phone"]&#125; =~ "" ]]; then echo "empty"; else echo "not empty"; fi # empty# 打印字典中的所有value, 返回值为数组echo $&#123;person[@]&#125; #lucy 22echo $&#123;person[@]:0:1&#125; #lucy# 打印字典中的所有key，返回值为数组echo $&#123;!person[@]&#125; #name age# 读取字典中键值对的数量echo $&#123;#person[@]&#125; # 2# for循环遍历字典for key in $&#123;!person[@]&#125;;do echo "key: $&#123;key&#125;, value: $&#123;person[$key]&#125;"; done#key: name, value: lucy#key: age, value: 22 字典中增加删除元素123456789101112131415161718192021222324#增加字典元素两种方式declare -A personperson=([name]="hanmeimei" [age]="23")person+=([phoneNumber]="13920380998")echo $&#123;person[@]&#125; # hanmeimei 23 13920380998echo $&#123;!person[@]&#125; # name age phoneNumberperson[addr]="shanghai"echo $&#123;person[@]&#125; #hanmeimei 23 shanghai 13920380998echo $&#123;!person[@]&#125; #name age addr phoneNumber#删除字典元素unset person[phoneNumber]echo $&#123;person[@]&#125; #hanmeimei 23 shanghaiecho $&#123;!person[@]&#125; #name age addr#删除不存在的字典元素时无影响unset person[phoneNumber]echo $&#123;person[@]&#125; #hanmeimei 23 shanghaiecho $&#123;!person[@]&#125; #name age addr#删除整个字典unset personif [[ $&#123;person&#125; =~ "" ]]; then echo "empty"; else echo "not empty"; fi #empty 字典元素值替换12345declare -A personperson=([name]="lilei" [age]="12")echo $&#123;person[name]&#125; #lileiperson[name]="lucy"echo $&#123;person[name]&#125; #lucy]]></content>
+      <categories>
+        <category>linux</category>
+        <category>bash</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>bash</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[通过shell实现yaml目标变量替换]]></title>
+    <url>%2F2019%2F08%2F08%2Flinux%2Fshell-replace-yaml-template%2F</url>
+    <content type="text"><![CDATA[yaml的模板build_template.yaml如下 123repos: - url: "$&#123;REPO_URL&#125;" branch: "$&#123;BRANCH&#125;" REPO_URL和BRANCH定义在环境变量中或写入config.ini文件 123# cat config.iniREPO_URL="https://github.com/etcd-io/etcd.git"BRANCH="master' 替换脚本如下 123configContent=$(cat config.ini)yamlTemplate=$(cat build_template.yaml)printf "$configContent\ncat &lt;&lt; EOF\n$&#123;yamlTemplate&#125;\nEOF" |bash &gt; ./build.yaml 生成的build.yaml文件内容如下: 123repos: - url: "https://github.com/etcd-io/etcd.git" branch: "master"]]></content>
+      <categories>
+        <category>linux</category>
+        <category>bash</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>bash</tag>
+        <tag>yaml</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[bash数组]]></title>
     <url>%2F2019%2F07%2F23%2Flinux%2Fbash-array%2F</url>
-    <content type="text"><![CDATA[bash版本号 12bash --versionGNU bash, version 4.2.46(2)-release bash数组使用举例 数组声明赋值1234567891011# Declare array namesdeclare -a names # 也可以不用声明，直接采用数组的赋值方式赋值，bash能自动识别为数组# 使用 [] 赋值names[0]="john"names[1]="lucy"# 使用 () 赋值names=("john" "lucy")names=([0]="john" [1]="lucy")names=([1]="jessica" [3]="hanmeimei") # 可以指定下标不连续 数组读取及遍历1234567891011121314151617181920# 根据下标读取数组内容names=([0]="lily" [1]="lucy" [3]="hanmeimei")echo $&#123;names[1]&#125; # lucyif [[ $&#123;names[2]&#125; =~ "" ]]; then echo "empty"; else echo "not empty"; fi # empty# 打印数组中所有元素， 此时打印出来的内容的是字符串列表echo $&#123;names[@]&#125; #lily lucy hanmeimei# 打印数组中元素的索引列表echo $&#123;!names[@]&#125; # 0 1 3# 读取数组长度# 上面定义的数组下标虽然不连续，但是数组长度仍为 3echo $&#123;#names[@]&#125; # 3# 遍历数组for name in $&#123;names[@]&#125;;do echo $name; done# lily# lucy# hanmeimei 数组截取及组合123456789101112names=('lilei' 'jack' 'hanmeimei' 'lily' 'lucy')# 截取从索引 1 开始（包含索引 1）的后面 3 个元素echo $&#123;names[@]:1:3&#125; # jack hanmeimei lily# 如果未指定元素个数，则表示后面所有元素echo $&#123;names[@]:2&#125; # hanmeimei lily lucynames1=('name1_1' 'name1_2')names2=('name2_1' 'name2_2' 'name2_3')names=($&#123;names1[@]&#125; $&#123;names2[@]&#125;)echo $&#123;names[@]&#125; # name1_1 name1_2 name2_1 name2_2 name2_3 删除数据中元素1234567891011121314151617181920names=('lily' 'lucy' 'hanmeimei' 'lilei' 'jack')# 删除数组中索引为 1 的元素unset names[1]echo $&#123;names[@]&#125; # lily hanmeimei lilei jackecho $&#123;!names[@]&#125; # 0 2 3 4# 删除整个数组unset names# 使用数组截取然后重新组合方式删除元素names=('lily' 'lucy' 'hanmeimei' 'lilei' 'jack')names=($&#123;names[@]:0:1&#125; $&#123;names[@]:2&#125;)echo $&#123;names[@]&#125; # lily hanmeimei lilei jackecho $&#123;!names[@]&#125; # 0 1 2 3# 使用模式操作符删除数组中的元素names=('lily' 'lucy' 'hanmeimei' 'lilei' 'jack')names=(@&#123;names[@]/lucy/&#125;)echo $&#123;names[@]&#125; # lily hanmeimei lilei jackecho $&#123;!names[@]&#125; # 0 1 2 3 数组元素值替换123456789# 使用数组下标赋值names=('lilei' 'hanmeimei' 'lucy' 'lily')names[1]='jessica'echo $&#123;names[@]&#125; # lilei jessica lucy lily#使用模式操作符进行内容替换names=('lilei' 'hanmeimei' 'lucy' 'lily')names=($&#123;names[@]/hanmeimei/jessica&#125;)echo $&#123;names[@]&#125; # lilei jessica lucy lily]]></content>
+    <content type="text"><![CDATA[bash版本号 12bash --versionGNU bash, version 4.2.46(2)-release bash数组使用举例 数组声明赋值1234567891011# Declare array namesdeclare -a names # 也可以不用声明，直接采用数组的赋值方式赋值，bash能自动识别为数组# 使用 [] 赋值names[0]="john"names[1]="lucy"# 使用 () 赋值names=("john" "lucy")names=([0]="john" [1]="lucy")names=([1]="jessica" [3]="hanmeimei") # 可以指定下标不连续 数组读取及遍历1234567891011121314151617181920# 根据下标读取数组内容names=([0]="lily" [1]="lucy" [3]="hanmeimei")echo $&#123;names[1]&#125; # lucyif [[ $&#123;names[2]&#125; =~ "" ]]; then echo "empty"; else echo "not empty"; fi # empty# 打印数组中所有元素， 此时打印出来的内容的是字符串列表echo $&#123;names[@]&#125; #lily lucy hanmeimei# 打印数组中元素的索引列表echo $&#123;!names[@]&#125; # 0 1 3# 读取数组长度# 上面定义的数组下标虽然不连续，但是数组长度仍为 3echo $&#123;#names[@]&#125; # 3# 遍历数组for name in $&#123;names[@]&#125;;do echo $name; done# lily# lucy# hanmeimei 数组截取及组合123456789101112131415161718names=('lilei' 'jack' 'hanmeimei' 'lily' 'lucy')# 截取从索引 1 开始（包含索引 1）的后面 3 个元素echo $&#123;names[@]:1:3&#125; # jack hanmeimei lily# 如果未指定元素个数，则表示后面所有元素echo $&#123;names[@]:2&#125; # hanmeimei lily lucy# 两个数组组合names1=('name1_1' 'name1_2')names2=('name2_1' 'name2_2' 'name2_3')names=($&#123;names1[@]&#125; $&#123;names2[@]&#125;)echo $&#123;names[@]&#125; # name1_1 name1_2 name2_1 name2_2 name2_3# 数组中增加元素names=('lily' 'lucy')names=("$&#123;names[@]&#125;" "hanmeimei")echo $&#123;names[@]&#125; # lily lucy hanmeimei 删除数据中元素1234567891011121314151617181920names=('lily' 'lucy' 'hanmeimei' 'lilei' 'jack')# 删除数组中索引为 1 的元素unset names[1]echo $&#123;names[@]&#125; # lily hanmeimei lilei jackecho $&#123;!names[@]&#125; # 0 2 3 4# 删除整个数组unset names# 使用数组截取然后重新组合方式删除元素names=('lily' 'lucy' 'hanmeimei' 'lilei' 'jack')names=($&#123;names[@]:0:1&#125; $&#123;names[@]:2&#125;)echo $&#123;names[@]&#125; # lily hanmeimei lilei jackecho $&#123;!names[@]&#125; # 0 1 2 3# 使用模式操作符删除数组中的元素names=('lily' 'lucy' 'hanmeimei' 'lilei' 'jack')names=(@&#123;names[@]/lucy/&#125;)echo $&#123;names[@]&#125; # lily hanmeimei lilei jackecho $&#123;!names[@]&#125; # 0 1 2 3 数组元素值替换123456789# 使用数组下标赋值names=('lilei' 'hanmeimei' 'lucy' 'lily')names[1]='jessica'echo $&#123;names[@]&#125; # lilei jessica lucy lily#使用模式操作符进行内容替换names=('lilei' 'hanmeimei' 'lucy' 'lily')names=($&#123;names[@]/hanmeimei/jessica&#125;)echo $&#123;names[@]&#125; # lilei jessica lucy lily]]></content>
       <categories>
         <category>linux</category>
         <category>bash</category>
@@ -16,7 +43,7 @@
   <entry>
     <title><![CDATA[bash使用总结]]></title>
     <url>%2F2019%2F07%2F23%2Flinux%2Fbash-usage%2F</url>
-    <content type="text"><![CDATA[Bash数组]]></content>
+    <content type="text"><![CDATA[Bash官网 Bash数组Bash字典 通过shell实现yaml模板变量替换]]></content>
       <categories>
         <category>linux</category>
         <category>bash</category>
