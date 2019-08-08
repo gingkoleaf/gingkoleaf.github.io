@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Gingko Leaf">
 <meta property="og:description" content="Jenkins支持所有运行的job都可以在服务重启时中断、暂停在服务重启后恢复运行。为了实现这一点，Jenkins pipeline中定义的所有变量都必须是可序列化的。类似的，Jenkins也必须能序列化构建中节点和子job之间的全局变量的状态。 遇到java.io.NotSerializableException问题的一般方法  将不可序列化的代码封装在一个用@NonCPS注释的函数中。这告诉J">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-22T16:03:51.109Z">
+<meta property="og:updated_time" content="2019-08-08T17:14:29.108Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pipeline序列化问题">
 <meta name="twitter:description" content="Jenkins支持所有运行的job都可以在服务重启时中断、暂停在服务重启后恢复运行。为了实现这一点，Jenkins pipeline中定义的所有变量都必须是可序列化的。类似的，Jenkins也必须能序列化构建中节点和子job之间的全局变量的状态。 遇到java.io.NotSerializableException问题的一般方法  将不可序列化的代码封装在一个用@NonCPS注释的函数中。这告诉J">
@@ -417,7 +417,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-23 00:03:51" itemprop="dateModified" datetime="2019-07-23T00:03:51+08:00">2019-07-23</time>
+                <time title="修改时间：2019-08-09 01:14:29" itemprop="dateModified" datetime="2019-08-09T01:14:29+08:00">2019-08-09</time>
               
             
           </span>
@@ -493,13 +493,13 @@
         <p>Jenkins支持所有运行的job都可以在服务重启时中断、暂停在服务重启后恢复运行。为了实现这一点，Jenkins pipeline中定义的所有变量都必须是可序列化的。类似的，Jenkins也必须能序列化构建中节点和子job之间的全局变量的状态。</p>
 <p>遇到<code>java.io.NotSerializableException</code>问题的一般方法</p>
 <ol>
-<li>将不可序列化的代码封装在一个用@NonCPS注释的函数中。这告诉Jenkins函数包含不可序列化的部分，必须在不停顿的情况下执行。</li>
+<li>将不可序列化的代码封装在一个用@NonCPS注释的函数中。这告诉Jenkins函数包含不可序列化的部分，必须在不可中断的情况下执行。使用NonCPS的函数中不能调用任何jenkins steps或其他CPS-transformed的代码。</li>
 <li>尝试取消不可序列化变量的定义</li>
 </ol>
 <p>更多详细信息参见<a href="https://github.com/jenkinsci/pipeline-plugin/blob/master/TUTORIAL.md#serializing-local-variables" target="_blank" rel="noopener">链接</a></p>
 <p>json解析</p>
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> groovy.json.JsonSlurperClassic </span><br><span class="line"></span><br><span class="line"><span class="meta">@NonCPS</span></span><br><span class="line"><span class="keyword">def</span> jsonParse(<span class="keyword">def</span> json) &#123;</span><br><span class="line">    <span class="keyword">new</span> groovy.json.JsonSlurperClassic().parseText(json)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">node(<span class="string">'master'</span>) &#123;</span><br><span class="line">    <span class="keyword">def</span> config =  jsonParse(readFile(<span class="string">"config.json"</span>))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> db = config[<span class="string">"database"</span>][<span class="string">"address"</span>]</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><a href="https://stackoverflow.com/questions/42537744/jenkins-2-pipeline-serialization-problems-in-global-function" target="_blank" rel="noopener">参考1</a><br><a href="https://stackoverflow.com/questions/37864542/jenkins-pipeline-notserializableexception-groovy-json-internal-lazymap" target="_blank" rel="noopener">参考2</a></p>
+<p><a href="https://stackoverflow.com/questions/42537744/jenkins-2-pipeline-serialization-problems-in-global-function" target="_blank" rel="noopener">参考1</a><br><a href="https://stackoverflow.com/questions/37864542/jenkins-pipeline-notserializableexception-groovy-json-internal-lazymap" target="_blank" rel="noopener">参考2</a><br><a href="https://issues.jenkins-ci.org/plugins/servlet/mobile#issue/JENKINS-27421" target="_blank" rel="noopener">参考3</a></p>
 
       
     </div>
@@ -691,9 +691,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-count">20</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>

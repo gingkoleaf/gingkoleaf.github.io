@@ -57,7 +57,7 @@
   <entry>
     <title><![CDATA[pipeline序列化问题]]></title>
     <url>%2F2019%2F07%2F22%2Fjenkins%2Fjenkins-serialization%2F</url>
-    <content type="text"><![CDATA[Jenkins支持所有运行的job都可以在服务重启时中断、暂停在服务重启后恢复运行。为了实现这一点，Jenkins pipeline中定义的所有变量都必须是可序列化的。类似的，Jenkins也必须能序列化构建中节点和子job之间的全局变量的状态。 遇到java.io.NotSerializableException问题的一般方法 将不可序列化的代码封装在一个用@NonCPS注释的函数中。这告诉Jenkins函数包含不可序列化的部分，必须在不停顿的情况下执行。 尝试取消不可序列化变量的定义 更多详细信息参见链接 json解析 12345678910111213import groovy.json.JsonSlurperClassic @NonCPSdef jsonParse(def json) &#123; new groovy.json.JsonSlurperClassic().parseText(json)&#125;node('master') &#123; def config = jsonParse(readFile("config.json")) def db = config["database"]["address"] ...&#125; 参考1参考2]]></content>
+    <content type="text"><![CDATA[Jenkins支持所有运行的job都可以在服务重启时中断、暂停在服务重启后恢复运行。为了实现这一点，Jenkins pipeline中定义的所有变量都必须是可序列化的。类似的，Jenkins也必须能序列化构建中节点和子job之间的全局变量的状态。 遇到java.io.NotSerializableException问题的一般方法 将不可序列化的代码封装在一个用@NonCPS注释的函数中。这告诉Jenkins函数包含不可序列化的部分，必须在不可中断的情况下执行。使用NonCPS的函数中不能调用任何jenkins steps或其他CPS-transformed的代码。 尝试取消不可序列化变量的定义 更多详细信息参见链接 json解析 12345678910111213import groovy.json.JsonSlurperClassic @NonCPSdef jsonParse(def json) &#123; new groovy.json.JsonSlurperClassic().parseText(json)&#125;node('master') &#123; def config = jsonParse(readFile("config.json")) def db = config["database"]["address"] ...&#125; 参考1参考2参考3]]></content>
       <categories>
         <category>tool</category>
         <category>持续集成</category>
@@ -289,7 +289,6 @@
         <category>tool</category>
         <category>持续集成</category>
         <category>jenkins</category>
-        <category>pipeline</category>
       </categories>
       <tags>
         <tag>jenkins</tag>
