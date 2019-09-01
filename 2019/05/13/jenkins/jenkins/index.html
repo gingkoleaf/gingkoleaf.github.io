@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Gingko Leaf">
 <meta property="og:description" content="常用链接 pipeline steps reference pipeline scm step(checkout) apache groovy doc SAP shared lib repo Jenkins插件默认升级站点配置 groovy实现添加slave 官方wiki pipeline_demo_sharedlib pipeline_demo_jenkinsfile  pipeline使用官方">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-22T15:27:15.281Z">
+<meta property="og:updated_time" content="2019-09-01T09:00:25.542Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jenkins使用总结">
 <meta name="twitter:description" content="常用链接 pipeline steps reference pipeline scm step(checkout) apache groovy doc SAP shared lib repo Jenkins插件默认升级站点配置 groovy实现添加slave 官方wiki pipeline_demo_sharedlib pipeline_demo_jenkinsfile  pipeline使用官方">
@@ -417,7 +417,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-22 23:27:15" itemprop="dateModified" datetime="2019-07-22T23:27:15+08:00">2019-07-22</time>
+                <time title="修改时间：2019-09-01 17:00:25" itemprop="dateModified" datetime="2019-09-01T17:00:25+08:00">2019-09-01</time>
               
             
           </span>
@@ -509,7 +509,7 @@
 <p>2) 重启jenkins服务<br>3) 系统管理 -&gt; 全局安全配置 中 启用安全<br>4) 系统管理 -&gt; 管理用户 中 重置密码</p>
 </li>
 </ul>
-
+<h3 id="jenkins执行shell脚本时-etc-profile中环境变量不能访问"><a href="#jenkins执行shell脚本时-etc-profile中环境变量不能访问" class="headerlink" title="jenkins执行shell脚本时/etc/profile中环境变量不能访问"></a><a href="/2019/09/01/jenkins/jenkins-sh-read-env">jenkins执行shell脚本时/etc/profile中环境变量不能访问</a></h3>
       
     </div>
 
@@ -654,7 +654,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -834,7 +834,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用链接"><span class="nav-number">1.</span> <span class="nav-text">常用链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pipeline使用"><span class="nav-number">2.</span> <span class="nav-text">pipeline使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#官方pipeline示例"><span class="nav-number">2.1.</span> <span class="nav-text">官方pipeline示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并行任务配置"><span class="nav-number">2.2.</span> <span class="nav-text">并行任务配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jenkins-pipeline控制并行执行job个数"><span class="nav-number">2.3.</span> <span class="nav-text">Jenkins pipeline控制并行执行job个数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shared-lib"><span class="nav-number">3.</span> <span class="nav-text">shared-lib</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pipeline代码调试"><span class="nav-number">4.</span> <span class="nav-text">pipeline代码调试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题总结"><span class="nav-number">5.</span> <span class="nav-text">问题总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#centos安装jenkins"><span class="nav-number">5.1.</span> <span class="nav-text">centos安装jenkins</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jenkins中使用Grab下载第三方Jar"><span class="nav-number">5.2.</span> <span class="nav-text">Jenkins中使用Grab下载第三方Jar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jenkins序列化"><span class="nav-number">5.3.</span> <span class="nav-text">Jenkins序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Multijob不能调用pipeline任务"><span class="nav-number">5.4.</span> <span class="nav-text">Multijob不能调用pipeline任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#admin密码丢失"><span class="nav-number">5.5.</span> <span class="nav-text">admin密码丢失</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用链接"><span class="nav-number">1.</span> <span class="nav-text">常用链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pipeline使用"><span class="nav-number">2.</span> <span class="nav-text">pipeline使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#官方pipeline示例"><span class="nav-number">2.1.</span> <span class="nav-text">官方pipeline示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并行任务配置"><span class="nav-number">2.2.</span> <span class="nav-text">并行任务配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jenkins-pipeline控制并行执行job个数"><span class="nav-number">2.3.</span> <span class="nav-text">Jenkins pipeline控制并行执行job个数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shared-lib"><span class="nav-number">3.</span> <span class="nav-text">shared-lib</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pipeline代码调试"><span class="nav-number">4.</span> <span class="nav-text">pipeline代码调试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题总结"><span class="nav-number">5.</span> <span class="nav-text">问题总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#centos安装jenkins"><span class="nav-number">5.1.</span> <span class="nav-text">centos安装jenkins</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jenkins中使用Grab下载第三方Jar"><span class="nav-number">5.2.</span> <span class="nav-text">Jenkins中使用Grab下载第三方Jar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jenkins序列化"><span class="nav-number">5.3.</span> <span class="nav-text">Jenkins序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Multijob不能调用pipeline任务"><span class="nav-number">5.4.</span> <span class="nav-text">Multijob不能调用pipeline任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#admin密码丢失"><span class="nav-number">5.5.</span> <span class="nav-text">admin密码丢失</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jenkins执行shell脚本时-etc-profile中环境变量不能访问"><span class="nav-number">5.6.</span> <span class="nav-text">jenkins执行shell脚本时/etc/profile中环境变量不能访问</span></a></li></ol></li></ol></div>
             
 
           </div>

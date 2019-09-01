@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[jenkins-sh-read-env]]></title>
+    <url>%2F2019%2F09%2F01%2Fjenkins%2Fjenkins-sh-read-env%2F</url>
+    <content type="text"><![CDATA[FreeStyle的JenkinsJob在freestyle的job中配置执行shell命令后，job在运行时默认的执行方式为 /bin/bash -xe /tmp/jenkinsxxxx.sh 1234567Building in workspace /var/lib/jenkins/workspace/jenkins_shell_test[jenkins_shell_test] $ /bin/sh -xe /tmp/jenkins6138408577395354213.sh+ set -x+ exportexport BUILD_CAUSE=&quot;MANUALTRIGGER&quot;export BUILD_CAUSE_MANUALTRIGGER=&quot;true&quot;... 在执行机上查看对应的进程 1234[root@localhost ~]# ps -ef |grep -i jenkinsjenkins 12371 1 20 16:30 ? 00:03:55 /etc/alternatives/java -Dcom.sun.akuma.Daemon=daemonized -Djava.awt.headless=true -DJENKINS_HOME=/var/lib/jenkins -jar /usr/lib/jenkins/jenkins.war --logfile=/var/log/jenkins/jenkins.log --webroot=/var/cache/jenkins/war --daemon --httpPort=8080 --debug=5 --handlerCountMax=100 --handlerCountMaxIdle=20jenkins 27359 12371 0 16:48 ? 00:00:00 /bin/sh -xe /tmp/jenkins6138408577395354213.shjenkins 27360 27359 0 16:48 ? 00:00:00 sleep 30 /bin/sh -xe xxx.sh方式运行的shell为非交互式非登录的模式，这种模式下的shell在启动时不会读取/etc/profile中的内容，所以/etc/profile中定义的环境变量不能访问 解决方法: 在shell中添加 #!/bin/bash -ilex，将shell模式修改为交互登录模式即可。 12345[root@localhost ~]# ps -ef |grep -i jenkinsjenkins 12371 1 10 16:30 ? 00:04:43 /etc/alternatives/java -Dcom.sun.akuma.Daemon=daemonized -Djava.awt.headless=true -DJENKINS_HOME=/var/lib/jenkins -jar /usr/lib/jenkins/jenkins.war --logfile=/var/log/jenkins/jenkins.log --webroot=/var/cache/jenkins/war --daemon --httpPort=8080 --debug=5 --handlerCountMax=100 --handlerCountMaxIdle=20jenkins 15197 12371 0 17:13 ? 00:00:00 /bin/bash -liex /tmp/jenkins15271049705299428998.shjenkins 15211 15197 0 17:13 ? 00:00:00 sleep 30[root@localhost ~]# pipeline模式的JenkinsJobpipeline模式下的原因与解决方案与FreeStyle类似，只是pipeline模式下脚本运行的进程不是jenkins主进程直接fork出来的。 1234567[root@localhost ~]# ps -ef |grep -i jenkinsjenkins 12371 1 11 16:30 ? 00:05:13 /etc/alternatives/java -Dcom.sun.akuma.Daemon=daemonized -Djava.awt.headless=true -DJENKINS_HOME=/var/lib/jenkins -jar /usr/lib/jenkins/jenkins.war --logfile=/var/log/jenkins/jenkins.log --webroot=/var/cache/jenkins/war --daemon --httpPort=8080 --debug=5 --handlerCountMax=100 --handlerCountMaxIdle=20jenkins 17509 1 0 17:16 ? 00:00:00 sh -c (pid=$$; &#123; while [ \( -d /proc/$pid -o \! -d /proc/$$ \) -a -d '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf' -a \! -f '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/jenkins-result.txt' ]; do touch '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/jenkins-log.txt'; sleep 3; done &#125; &amp; jsc=durable-7a8937f3d4c335791e06262c93820f88; JENKINS_SERVER_COOKIE=$jsc 'sh' -xe '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/script.sh' &gt; '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/jenkins-log.txt' 2&gt;&amp;1; echo $? &gt; '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/jenkins-result.txt.tmp'; mv '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/jenkins-result.txt.tmp' '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/jenkins-result.txt'; wait) &gt;&amp;- 2&gt;&amp;- &amp;jenkins 17511 17509 0 17:16 ? 00:00:00 sh -c (pid=$$; &#123; while [ \( -d /proc/$pid -o \! -d /proc/$$ \) -a -d '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf' -a \! -f '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/jenkins-result.txt' ]; do touch '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/jenkins-log.txt'; sleep 3; done &#125; &amp; jsc=durable-7a8937f3d4c335791e06262c93820f88; JENKINS_SERVER_COOKIE=$jsc 'sh' -xe '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/script.sh' &gt; '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/jenkins-log.txt' 2&gt;&amp;1; echo $? &gt; '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/jenkins-result.txt.tmp'; mv '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/jenkins-result.txt.tmp' '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/jenkins-result.txt'; wait) &gt;&amp;- 2&gt;&amp;- &amp;jenkins 17512 17509 0 17:16 ? 00:00:00 sh -xe /var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/script.shjenkins 17514 17512 0 17:16 ? 00:00:00 sleep 30jenkins 17786 17511 0 17:16 ? 00:00:00 sleep 3]]></content>
+      <categories>
+        <category>tool</category>
+        <category>持续集成</category>
+        <category>jenkins</category>
+      </categories>
+      <tags>
+        <tag>jenkins</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[bash参数说明]]></title>
     <url>%2F2019%2F09%2F01%2Flinux%2Fshell-parameter%2F</url>
     <content type="text"><![CDATA[特殊参数$$当前Shell进程ID。对于 Shell 脚本，就是这些脚本所在的进程ID。 12345678910111213#显示当前shell的PID[root@localhost ~]# echo $$7338[root@localhost ~]# cat test.shecho $$ # 此处打印 test.sh 脚本运行的 PIDsleep 10# 运行shell脚本程序test.sh时，系统将创建一个子shell，它的父shell为 7338[root@localhost ~]# /bin/bash test.sh &amp;[1] 16371[root@localhost ~]# 16371[root@localhost ~]# ps -ef |grep -i test.shroot 16371 7338 0 05:13 pts/0 00:00:00 /bin/bash test.sh]]></content>
@@ -363,9 +376,9 @@
         <category>makefile</category>
       </categories>
       <tags>
-        <tag>总结</tag>
         <tag>make</tag>
         <tag>makefile</tag>
+        <tag>总结</tag>
       </tags>
   </entry>
   <entry>
@@ -384,7 +397,7 @@
   <entry>
     <title><![CDATA[jenkins使用总结]]></title>
     <url>%2F2019%2F05%2F13%2Fjenkins%2Fjenkins%2F</url>
-    <content type="text"><![CDATA[常用链接 pipeline steps reference pipeline scm step(checkout) apache groovy doc SAP shared lib repo Jenkins插件默认升级站点配置 groovy实现添加slave 官方wiki pipeline_demo_sharedlib pipeline_demo_jenkinsfile pipeline使用官方pipeline示例并行任务配置Jenkins pipeline控制并行执行job个数shared-libpipeline代码调试问题总结centos安装jenkinsJenkins中使用Grab下载第三方JarJenkins序列化Multijob不能调用pipeline任务升级Multijob插件到1.32及以上 admin密码丢失 初始密码: ${jenkins_home}/secrets/initialAdminPassword 修改过密码后忘记1) 将 ${jenkins_home}/config.xml 文件中以下内容修改为false 1&lt;useSecurity&gt;true&lt;/useSecurity&gt; 2) 重启jenkins服务3) 系统管理 -&gt; 全局安全配置 中 启用安全4) 系统管理 -&gt; 管理用户 中 重置密码]]></content>
+    <content type="text"><![CDATA[常用链接 pipeline steps reference pipeline scm step(checkout) apache groovy doc SAP shared lib repo Jenkins插件默认升级站点配置 groovy实现添加slave 官方wiki pipeline_demo_sharedlib pipeline_demo_jenkinsfile pipeline使用官方pipeline示例并行任务配置Jenkins pipeline控制并行执行job个数shared-libpipeline代码调试问题总结centos安装jenkinsJenkins中使用Grab下载第三方JarJenkins序列化Multijob不能调用pipeline任务升级Multijob插件到1.32及以上 admin密码丢失 初始密码: ${jenkins_home}/secrets/initialAdminPassword 修改过密码后忘记1) 将 ${jenkins_home}/config.xml 文件中以下内容修改为false 1&lt;useSecurity&gt;true&lt;/useSecurity&gt; 2) 重启jenkins服务3) 系统管理 -&gt; 全局安全配置 中 启用安全4) 系统管理 -&gt; 管理用户 中 重置密码 jenkins执行shell脚本时/etc/profile中环境变量不能访问]]></content>
       <categories>
         <category>tool</category>
         <category>持续集成</category>
@@ -418,8 +431,8 @@
         <category>npm</category>
       </categories>
       <tags>
-        <tag>npm</tag>
         <tag>总结</tag>
+        <tag>npm</tag>
       </tags>
   </entry>
   <entry>
