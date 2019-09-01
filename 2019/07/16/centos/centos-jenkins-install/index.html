@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Gingko Leaf">
 <meta property="og:description" content="通过设置jenkins官方repo仓库下载1234sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.reposudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.keyyum install je">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-16T15:27:17.294Z">
+<meta property="og:updated_time" content="2019-09-01T08:37:40.834Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Centos下jenkins的安装">
 <meta name="twitter:description" content="通过设置jenkins官方repo仓库下载1234sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.reposudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.keyyum install je">
@@ -400,12 +400,24 @@
                 
               
 
-              <time title="创建时间：2019-07-16 22:30:35 / 修改时间：23:27:17" itemprop="dateCreated datePublished" datetime="2019-07-16T22:30:35+08:00">2019-07-16</time>
+              <time title="创建时间：2019-07-16 22:30:35" itemprop="dateCreated datePublished" datetime="2019-07-16T22:30:35+08:00">2019-07-16</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-09-01 16:37:40" itemprop="dateModified" datetime="2019-09-01T16:37:40+08:00">2019-09-01</time>
               
             
           </span>
@@ -477,9 +489,13 @@
 <h3 id="下载rpm安装"><a href="#下载rpm安装" class="headerlink" title="下载rpm安装"></a>下载rpm安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://pkg.jenkins.io/redhat-stable/jenkins-2.176.1-1.1.noarch.rpm</span><br><span class="line">rpm -ivh jenkins-2.176.1-1.1.noarch.rpm</span><br></pre></td></tr></table></figure>
 <h3 id="下载war包"><a href="#下载war包" class="headerlink" title="下载war包"></a>下载war包</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget http://mirrors.jenkins.io/war-stable/latest/jenkins.war</span><br><span class="line">java -jar jenkins.war</span><br></pre></td></tr></table></figure>
 <h3 id="虚拟机中启动jenkins后不能访问"><a href="#虚拟机中启动jenkins后不能访问" class="headerlink" title="虚拟机中启动jenkins后不能访问"></a>虚拟机中启动jenkins后不能访问</h3><ol>
-<li>关闭防火墙</li>
-</ol>
+<li><p>关闭防火墙</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl status firewalld</span><br><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl disable firewalld</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置防火墙开放jinkins使用的端口</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 检查当前防火墙开放的端口</span></span><br><span class="line">[root@localhost ~]# firewall-cmd  --list-ports</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 配置防火墙开放端口</span></span><br><span class="line">[root@localhost ~]# firewall-cmd --permanent --zone=public --add-port=8080/tcp</span><br><span class="line">success</span><br><span class="line">[root@localhost ~]# firewall-cmd  --list-ports</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重启防火墙</span></span><br><span class="line">[root@localhost ~]# systemctl reload firewalld</span><br><span class="line">[root@localhost ~]# firewall-cmd  --list-ports</span><br><span class="line">8080/tcp</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 
       
     </div>
@@ -623,7 +639,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-count">34</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

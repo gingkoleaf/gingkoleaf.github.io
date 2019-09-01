@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[bash参数说明]]></title>
+    <url>%2F2019%2F09%2F01%2Flinux%2Fshell-parameter%2F</url>
+    <content type="text"><![CDATA[特殊参数$$当前Shell进程ID。对于 Shell 脚本，就是这些脚本所在的进程ID。 12345678910111213#显示当前shell的PID[root@localhost ~]# echo $$7338[root@localhost ~]# cat test.shecho $$ # 此处打印 test.sh 脚本运行的 PIDsleep 10# 运行shell脚本程序test.sh时，系统将创建一个子shell，它的父shell为 7338[root@localhost ~]# /bin/bash test.sh &amp;[1] 16371[root@localhost ~]# 16371[root@localhost ~]# ps -ef |grep -i test.shroot 16371 7338 0 05:13 pts/0 00:00:00 /bin/bash test.sh]]></content>
+      <categories>
+        <category>linux</category>
+        <category>bash</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>bash</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[bash启动介绍]]></title>
+    <url>%2F2019%2F08%2F30%2Flinux%2Fshell%2F</url>
+    <content type="text"><![CDATA[概述0号/1号和2号进程 123UID PID PPID C STIME TTY TIME CMDroot 1 0 0 Aug08 ? 00:00:02 /usr/lib/systemd/systemd --switched-root --system --deserialize 22root 2 0 0 Aug08 ? 00:00:00 [kthreadd] 系统启动后，当用户登录到系统时，系统将启动一个用户态的shell进程。在shell进程中运行shell脚本程序时，系统将创建一个子shell，此时系统中将有两个shell，一个是登录时系统启动的shell，另一个是系统为运行脚本程序创建的shell。脚本执行运行完后，子shell将终止，并返回到执行脚本之前的shell。 tty终端的shell进程如下： 通过ssh连接到系统的shell进程如下: 12345678910[root@localhost ~]# echo $$7338[root@localhost ~]# ps -ef |grep -i 7338root 7338 7331 0 03:48 pts/0 00:00:00 -bash[root@localhost ~]# ps -ef |grep -i 7331root 7331 3329 0 03:48 ? 00:00:12 sshd: root@pts/0,pts/1root 7338 7331 0 03:48 pts/0 00:00:00 -bashroot 7344 7331 0 03:48 pts/1 00:00:00 -bash[root@localhost ~]# ps -ef |grep -i 3329root 3329 1 0 Aug08 ? 00:00:00 /usr/sbin/sshd -D shell分类交互式shell与非交互式shell区分方法 可以通过打印“$-”变量的值（代表着当前shell的选项标志），查看其中的“i”选项（表示interactive shell）来区分交互式与非交互式shell。 12345678910111213141516171819[root@localhost ~]# echo $$31991[root@localhost ~]# cat test.shecho $-case "$-" in*i*) echo This shell is interactive;;*) echo This shell is not interactive;;esac[root@localhost ~]# bash test.shhBThis shell is not interactive[root@localhost ~]# echo $$31991[root@localhost ~]# bash -i test.sh himBThis shell is interactive[root@localhost ~]# echo $$31991 通过检查$PS1的内容是否为空判断，在非交互式shell中不会设置该变量 123456789101112131415161718192021[root@localhost ~]# echo $$31991[root@localhost ~]# cat test.shecho $-if [[ -z "$PS1" ]];then echo This shell is not interactiveelse echo This shell is interactivefi[root@localhost ~]# bash test.shhBThis shell is not interactive[root@localhost ~]# echo $$31991[root@localhost ~]# bash -i test.shhimBThis shell is interactive[root@localhost ~]# echo $$31991[root@localhost ~]# echo $-himBH himBH解释 交互式shell顾名思义，shell等待用户输入，输入后系统立即执行并返回结果，并等待一下此输入。当退出后，shell也终止了。 启动交互式shell的方法 启动shell时不带任何选项参数 启动shell时指定-i选项参数 启动shell时指定了-s且没有指定-c参数 非交互式shell通常情况下，执行shell脚本文件时的子shell都是属于非交互式的。在这种场景下，shell读取存放在脚本文件中的内容然后执行，直到读到文件的结尾EOF，shell终止。 登录shell与非登录shell登录式shell需要用户名和密码登录后才能进入的shell，或者通过–login选项打开的shell。 非登录式shell不需要输入用户名和密码即可打开的Shell，例如：直接命令“bash”就是打开一个新的非登录shell，在Gnome或KDE中打开一个“终端”（terminal）窗口程序也是一个非登录shell。 执行exit命令，退出一个shell（登录或非登录shell）；执行logout命令，退出登录shell（不能退出非登录shell） 123456789101112[root@localhost ~]# echo $$2532[root@localhost ~]# bash[root@localhost ~]# echo $$2709[root@localhost ~]# logoutbash: logout: not login shell: use 'exit'[root@localhost ~]# exitexit[root@localhost ~]# exitlogout连接断开 bash是 login shell 时，其进程名为&quot;-bash&quot; 而不是&quot;bash&quot; 12345678910111213141516[root@localhost ~]# echo $$2995[root@localhost ~]# ps -ef |grep -i bashroot 2995 2985 0 08:55 pts/0 00:00:00 -bashroot 3001 2985 0 08:55 pts/1 00:00:00 -bash[root@localhost ~]# bash[root@localhost ~]# echo $$3689[root@localhost ~]# ps -ef |grep -i bashroot 2995 2985 0 08:55 pts/0 00:00:00 -bashroot 3001 2985 0 08:55 pts/1 00:00:00 -bashroot 3689 2995 0 08:56 pts/0 00:00:00 bash[root@localhost ~]# exitexit[root@localhost ~]# echo $$2995 shell分类组合情况 登录式 非登录式 交互式 1.登录系统时获得的顶层shell，无论是通过本地终端登录，还是通过网络ssh登录2.使用bash –login命令启动的shell3.使用su [-/-l/–login] [user]切换到其他用户时 1.使用bash命令启动的shell2.使用su [user]切换到其他用户时 非交互式 在脚本中使用–login选项调用bash（比如在脚本第一行做如下指定：#!/bin/bash –login） 通常情况下执行bash脚本时运行脚本的子shell bash启动时执行的启动文件 登录式 非登录式 交互式 如果/etc/profile存在，则首先执行该文件依次查找存在并可读的~/.bash_profile, ~/.bash_login, ~/.profile中的第一个执行如果启动时指定了--noprofile选项，则不执行上述两个步骤退出时，如果~/.bash_logout存在则执行 如果~/.bashrc存在则执行如果指定了--norc参数则不执行上述步骤可以通过指定--rcfile file指定其他文件替代~/.bashrc 非交互式 同上 查找环境变量BASH_ENV，读取并执行BASH_ENV指向的文件中的内容 shell启动选项参数-i 选项强制子shell使用交互式方式运行 -c cmd_string 选项表示子shell从字符串中读入命令，如果字符串后还有变量就被设定为从$0开始的位置参数 1234[root@localhost ~]# /bin/bash -c 'echo hello world'hello world[root@localhost ~]# /bin/bash -c 'echo $0 $1' hello kittyhello kitty ssh执行远程命令和bash -c string的用法 -s 选项如果指定-s参数，那么表示子shell从标准输入中读入命令，直到输入exit。 该参数允许指定位置参数并将其传入子shell中。 12345678910111213141516171819202122232425262728[root@localhost ~]# echo $$9051# 进入子shell中，未指定-c参数时，子shell为交互式shell[root@localhost ~]# bash -s hello new world[root@localhost ~]# echo $$11211[root@localhost ~]# echo $-himBHs[root@localhost ~]# echo $1hello[root@localhost ~]# echo $2new[root@localhost ~]# echo $3world[root@localhost ~]# exitexit# 退回父shell[root@localhost ~]# echo $$9051# 如果指定-c参数，子shell为非交互式shell[root@localhost ~]# bash -s -c 'echo $0' hellohello[root@localhost ~]# echo $$9051[root@localhost ~]# bash -s -c 'echo $-'hBcs[root@localhost ~]# echo $$9051]]></content>
+      <categories>
+        <category>linux</category>
+        <category>bash</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>bash</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[bash中字典使用]]></title>
     <url>%2F2019%2F08%2F08%2Flinux%2Fbash-dict%2F</url>
     <content type="text"><![CDATA[bash版本号 12bash --versionGNU bash, version 4.2.46(2)-release bash中字典使用举例 字典声明赋值 与数组不同，字典使用前必须先声明 12345# Declare dict person 必须先声明declare -A person# 使用 () 赋值person=([name]="john" [age]="18") 字典读取及遍历12345678910111213141516171819202122declare -A person# 根据key读取字典内容person=([name]="lucy" [age]="22")echo $&#123;person["name"]&#125; # lucy# 读取不存在的key时，返回为空if [[ $&#123;person["phone"]&#125; =~ "" ]]; then echo "empty"; else echo "not empty"; fi # empty# 打印字典中的所有value, 返回值为数组echo $&#123;person[@]&#125; #lucy 22echo $&#123;person[@]:0:1&#125; #lucy# 打印字典中的所有key，返回值为数组echo $&#123;!person[@]&#125; #name age# 读取字典中键值对的数量echo $&#123;#person[@]&#125; # 2# for循环遍历字典for key in $&#123;!person[@]&#125;;do echo "key: $&#123;key&#125;, value: $&#123;person[$key]&#125;"; done#key: name, value: lucy#key: age, value: 22 字典中增加删除元素123456789101112131415161718192021222324#增加字典元素两种方式declare -A personperson=([name]="hanmeimei" [age]="23")person+=([phoneNumber]="13920380998")echo $&#123;person[@]&#125; # hanmeimei 23 13920380998echo $&#123;!person[@]&#125; # name age phoneNumberperson[addr]="shanghai"echo $&#123;person[@]&#125; #hanmeimei 23 shanghai 13920380998echo $&#123;!person[@]&#125; #name age addr phoneNumber#删除字典元素unset person[phoneNumber]echo $&#123;person[@]&#125; #hanmeimei 23 shanghaiecho $&#123;!person[@]&#125; #name age addr#删除不存在的字典元素时无影响unset person[phoneNumber]echo $&#123;person[@]&#125; #hanmeimei 23 shanghaiecho $&#123;!person[@]&#125; #name age addr#删除整个字典unset personif [[ $&#123;person&#125; =~ "" ]]; then echo "empty"; else echo "not empty"; fi #empty 字典元素值替换12345declare -A personperson=([name]="lilei" [age]="12")echo $&#123;person[name]&#125; #lileiperson[name]="lucy"echo $&#123;person[name]&#125; #lucy]]></content>
@@ -43,7 +69,7 @@
   <entry>
     <title><![CDATA[bash使用总结]]></title>
     <url>%2F2019%2F07%2F23%2Flinux%2Fbash-usage%2F</url>
-    <content type="text"><![CDATA[Bash官网 Bash数组Bash字典 通过shell实现yaml模板变量替换]]></content>
+    <content type="text"><![CDATA[bash启动简介bash参数 Bash官网 Bash数组Bash字典 通过shell实现yaml模板变量替换]]></content>
       <categories>
         <category>linux</category>
         <category>bash</category>
@@ -83,7 +109,7 @@
   <entry>
     <title><![CDATA[Centos下jenkins的安装]]></title>
     <url>%2F2019%2F07%2F16%2Fcentos%2Fcentos-jenkins-install%2F</url>
-    <content type="text"><![CDATA[通过设置jenkins官方repo仓库下载1234sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.reposudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.keyyum install jenkinscat /etc/rc.d/init.d/jenkins 安装后，jenkins.war默认地址为JENKINS_WAR=”/usr/lib/jenkins/jenkins.war” jenkins的config地址为JENKINS_CONFIG=/etc/sysconfig/jenkins 下载rpm安装12wget https://pkg.jenkins.io/redhat-stable/jenkins-2.176.1-1.1.noarch.rpmrpm -ivh jenkins-2.176.1-1.1.noarch.rpm 下载war包12wget http://mirrors.jenkins.io/war-stable/latest/jenkins.warjava -jar jenkins.war 虚拟机中启动jenkins后不能访问 关闭防火墙 123systemctl status firewalldsystemctl stop firewalldsystemctl disable firewalld]]></content>
+    <content type="text"><![CDATA[通过设置jenkins官方repo仓库下载1234sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.reposudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.keyyum install jenkinscat /etc/rc.d/init.d/jenkins 安装后，jenkins.war默认地址为JENKINS_WAR=”/usr/lib/jenkins/jenkins.war” jenkins的config地址为JENKINS_CONFIG=/etc/sysconfig/jenkins 下载rpm安装12wget https://pkg.jenkins.io/redhat-stable/jenkins-2.176.1-1.1.noarch.rpmrpm -ivh jenkins-2.176.1-1.1.noarch.rpm 下载war包12wget http://mirrors.jenkins.io/war-stable/latest/jenkins.warjava -jar jenkins.war 虚拟机中启动jenkins后不能访问 关闭防火墙 123systemctl status firewalldsystemctl stop firewalldsystemctl disable firewalld 配置防火墙开放jinkins使用的端口 123456789101112# 检查当前防火墙开放的端口[root@localhost ~]# firewall-cmd --list-ports# 配置防火墙开放端口[root@localhost ~]# firewall-cmd --permanent --zone=public --add-port=8080/tcpsuccess[root@localhost ~]# firewall-cmd --list-ports# 重启防火墙[root@localhost ~]# systemctl reload firewalld[root@localhost ~]# firewall-cmd --list-ports8080/tcp]]></content>
       <categories>
         <category>linux</category>
         <category>centos</category>
@@ -337,9 +363,9 @@
         <category>makefile</category>
       </categories>
       <tags>
+        <tag>总结</tag>
         <tag>make</tag>
         <tag>makefile</tag>
-        <tag>总结</tag>
       </tags>
   </entry>
   <entry>
@@ -392,8 +418,8 @@
         <category>npm</category>
       </categories>
       <tags>
-        <tag>总结</tag>
         <tag>npm</tag>
+        <tag>总结</tag>
       </tags>
   </entry>
   <entry>
