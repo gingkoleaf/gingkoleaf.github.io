@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Gingko Leaf">
 <meta property="og:description" content="官方文档极客学院翻译 问题描述在使用Jenkins的 pipeline as code 特性时，遇到使用第三方jar的情况，使用了@Grab(group=&amp;#39;org.restlet&amp;#39;, module=&amp;#39;org.restlet&amp;#39;, version=&amp;#39;1.1.6&amp;#39;)注解，但是在Jenkins job运行时下载依赖失败。 解决方法grape默认时采用mave">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-16T14:25:33.107Z">
+<meta property="og:updated_time" content="2019-11-08T13:53:14.924Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jenkins通过Grab下载依赖失败">
 <meta name="twitter:description" content="官方文档极客学院翻译 问题描述在使用Jenkins的 pipeline as code 特性时，遇到使用第三方jar的情况，使用了@Grab(group=&amp;#39;org.restlet&amp;#39;, module=&amp;#39;org.restlet&amp;#39;, version=&amp;#39;1.1.6&amp;#39;)注解，但是在Jenkins job运行时下载依赖失败。 解决方法grape默认时采用mave">
@@ -400,12 +400,24 @@
                 
               
 
-              <time title="创建时间：2019-07-16 21:49:01 / 修改时间：22:25:33" itemprop="dateCreated datePublished" datetime="2019-07-16T21:49:01+08:00">2019-07-16</time>
+              <time title="创建时间：2019-07-16 21:49:01" itemprop="dateCreated datePublished" datetime="2019-07-16T21:49:01+08:00">2019-07-16</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-11-08 21:53:14" itemprop="dateModified" datetime="2019-11-08T21:53:14+08:00">2019-11-08</time>
               
             
           </span>
@@ -474,11 +486,14 @@
         <p><a href="https://docs.groovy-lang.org/latest/html/documentation/grape.html" target="_blank" rel="noopener">官方文档</a><br><a href="http://wiki.jikexueyuan.com/project/groovy-introduction/grape-dependency-manager.html" target="_blank" rel="noopener">极客学院翻译</a></p>
 <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>在使用Jenkins的 pipeline as code 特性时，遇到使用第三方jar的情况，使用了<br><code>@Grab(group=&#39;org.restlet&#39;, module=&#39;org.restlet&#39;, version=&#39;1.1.6&#39;)</code>注解，但是在Jenkins job运行时下载依赖失败。</p>
 <h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>grape默认时采用maven的 mvnrepository.com 来搜索依赖包，出问题的Jenkins master上是不能访问该仓库的，所以下载依赖失败。</p>
-<p>在${JENKINS_HOME}/.groovy/目录下新增文件grapeConfig.xml，指定仓库地址为内网仓库或可访问的maven镜像仓库。</p>
+<p>在${user.home}/.groovy/目录下新增文件grapeConfig.xml，指定仓库地址为内网仓库或可访问的maven镜像仓库。</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ivysettings</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">settings</span> <span class="attr">defaultResolver</span>=<span class="string">"downloadGrapes"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">resolvers</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">chain</span> <span class="attr">name</span>=<span class="string">"downloadGrapes"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">ibiblio</span> <span class="attr">name</span>=<span class="string">"public"</span> <span class="attr">root</span>=<span class="string">"https://mirrors.huaweicloud.com/repository/maven/"</span> <span class="attr">m2compatible</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">chain</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">resolvers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ivysettings</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>grapeConfig.xml的<a href="https://github.com/apache/groovy/blob/master/src/resources/groovy/grape/defaultGrapeConfig.xml" target="_blank" rel="noopener">默认配置</a>为</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ivysettings</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">settings</span> <span class="attr">defaultResolver</span>=<span class="string">"downloadGrapes"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">resolvers</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">chain</span> <span class="attr">name</span>=<span class="string">"downloadGrapes"</span> <span class="attr">returnFirst</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">filesystem</span> <span class="attr">name</span>=<span class="string">"cachedGrapes"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ivy</span> <span class="attr">pattern</span>=<span class="string">"$&#123;user.home&#125;/.groovy/grapes/[organisation]/[module]/ivy-[revision].xml"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifact</span> <span class="attr">pattern</span>=<span class="string">"$&#123;user.home&#125;/.groovy/grapes/[organisation]/[module]/[type]s/[artifact]-[revision](-[classifier]).[ext]"</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">filesystem</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">ibiblio</span> <span class="attr">name</span>=<span class="string">"localm2"</span> <span class="attr">root</span>=<span class="string">"file:$&#123;user.home&#125;/.m2/repository/"</span> <span class="attr">checkmodified</span>=<span class="string">"true"</span> <span class="attr">changingPattern</span>=<span class="string">".*"</span> <span class="attr">changingMatcher</span>=<span class="string">"regexp"</span> <span class="attr">m2compatible</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- todo add 'endorsed groovy extensions' resolver here --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">ibiblio</span> <span class="attr">name</span>=<span class="string">"jcenter"</span> <span class="attr">root</span>=<span class="string">"https://jcenter.bintray.com/"</span> <span class="attr">m2compatible</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">ibiblio</span> <span class="attr">name</span>=<span class="string">"ibiblio"</span> <span class="attr">m2compatible</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">chain</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">resolvers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ivysettings</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>Jenkins中grape下载的第三方jar默认是缓存在${JENKINS_HOME}/.groovy/grapes/目录下。可以通过添加Jenkins的启动参数<code>-Dgroovy.grape.report.downloads=true</code> 和 <code>-Divy.message.logger.level=4</code>，在jenkins的日志中观察第三方依赖的下载过程。</p>
+<p>Jenkins中grape下载的第三方jar默认是缓存在${user.home}/.groovy/grapes/目录下。可以通过添加Jenkins的启动参数<code>-Dgroovy.grape.report.downloads=true</code> 和 <code>-Divy.message.logger.level=4</code>，在jenkins的日志中观察第三方依赖的下载过程。</p>
+<blockquote>
+<p>如果jenkins master采用docker方式安装时，使用jenkins用户登录，同时设置jenkins的user.home为JENKINS_HOME即可。</p>
+</blockquote>
 
       
     </div>
@@ -624,7 +639,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

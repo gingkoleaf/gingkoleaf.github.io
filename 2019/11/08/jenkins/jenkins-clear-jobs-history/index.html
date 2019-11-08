@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="bash版本号 12bash --versionGNU bash, version 4.2.46(2)-release bash数组使用举例 数组声明赋值1234567891011# Declare array namesdeclare -a names   # 也可以不用声明，直接采用数组的赋值方式赋值，bash能自动识别为数组# 使用 [] 赋值names[0]=&quot;john&quot;names[1]=">
-<meta name="keywords" content="linux,bash">
+  <meta name="description" content="123456789101112131415161718192021222324252627282930313233def jobRetain = 3  // job 保留的历史记录数量// Jenkins.instance.getClass(): hudson.model.Hudson// 获取所有freestyle的jobjobs = Jenkins.instance.getAllItems(A">
+<meta name="keywords" content="jenkins,pipeline">
 <meta property="og:type" content="article">
-<meta property="og:title" content="bash数组">
-<meta property="og:url" content="http://yoursite.com/2019/07/23/linux/bash-array/index.html">
+<meta property="og:title" content="清理Jenkins中所有任务的历史记录">
+<meta property="og:url" content="http://yoursite.com/2019/11/08/jenkins/jenkins-clear-jobs-history/index.html">
 <meta property="og:site_name" content="Gingko Leaf">
-<meta property="og:description" content="bash版本号 12bash --versionGNU bash, version 4.2.46(2)-release bash数组使用举例 数组声明赋值1234567891011# Declare array namesdeclare -a names   # 也可以不用声明，直接采用数组的赋值方式赋值，bash能自动识别为数组# 使用 [] 赋值names[0]=&quot;john&quot;names[1]=">
+<meta property="og:description" content="123456789101112131415161718192021222324252627282930313233def jobRetain = 3  // job 保留的历史记录数量// Jenkins.instance.getClass(): hudson.model.Hudson// 获取所有freestyle的jobjobs = Jenkins.instance.getAllItems(A">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-08T15:57:10.610Z">
+<meta property="og:updated_time" content="2019-11-08T16:37:12.496Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="bash数组">
-<meta name="twitter:description" content="bash版本号 12bash --versionGNU bash, version 4.2.46(2)-release bash数组使用举例 数组声明赋值1234567891011# Declare array namesdeclare -a names   # 也可以不用声明，直接采用数组的赋值方式赋值，bash能自动识别为数组# 使用 [] 赋值names[0]=&quot;john&quot;names[1]=">
+<meta name="twitter:title" content="清理Jenkins中所有任务的历史记录">
+<meta name="twitter:description" content="123456789101112131415161718192021222324252627282930313233def jobRetain = 3  // job 保留的历史记录数量// Jenkins.instance.getClass(): hudson.model.Hudson// 获取所有freestyle的jobjobs = Jenkins.instance.getAllItems(A">
 
 
 
@@ -115,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/07/23/linux/bash-array/">
+  <link rel="canonical" href="http://yoursite.com/2019/11/08/jenkins/jenkins-clear-jobs-history/">
 
 
 
@@ -125,7 +125,7 @@
   };
 </script>
 
-  <title>bash数组 | Gingko Leaf</title>
+  <title>清理Jenkins中所有任务的历史记录 | Gingko Leaf</title>
   
 
 
@@ -357,7 +357,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/23/linux/bash-array/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/08/jenkins/jenkins-clear-jobs-history/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="daybreak.gx">
@@ -374,7 +374,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">bash数组
+          <h1 class="post-title" itemprop="name headline">清理Jenkins中所有任务的历史记录
 
               
             
@@ -400,7 +400,7 @@
                 
               
 
-              <time title="创建时间：2019-07-23 22:53:29" itemprop="dateCreated datePublished" datetime="2019-07-23T22:53:29+08:00">2019-07-23</time>
+              <time title="创建时间：2019-11-08 23:12:03" itemprop="dateCreated datePublished" datetime="2019-11-08T23:12:03+08:00">2019-11-08</time>
             
 
             
@@ -417,7 +417,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-08 23:57:10" itemprop="dateModified" datetime="2019-08-08T23:57:10+08:00">2019-08-08</time>
+                <time title="修改时间：2019-11-09 00:37:12" itemprop="dateModified" datetime="2019-11-09T00:37:12+08:00">2019-11-09</time>
               
             
           </span>
@@ -434,14 +434,21 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
 
                 
                 
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/bash/" itemprop="url" rel="index"><span itemprop="name">bash</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/持续集成/" itemprop="url" rel="index"><span itemprop="name">持续集成</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/持续集成/jenkins/" itemprop="url" rel="index"><span itemprop="name">jenkins</span></a></span>
 
                 
                 
@@ -483,14 +490,9 @@
       
 
       
-        <p>bash版本号</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bash --version</span><br><span class="line">GNU bash, version 4.2.46(2)-release</span><br></pre></td></tr></table></figure>
-<p>bash数组使用举例</p>
-<h3 id="数组声明赋值"><a href="#数组声明赋值" class="headerlink" title="数组声明赋值"></a>数组声明赋值</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Declare array names</span></span><br><span class="line"><span class="built_in">declare</span> -a names   <span class="comment"># 也可以不用声明，直接采用数组的赋值方式赋值，bash能自动识别为数组</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 [] 赋值</span></span><br><span class="line">names[0]=<span class="string">"john"</span></span><br><span class="line">names[1]=<span class="string">"lucy"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 () 赋值</span></span><br><span class="line">names=(<span class="string">"john"</span> <span class="string">"lucy"</span>)</span><br><span class="line">names=([0]=<span class="string">"john"</span> [1]=<span class="string">"lucy"</span>)</span><br><span class="line">names=([1]=<span class="string">"jessica"</span> [3]=<span class="string">"hanmeimei"</span>) <span class="comment"># 可以指定下标不连续</span></span><br></pre></td></tr></table></figure>
-<h3 id="数组读取及遍历"><a href="#数组读取及遍历" class="headerlink" title="数组读取及遍历"></a>数组读取及遍历</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 根据下标读取数组内容</span></span><br><span class="line">names=([0]=<span class="string">"lily"</span> [1]=<span class="string">"lucy"</span> [3]=<span class="string">"hanmeimei"</span>)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;names[1]&#125;</span>   <span class="comment"># lucy</span></span><br><span class="line"><span class="keyword">if</span> [[ <span class="variable">$&#123;names[2]&#125;</span> =~ <span class="string">""</span> ]]; <span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">"empty"</span>; <span class="keyword">else</span> <span class="built_in">echo</span> <span class="string">"not empty"</span>; <span class="keyword">fi</span>   <span class="comment"># empty</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印数组中所有元素， 此时打印出来的内容的是字符串列表</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;names[@]&#125;</span>    <span class="comment">#lily lucy hanmeimei</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印数组中元素的索引列表</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;!names[@]&#125;</span>   <span class="comment"># 0 1 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取数组长度</span></span><br><span class="line"><span class="comment"># 上面定义的数组下标虽然不连续，但是数组长度仍为 3</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;#names[@]&#125;</span>   <span class="comment"># 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 遍历数组</span></span><br><span class="line"><span class="keyword">for</span> name <span class="keyword">in</span> <span class="variable">$&#123;names[@]&#125;</span>;<span class="keyword">do</span> <span class="built_in">echo</span> <span class="variable">$name</span>; <span class="keyword">done</span></span><br><span class="line"><span class="comment"># lily</span></span><br><span class="line"><span class="comment"># lucy</span></span><br><span class="line"><span class="comment"># hanmeimei</span></span><br></pre></td></tr></table></figure>
-<h3 id="数组截取及组合"><a href="#数组截取及组合" class="headerlink" title="数组截取及组合"></a>数组截取及组合</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">names=(<span class="string">'lilei'</span> <span class="string">'jack'</span> <span class="string">'hanmeimei'</span> <span class="string">'lily'</span> <span class="string">'lucy'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 截取从索引 1 开始（包含索引 1）的后面 3 个元素</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;names[@]:1:3&#125;</span>    <span class="comment"># jack hanmeimei lily</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果未指定元素个数，则表示后面所有元素</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;names[@]:2&#125;</span>      <span class="comment"># hanmeimei lily lucy</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 两个数组组合</span></span><br><span class="line">names1=(<span class="string">'name1_1'</span> <span class="string">'name1_2'</span>)</span><br><span class="line">names2=(<span class="string">'name2_1'</span> <span class="string">'name2_2'</span> <span class="string">'name2_3'</span>)</span><br><span class="line">names=(<span class="variable">$&#123;names1[@]&#125;</span> <span class="variable">$&#123;names2[@]&#125;</span>)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;names[@]&#125;</span>    <span class="comment"># name1_1 name1_2 name2_1 name2_2 name2_3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 数组中增加元素</span></span><br><span class="line">names=(<span class="string">'lily'</span> <span class="string">'lucy'</span>)</span><br><span class="line">names=(<span class="string">"<span class="variable">$&#123;names[@]&#125;</span>"</span> <span class="string">"hanmeimei"</span>)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;names[@]&#125;</span>    <span class="comment"># lily lucy hanmeimei</span></span><br></pre></td></tr></table></figure>
-<h3 id="删除数据中元素"><a href="#删除数据中元素" class="headerlink" title="删除数据中元素"></a>删除数据中元素</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">names=(<span class="string">'lily'</span> <span class="string">'lucy'</span> <span class="string">'hanmeimei'</span> <span class="string">'lilei'</span> <span class="string">'jack'</span>)</span><br><span class="line"><span class="comment"># 删除数组中索引为 1 的元素</span></span><br><span class="line"><span class="built_in">unset</span> names[1]</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;names[@]&#125;</span>    <span class="comment"># lily hanmeimei lilei jack</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;!names[@]&#125;</span>   <span class="comment"># 0 2 3 4</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除整个数组</span></span><br><span class="line"><span class="built_in">unset</span> names</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用数组截取然后重新组合方式删除元素</span></span><br><span class="line">names=(<span class="string">'lily'</span> <span class="string">'lucy'</span> <span class="string">'hanmeimei'</span> <span class="string">'lilei'</span> <span class="string">'jack'</span>)</span><br><span class="line">names=(<span class="variable">$&#123;names[@]:0:1&#125;</span> <span class="variable">$&#123;names[@]:2&#125;</span>)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;names[@]&#125;</span>    <span class="comment"># lily hanmeimei lilei jack</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;!names[@]&#125;</span>   <span class="comment"># 0 1 2 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用模式操作符删除数组中的元素</span></span><br><span class="line">names=(<span class="string">'lily'</span> <span class="string">'lucy'</span> <span class="string">'hanmeimei'</span> <span class="string">'lilei'</span> <span class="string">'jack'</span>)</span><br><span class="line">names=(@&#123;names[@]/lucy/&#125;)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;names[@]&#125;</span>    <span class="comment"># lily hanmeimei lilei jack</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;!names[@]&#125;</span>   <span class="comment"># 0 1 2 3</span></span><br></pre></td></tr></table></figure>
-<h3 id="数组元素值替换"><a href="#数组元素值替换" class="headerlink" title="数组元素值替换"></a>数组元素值替换</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用数组下标赋值</span></span><br><span class="line">names=(<span class="string">'lilei'</span> <span class="string">'hanmeimei'</span> <span class="string">'lucy'</span> <span class="string">'lily'</span>)</span><br><span class="line">names[1]=<span class="string">'jessica'</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;names[@]&#125;</span>    <span class="comment"># lilei jessica lucy lily</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用模式操作符进行内容替换</span></span><br><span class="line">names=(<span class="string">'lilei'</span> <span class="string">'hanmeimei'</span> <span class="string">'lucy'</span> <span class="string">'lily'</span>)</span><br><span class="line">names=(<span class="variable">$&#123;names[@]/hanmeimei/jessica&#125;</span>)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;names[@]&#125;</span>    <span class="comment"># lilei jessica lucy lily</span></span><br></pre></td></tr></table></figure>
+        <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> jobRetain = <span class="number">3</span>  <span class="comment">// job 保留的历史记录数量</span></span><br><span class="line"><span class="comment">// Jenkins.instance.getClass(): hudson.model.Hudson</span></span><br><span class="line"><span class="comment">// 获取所有freestyle的job</span></span><br><span class="line">jobs = Jenkins.instance.getAllItems(AbstactProject.<span class="keyword">class</span>)</span><br><span class="line">println(jobs)</span><br><span class="line"><span class="comment">// 获取所有pipeline的job</span></span><br><span class="line">jobs = Jenkins.instance.getAllItems(org.jenkinsci.plugins.workflow.job.WorkflowJob.<span class="keyword">class</span>)</span><br><span class="line">println(jobs)</span><br><span class="line"><span class="comment">// 获取所有的job</span></span><br><span class="line">jobs = Jenkins.instance.getAllItems(hudson.model.Job.<span class="keyword">class</span>())</span><br><span class="line">println(jobs)</span><br><span class="line"></span><br><span class="line">jobs.each &#123; job -&gt;</span><br><span class="line">    <span class="keyword">def</span> builds = job.getBuilds()</span><br><span class="line">    println(builds)</span><br><span class="line">    <span class="keyword">if</span>(builds) &#123;</span><br><span class="line">        <span class="keyword">def</span> latestBuildNumber = job.getLastBuild().getNumber()</span><br><span class="line">        <span class="keyword">def</span> retainMaxNumber = latestBuildNumber - jobRetain</span><br><span class="line">        println(<span class="string">"$&#123;job.name&#125;'s last build number: $&#123;latestBuildNumber&#125;"</span>)</span><br><span class="line">        <span class="keyword">if</span> (retainMaxNumber &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            println(<span class="string">"$&#123;job.name&#125;'s last build is less than $&#123;jobRetain&#125;, skip..."</span>)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        println(builds.getClass())</span><br><span class="line">        job.getBuilds().findAll&#123;it.number &lt;= retainMaxNumber&#125;.each &#123;</span><br><span class="line">            <span class="comment">// it.getClass(): org.jenkinsci.plugins.workflow.job.WorkflowRun</span></span><br><span class="line">            println(<span class="string">"delete $&#123;job.name&#125;'s $&#123;it.number&#125;"</span>)</span><br><span class="line">            it.delete()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        println(<span class="string">"$&#123;job.name&#125; don't have builder, skip..."</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行日志如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">Started by user unknown or anonymous</span><br><span class="line">Running in Durability level: MAX_SURVIVABILITY</span><br><span class="line">[Pipeline] Start of Pipeline</span><br><span class="line">[Pipeline] echo</span><br><span class="line">[hudson.model.FreeStyleProject@5aab9184[jenkins_shell_test], com.tikal.jenkins.plugins.multijob.MultiJobProject@ce9939f[multijob_test], hudson.model.FreeStyleProject@12b9358a[no_build_job]]</span><br><span class="line">[Pipeline] echo</span><br><span class="line">[org.jenkinsci.plugins.workflow.job.WorkflowJob@10dabbd8[clear_history], org.jenkinsci.plugins.workflow.job.WorkflowJob@4e79153f[pipeline_shell_test]]</span><br><span class="line">[Pipeline] echo</span><br><span class="line">[org.jenkinsci.plugins.workflow.job.WorkflowJob@10dabbd8[clear_history], hudson.model.FreeStyleProject@5aab9184[jenkins_shell_test], com.tikal.jenkins.plugins.multijob.MultiJobProject@ce9939f[multijob_test], hudson.model.FreeStyleProject@12b9358a[no_build_job], org.jenkinsci.plugins.workflow.job.WorkflowJob@4e79153f[pipeline_shell_test]]</span><br><span class="line">[Pipeline] echo</span><br><span class="line">[clear_history #24, clear_history #23, clear_history #22, clear_history #21, clear_history #20, clear_history #19, clear_history #18, clear_history #17, clear_history #16, clear_history #15, clear_history #14]</span><br><span class="line">[Pipeline] echo</span><br><span class="line">clear_history&apos;s last build number: 24</span><br><span class="line">[Pipeline] echo</span><br><span class="line">class hudson.util.RunList</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete clear_history&apos;s 21</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete clear_history&apos;s 20</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete clear_history&apos;s 19</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete clear_history&apos;s 18</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete clear_history&apos;s 17</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete clear_history&apos;s 16</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete clear_history&apos;s 15</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete clear_history&apos;s 14</span><br><span class="line">[Pipeline] echo</span><br><span class="line">[jenkins_shell_test #7, jenkins_shell_test #6, jenkins_shell_test #5, jenkins_shell_test #4, jenkins_shell_test #3, jenkins_shell_test #2, jenkins_shell_test #1]</span><br><span class="line">[Pipeline] echo</span><br><span class="line">jenkins_shell_test&apos;s last build number: 7</span><br><span class="line">[Pipeline] echo</span><br><span class="line">class hudson.util.RunList</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete jenkins_shell_test&apos;s 4</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete jenkins_shell_test&apos;s 3</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete jenkins_shell_test&apos;s 2</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete jenkins_shell_test&apos;s 1</span><br><span class="line">[Pipeline] echo</span><br><span class="line">[multijob_test #3, multijob_test #2, multijob_test #1]</span><br><span class="line">[Pipeline] echo</span><br><span class="line">multijob_test&apos;s last build number: 3</span><br><span class="line">[Pipeline] echo</span><br><span class="line">multijob_test&apos;s last build is less than 3, skip...</span><br><span class="line">[Pipeline] echo</span><br><span class="line">[]</span><br><span class="line">[Pipeline] echo</span><br><span class="line">no_build_job don&apos;t have builder, skip...</span><br><span class="line">[Pipeline] echo</span><br><span class="line">[pipeline_shell_test #91, pipeline_shell_test #90, pipeline_shell_test #89, pipeline_shell_test #88, pipeline_shell_test #87, pipeline_shell_test #86, pipeline_shell_test #85, pipeline_shell_test #84, pipeline_shell_test #83, pipeline_shell_test #82]</span><br><span class="line">[Pipeline] echo</span><br><span class="line">pipeline_shell_test&apos;s last build number: 91</span><br><span class="line">[Pipeline] echo</span><br><span class="line">class hudson.util.RunList</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete pipeline_shell_test&apos;s 88</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete pipeline_shell_test&apos;s 87</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete pipeline_shell_test&apos;s 86</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete pipeline_shell_test&apos;s 85</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete pipeline_shell_test&apos;s 84</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete pipeline_shell_test&apos;s 83</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete pipeline_shell_test&apos;s 82</span><br><span class="line">[Pipeline] End of Pipeline</span><br><span class="line">Finished: SUCCESS</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -538,9 +540,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/linux/" rel="tag"># linux</a>
+            <a href="/tags/jenkins/" rel="tag"># jenkins</a>
           
-            <a href="/tags/bash/" rel="tag"># bash</a>
+            <a href="/tags/pipeline/" rel="tag"># pipeline</a>
           
         </div>
       
@@ -553,8 +555,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/23/linux/bash-usage/" rel="next" title="bash使用总结">
-                <i class="fa fa-chevron-left"></i> bash使用总结
+              <a href="/2019/11/02/groovy/groovy-repalce-param-in-yaml/" rel="next" title="动态替换map中的变量">
+                <i class="fa fa-chevron-left"></i> 动态替换map中的变量
               </a>
             
           </div>
@@ -562,10 +564,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/08/linux/shell-replace-yaml-template/" rel="prev" title="通过shell实现yaml目标变量替换">
-                通过shell实现yaml目标变量替换 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -609,17 +607,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -805,23 +794,6 @@
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数组声明赋值"><span class="nav-number">1.</span> <span class="nav-text">数组声明赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组读取及遍历"><span class="nav-number">2.</span> <span class="nav-text">数组读取及遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组截取及组合"><span class="nav-number">3.</span> <span class="nav-text">数组截取及组合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除数据中元素"><span class="nav-number">4.</span> <span class="nav-text">删除数据中元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组元素值替换"><span class="nav-number">5.</span> <span class="nav-text">数组元素值替换</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       

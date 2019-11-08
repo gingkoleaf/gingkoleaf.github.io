@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Gingko Leaf">
 <meta property="og:description" content="通过设置jenkins官方repo仓库下载1234sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.reposudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.keyyum install je">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-01T08:37:40.834Z">
+<meta property="og:updated_time" content="2019-11-08T15:09:58.030Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Centos下jenkins的安装">
 <meta name="twitter:description" content="通过设置jenkins官方repo仓库下载1234sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.reposudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.keyyum install je">
@@ -417,7 +417,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-09-01 16:37:40" itemprop="dateModified" datetime="2019-09-01T16:37:40+08:00">2019-09-01</time>
+                <time title="修改时间：2019-11-08 23:09:58" itemprop="dateModified" datetime="2019-11-08T23:09:58+08:00">2019-11-08</time>
               
             
           </span>
@@ -486,8 +486,11 @@
         <h3 id="通过设置jenkins官方repo仓库下载"><a href="#通过设置jenkins官方repo仓库下载" class="headerlink" title="通过设置jenkins官方repo仓库下载"></a>通过设置jenkins官方repo仓库下载</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo</span><br><span class="line">sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key</span><br><span class="line">yum install jenkins</span><br><span class="line">cat /etc/rc.d/init.d/jenkins</span><br></pre></td></tr></table></figure>
 <p>安装后，jenkins.war默认地址为<br>JENKINS_WAR=”/usr/lib/jenkins/jenkins.war”</p>
 <p>jenkins的config地址为<br>JENKINS_CONFIG=/etc/sysconfig/jenkins</p>
+<p>jenkins服务的启动/停止/重启脚本为<br>/etc/init.d/jenkins</p>
 <h3 id="下载rpm安装"><a href="#下载rpm安装" class="headerlink" title="下载rpm安装"></a>下载rpm安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://pkg.jenkins.io/redhat-stable/jenkins-2.176.1-1.1.noarch.rpm</span><br><span class="line">rpm -ivh jenkins-2.176.1-1.1.noarch.rpm</span><br></pre></td></tr></table></figure>
 <h3 id="下载war包"><a href="#下载war包" class="headerlink" title="下载war包"></a>下载war包</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget http://mirrors.jenkins.io/war-stable/latest/jenkins.war</span><br><span class="line">java -jar jenkins.war</span><br></pre></td></tr></table></figure>
+<p>常用的启动参数为:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -Duser.timezone=GMT+08 -Dgroovy.grape.report.downloads=true -Divy.message.logger.level=4 -Dhudson.model.ParametersAction.keepUndefinedParameters=true -Dhudson.security.ArtifactsPermission=true -Djava.awt.headless=true -Dorg.apache.commons.jelly.tags.fmt.timeZone=Asia/Shanghai -Dhudson.slaves.NodeProvisioner.MARGIN=50 -Dhudson.slaves.NodeProvisioner.MARGIN0=0.85 -Dhudson.slaves.NodeProvisioner.initialDelay=0 -Dhudson.slaves.NodeProvisioner.recurrencePeriod=2 -Dhudson.model.LoadStatistics.clock=2 -Dhudson.model.LoadStatistics.decay=0.1 -server -Xms10g -Xmx32g -XX:MaxPermSize=4g -Djava.awt.headless=true -Xloggc:/var/jenkins_home/jenkins_gc.log -XX:+HeapDumpOnOutOfMemoryError -DJENKINS_HOME=/var/jenkins_home -jar jenkins.war --logfile=/var/jenkins_home/jenkins.log</span><br></pre></td></tr></table></figure>
 <h3 id="虚拟机中启动jenkins后不能访问"><a href="#虚拟机中启动jenkins后不能访问" class="headerlink" title="虚拟机中启动jenkins后不能访问"></a>虚拟机中启动jenkins后不能访问</h3><ol>
 <li><p>关闭防火墙</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl status firewalld</span><br><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl disable firewalld</span><br></pre></td></tr></table></figure>
@@ -639,7 +642,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
