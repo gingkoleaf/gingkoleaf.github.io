@@ -1,6 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[jenkins的日志配置]]></title>
+    <url>%2F2019%2F11%2F15%2Fjenkins%2Fjenkins-log-config%2F</url>
+    <content type="text"><![CDATA[use a post initialization scriptjenkins支持在启动后立即运行指定脚本(${JENKINS_HOME/init.groovy} 或 ${JENKINS_HOME}/init.groovy.d/*.groovy)，脚本可以访问Jenins中的类和所有插件。可以利用这个特性来实现日志配置 12345import java.util.logging.Levelimport java.util.logging.LoggerLogger.getLogger("hudson.plugins.git.GitStatus").setLevel(Level.SEVERE)Logger.getLogger("hudson.security.csrf.CrumbFilter").setLevel(Level.SEVERE) use java.util.logging创建一个logging.properties文件，里面包含日志记录的配置，然后通过增加JVM选项-Djava.util.logging.config.file=&lt;pathTo&gt;/logging.properties 来生效配置 这种方式只支持使用了 java.util.logging 来记录日志的classes，如果某些classes使用了其他日志功能（如 org.apache.commons.logging）则不会生效 1234567891011handlers=java.util.logging.ConsoleHandler,java.util.logging.FileHandlerjava.util.logging.FileHandler.level=INFOjava.util.logging.FileHandler.formatter=java.util.logging.SimpleFormatterjava.util.logging.FileHandler.pattern=/var/log/jenkins/jenkins.logjava.util.logging.FileHandler.append=truejava.util.logging.FileHandler.limit=10000000java.util.logging.FileHandler.count=5java.util.logging.ConsoleHandler.level=INFOjava.util.logging.ConsoleHandler.formatter=java.util.logging.SimpleFormatter 使用linux的logrotatelogrotate是个十分有用的工具，它可以自动对日志进行截断（或轮循）、压缩以及删除旧的日志文件。 Logrotate是基于CRON来运行的，其脚本是/etc/cron.daily/logrotate。 logrotate的配置文件是/etc/logrotate.conf，通常不需要对它进行修改。日志文件的轮循设置在独立的配置文件中，它们放在/etc/logrotate.d/目录下。 /etc/logrotate.d/jenkins文件配置如下: 1234567891011121314/var/jenkins_home/logs/jenkins.log &#123; daily //日志文件轮循周期。可用值为‘daily’，‘weekly’或者‘yearly’ rotate 5 //最多将存储5个归档日志。对于第六个归档，时间最久的归档将被删除 dataext //旧日志文件以创建日期命名 compress //在轮循任务完成后，已轮循的归档将使用gzip进行压缩 delaycompress //总是与compress选项一起用，delaycompress选项指示logrotate不要将最近的归档压缩，压缩将在下一次轮循周期进行。这在你或任何软件仍然需要读取最新归档时很有用。 missingok //在日志轮循期间，任何错误将被忽略，例如“文件无法找到”之类的错误 notifempty //如果日志文件为空，轮循不会进行 size 100k //当日志文件到达指定的大小时才转储，log-size能指定bytes(缺省)及KB (sizek)或MB(sizem) create 644 root root //mode owner group 转储文件，使用指定的文件模式创建新的日志文件 postrotate //在logrotate转储之后需要执行的指令，例如重新启动 (kill -HUP) 某个服务 必须独立成行 /usr/bin/killall -HUP rsyslogd endscript&#125; 值得注意的一个配置是：copytruncate copytruncate 如果没有这个选项的话，操作方式：是将原log日志文件，移动成类似log.1的旧文件， 然后创建一个新的文件。 如果设置了，操作方式：拷贝原日志文件，并且将其变成大小为0的文件。 区别是如果进程,比如nginx 使用了一个文件写日志，没有copytruncate的话，切割日志时， 把旧日志log-&gt;log.1 ，然后创建新日志log。这时候nginx 打开的文件描述符依然时log.1，由没有信号通知nginx 要换日志描述符，所以它会继续向log.1写日志，这样就不符合我们的要求了。 因为我们想切割日志后，nginx 自动会向新的log 文件写日志，而不是旧的log.1文件 解决方法有两个： 1.向上面的nginx 切割日志配置，再postrotate里面写个脚本 postrotate [ -s /run/nginx.pid ] &amp;&amp; kill -USR1 cat /run/nginx.pidendscript 这样就是发信号给nginx ,让nginx 关闭旧日志文件描述符，重新打开新的日志文件描述，并写入日志 2.使用copytruncate参数，向上面说的，配置了它以后，操作方式是把log 复制一份 成为log.1，然后清空log的内容，使大小为0，那此时log依然时原来的旧log，对进程（nginx）来说，依然打开的是原来的文件描述符，可以继续往里面写日志，而不用发送信号给nginx copytruncate这种方式操作的时候， 拷贝和清空之间有一个时间差，可能会丢失部分日志数据。 nocopytruncate 备份日志文件不过不截断。]]></content>
+      <categories>
+        <category>tool</category>
+        <category>持续集成</category>
+        <category>jenkins</category>
+      </categories>
+      <tags>
+        <tag>jenkins</tag>
+        <tag>pipeline</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[修改Jenkins Home]]></title>
+    <url>%2F2019%2F11%2F14%2Fjenkins%2Fjenkins-change-home%2F</url>
+    <content type="text"><![CDATA[修改 JENKINS_HOME 前必须先停止jenkins服务，修改后将原来 jenkins home目录中的数据copy到新目录，然后重启服务。 使用war启动jenkins直接通过 java -DJENKINS_HOME=/var/jenkins_home -jar jenkins.war 指定 -DJENKINS_HOME 选项即可 centos使用rpm安装或yum安装通过修改 /etc/sysconfig/jenkins 配置文件中的 JENKINS_HOME 配置 docker容器化安装通过在 docker run 中增加 -e JENKINS_HOME=xxxx 环境变量来修改]]></content>
+      <categories>
+        <category>tool</category>
+        <category>持续集成</category>
+        <category>jenkins</category>
+      </categories>
+      <tags>
+        <tag>jenkins</tag>
+        <tag>pipeline</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[docker-restart-policies]]></title>
+    <url>%2F2019%2F11%2F14%2Fdocker%2Fdocker-restart-policies%2F</url>
+    <content type="text"><![CDATA[使用在 docker run 命令中通过指定 --restart=xxx 选项来指定容器在退出时的重启策略。 Docker容器的重启动作都是由Docker守护进程完成的。 重启策略 策略 说明 no 默认值，当容器退出时不会重启 on-failure[:max-retries] 在容器为非正常退出(退出状态为非0)时才会重启，可以指定最大重启次数 always 不管容器退出状态为什么，总是重启容器，当指定该值时，守护进程总是会在进程启动后启动容器 unless-stopped 无论退出状态如何，总是重启容器，除非容器在Docker守护进程停止之前进入了停止状态。 每次重启时，docker都会按照 100ms 200ms 400ms 800ms 1600ms … 的规律增加等待延时，直到达到on-failure的最大次数或者docker停止或通过docker rm -f 删除容器。 如果容器重新启动成功(容器启动并运行至少10秒)，则延迟将重置为其默认值100 ms。 可以通过docker inspect获得容器(尝试)重新启动的次数。例如，获取容器“my-container”的重启次数 1docker inspect -f "&#123;&#123; .RestartCount &#125;&#125;" my-container docker run 命令中 --restart=xxx 和 --rm 选项时互斥的，不能同时指定 容器只有在成功启动后restart policy才能生效。这里的”成功启动”是指容器处于up至少10秒且已经处于docker监管。这是避免没有成功启动的容器陷入restart的死循环。 如果手动stop一个容器，容器设置的restart policy将会被忽略，除非docker守护进程重启或者容器手动重启；这是避免了如果重启策略设置了always，如果不忽略policy那么容器无法手动停止。 更新重启策略1docker update --restart=no my-container 当需要彻底删除一个指定always策略的容器时，必须先更新重启策略为no，然后在停止和删除容器。]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[docker配置代理]]></title>
     <url>%2F2019%2F11%2F11%2Fdocker%2Fdocker-set-proxy%2F</url>
     <content type="text"><![CDATA[systemd中，创建 /etc/systemd/system/docker.service.d/http-proxy.conf 文件，增加如下配置 12[Service]Environment=&quot;HTTP_PROXY=http://proxy.example.com:80/&quot; &quot;HTTPS_PROXY=https://proxy.example.com:443/&quot; &quot;NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,&quot;]]></content>
@@ -14,7 +53,7 @@
   <entry>
     <title><![CDATA[docker配置文件常用配置]]></title>
     <url>%2F2019%2F11%2F11%2Fdocker%2Fdocker-config-file%2F</url>
-    <content type="text"><![CDATA[默认配置文件为: /etc/docker/daemon.json, 如果该文件不存在，需要自己创建 官方配置文件说明 常用配置如下 12345678910&#123; "graph": "/data/docker_home", // 配置docker默认root目录，该配置19.03.0版本已废弃，计划19.09.0版本删除 "data-root": "/data/docker_home", // 配置docker默认root目录 "registry-mirrors": [ //配置docker镜像源 "https://registry.docker-cn.com", // Docker 官方镜像中国区 "http://hub-mirror.c.163.com", // 网易镜像源 "https://docker.mirrors.ustc.edu.cn"], // 中科大镜像源 "insecure-registries": [], // 配置非安全的镜像仓库(私有仓库)，通常公司内部镜像源配置在此处 "debug": true, //启动debug模式，默认为 false&#125;]]></content>
+    <content type="text"><![CDATA[默认配置文件为: /etc/docker/daemon.json, 如果该文件不存在，需要自己创建 官方配置文件说明 常用配置如下 12345678910&#123; "graph": "/data/docker_home", // 配置docker默认root目录，该配置19.03.0版本已废弃，计划19.09.0版本删除 "data-root": "/data/docker_home", // 配置docker默认root目录 "registry-mirrors": [ //配置docker镜像源 "https://registry.docker-cn.com", // Docker 官方镜像中国区 "http://hub-mirror.c.163.com", // 网易镜像源 "https://docker.mirrors.ustc.edu.cn"], // 中科大镜像源 "insecure-registries": [], // 配置非安全的镜像仓库(私有仓库)，通常公司内部镜像源配置在此处 "debug": true, //启动debug模式，默认为 false&#125; insecure-registries中定义的私有仓库如果端口号不为 80 , 则必须指定端口号使用 docker pull 拉取镜像时必须和 insecure-registers 中定义的完全一致(包括端口号)]]></content>
       <categories>
         <category>docker</category>
       </categories>
@@ -36,7 +75,7 @@
   <entry>
     <title><![CDATA[docker使用总结]]></title>
     <url>%2F2019%2F11%2F11%2Fdocker%2Fdocker-usage%2F</url>
-    <content type="text"><![CDATA[官方文档CentOS下安装dockerdocker常见配置说明 docker可执行文件: /usr/bin/dockerd docker服务配置文件: /usr/lib/systemd/system/docker.service docker配置文件: /etc/docker/daemon.json docker存储默认目录: /var/lib/docker 修改docker存储的默认路径docker配置文件常用设置docker代理配置dockerd命令详解]]></content>
+    <content type="text"><![CDATA[官方文档CentOS下安装dockerdocker常见配置说明 docker可执行文件: /usr/bin/dockerd docker服务配置文件: /usr/lib/systemd/system/docker.service docker配置文件: /etc/docker/daemon.json docker存储默认目录: /var/lib/docker 修改docker存储的默认路径docker配置文件常用设置docker代理配置dockerd命令详解docker重启策略]]></content>
       <categories>
         <category>docker</category>
       </categories>
@@ -54,8 +93,8 @@
         <category>centos</category>
       </categories>
       <tags>
-        <tag>docker</tag>
         <tag>centos</tag>
+        <tag>docker</tag>
       </tags>
   </entry>
   <entry>
@@ -246,7 +285,7 @@
   <entry>
     <title><![CDATA[Centos下jenkins的安装]]></title>
     <url>%2F2019%2F07%2F16%2Fcentos%2Fcentos-jenkins-install%2F</url>
-    <content type="text"><![CDATA[通过设置jenkins官方repo仓库下载1234sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.reposudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.keyyum install jenkinscat /etc/rc.d/init.d/jenkins 安装后，jenkins.war默认地址为JENKINS_WAR=”/usr/lib/jenkins/jenkins.war” jenkins的config地址为JENKINS_CONFIG=/etc/sysconfig/jenkins jenkins服务的启动/停止/重启脚本为/etc/init.d/jenkins 下载rpm安装12wget https://pkg.jenkins.io/redhat-stable/jenkins-2.176.1-1.1.noarch.rpmrpm -ivh jenkins-2.176.1-1.1.noarch.rpm 下载war包12wget http://mirrors.jenkins.io/war-stable/latest/jenkins.warjava -jar jenkins.war 常用的启动参数为: 1java -Duser.timezone=GMT+08 -Dgroovy.grape.report.downloads=true -Divy.message.logger.level=4 -Dhudson.model.ParametersAction.keepUndefinedParameters=true -Dhudson.security.ArtifactsPermission=true -Djava.awt.headless=true -Dorg.apache.commons.jelly.tags.fmt.timeZone=Asia/Shanghai -Dhudson.slaves.NodeProvisioner.MARGIN=50 -Dhudson.slaves.NodeProvisioner.MARGIN0=0.85 -Dhudson.slaves.NodeProvisioner.initialDelay=0 -Dhudson.slaves.NodeProvisioner.recurrencePeriod=2 -Dhudson.model.LoadStatistics.clock=2 -Dhudson.model.LoadStatistics.decay=0.1 -server -Xms10g -Xmx32g -XX:MaxPermSize=4g -Djava.awt.headless=true -Xloggc:/var/jenkins_home/jenkins_gc.log -XX:+HeapDumpOnOutOfMemoryError -DJENKINS_HOME=/var/jenkins_home -jar jenkins.war --logfile=/var/jenkins_home/jenkins.log 虚拟机中启动jenkins后不能访问 关闭防火墙 123systemctl status firewalldsystemctl stop firewalldsystemctl disable firewalld 配置防火墙开放jinkins使用的端口 123456789101112# 检查当前防火墙开放的端口[root@localhost ~]# firewall-cmd --list-ports# 配置防火墙开放端口[root@localhost ~]# firewall-cmd --permanent --zone=public --add-port=8080/tcpsuccess[root@localhost ~]# firewall-cmd --list-ports# 重启防火墙[root@localhost ~]# systemctl reload firewalld[root@localhost ~]# firewall-cmd --list-ports8080/tcp]]></content>
+    <content type="text"><![CDATA[非docker安装通过设置jenkins官方repo仓库下载1234sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.reposudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.keyyum install jenkinscat /etc/rc.d/init.d/jenkins 安装后，jenkins.war默认地址为JENKINS_WAR=”/usr/lib/jenkins/jenkins.war” jenkins的config地址为JENKINS_CONFIG=/etc/sysconfig/jenkins jenkins服务的启动/停止/重启脚本为/etc/init.d/jenkins 下载rpm安装12wget https://pkg.jenkins.io/redhat-stable/jenkins-2.176.1-1.1.noarch.rpmrpm -ivh jenkins-2.176.1-1.1.noarch.rpm 下载war包12wget http://mirrors.jenkins.io/war-stable/latest/jenkins.warjava -jar jenkins.war 常用的启动参数为: 1234567891011121314151617java -Duser.timezone=GMT+08 \ -Djava.util.logging.config.file=/var/jenkins_home/jenkins.logging.properties \ -Dgroovy.grape.report.downloads=true -Divy.message.logger.level=4 \ -Dhudson.model.ParametersAction.keepUndefinedParameters=true \ -Dhudson.security.ArtifactsPermission=true -Djava.awt.headless=true \ -Dorg.apache.commons.jelly.tags.fmt.timeZone=Asia/Shanghai \ -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 \ -Dhudson.slaves.NodeProvisioner.MARGIN=50 \ -Dhudson.slaves.NodeProvisioner.MARGIN0=0.85 \ -Dhudson.slaves.NodeProvisioner.initialDelay=0 \ -Dhudson.slaves.NodeProvisioner.recurrencePeriod=2 \ -Dhudson.model.LoadStatistics.clock=2 \ -Dhudson.model.LoadStatistics.decay=0.1 \ -server -Xms10g -Xmx32g -XX:MaxPermSize=4g -XX:+HeapDumpOnOutOfMemoryError \ -Xloggc:/var/jenkins_home/jenkins_gc.log \ -DJENKINS_HOME=/var/jenkins_home \ -jar jenkins.war --logfile=/var/jenkins_home/jenkins.log jenkins.logging.properties 的内容参见说明 虚拟机中启动jenkins后不能访问 关闭防火墙 123systemctl status firewalldsystemctl stop firewalldsystemctl disable firewalld 配置防火墙开放jinkins使用的端口 123456789101112# 检查当前防火墙开放的端口[root@localhost ~]# firewall-cmd --list-ports# 配置防火墙开放端口[root@localhost ~]# firewall-cmd --permanent --zone=public --add-port=8080/tcpsuccess[root@localhost ~]# firewall-cmd --list-ports# 重启防火墙[root@localhost ~]# systemctl reload firewalld[root@localhost ~]# firewall-cmd --list-ports8080/tcp docker安装docker hub中有两种jenkins的镜像，jenkins官方推荐使用 jenkinsci/blueocean 镜像，该镜像中包含了blueocean插件，该镜像会在blueocean发布新版本时同步发布。还有一个镜像 jenkins/jenkins, 为jenkins的纯净版本。 jenkins/jenkins的github地址 容器化安装时，支持配置下面三个环境变量，来定义jenkins的配置 JAVA_OPTS JENKINS_HOME JENKINS_OPTS JENKINS_SLAVE_AGENT_PORT 123456789101112docker run \ --restart=always \ -d \ -p 80:8080 \ -p 31281:31281 \ -e JENKINS_SLAVE_AGENT_PORT=31281 \ -e JENKINS_HOME="/var/jenkins_home" \ -e JAVA_OPTS="-Duser.timezone=GMT+08 -Dgroovy.grape.report.downloads=true -Divy.message.logger.level=4 -Djava.util.logging.config.file=/var/jenkins_home/jenkins.logging.properties -Dhudson.model.ParametersAction.keepUndefinedParameters=true -Dhudson.security.ArtifactsPermission=true -Djava.awt.headless=true -Dorg.apache.commons.jelly.tags.fmt.timeZone=Asia/Shanghai -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -Dhudson.slaves.NodeProvisioner.MARGIN=50 -Dhudson.slaves.NodeProvisioner.MARGIN0=0.85 -Dhudson.slaves.NodeProvisioner.initialDelay=0 -Dhudson.slaves.NodeProvisioner.recurrencePeriod=2 -Dhudson.model.LoadStatistics.clock=2 -Dhudson.model.LoadStatistics.decay=0.1 -server -Xms10g -Xmx32g -XX:MaxPermSize=4g -XX:+HeapDumpOnOutOfMemoryError -Xloggc:/var/jenkins_home/jenkins_gc.log" \ -e JENKINS_OPTS="--logfile=/var/jenkins_home/logs/jenkins.log" \ -v /data/jenkins_home:/var/jenkins_home \ -v /var/run/docker.sock:/var/run/docker.sock \ jenkins/jenkins jenkins.logging.properties 的内容参见说明]]></content>
       <categories>
         <category>linux</category>
         <category>centos</category>

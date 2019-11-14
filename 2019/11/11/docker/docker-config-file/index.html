@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Gingko Leaf">
 <meta property="og:description" content="默认配置文件为: /etc/docker/daemon.json, 如果该文件不存在，需要自己创建 官方配置文件说明 常用配置如下 12345678910&amp;#123;  &quot;graph&quot;: &quot;/data/docker_home&quot;, // 配置docker默认root目录，该配置19.03.0版本已废弃，计划19.09.0版本删除  &quot;data-root&quot;: &quot;/data/docker_home&quot;,">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-11T16:44:46.213Z">
+<meta property="og:updated_time" content="2019-11-14T14:55:22.916Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker配置文件常用配置">
 <meta name="twitter:description" content="默认配置文件为: /etc/docker/daemon.json, 如果该文件不存在，需要自己创建 官方配置文件说明 常用配置如下 12345678910&amp;#123;  &quot;graph&quot;: &quot;/data/docker_home&quot;, // 配置docker默认root目录，该配置19.03.0版本已废弃，计划19.09.0版本删除  &quot;data-root&quot;: &quot;/data/docker_home&quot;,">
@@ -417,7 +417,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-11-12 00:44:46" itemprop="dateModified" datetime="2019-11-12T00:44:46+08:00">2019-11-12</time>
+                <time title="修改时间：2019-11-14 22:55:22" itemprop="dateModified" datetime="2019-11-14T22:55:22+08:00">2019-11-14</time>
               
             
           </span>
@@ -480,6 +480,9 @@
 <p><a href="https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file" target="_blank" rel="noopener">官方配置文件说明</a></p>
 <p>常用配置如下</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "graph": "/data/docker_home", // 配置docker默认root目录，该配置19.03.0版本已废弃，计划19.09.0版本删除</span><br><span class="line">  "data-root": "/data/docker_home", // 配置docker默认root目录</span><br><span class="line">  "registry-mirrors": [ //配置docker镜像源</span><br><span class="line">    "https://registry.docker-cn.com",  // Docker 官方镜像中国区</span><br><span class="line">    "http://hub-mirror.c.163.com",     // 网易镜像源</span><br><span class="line">    "https://docker.mirrors.ustc.edu.cn"],  // 中科大镜像源</span><br><span class="line">  "insecure-registries": [], // 配置非安全的镜像仓库(私有仓库)，通常公司内部镜像源配置在此处</span><br><span class="line">  "debug": true,  //启动debug模式，默认为 false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>insecure-registries中定义的私有仓库如果端口号不为 80 , 则必须指定端口号<br>使用 docker pull 拉取镜像时必须和 insecure-registers 中定义的完全一致(包括端口号)</p>
+</blockquote>
 
       
     </div>
@@ -612,7 +615,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-count">48</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
