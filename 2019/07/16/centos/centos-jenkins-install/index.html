@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Gingko Leaf">
 <meta property="og:description" content="非docker安装通过设置jenkins官方repo仓库下载1234sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.reposudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.keyyum i">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-14T16:44:26.340Z">
+<meta property="og:updated_time" content="2019-11-17T05:43:57.163Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Centos下jenkins的安装">
 <meta name="twitter:description" content="非docker安装通过设置jenkins官方repo仓库下载1234sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.reposudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.keyyum i">
@@ -243,23 +243,6 @@
     
 
     <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-categories">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
 
   </li>
         
@@ -417,7 +400,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-11-15 00:44:26" itemprop="dateModified" datetime="2019-11-15T00:44:26+08:00">2019-11-15</time>
+                <time title="修改时间：2019-11-17 13:43:57" itemprop="dateModified" datetime="2019-11-17T13:43:57+08:00">2019-11-17</time>
               
             
           </span>
@@ -519,6 +502,9 @@
 <blockquote>
 <p>jenkins.logging.properties 的内容参见<a href="/2019/11/15/jenkins-log-config">说明</a></p>
 </blockquote>
+<h3 id="docker运行jenkins时提示权限错误"><a href="#docker运行jenkins时提示权限错误" class="headerlink" title="docker运行jenkins时提示权限错误"></a>docker运行jenkins时提示权限错误</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">touch: cannot touch ‘/var/jenkins_home/copy_reference_file.log’: Permission denied</span><br><span class="line">Can not write to /var/jenkins_home/copy_reference_file.log. Wrong volume permissions?</span><br></pre></td></tr></table></figure>
+<p>因为容器启动时默认采用jenkins用户，uid和gid分别时 1000 和 1000，需要将挂载到容器里面的JENKINS_HOME对应的宿主机上的目录的所有者修改下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -R 1000:1000 /data/jenkins_home</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -662,7 +648,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-count">52</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -848,7 +834,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#非docker安装"><span class="nav-number">1.</span> <span class="nav-text">非docker安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通过设置jenkins官方repo仓库下载"><span class="nav-number">1.1.</span> <span class="nav-text">通过设置jenkins官方repo仓库下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载rpm安装"><span class="nav-number">1.2.</span> <span class="nav-text">下载rpm安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载war包"><span class="nav-number">1.3.</span> <span class="nav-text">下载war包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟机中启动jenkins后不能访问"><span class="nav-number">1.4.</span> <span class="nav-text">虚拟机中启动jenkins后不能访问</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker安装"><span class="nav-number">2.</span> <span class="nav-text">docker安装</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#非docker安装"><span class="nav-number">1.</span> <span class="nav-text">非docker安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通过设置jenkins官方repo仓库下载"><span class="nav-number">1.1.</span> <span class="nav-text">通过设置jenkins官方repo仓库下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载rpm安装"><span class="nav-number">1.2.</span> <span class="nav-text">下载rpm安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载war包"><span class="nav-number">1.3.</span> <span class="nav-text">下载war包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟机中启动jenkins后不能访问"><span class="nav-number">1.4.</span> <span class="nav-text">虚拟机中启动jenkins后不能访问</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker安装"><span class="nav-number">2.</span> <span class="nav-text">docker安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#docker运行jenkins时提示权限错误"><span class="nav-number">2.1.</span> <span class="nav-text">docker运行jenkins时提示权限错误</span></a></li></ol></li></ol></div>
             
 
           </div>
