@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Gingko Leaf">
 <meta property="og:description" content="123456789101112131415161718192021222324252627282930313233def jobRetain = 3  // job 保留的历史记录数量// Jenkins.instance.getClass(): hudson.model.Hudson// 获取所有freestyle的jobjobs = Jenkins.instance.getAllItems(A">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-08T16:37:12.496Z">
+<meta property="og:updated_time" content="2019-11-23T06:58:11.023Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="清理Jenkins中所有任务的历史记录">
 <meta name="twitter:description" content="123456789101112131415161718192021222324252627282930313233def jobRetain = 3  // job 保留的历史记录数量// Jenkins.instance.getClass(): hudson.model.Hudson// 获取所有freestyle的jobjobs = Jenkins.instance.getAllItems(A">
@@ -400,43 +400,11 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-11-09 00:37:12" itemprop="dateModified" datetime="2019-11-09T00:37:12+08:00">2019-11-09</time>
+                <time title="修改时间：2019-11-23 14:58:11" itemprop="dateModified" datetime="2019-11-23T14:58:11+08:00">2019-11-23</time>
               
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/持续集成/" itemprop="url" rel="index"><span itemprop="name">持续集成</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/持续集成/jenkins/" itemprop="url" rel="index"><span itemprop="name">jenkins</span></a></span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -473,7 +441,7 @@
       
 
       
-        <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> jobRetain = <span class="number">3</span>  <span class="comment">// job 保留的历史记录数量</span></span><br><span class="line"><span class="comment">// Jenkins.instance.getClass(): hudson.model.Hudson</span></span><br><span class="line"><span class="comment">// 获取所有freestyle的job</span></span><br><span class="line">jobs = Jenkins.instance.getAllItems(AbstactProject.<span class="keyword">class</span>)</span><br><span class="line">println(jobs)</span><br><span class="line"><span class="comment">// 获取所有pipeline的job</span></span><br><span class="line">jobs = Jenkins.instance.getAllItems(org.jenkinsci.plugins.workflow.job.WorkflowJob.<span class="keyword">class</span>)</span><br><span class="line">println(jobs)</span><br><span class="line"><span class="comment">// 获取所有的job</span></span><br><span class="line">jobs = Jenkins.instance.getAllItems(hudson.model.Job.<span class="keyword">class</span>())</span><br><span class="line">println(jobs)</span><br><span class="line"></span><br><span class="line">jobs.each &#123; job -&gt;</span><br><span class="line">    <span class="keyword">def</span> builds = job.getBuilds()</span><br><span class="line">    println(builds)</span><br><span class="line">    <span class="keyword">if</span>(builds) &#123;</span><br><span class="line">        <span class="keyword">def</span> latestBuildNumber = job.getLastBuild().getNumber()</span><br><span class="line">        <span class="keyword">def</span> retainMaxNumber = latestBuildNumber - jobRetain</span><br><span class="line">        println(<span class="string">"$&#123;job.name&#125;'s last build number: $&#123;latestBuildNumber&#125;"</span>)</span><br><span class="line">        <span class="keyword">if</span> (retainMaxNumber &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            println(<span class="string">"$&#123;job.name&#125;'s last build is less than $&#123;jobRetain&#125;, skip..."</span>)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        println(builds.getClass())</span><br><span class="line">        job.getBuilds().findAll&#123;it.number &lt;= retainMaxNumber&#125;.each &#123;</span><br><span class="line">            <span class="comment">// it.getClass(): org.jenkinsci.plugins.workflow.job.WorkflowRun</span></span><br><span class="line">            println(<span class="string">"delete $&#123;job.name&#125;'s $&#123;it.number&#125;"</span>)</span><br><span class="line">            it.delete()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        println(<span class="string">"$&#123;job.name&#125; don't have builder, skip..."</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> jobRetain = <span class="number">3</span>  <span class="comment">// job 保留的历史记录数量</span></span><br><span class="line"><span class="comment">// Jenkins.instance.getClass(): hudson.model.Hudson</span></span><br><span class="line"><span class="comment">// 获取所有freestyle的job</span></span><br><span class="line">jobs = Jenkins.instance.getAllItems(AbstactProject.<span class="keyword">class</span>)</span><br><span class="line">println(jobs)</span><br><span class="line"><span class="comment">// 获取所有pipeline的job</span></span><br><span class="line">jobs = Jenkins.instance.getAllItems(org.jenkinsci.plugins.workflow.job.WorkflowJob.<span class="keyword">class</span>)</span><br><span class="line">println(jobs)</span><br><span class="line"><span class="comment">// 获取所有的job</span></span><br><span class="line">jobs = Jenkins.instance.getAllItems(hudson.model.Job.<span class="keyword">class</span>)</span><br><span class="line">println(jobs)</span><br><span class="line"></span><br><span class="line">jobs.each &#123; job -&gt;</span><br><span class="line">    <span class="keyword">def</span> builds = job.getBuilds()</span><br><span class="line">    println(builds)</span><br><span class="line">    <span class="keyword">if</span>(builds) &#123;</span><br><span class="line">        <span class="keyword">def</span> latestBuildNumber = job.getLastBuild().getNumber()</span><br><span class="line">        <span class="keyword">def</span> retainMaxNumber = latestBuildNumber - jobRetain</span><br><span class="line">        println(<span class="string">"$&#123;job.name&#125;'s last build number: $&#123;latestBuildNumber&#125;"</span>)</span><br><span class="line">        <span class="keyword">if</span> (retainMaxNumber &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            println(<span class="string">"$&#123;job.name&#125;'s last build is less than $&#123;jobRetain&#125;, skip..."</span>)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        println(builds.getClass())</span><br><span class="line">        job.getBuilds().findAll&#123;it.number &lt;= retainMaxNumber&#125;.each &#123;</span><br><span class="line">            <span class="comment">// it.getClass(): org.jenkinsci.plugins.workflow.job.WorkflowRun</span></span><br><span class="line">            println(<span class="string">"delete $&#123;job.name&#125;'s $&#123;it.number&#125;"</span>)</span><br><span class="line">            it.delete()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        println(<span class="string">"$&#123;job.name&#125; don't have builder, skip..."</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>执行日志如下</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">Started by user unknown or anonymous</span><br><span class="line">Running in Durability level: MAX_SURVIVABILITY</span><br><span class="line">[Pipeline] Start of Pipeline</span><br><span class="line">[Pipeline] echo</span><br><span class="line">[hudson.model.FreeStyleProject@5aab9184[jenkins_shell_test], com.tikal.jenkins.plugins.multijob.MultiJobProject@ce9939f[multijob_test], hudson.model.FreeStyleProject@12b9358a[no_build_job]]</span><br><span class="line">[Pipeline] echo</span><br><span class="line">[org.jenkinsci.plugins.workflow.job.WorkflowJob@10dabbd8[clear_history], org.jenkinsci.plugins.workflow.job.WorkflowJob@4e79153f[pipeline_shell_test]]</span><br><span class="line">[Pipeline] echo</span><br><span class="line">[org.jenkinsci.plugins.workflow.job.WorkflowJob@10dabbd8[clear_history], hudson.model.FreeStyleProject@5aab9184[jenkins_shell_test], com.tikal.jenkins.plugins.multijob.MultiJobProject@ce9939f[multijob_test], hudson.model.FreeStyleProject@12b9358a[no_build_job], org.jenkinsci.plugins.workflow.job.WorkflowJob@4e79153f[pipeline_shell_test]]</span><br><span class="line">[Pipeline] echo</span><br><span class="line">[clear_history #24, clear_history #23, clear_history #22, clear_history #21, clear_history #20, clear_history #19, clear_history #18, clear_history #17, clear_history #16, clear_history #15, clear_history #14]</span><br><span class="line">[Pipeline] echo</span><br><span class="line">clear_history&apos;s last build number: 24</span><br><span class="line">[Pipeline] echo</span><br><span class="line">class hudson.util.RunList</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete clear_history&apos;s 21</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete clear_history&apos;s 20</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete clear_history&apos;s 19</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete clear_history&apos;s 18</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete clear_history&apos;s 17</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete clear_history&apos;s 16</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete clear_history&apos;s 15</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete clear_history&apos;s 14</span><br><span class="line">[Pipeline] echo</span><br><span class="line">[jenkins_shell_test #7, jenkins_shell_test #6, jenkins_shell_test #5, jenkins_shell_test #4, jenkins_shell_test #3, jenkins_shell_test #2, jenkins_shell_test #1]</span><br><span class="line">[Pipeline] echo</span><br><span class="line">jenkins_shell_test&apos;s last build number: 7</span><br><span class="line">[Pipeline] echo</span><br><span class="line">class hudson.util.RunList</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete jenkins_shell_test&apos;s 4</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete jenkins_shell_test&apos;s 3</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete jenkins_shell_test&apos;s 2</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete jenkins_shell_test&apos;s 1</span><br><span class="line">[Pipeline] echo</span><br><span class="line">[multijob_test #3, multijob_test #2, multijob_test #1]</span><br><span class="line">[Pipeline] echo</span><br><span class="line">multijob_test&apos;s last build number: 3</span><br><span class="line">[Pipeline] echo</span><br><span class="line">multijob_test&apos;s last build is less than 3, skip...</span><br><span class="line">[Pipeline] echo</span><br><span class="line">[]</span><br><span class="line">[Pipeline] echo</span><br><span class="line">no_build_job don&apos;t have builder, skip...</span><br><span class="line">[Pipeline] echo</span><br><span class="line">[pipeline_shell_test #91, pipeline_shell_test #90, pipeline_shell_test #89, pipeline_shell_test #88, pipeline_shell_test #87, pipeline_shell_test #86, pipeline_shell_test #85, pipeline_shell_test #84, pipeline_shell_test #83, pipeline_shell_test #82]</span><br><span class="line">[Pipeline] echo</span><br><span class="line">pipeline_shell_test&apos;s last build number: 91</span><br><span class="line">[Pipeline] echo</span><br><span class="line">class hudson.util.RunList</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete pipeline_shell_test&apos;s 88</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete pipeline_shell_test&apos;s 87</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete pipeline_shell_test&apos;s 86</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete pipeline_shell_test&apos;s 85</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete pipeline_shell_test&apos;s 84</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete pipeline_shell_test&apos;s 83</span><br><span class="line">[Pipeline] echo</span><br><span class="line">delete pipeline_shell_test&apos;s 82</span><br><span class="line">[Pipeline] End of Pipeline</span><br><span class="line">Finished: SUCCESS</span><br></pre></td></tr></table></figure>
 
@@ -610,69 +578,12 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">53</span>
+                    <span class="site-state-item-count">57</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
               
 
-              
-                
-                
-                <div class="site-state-item site-state-categories">
-                  
-                    
-                      <a href="/categories/">
-                    
-                  
-                    
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">21</span>
-                    <span class="site-state-item-name">分类</span>
-                  </a>
-                </div>
               
 
               
