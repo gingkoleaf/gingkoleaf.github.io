@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="参考1参考2参考3参考4 常见问题CentOS7配置userns-remap后启动容器失败">
+  <meta name="description" content="官方文档 概述docker容器运行时，默认情况下容器内进程的运行用户就是docker host上的root用户，这样运行时如果将host中的某些目录挂载到容器中时，容器内的进程拥有这些目录的所有权限，这样时不安全的。 解决方法有两种，一种是使用非root用户运行容器，另一种就是使用下面讲的user namespace方式。 Linux的user namespace可以对运行的进程做用户隔离，在这些">
 <meta name="keywords" content="docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="docker配置使用User Namespace">
 <meta property="og:url" content="http://yoursite.com/2019/11/17/docker/docker-user-namespace/index.html">
 <meta property="og:site_name" content="Gingko Leaf">
-<meta property="og:description" content="参考1参考2参考3参考4 常见问题CentOS7配置userns-remap后启动容器失败">
+<meta property="og:description" content="官方文档 概述docker容器运行时，默认情况下容器内进程的运行用户就是docker host上的root用户，这样运行时如果将host中的某些目录挂载到容器中时，容器内的进程拥有这些目录的所有权限，这样时不安全的。 解决方法有两种，一种是使用非root用户运行容器，另一种就是使用下面讲的user namespace方式。 Linux的user namespace可以对运行的进程做用户隔离，在这些">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-23T06:56:33.884Z">
+<meta property="og:updated_time" content="2019-11-24T08:05:36.442Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker配置使用User Namespace">
-<meta name="twitter:description" content="参考1参考2参考3参考4 常见问题CentOS7配置userns-remap后启动容器失败">
+<meta name="twitter:description" content="官方文档 概述docker容器运行时，默认情况下容器内进程的运行用户就是docker host上的root用户，这样运行时如果将host中的某些目录挂载到容器中时，容器内的进程拥有这些目录的所有权限，这样时不安全的。 解决方法有两种，一种是使用非root用户运行容器，另一种就是使用下面讲的user namespace方式。 Linux的user namespace可以对运行的进程做用户隔离，在这些">
 
 
 
@@ -400,7 +400,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-11-23 14:56:33" itemprop="dateModified" datetime="2019-11-23T14:56:33+08:00">2019-11-23</time>
+                <time title="修改时间：2019-11-24 16:05:36" itemprop="dateModified" datetime="2019-11-24T16:05:36+08:00">2019-11-24</time>
               
             
           </span>
@@ -441,8 +441,51 @@
       
 
       
-        <p><a href="https://www.cnblogs.com/charlieroro/p/10069461.html" target="_blank" rel="noopener">参考1</a><br><a href="https://www.binss.me/blog/solve-docker-permission-problem-by-using-user-namespace/" target="_blank" rel="noopener">参考2</a><br><a href="https://www.cnblogs.com/sammyliu/p/5878973.html" target="_blank" rel="noopener">参考3</a><br><a href="https://docs.docker.com/engine/security/userns-remap/" target="_blank" rel="noopener">参考4</a></p>
-<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="CentOS7配置userns-remap后启动容器失败"><a href="#CentOS7配置userns-remap后启动容器失败" class="headerlink" title="CentOS7配置userns-remap后启动容器失败"></a><a href="/2019/11/17/centos7-user-namespace-runtime-error">CentOS7配置userns-remap后启动容器失败</a></h3>
+        <p><a href="https://docs.docker.com/engine/security/userns-remap/" target="_blank" rel="noopener">官方文档</a></p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>docker容器运行时，默认情况下容器内进程的运行用户就是docker host上的root用户，这样运行时如果将host中的某些目录挂载到容器中时，容器内的进程拥有这些目录的所有权限，这样时不安全的。</p>
+<p>解决方法有两种，一种是<a href="/2019/11/17/docker/docker-uid-gid">使用非root用户运行容器</a>，另一种就是使用下面讲的user namespace方式。</p>
+<p>Linux的user namespace可以对运行的进程做用户隔离，在这些进程不感知的情况下，限制它们对系统资源的访问。可以通过Linux的user namespace功能，将容器内的root用户映射为docker host中的低权限用户。</p>
+<h2 id="docker启用user-namespace"><a href="#docker启用user-namespace" class="headerlink" title="docker启用user namespace"></a>docker启用user namespace</h2><blockquote>
+<p>docker在1.10(2016-02-04)版本中才实现了使用user namespace的功能，称之为 userns-remap</p>
+</blockquote>
+<ul>
+<li><p>首先在docker host中创建用户和组</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# groupadd -g 5000 dockertest</span><br><span class="line">[root@localhost ~]# useradd -u 5000 -g dockertest dockertest</span><br><span class="line">[root@localhost ~]# id dockertest</span><br><span class="line">uid=5000(dockertest) gid=5000(dockertest) groups=5000(dockertest)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改docker host中的 /etc/subuid 和 /etc/subgid 配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat /etc/subuid</span><br><span class="line">dockertest:5000:1         # 容器中root用户(uid=0)映射为docker host中的uid为5000的用户</span><br><span class="line">dockertest:100000:65535   # 容器中的用户 1 ~ 65536 映射为 host中的 uid 为 100000 ~ 100000+65535</span><br><span class="line">[root@localhost ~]# cat /etc/subgid</span><br><span class="line">dockertest:5000:1         # 同subuid</span><br><span class="line">dockertest:100000:65535   # 同subuid</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>也可以直接配置dockertest:100000:65536，这样的话，容器的root映射为host的uid=100000的用户</p>
+</blockquote>
+<ul>
+<li><p>修改<code>/etc/docker/daemon.json</code>文件，增加 <code>&quot;userns-remap&quot;:&quot;dockertest&quot;</code> 配置，然后重启docker服务</p>
+</li>
+<li><p>启动容器进行检查</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# docker run -d --rm centos:8 sleep 300</span><br><span class="line">152a7eed420e3d84eefebf1fadc1f1f9d8cfa2fd607d59c03a806d822f5e57d3</span><br><span class="line">[root@localhost ~]# docker ps</span><br><span class="line">CONTAINER ID   IMAGE      COMMAND      CREATED       STATUS       PORTS  NAMES</span><br><span class="line">152a7eed420e   centos:8   "sleep 300"  6 seconds ago Up 3 seconds        jovial_sutherland</span><br><span class="line">[root@localhost ~]# ps -ef |grep -i sleep</span><br><span class="line">dockert+ 12387 12371  0 20:20 ?        00:00:00 /usr/bin/coreutils --coreutils-prog-shebang=sleep /usr/bin/sleep 300</span><br><span class="line">[root@localhost ~]# cat /proc/12387/uid_map</span><br><span class="line">        0       5000          1     # 将host 上的 5000 用户映射为容器内的 0(root)用户</span><br><span class="line">        1     100000      65535     # 将host 上的 100000 用户映射为容器内的 1 用户</span><br><span class="line">[root@localhost ~]# cat /proc/12387/gid_map</span><br><span class="line">        0       5000          1</span><br><span class="line">        1     100000      65535</span><br><span class="line">[root@localhost ~]#</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><code>docker使用userns-remap时，在docker_home目录下会自动创建一个5000.5000(根据实际情况会有变化)的目录</code></p>
+<blockquote>
+<p>在修改daemon.json文件时，可以将userns-remap的值设置为已经存在的用户。也可以指定为默认值(default)，如果指定为 default，那么会自动创建用户和组 dockremap。<br>如果使用default配置，RHEL/centos不会自动将 dockremap 添加到 /etc/subuid 和 /etc/subgid 中，需要手动添加。</p>
+</blockquote>
+<h2 id="容器中禁用namespace映射"><a href="#容器中禁用namespace映射" class="headerlink" title="容器中禁用namespace映射"></a>容器中禁用namespace映射</h2><p>当docker daemon启用了user namespace后，所有启动的容器默认都会使用user namespace功能。</p>
+<p>此时如果想要禁用容器的user namespace(如想要启动一个具有特权的容器)，可以在docker create/docker run/docker exec命令中增加 <code>--userns=host</code> 选项实现。</p>
+<p>使用 <code>--userns=host</code> 选项时，不会为该容器进行用户映射，但是由于容器之间共享read-only(image) layers，容器的文件系统所有者仍然会映射为daemon中配置userns-remap用户。这样可能会导致容器内某些程序运行时出现一些意外，For instance sudo (which checks that its binaries belong to user 0) or binaries with a setuid flag。</p>
+<h2 id="docker使用user-namespace的限制"><a href="#docker使用user-namespace的限制" class="headerlink" title="docker使用user namespace的限制"></a>docker使用user namespace的限制</h2><p>当docker启用user namespace时，会与docker的下面的一些特性无法兼容:</p>
+<ul>
+<li>sharing PID or NET namespaces with the host(–pid=host or –network=host)</li>
+<li>external (volume or storage) drivers which are unaware or incapable of using daemon user mappings</li>
+<li>Using the –privileged mode flag on docker run without also specifying –userns=host。(docker run中使用了–privileged但是没有使用–userns=host)</li>
+</ul>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="检查Linux内核是否开启了user-namespace功能"><a href="#检查Linux内核是否开启了user-namespace功能" class="headerlink" title="检查Linux内核是否开启了user namespace功能"></a>检查Linux内核是否开启了user namespace功能</h3><ul>
+<li>首先确认内核版本，linux是在内核3.8开始才引入了user namespace功能</li>
+<li><p>查看内核编译选项</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat /boot/config-$(uname -r) |grep -i config_user_ns</span><br><span class="line">CONFIG_USER_NS=y</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="CentOS7配置userns-remap后启动容器失败"><a href="#CentOS7配置userns-remap后启动容器失败" class="headerlink" title="CentOS7配置userns-remap后启动容器失败"></a><a href="/2019/11/17/docker/centos7-user-namespace-runtime-error">CentOS7配置userns-remap后启动容器失败</a></h3>
       
     </div>
 
@@ -712,7 +755,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常见问题"><span class="nav-number">1.</span> <span class="nav-text">常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CentOS7配置userns-remap后启动容器失败"><span class="nav-number">1.1.</span> <span class="nav-text">CentOS7配置userns-remap后启动容器失败</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker启用user-namespace"><span class="nav-number">2.</span> <span class="nav-text">docker启用user namespace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容器中禁用namespace映射"><span class="nav-number">3.</span> <span class="nav-text">容器中禁用namespace映射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker使用user-namespace的限制"><span class="nav-number">4.</span> <span class="nav-text">docker使用user namespace的限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见问题"><span class="nav-number">5.</span> <span class="nav-text">常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#检查Linux内核是否开启了user-namespace功能"><span class="nav-number">5.1.</span> <span class="nav-text">检查Linux内核是否开启了user namespace功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CentOS7配置userns-remap后启动容器失败"><span class="nav-number">5.2.</span> <span class="nav-text">CentOS7配置userns-remap后启动容器失败</span></a></li></ol></li></ol></div>
             
 
           </div>

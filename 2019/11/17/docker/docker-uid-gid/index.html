@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Gingko Leaf">
 <meta property="og:description" content="以下内容适用于docker未使用的user namespace的情况 linux系统中的uid和gid是由内核负责管理的，而且内核管理是使用的是id不是name。同一台宿主机中运行的不同的docker和宿主机共享同一个内核，所以所有的docker中的uid和gid的管理和宿主机也都是一致的。即docker中的uid为1000的用户和宿主机中uid为1000的用户实质上是同一个用户。默认情况下doc">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-23T06:56:20.010Z">
+<meta property="og:updated_time" content="2019-11-24T06:27:06.731Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker中的用户说明">
 <meta name="twitter:description" content="以下内容适用于docker未使用的user namespace的情况 linux系统中的uid和gid是由内核负责管理的，而且内核管理是使用的是id不是name。同一台宿主机中运行的不同的docker和宿主机共享同一个内核，所以所有的docker中的uid和gid的管理和宿主机也都是一致的。即docker中的uid为1000的用户和宿主机中uid为1000的用户实质上是同一个用户。默认情况下doc">
@@ -400,7 +400,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-11-23 14:56:20" itemprop="dateModified" datetime="2019-11-23T14:56:20+08:00">2019-11-23</time>
+                <time title="修改时间：2019-11-24 14:27:06" itemprop="dateModified" datetime="2019-11-24T14:27:06+08:00">2019-11-24</time>
               
             
           </span>
@@ -442,7 +442,7 @@
 
       
         <p><code>以下内容适用于docker未使用的user namespace的情况</code></p>
-<p>linux系统中的uid和gid是由内核负责管理的，而且内核管理是使用的是id不是name。同一台宿主机中运行的不同的docker和宿主机共享同一个内核，所以所有的docker中的uid和gid的管理和宿主机也都是一致的。即docker中的uid为1000的用户和宿主机中uid为1000的用户实质上是同一个用户。默认情况下docker启动时，都是采用的root账号，相当于容器中的应用对宿主机由完全的控制权限，这种做法时不安全的，所以需要对容器运行时指定一个具有合适权限的用户。</p>
+<p>linux系统中的uid和gid是由内核负责管理的，而且内核管理是使用的是id不是name。同一台宿主机中运行的不同的docker和宿主机共享同一个内核，所以所有的docker中的uid和gid的管理和宿主机也都是一致的。即docker中的uid为1000的用户和宿主机中uid为1000的用户实质上是同一个用户。默认情况下docker启动时，都是采用的root账号，相当于容器中的应用对宿主机有完全的控制权限，这种做法时不安全的，所以需要对容器运行时指定一个具有合适权限的用户。</p>
 <p>不同docker之间以及docker和宿主机中同一个uid可能对应不同的的用户名称，这是因为uid到用户名的解析(用户态程序)不同而已。</p>
 <h2 id="指定docker运行使用的用户"><a href="#指定docker运行使用的用户" class="headerlink" title="指定docker运行使用的用户"></a>指定docker运行使用的用户</h2><h3 id="Dockerfile中使用USER命令指定"><a href="#Dockerfile中使用USER命令指定" class="headerlink" title="Dockerfile中使用USER命令指定"></a>Dockerfile中使用USER命令指定</h3><p>下面是jenkins的dockerfile中关于USER使用的节选</p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ......</span></span><br><span class="line"><span class="keyword">ARG</span> <span class="keyword">user</span>=jenkins</span><br><span class="line"><span class="keyword">ARG</span> group=jenkins</span><br><span class="line"><span class="keyword">ARG</span> uid=<span class="number">1000</span></span><br><span class="line"><span class="keyword">ARG</span> gid=<span class="number">1000</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Jenkins is run with user `jenkins`, uid = 1000</span></span><br><span class="line"><span class="comment"># If you bind mount a volume from the host or a data container,</span></span><br><span class="line"><span class="comment"># ensure you use the same uid</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> mkdir -p <span class="variable">$JENKINS_HOME</span> \</span></span><br><span class="line"><span class="bash">  &amp;&amp; chown <span class="variable">$&#123;uid&#125;</span>:<span class="variable">$&#123;gid&#125;</span> <span class="variable">$JENKINS_HOME</span> \</span></span><br><span class="line"><span class="bash">  &amp;&amp; groupadd -g <span class="variable">$&#123;gid&#125;</span> <span class="variable">$&#123;group&#125;</span> \</span></span><br><span class="line"><span class="bash">  &amp;&amp; useradd -d <span class="string">"<span class="variable">$JENKINS_HOME</span>"</span> -u <span class="variable">$&#123;uid&#125;</span> -g <span class="variable">$&#123;gid&#125;</span> -m -s /bin/bash <span class="variable">$&#123;user&#125;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ......</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> chown -R <span class="variable">$&#123;user&#125;</span> <span class="string">"<span class="variable">$JENKINS_HOME</span>"</span> <span class="string">"<span class="variable">$REF</span>"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># .....</span></span><br><span class="line"><span class="keyword">USER</span> $&#123;<span class="keyword">user</span>&#125;</span><br><span class="line"><span class="comment"># ......</span></span><br></pre></td></tr></table></figure>
