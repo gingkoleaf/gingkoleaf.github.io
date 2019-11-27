@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[linux历史记录history配置]]></title>
+    <url>%2F2019%2F11%2F27%2Flinux%2Flinux-history-config%2F</url>
+    <content type="text"><![CDATA[history命令说明查看最近10条记录1history 10 重新执行某条历史命令1234!1000 # 执行第1000条历史命令!-2 # 执行倒数第二条历史命令!! # 执行上一条命令!string # 执行最近一条以string开头的命令 history配置可以通过设置某些环境变量，实现history的功能配置 环境变量 备注 HISTSIZE history保留历史命令的条数，如果配置为0，则不保留history HISTFILE 保存历史命令的文件，默认为 .bash_history HISTFILESIZE .bash_history中保留历史命令条数 HISTTIMEFORMAT history中显示时间格式，不配置则不显示 HISCONTROL 历史命令记录控制。\n ignoredups: 忽略连续重复的命令\n ignorespace: 忽略以空白字符开头的命令\n ignoreboth: 同时忽略以上两种\n erasedups: 忽略所有历史记录中重复的命令 HISTIGNORE 配置忽略指定命令， 如 HISTIGNORE=”pwd:ls:ls -ltr” 常用history配置12345678910111213141516171819# 修改 /etc/profile中历史记录最大条数sed -i 's/^HISTSIZE=1000/HISTSIZE=9999/g' /etc/profile# 在 .bashrc中增加以下配置# 获取操作者的ip信息USER_IP=`who -u am i 2&gt;/dev/null | awk '&#123;print $NF&#125;' | sed -e 's/[()]//g'`if [ "$USER_IP" = "" ]thenUSER_IP=`hostname`fi# 设置history命令时间格式(包含年月日，时分秒，操作者ip，操作者使用用户 信息)export HISTTIMEFORMAT="`whoami` %F %T $USER_IP "# 使能(-s) histappend配置，可以通过执行shopt命令查看当前各种配置的使能情况# 如果使能 histappend，表示在shell退出时将本shell中所有的历史记录追加到 HISTFILE 指定的文件中# 如果未使能 histappend，表示在shell退出时将历史记录覆盖指定文件# 通常该配置在 /etc/bashrc中存在，在 /root/.bashrc中会调用执行 /etc/bashrcshopt -s histappend# PROMPT_COMMAND中的内容为 在打印每个主提示符之前执行的命令PROMPT_COMMAND="history -a;history -c;history -r;$PROMPT_COMMAND" 清除history记录当打开一个session时，在该session中执行的命令会放在缓存中，当终端退出或关闭时，会将缓存中的内容写入HISTFILE指定的文件中。 当session被kill掉时，该session中缓存的命令，无法记录到HISTFILE指定文件。 清除当前session的命令1history -c 清除所有的历史记录1echo "" &gt; /root/.bash_history]]></content>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[linux-systemd]]></title>
+    <url>%2F2019%2F11%2F24%2Flinux%2Flinux-systemd%2F</url>
+    <content type="text"><![CDATA[systemd githubsystemd官网systemd man手册 参考1参考2参考3]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[git中ssl证书设置]]></title>
     <url>%2F2019%2F11%2F23%2Fgit%2Fgit-ssl-no-verify%2F</url>
     <content type="text"><![CDATA[忽略ssl证书1git config --global http.sslVerify false 某些场景(如在docker的构建环境中，不希望通过修改docker来忽略ssl校验)下，不方便使用上述命令设置忽略ssl校验时，可以通过设置环境变量 GIT_SSL_NO_VERIFY为 true 的方式进行忽略 指定ssl证书1git config --global http.sslCAPath /git/certificates 可以通过设置环境变量 GIT_SSL_CAPATH=/git/certificates 来指定证书路径]]></content>
