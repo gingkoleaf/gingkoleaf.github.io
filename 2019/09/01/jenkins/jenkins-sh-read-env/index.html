@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Gingko Leaf">
 <meta property="og:description" content="FreeStyle的JenkinsJob在freestyle的job中配置执行shell命令后，job在运行时默认的执行方式为 /bin/bash -xe /tmp/jenkinsxxxx.sh 1234567Building in workspace /var/lib/jenkins/workspace/jenkins_shell_test[jenkins_shell_test] $ /bin/">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-24T08:19:38.169Z">
+<meta property="og:updated_time" content="2019-12-04T14:11:05.315Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jenkins运行shell脚本时读取系统环境变量">
 <meta name="twitter:description" content="FreeStyle的JenkinsJob在freestyle的job中配置执行shell命令后，job在运行时默认的执行方式为 /bin/bash -xe /tmp/jenkinsxxxx.sh 1234567Building in workspace /var/lib/jenkins/workspace/jenkins_shell_test[jenkins_shell_test] $ /bin/">
@@ -400,7 +400,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-11-24 16:19:38" itemprop="dateModified" datetime="2019-11-24T16:19:38+08:00">2019-11-24</time>
+                <time title="修改时间：2019-12-04 22:11:05" itemprop="dateModified" datetime="2019-12-04T22:11:05+08:00">2019-12-04</time>
               
             
           </span>
@@ -450,8 +450,11 @@
 <p>解决方法:</p>
 <p>在shell中添加 <code>#!/bin/bash -ilex</code>，将shell模式修改为交互登录模式即可。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ps -ef |grep -i jenkins</span><br><span class="line">jenkins  12371     1 10 16:30 ?        00:04:43 /etc/alternatives/java -Dcom.sun.akuma.Daemon=daemonized -Djava.awt.headless=true -DJENKINS_HOME=/var/lib/jenkins -jar /usr/lib/jenkins/jenkins.war --logfile=/var/log/jenkins/jenkins.log --webroot=/var/cache/jenkins/war --daemon --httpPort=8080 --debug=5 --handlerCountMax=100 --handlerCountMaxIdle=20</span><br><span class="line">jenkins  15197 12371  0 17:13 ?        00:00:00 /bin/bash -liex /tmp/jenkins15271049705299428998.sh</span><br><span class="line">jenkins  15211 15197  0 17:13 ?        00:00:00 sleep 30</span><br><span class="line">[root@localhost ~]#</span><br></pre></td></tr></table></figure>
+<p><code>注意, #!/bin/bash -ilex 一定要在首行</code></p>
 <h2 id="pipeline模式的JenkinsJob"><a href="#pipeline模式的JenkinsJob" class="headerlink" title="pipeline模式的JenkinsJob"></a>pipeline模式的JenkinsJob</h2><p>pipeline模式下的原因与解决方案与FreeStyle类似，只是pipeline模式下脚本运行的进程不是jenkins主进程直接fork出来的。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ps -ef |grep -i jenkins</span><br><span class="line">jenkins  12371     1 11 16:30 ?        00:05:13 /etc/alternatives/java -Dcom.sun.akuma.Daemon=daemonized -Djava.awt.headless=true -DJENKINS_HOME=/var/lib/jenkins -jar /usr/lib/jenkins/jenkins.war --logfile=/var/log/jenkins/jenkins.log --webroot=/var/cache/jenkins/war --daemon --httpPort=8080 --debug=5 --handlerCountMax=100 --handlerCountMaxIdle=20</span><br><span class="line">jenkins  17509     1  0 17:16 ?        00:00:00 sh -c (pid=$$; &#123; while [ \( -d /proc/$pid -o \! -d /proc/$$ \) -a -d '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf' -a \! -f '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/jenkins-result.txt' ]; do touch '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/jenkins-log.txt'; sleep 3; done &#125; &amp; jsc=durable-7a8937f3d4c335791e06262c93820f88; JENKINS_SERVER_COOKIE=$jsc 'sh' -xe  '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/script.sh' &gt; '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/jenkins-log.txt' 2&gt;&amp;1; echo $? &gt; '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/jenkins-result.txt.tmp'; mv '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/jenkins-result.txt.tmp' '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/jenkins-result.txt'; wait) &gt;&amp;- 2&gt;&amp;- &amp;</span><br><span class="line">jenkins  17511 17509  0 17:16 ?        00:00:00 sh -c (pid=$$; &#123; while [ \( -d /proc/$pid -o \! -d /proc/$$ \) -a -d '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf' -a \! -f '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/jenkins-result.txt' ]; do touch '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/jenkins-log.txt'; sleep 3; done &#125; &amp; jsc=durable-7a8937f3d4c335791e06262c93820f88; JENKINS_SERVER_COOKIE=$jsc 'sh' -xe  '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/script.sh' &gt; '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/jenkins-log.txt' 2&gt;&amp;1; echo $? &gt; '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/jenkins-result.txt.tmp'; mv '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/jenkins-result.txt.tmp' '/var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/jenkins-result.txt'; wait) &gt;&amp;- 2&gt;&amp;- &amp;</span><br><span class="line">jenkins  17512 17509  0 17:16 ?        00:00:00 sh -xe /var/lib/jenkins/workspace/pipeline_shell_test@tmp/durable-da5871cf/script.sh</span><br><span class="line">jenkins  17514 17512  0 17:16 ?        00:00:00 sleep 30</span><br><span class="line">jenkins  17786 17511  0 17:16 ?        00:00:00 sleep 3</span><br></pre></td></tr></table></figure>
+<p>pipeline中配置bash的登录模式</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// #!/bin/bash -ilex 一定要在首行，与第一个 """ 同行</span></span><br><span class="line">sh <span class="string">"""#!/bin/bash -ilex</span></span><br><span class="line"><span class="string">export</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -593,7 +596,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">59</span>
+                    <span class="site-state-item-count">60</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
