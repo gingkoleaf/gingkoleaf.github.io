@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[python3官方文档学习笔记]]></title>
+    <url>%2F2020%2F05%2F20%2Fpython%2Fpython3-doc-notes%2F</url>
+    <content type="text"><![CDATA[Python3.8.0 执行运算符优先级参考 交互模式_变量在交互模式中，最后一个printed expression会被赋值到 _ 变量中。使用该变量时，应该把它作为一个只读类型的变量。 123456789101112131415161718192021222324&gt;&gt;&gt; _ # 交互模式初始化是 _ 变量不存在Traceback (most recent call last): File "&lt;pyshell#0&gt;", line 1, in &lt;module&gt; _NameError: name '_' is not defined&gt;&gt;&gt; a=3&gt;&gt;&gt; _Traceback (most recent call last): File "&lt;pyshell#2&gt;", line 1, in &lt;module&gt; _NameError: name '_' is not defined&gt;&gt;&gt; b=4&gt;&gt;&gt; a+b7&gt;&gt;&gt; _7&gt;&gt;&gt; c=5&gt;&gt;&gt; _7&gt;&gt;&gt; c+_12&gt;&gt;&gt; _12&gt;&gt;&gt; 脚本文件的Shebang行 Unix系统中的 #! 符号称之为 Shebang 在Unix系统中，在python脚本文件的第一行指定如下内容后，python脚本就可以像shell一样直接执行 1#!/usr/bin/env python3 不使用#!/usr/bin/python3的原因是，为了提高可移植性，比如有些系统的python3没有安装在/usr/bin/目录，那么这种方式就会出错，而#!/usr/bin/env python3的方式，会在系统的PATH中搜索python3的安装路径，然后再调用对应路径下的python解释器执行。 编码文件编码默认情况下，python的代码文件采用的是UTF-8的编码方式。可以通过使用 1# -*- coding: encoding -*- 的方式修改文件的编码格式。 数据结构数值运算 除运算时总是返回float类型的结果。表达式中整数与浮点数都存在时也是会返回float类型的结果 floor division // 运算会返回整数结果，是直接丢弃小数部分，不会四舍五入 字符串显示 通常情况下，交互模式中显示字符串时会将字符串的内容用单引号&#39;包裹起来 1234567891011121314151617181920212223&gt;&gt;&gt; str1 = '"isn\'t," they said'&gt;&gt;&gt; str1'"isn\'t," they said'&gt;&gt;&gt; print(str1)"isn't," they said&gt;&gt;&gt; str2="no, it is not"&gt;&gt;&gt; str2'no, it is not'&gt;&gt;&gt; print(str2)no, it is not&gt;&gt;&gt; str3="first line\nsecond line"&gt;&gt;&gt; str3'first line\nsecond line'# 使用print语句打印时，不会显示字符串回显时使用的包裹字符，同时会生效转义字符&gt;&gt;&gt; print(str3)first linesecond line&gt;&gt;&gt; str4="doesn\'t"# 当字符串中包含单引号同时没有包含双引号时，字符串的回显使用双引号包裹&gt;&gt;&gt; str4"doesn't"&gt;&gt;&gt; print(str4)doesn't 字符串中有反斜杠\时，会默认将后面的字符理解为转义字符，如果不想让字符转义时，可以使用\\或在字符串前添加r标记 12345678&gt;&gt;&gt; print("c:\abc\name")c:bcame&gt;&gt;&gt; print(r"c:\abc\name")c:\abc\name&gt;&gt;&gt; print("c:\\abc\\name")c:\abc\name&gt;&gt;&gt; 列表 列表中可以包含不同类型的元素，但是通常情况下都是同类型的。 列表的所有切片操作都会返回一个新的列表(shallow copy, 浅拷贝) 123456789101112131415161718192021222324&gt;&gt;&gt; list1=[1,2,3,4,5]&gt;&gt;&gt; id(list1)2012936495808&gt;&gt;&gt; list2=list1[:]&gt;&gt;&gt; id(list2)2012929059648&gt;&gt;&gt; list3=list1[2:]&gt;&gt;&gt; id(list3)2012936912256&gt;&gt;&gt;&gt;&gt;&gt; str1="abcdefg"&gt;&gt;&gt; str2=str1[:]&gt;&gt;&gt; id(str1)2012936632368&gt;&gt;&gt; id(str2)2012936632368&gt;&gt;&gt; id(str1)==id(str2)True&gt;&gt;&gt; id(list1)==id(list2)False&gt;&gt;&gt; str3=str1[2:]&gt;&gt;&gt; id(str3)2012936535024&gt;&gt;&gt;]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[python使用总结]]></title>
+    <url>%2F2020%2F05%2F20%2Fpython%2Fpyhton-usage%2F</url>
+    <content type="text"><![CDATA[基于Python3 基础知识python3官方文档学习笔记]]></content>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[coverage-test]]></title>
+    <url>%2F2020%2F02%2F10%2Ftest%2Fcoverage-test%2F</url>
+    <content type="text"><![CDATA[参考1参考2]]></content>
+      <tags>
+        <tag>lcov</tag>
+        <tag>gcov</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[ps命令详解]]></title>
     <url>%2F2019%2F12%2F04%2Flinux%2Flinux-cmd-ps%2F</url>
     <content type="text"><![CDATA[概述ps命令支持三种不同类型的选项 UNIX选项，以 - 符号开头 BSD选项，不能包含 - GUN选项，以 -- 符号开头 不同类型的选项可以自由混合，但是有可能会产生冲突。 示例Unix模式显示系统中的所有process进程1234ps -eps -efps -eFps -ely BSD模式显示系统中的所有process进程12ps axps aux 树状显示系统中所有process进程123ps -ejHps axjfps -ef f 树状显示系统中的所有threads线程12ps -eLfps axms To get security info123ps -eo euser,ruser,suser,fuser,f,comm,labelps axZps -eM To see every process running as root (real &amp; effective ID) in user format1ps -U root -u root u To see every process with a user-defined format123ps -eo pid,tid,class,rtprio,ni,pri,psr,pcpu,stat,wchan:14,commps axo stat,euid,ruid,tty,tpgid,sess,pgrp,ppid,pid,pcpu,commps -Ao pid,tt,user,fname,tmout,f,wchan Print only the process IDs of syslogd1ps -C syslogd -o pid= Print only the name of PID 421ps -q 42 -o comm= 常用选项 选项 说明 -A -e 显示所有进程信息 -123 123 --pid pidlist -p pidlistp pidlist 显示pidlist中指定的所有pid的进程信息接受空白分隔或逗号分隔的列表形式的单个参数，如-p &quot;123,124&quot;或-p &quot;123 124&quot; -U userlist--User userlist 显示userlist中指定的RUID(real user id)或name的进程信息RUID表示create该进程的用户 U userlist-u userlist--user userlist 显示userlist中指定的EUID(effective user id)或name的进程信息EUID用于系统决定用户对文件资源的访问权限，一般情况下等同于RUID -f-F 显示所有的列，通常与其它unix格式选项联合使用使用该参数时会显示进程的命令参数信息与-L参数同时使用时，还会显示NLWP(number of threads)和LWP(thread id)信息 e 在命令列中最后显示进程的环境变量信息，如 ps -ef e f ASCII字符显示树状结构, 表示程序间的层次关系 -mm 显示进程中的线程信息 -L Show threads, possibly with LWP and NLWP columns o format-o format--format format 用户自定义格式。format可以是一个空白或逗号分割的列表，用于指定输出的列，支持的列表内容见输出列内容列的表头内容可以重命名 ps -o pid,ruser=RealUser列的表头可以忽略 ps -o pid=,comm= 上述中xxxlist的内容，表示接受空白分割或逗号分割的列表形式的单个参数 输出列内容]]></content>
@@ -262,7 +284,7 @@
   <entry>
     <title><![CDATA[bash使用总结]]></title>
     <url>%2F2019%2F07%2F23%2Flinux%2Fbash-usage%2F</url>
-    <content type="text"><![CDATA[bash启动简介bash参数 Bash官网 Bash数组Bash字典 通过shell实现yaml模板变量替换]]></content>
+    <content type="text"><![CDATA[bash启动简介bash参数 Bash官网 Bash数组Bash字典 通过shell实现yaml模板变量替换 Unix系统中的Shebang符号]]></content>
       <tags>
         <tag>总结</tag>
         <tag>linux</tag>
