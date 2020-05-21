@@ -191,8 +191,8 @@
     <url>%2F2019%2F11%2F11%2Fcentos%2Fcentos-docker-install%2F</url>
     <content type="text"><![CDATA[CentOS7.6 卸载老版本 12345678yum remove docker \ docker-client \ docker-client-latest \ docker-common \ docker-latest \ docker-latest-logrotate \ docker-logrotate \ docker-engine 安装所需依赖 123yum install -y yum-utils \ device-mapper-persistent-data \ lvm2 配置repo 123yum-config-manager \ --add-repo \ https://download.docker.com/linux/centos/docker-ce.repo 安装docker 1yum install docker-ce docker-ce-cli containerd.io]]></content>
       <tags>
-        <tag>docker</tag>
         <tag>centos</tag>
+        <tag>docker</tag>
       </tags>
   </entry>
   <entry>
@@ -412,6 +412,7 @@
     <content type="text"><![CDATA[命令格式12345678git diff [&lt;options&gt;] [--] [&lt;path&gt;..] # 默认表示比较工作区与暂存区git diff [&lt;options&gt;] HEAD [--] [&lt;path&gt;..] # 表示比较工作区与本地版本库最新版本git diff [&lt;options&gt;] commitid [--] [&lt;path&gt;..] # 表示比较工作区与指定commit id版本git diff [&lt;options&gt;] --cached [--] [&lt;path&gt;..] # 表示比较暂存区与本地库最新版本git diff [&lt;options&gt;] --cached commitid [--] [&lt;path&gt;..] # 表示比较暂存区与指定commit id版本git diff [&lt;options&gt;] commitid commitid [--] [&lt;path&gt;..] # 表示比较两次commitid之间的差异 命令参数选项 –raw: 显示原始的差异格式，如下: 123[root@localhost gitTest]# git diff --cached --raw:000000 100644 0000000 31d115c A addfile:100644 100644 389cecf 1f09c93 M newfile2 –stat: 显示差异统计结果，如下： 1234[root@localhost gitTest]# git diff --cached --stataddfile | 5 +++++newfile2 | 3 +--2 files changed, 6 insertions(+), 2 deletions(-) –shortstat: 只显示--stat的最后一行内容 12[root@localhost gitTest]# git diff --cached --shortstat2 files changed, 6 insertions(+), 2 deletions(-) –numstat: 只显示增加和删除的行数统计 123[root@localhost gitTest]# git diff --cached --numstat5 0 addfile1 2 newfile2 –name-only: 只显示哪些文件有差异 123[root@localhost gitTest]# git diff --cached --name-onlyaddfilenewfile2 使用git diff打补丁将工作区与本地仓库的差异做成补丁git diff &gt; patch_name 检验补丁是否能使用，如果没有任何输出表示可以顺利接受该补丁git apply –check patch_name 在另外一个地方应用补丁git apply patch_name 命令回显说明git diff命令的回显采用的时GNU diff命令合并格式的变体 linux下通过diff -u file_a file_b来显示diff的合并格式 内容增删12345678910111213141516171819202122232425262728293031&gt; git diff HEAD~1 HEADdiff --git a/README.md b/README.md # 表示显示内容为git格式的diffindex ae50fdb..54e2aab 100644 # ae50fab..54e2aab表示两个版本对象的哈希值 # 100644表示对象的模式(普通文件， 644权限)--- a/README.md # --- 表示变动前的版本+++ b/README.md # +++ 表示变动后的版本@@ -5,6 +5,7 @@ # 该行表示变动的位置，由两个@表示开头和结尾 # - 表示 文件a/README.md， + 表示文件b/README.md # 5,6 表示下方显示内容为a/README.md的第5行开始，连续6行 # 5,7 表示下方显示内容为b/README.md的第5行开始，连续7行 b c d+new line e f gdiff --git a/newfile b/newfileindex fd54aa0..2d3a259 100644--- a/newfile+++ b/newfile@@ -1,5 +1,7 @@ add new file 1-2-3++ds+honda+toyta 新增文件1234567891011diff --git a/newfile3 b/newfile3new file mode 100644index 0000000..d4afdcc--- /dev/null+++ b/newfile3@@ -0,0 +1,5 @@+add new file3++new file++new file end 删除文件12345678910111213diff --git a/newfile b/newfiledeleted file mode 100644index 2d3a259..0000000--- a/newfile+++ /dev/null@@ -1,7 +0,0 @@-add new file-1--ds-honda-toyta- 重命名文件12345678910111213141516diff --git a/deletefile b/newfile2similarity index 89%rename from deletefilerename to newfile2index 08cb754..389cecf 100644--- a/deletefile+++ b/newfile2@@ -1,8 +1,6 @@ file tobe rename 1 2-3-4 5 6 7]]></content>
       <tags>
         <tag>git</tag>
+        <tag>diff</tag>
       </tags>
   </entry>
   <entry>
