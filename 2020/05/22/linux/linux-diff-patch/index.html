@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Gingko Leaf">
 <meta property="og:description" content="diff命令diff命令时unix中用来比较文件差异的工具，也通常用于代码管理中。 diff命令显示结果有三种格式:  正常格式(normal diff)  diff f1 f2 上下文格式(context diff)  diff -c f1 f2 合并格式(unified diff)  diff -u f1 f2 side-by-side格式  diff -y f1 f2  比较文件的内容: 1">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-05-23T06:38:30.569Z">
+<meta property="og:updated_time" content="2020-06-02T11:31:06.291Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux下的diff和patch使用">
 <meta name="twitter:description" content="diff命令diff命令时unix中用来比较文件差异的工具，也通常用于代码管理中。 diff命令显示结果有三种格式:  正常格式(normal diff)  diff f1 f2 上下文格式(context diff)  diff -c f1 f2 合并格式(unified diff)  diff -u f1 f2 side-by-side格式  diff -y f1 f2  比较文件的内容: 1">
@@ -400,7 +400,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-05-23 14:38:30" itemprop="dateModified" datetime="2020-05-23T14:38:30+08:00">2020-05-23</time>
+                <time title="修改时间：2020-06-02 19:31:06" itemprop="dateModified" datetime="2020-06-02T19:31:06+08:00">2020-06-02</time>
               
             
           </span>
@@ -562,9 +562,22 @@
 <td><code>-p</code>或<code>--show-c-function</code></td>
 <td>如果比较的文件时c语言源文件，显示差异所在的函数名</td>
 </tr>
+<tr>
+<td><code>-P</code>或<code>--unidirectional-new-file</code></td>
+<td>与 <code>-N</code>类似，只有当第二个目录包含了第一个目录没有的文件时，才会将这个文件与空白文件做对比</td>
+</tr>
 </tbody>
 </table>
-<h3 id="diff命令生成补丁文件"><a href="#diff命令生成补丁文件" class="headerlink" title="diff命令生成补丁文件"></a>diff命令生成补丁文件</h3><blockquote>
+<h2 id="patch命令"><a href="#patch命令" class="headerlink" title="patch命令"></a>patch命令</h2><blockquote>
+<p>执行patch命令时，patch文件中定义的修改后的目录不能存在</p>
+</blockquote>
+<h3 id="patch命令说明"><a href="#patch命令说明" class="headerlink" title="patch命令说明"></a>patch命令说明</h3><p>patch命令的使用有两种格式</p>
+<ul>
+<li>如果针对单文件打补丁: <code>patch [option] [originalfile [patchfile]]</code></li>
+<li>同时常用更多的方式为: <code>patch -pnum &lt; patchfile</code></li>
+</ul>
+<p>常用的命令选项<br>| 名称                   | 说明                                                                                                                                             |<br>| ———————- | ———————————————————————————————————————————————— |<br>| <code>--dry-run</code>            | 只是打印应用补丁后的结果，并不会实际修改文件                                                                                                     |<br>| <code>-R</code> 或 <code>--reverse</code>    | 该命令执行时会假设补丁文件是通过交换ori和mod参数，实际上可以对打过补丁后的文件做回滚操作                                                         |<br>| <code>-b</code>或<code>--backup</code>       | 对每一个修改的文件做备份，会生成xxx.orig备份文件                                                                                                 |<br>| <code>-pNum</code>或<code>--strip=NUM</code> | 设置执行命令时会去除patchfile中的几层路径名。0表示不删除，使用patchfile中的全路径，如果未指定该参数或NUM设置有问题，会提示找不到需要打补丁的文件 |</p>
+<h3 id="diff-patch的补丁应用"><a href="#diff-patch的补丁应用" class="headerlink" title="diff + patch的补丁应用"></a>diff + patch的补丁应用</h3><blockquote>
 <p>如果是对目录制作补丁文件，目录应该使用相对路径，不要使用绝对路径<br>两个目录的结构要一样</p>
 </blockquote>
 <p>根据修改后目录的内容不同，生成补丁的方式也会不一样</p>
@@ -573,14 +586,11 @@
 <p><code>diff -urP src_ori_dir src_mod_dir &gt; src.patch</code></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test_diff_patch]# tree ./src_ori</span><br><span class="line">./src_ori   # ori目录中有两个文件 123 和 abc，文件中的内容与文件名相同</span><br><span class="line">├── 123</span><br><span class="line">└── abc</span><br><span class="line"></span><br><span class="line">0 directories, 2 files</span><br><span class="line">[root@localhost test_diff_patch]# cat ./src_ori/*</span><br><span class="line">123</span><br><span class="line">abc</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> patch中修改了abc文件的内容为bbb，并新增了文件ccc</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##</span></span></span><br><span class="line">[root@localhost test_diff_patch]# cat src.patch</span><br><span class="line">Only in src_ori: 123</span><br><span class="line">diff -ruP src_ori/abc src_mod/abc</span><br><span class="line">--- src_ori/abc 2020-05-23 14:25:13.895198462 +0800</span><br><span class="line">+++ src_mod/abc 2020-05-23 14:04:06.095735637 +0800</span><br><span class="line">@@ -1 +1 @@</span><br><span class="line">-abc</span><br><span class="line">+bbb</span><br><span class="line">diff -ruP src_ori/ccc src_mod/ccc</span><br><span class="line">--- src_ori/ccc 1970-01-01 08:00:00.000000000 +0800</span><br><span class="line">+++ src_mod/ccc 2020-05-23 14:25:41.160887860 +0800</span><br><span class="line">@@ -0,0 +1 @@</span><br><span class="line">+ccc</span><br><span class="line">[root@localhost test_diff_patch]# patch -p0 &lt; src.patch</span><br><span class="line">patching file src_ori/abc</span><br><span class="line">patching file src_ori/ccc</span><br><span class="line">[root@localhost test_diff_patch]# tree ./src_ori</span><br><span class="line">./src_ori   # 执行了patch命令后，ori中多了ccc文件，abc的内容也变成了bbb</span><br><span class="line">├── 123</span><br><span class="line">├── abc</span><br><span class="line">└── ccc</span><br><span class="line"></span><br><span class="line">0 directories, 3 files</span><br><span class="line">[root@localhost test_diff_patch]# cat ./src_ori/*</span><br><span class="line">123</span><br><span class="line">bbb</span><br><span class="line">ccc</span><br><span class="line">[root@localhost test_diff_patch]#</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>如果mod的目录中有对ori目录文件做删除，那么mod目录中必须包含未删除ori中的其他所有文件</p>
+<li><p>只要mod的目录中有对ori目录文件做删除，那么mod目录中必须包含未删除ori中的其他所有文件</p>
 <p><code>diff -urN src_ori_dir src_mod_dir &gt; src.patch</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> TODO</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ori中文件内容与文件名相同</span></span><br><span class="line">baoze@DESKTOP-EV6CLJE:/mnt/d/workspace/patch_test$ ll ./*/*</span><br><span class="line">-rwxrwxrwx 1 baoze baoze   7 Jun  2 18:55 ./mod/aaa*</span><br><span class="line">-rwxrwxrwx 1 baoze baoze   4 Jun  2 18:54 ./ori/aaa*</span><br><span class="line">-rwxrwxrwx 1 baoze baoze   4 Jun  2 18:54 ./ori/bbb*</span><br><span class="line"></span><br><span class="line">./ori/inner:</span><br><span class="line">total 0</span><br><span class="line">drwxrwxrwx 1 baoze baoze 512 Jun  2 18:54 ./</span><br><span class="line">drwxrwxrwx 1 baoze baoze 512 Jun  2 18:54 ../</span><br><span class="line">-rwxrwxrwx 1 baoze baoze   4 Jun  2 18:54 ccc*</span><br><span class="line">baoze@DESKTOP-EV6CLJE:/mnt/d/workspace/patch_test$</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># mod中内容修改了aaa文件，删除了bbb和ccc文件</span></span></span><br><span class="line">baoze@DESKTOP-EV6CLJE:/mnt/d/workspace/patch_test$ diff -ruN ori mod &gt; mod.patch</span><br><span class="line">baoze@DESKTOP-EV6CLJE:/mnt/d/workspace/patch_test$ cat mod.patch</span><br><span class="line">diff -ruN ori/aaa mod/aaa</span><br><span class="line">--- ori/aaa     2020-06-02 18:54:37.447786500 +0800</span><br><span class="line">+++ mod/aaa     2020-06-02 18:55:36.400920500 +0800</span><br><span class="line">@@ -1 +1 @@</span><br><span class="line">-aaa</span><br><span class="line">+newaaa</span><br><span class="line">diff -ruN ori/bbb mod/bbb</span><br><span class="line">--- ori/bbb     2020-06-02 18:54:42.786351600 +0800</span><br><span class="line">+++ mod/bbb     1970-01-01 08:00:00.000000000 +0800</span><br><span class="line">@@ -1 +0,0 @@</span><br><span class="line">-bbb</span><br><span class="line">diff -ruN ori/inner/ccc mod/inner/ccc</span><br><span class="line">--- ori/inner/ccc       2020-06-02 18:54:29.759650700 +0800</span><br><span class="line">+++ mod/inner/ccc       1970-01-01 08:00:00.000000000 +0800</span><br><span class="line">@@ -1 +0,0 @@</span><br><span class="line">-ccc</span><br><span class="line">baoze@DESKTOP-EV6CLJE:/mnt/d/workspace/patch_test$</span><br><span class="line"><span class="meta">#</span><span class="bash"> 对ori进行打补丁</span></span><br><span class="line">baoze@DESKTOP-EV6CLJE:/mnt/d/workspace/patch_test$ patch -p0 &lt; mod.patch</span><br><span class="line">patching file ori/aaa</span><br><span class="line">patching file ori/bbb</span><br><span class="line">patching file ori/inner/ccc</span><br><span class="line"><span class="meta">#</span><span class="bash"> 打补丁后ori目录下只有aaa文件，内容也有修改</span></span><br><span class="line">baoze@DESKTOP-EV6CLJE:/mnt/d/workspace/patch_test$ ll ori/</span><br><span class="line">total 0</span><br><span class="line">drwxrwxrwx 1 baoze baoze 512 Jun  2 19:08 ./</span><br><span class="line">drwxrwxrwx 1 baoze baoze 512 Jun  2 19:06 ../</span><br><span class="line">-rwxrwxrwx 1 baoze baoze   7 Jun  2 19:08 aaa*</span><br><span class="line">baoze@DESKTOP-EV6CLJE:/mnt/d/workspace/patch_test$ cat ori/aaa</span><br><span class="line">newaaa</span><br><span class="line">baoze@DESKTOP-EV6CLJE:/mnt/d/workspace/patch_test$</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="patch命令"><a href="#patch命令" class="headerlink" title="patch命令"></a>patch命令</h2><blockquote>
-<p>执行patch命令时，patch文件中定义的修改后的目录不能存在</p>
-</blockquote>
 
       
     </div>
@@ -653,6 +663,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2020/05/31/windows/windows-usage/" rel="prev" title="windows使用总结">
+                windows使用总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -720,7 +734,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">64</span>
+                    <span class="site-state-item-count">67</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -795,7 +809,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">28</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -859,7 +877,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#diff命令"><span class="nav-number">1.</span> <span class="nav-text">diff命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#正常格式"><span class="nav-number">1.1.</span> <span class="nav-text">正常格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上下文格式"><span class="nav-number">1.2.</span> <span class="nav-text">上下文格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#合并格式"><span class="nav-number">1.3.</span> <span class="nav-text">合并格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#side-by-side格式"><span class="nav-number">1.4.</span> <span class="nav-text">side-by-side格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令格式说明"><span class="nav-number">1.5.</span> <span class="nav-text">命令格式说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#diff命令生成补丁文件"><span class="nav-number">1.6.</span> <span class="nav-text">diff命令生成补丁文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#patch命令"><span class="nav-number">2.</span> <span class="nav-text">patch命令</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#diff命令"><span class="nav-number">1.</span> <span class="nav-text">diff命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#正常格式"><span class="nav-number">1.1.</span> <span class="nav-text">正常格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上下文格式"><span class="nav-number">1.2.</span> <span class="nav-text">上下文格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#合并格式"><span class="nav-number">1.3.</span> <span class="nav-text">合并格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#side-by-side格式"><span class="nav-number">1.4.</span> <span class="nav-text">side-by-side格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令格式说明"><span class="nav-number">1.5.</span> <span class="nav-text">命令格式说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#patch命令"><span class="nav-number">2.</span> <span class="nav-text">patch命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#patch命令说明"><span class="nav-number">2.1.</span> <span class="nav-text">patch命令说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#diff-patch的补丁应用"><span class="nav-number">2.2.</span> <span class="nav-text">diff + patch的补丁应用</span></a></li></ol></li></ol></div>
             
 
           </div>
