@@ -96,15 +96,18 @@
 
 
 
-  <meta name="keywords" content="centos,yum,TODO">
+  <meta name="description" content="搜索命令属于哪些包 yum search xxx yum provides xxx  yum list   命令 描述     yum list [all] 所有已安装和可以安装的包   yum list available 所有可以安装的包   yum list installed 所有已经安装的包   yum list updates 所有可以升级的包   yum list extra 所有已">
+<meta name="keywords" content="centos,yum">
 <meta property="og:type" content="article">
-<meta property="og:title" content="yum源优先级配置">
-<meta property="og:url" content="http://yoursite.com/2019/06/30/centos/yum-priorities/index.html">
+<meta property="og:title" content="yum命令使用">
+<meta property="og:url" content="http://yoursite.com/2020/06/03/centos/yum-cmd/index.html">
 <meta property="og:site_name" content="Gingko Leaf">
+<meta property="og:description" content="搜索命令属于哪些包 yum search xxx yum provides xxx  yum list   命令 描述     yum list [all] 所有已安装和可以安装的包   yum list available 所有可以安装的包   yum list installed 所有已经安装的包   yum list updates 所有可以升级的包   yum list extra 所有已">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-23T06:55:33.257Z">
+<meta property="og:updated_time" content="2020-06-02T17:25:22.905Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yum源优先级配置">
+<meta name="twitter:title" content="yum命令使用">
+<meta name="twitter:description" content="搜索命令属于哪些包 yum search xxx yum provides xxx  yum list   命令 描述     yum list [all] 所有已安装和可以安装的包   yum list available 所有可以安装的包   yum list installed 所有已经安装的包   yum list updates 所有可以升级的包   yum list extra 所有已">
 
 
 
@@ -112,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/06/30/centos/yum-priorities/">
+  <link rel="canonical" href="http://yoursite.com/2020/06/03/centos/yum-cmd/">
 
 
 
@@ -122,7 +125,7 @@
   };
 </script>
 
-  <title>yum源优先级配置 | Gingko Leaf</title>
+  <title>yum命令使用 | Gingko Leaf</title>
   
 
 
@@ -337,7 +340,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/30/centos/yum-priorities/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/03/centos/yum-cmd/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="daybreak.gx">
@@ -354,7 +357,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">yum源优先级配置
+          <h1 class="post-title" itemprop="name headline">yum命令使用
 
               
             
@@ -380,24 +383,12 @@
                 
               
 
-              <time title="创建时间：2019-06-30 02:32:13" itemprop="dateCreated datePublished" datetime="2019-06-30T02:32:13+08:00">2019-06-30</time>
+              <time title="创建时间：2020-06-03 01:14:09 / 修改时间：01:25:22" itemprop="dateCreated datePublished" datetime="2020-06-03T01:14:09+08:00">2020-06-03</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-11-23 14:55:33" itemprop="dateModified" datetime="2019-11-23T14:55:33+08:00">2019-11-23</time>
               
             
           </span>
@@ -438,7 +429,42 @@
       
 
       
-        
+        <h3 id="搜索命令属于哪些包"><a href="#搜索命令属于哪些包" class="headerlink" title="搜索命令属于哪些包"></a>搜索命令属于哪些包</h3><ul>
+<li><code>yum search xxx</code></li>
+<li><code>yum provides xxx</code></li>
+</ul>
+<h3 id="yum-list"><a href="#yum-list" class="headerlink" title="yum list"></a>yum list</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yum list [all]</td>
+<td>所有已安装和可以安装的包</td>
+</tr>
+<tr>
+<td>yum list available</td>
+<td>所有可以安装的包</td>
+</tr>
+<tr>
+<td>yum list installed</td>
+<td>所有已经安装的包</td>
+</tr>
+<tr>
+<td>yum list updates</td>
+<td>所有可以升级的包</td>
+</tr>
+<tr>
+<td>yum list extra</td>
+<td>所有已经安装但不在repository的包</td>
+</tr>
+</tbody>
+</table>
+<h3 id="查看软件包详情-yum-info-wget"><a href="#查看软件包详情-yum-info-wget" class="headerlink" title="查看软件包详情 yum info wget"></a>查看软件包详情 <code>yum info wget</code></h3><h3 id="查看软件包依赖-yum-deplist-wget"><a href="#查看软件包依赖-yum-deplist-wget" class="headerlink" title="查看软件包依赖 yum deplist wget"></a>查看软件包依赖 <code>yum deplist wget</code></h3><h3 id="删除yum安装的软件-yum-remove-xxx-或-yum-erase-xxx"><a href="#删除yum安装的软件-yum-remove-xxx-或-yum-erase-xxx" class="headerlink" title="删除yum安装的软件 yum remove xxx 或 yum erase xxx"></a>删除yum安装的软件 <code>yum remove xxx</code> 或 <code>yum erase xxx</code></h3><h3 id="更新软件-yum-update-package-name"><a href="#更新软件-yum-update-package-name" class="headerlink" title="更新软件 yum update [package_name]"></a>更新软件 <code>yum update [package_name]</code></h3><p><code>如果没有指定package_name, 则会更新所有已安装的软件</code></p>
+
       
     </div>
 
@@ -489,8 +515,6 @@
           
             <a href="/tags/yum/" rel="tag"># yum</a>
           
-            <a href="/tags/TODO/" rel="tag"># TODO</a>
-          
         </div>
       
 
@@ -502,8 +526,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/30/centos/epel/" rel="next" title="epel配置与使用">
-                <i class="fa fa-chevron-left"></i> epel配置与使用
+              <a href="/2020/05/31/windows/windows-docker/" rel="next" title="windows下docker安装">
+                <i class="fa fa-chevron-left"></i> windows下docker安装
               </a>
             
           </div>
@@ -511,10 +535,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/07/git/git-cmd-hash-object/" rel="prev" title="git-hash-object 命令">
-                git-hash-object 命令 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -558,8 +578,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -706,6 +735,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索命令属于哪些包"><span class="nav-number">1.</span> <span class="nav-text">搜索命令属于哪些包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yum-list"><span class="nav-number">2.</span> <span class="nav-text">yum list</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看软件包详情-yum-info-wget"><span class="nav-number">3.</span> <span class="nav-text">查看软件包详情 yum info wget</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看软件包依赖-yum-deplist-wget"><span class="nav-number">4.</span> <span class="nav-text">查看软件包依赖 yum deplist wget</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除yum安装的软件-yum-remove-xxx-或-yum-erase-xxx"><span class="nav-number">5.</span> <span class="nav-text">删除yum安装的软件 yum remove xxx 或 yum erase xxx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新软件-yum-update-package-name"><span class="nav-number">6.</span> <span class="nav-text">更新软件 yum update [package_name]</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
