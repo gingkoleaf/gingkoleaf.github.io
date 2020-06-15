@@ -96,17 +96,18 @@
 
 
 
-  <meta name="description" content="TODO1TODO2">
+  <meta name="description" content="本地源配置 将系统的iso文件挂载到/mnt/iso目录  1mount -o loop xxx.iso /mnt/iso  在/etc/yum.repo.d/中增加local.repo文件，内容如下:  12345[local]name=localbaseurl=file:///mnt/isoenable=1gpgcheck=0  enable 表示是否启用该源，0表示关闭，1表示开启gpgch">
+<meta name="keywords" content="yum,repo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vm_network">
-<meta property="og:url" content="http://yoursite.com/2019/05/16/vm-network/index.html">
+<meta property="og:title" content="yum私有源配置">
+<meta property="og:url" content="http://yoursite.com/2020/06/14/centos/yum-private-repo/index.html">
 <meta property="og:site_name" content="Gingko Leaf">
-<meta property="og:description" content="TODO1TODO2">
+<meta property="og:description" content="本地源配置 将系统的iso文件挂载到/mnt/iso目录  1mount -o loop xxx.iso /mnt/iso  在/etc/yum.repo.d/中增加local.repo文件，内容如下:  12345[local]name=localbaseurl=file:///mnt/isoenable=1gpgcheck=0  enable 表示是否启用该源，0表示关闭，1表示开启gpgch">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-23T07:00:16.306Z">
+<meta property="og:updated_time" content="2020-06-15T10:51:10.916Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vm_network">
-<meta name="twitter:description" content="TODO1TODO2">
+<meta name="twitter:title" content="yum私有源配置">
+<meta name="twitter:description" content="本地源配置 将系统的iso文件挂载到/mnt/iso目录  1mount -o loop xxx.iso /mnt/iso  在/etc/yum.repo.d/中增加local.repo文件，内容如下:  12345[local]name=localbaseurl=file:///mnt/isoenable=1gpgcheck=0  enable 表示是否启用该源，0表示关闭，1表示开启gpgch">
 
 
 
@@ -114,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/05/16/vm-network/">
+  <link rel="canonical" href="http://yoursite.com/2020/06/14/centos/yum-private-repo/">
 
 
 
@@ -124,7 +125,7 @@
   };
 </script>
 
-  <title>vm_network | Gingko Leaf</title>
+  <title>yum私有源配置 | Gingko Leaf</title>
   
 
 
@@ -339,7 +340,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/16/vm-network/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/14/centos/yum-private-repo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="daybreak.gx">
@@ -356,7 +357,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">vm_network
+          <h1 class="post-title" itemprop="name headline">yum私有源配置
 
               
             
@@ -382,7 +383,7 @@
                 
               
 
-              <time title="创建时间：2019-05-16 13:36:26" itemprop="dateCreated datePublished" datetime="2019-05-16T13:36:26+08:00">2019-05-16</time>
+              <time title="创建时间：2020-06-14 23:51:28" itemprop="dateCreated datePublished" datetime="2020-06-14T23:51:28+08:00">2020-06-14</time>
             
 
             
@@ -399,7 +400,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-11-23 15:00:16" itemprop="dateModified" datetime="2019-11-23T15:00:16+08:00">2019-11-23</time>
+                <time title="修改时间：2020-06-15 18:51:10" itemprop="dateModified" datetime="2020-06-15T18:51:10+08:00">2020-06-15</time>
               
             
           </span>
@@ -440,7 +441,23 @@
       
 
       
-        <p><a href="https://blog.csdn.net/yushupan/article/details/78404395" target="_blank" rel="noopener">TODO1</a><br><a href="https://blog.csdn.net/chichi123137/article/details/82670257" target="_blank" rel="noopener">TODO2</a></p>
+        <h2 id="本地源配置"><a href="#本地源配置" class="headerlink" title="本地源配置"></a>本地源配置</h2><ol>
+<li><p>将系统的iso文件挂载到<code>/mnt/iso</code>目录</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -o loop xxx.iso /mnt/iso</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在<code>/etc/yum.repo.d/</code>中增加<code>local.repo</code>文件，内容如下:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[local]</span><br><span class="line">name=local</span><br><span class="line">baseurl=file:///mnt/iso</span><br><span class="line">enable=1</span><br><span class="line">gpgcheck=0</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>enable 表示是否启用该源，0表示关闭，1表示开启<br>gpgcheck 表示是否检查GPG-KEy，0表示不检查，1表示检查</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="搭建局域网HTTP服务的私有源"><a href="#搭建局域网HTTP服务的私有源" class="headerlink" title="搭建局域网HTTP服务的私有源"></a>搭建局域网HTTP服务的私有源</h2><h3 id="生成repodata"><a href="#生成repodata" class="headerlink" title="生成repodata"></a>生成repodata</h3>  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost /]# yum install createrepo</span><br><span class="line">[root@localhost /]# mkdir -p /data/repo/7/x86_64</span><br><span class="line">[root@localhost x86_64]# cd /data/repo/7/x86_64</span><br><span class="line"><span class="meta">#</span><span class="bash"> 执行 createrepo 会在目录下生成 repodata目录，为了简单，当前目录下之copy了一个zlib的rpm包</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果rpm包有变化，需要执行createrepo --update .</span></span><br><span class="line">[root@localhost x86_64]# createrepo .</span><br><span class="line">Spawning worker 0 with 4021 pkgs</span><br><span class="line">Workers Finished</span><br><span class="line">Saving Primary metadata</span><br><span class="line">Saving file lists metadata</span><br><span class="line">Saving other metadata</span><br><span class="line">Generating sqlite DBs</span><br><span class="line">Sqlite DBs complete</span><br><span class="line">[root@localhost x86_64]# ll |grep -v rpm</span><br><span class="line">total 3891360</span><br><span class="line">drwxr-xr-x. 2 root root     4096 Jun 15 13:54 repodata</span><br><span class="line">[root@localhost x86_64]#</span><br></pre></td></tr></table></figure>
+<h3 id="搭建http服务"><a href="#搭建http服务" class="headerlink" title="搭建http服务"></a>搭建http服务</h3><p>  <a href="/2020/06/15/nginx/nginx-install/">参考nginx安装</a></p>
+<p>  配置文件如下:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">user  root;</span><br><span class="line">worker_processes  1;</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line"></span><br><span class="line">    sendfile        on;</span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line">    server &#123;</span><br><span class="line">        listen       8090;</span><br><span class="line">        server_name  localhost;</span><br><span class="line">        root /data/repo;</span><br><span class="line">        location / &#123;</span><br><span class="line">            autoindex on;</span><br><span class="line">            charset utf-8;</span><br><span class="line">        &#125;</span><br><span class="line">        error_page   500 502 503 504  /50x.html;</span><br><span class="line">        location = /50x.html &#123;</span><br><span class="line">            root   html;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="修改yum-repo验证"><a href="#修改yum-repo验证" class="headerlink" title="修改yum.repo验证"></a>修改yum.repo验证</h3><p>  <code>先删掉当前所有的repo配置，增加private的repo配置</code></p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost yum.repos.d]# cat private.repo</span><br><span class="line">[private]</span><br><span class="line">name=private</span><br><span class="line">baseurl=http://192.168.43.129:8090/7/x86_64</span><br><span class="line">enable=1</span><br><span class="line">gpgcheck=0</span><br><span class="line">[root@localhost yum.repos.d]# yum clean all</span><br><span class="line">Loaded plugins: fastestmirror</span><br><span class="line">Cleaning repos: private</span><br><span class="line">Cleaning up list of fastest mirrors</span><br><span class="line">Other repos take up 50 M of disk space (use --verbose for details)</span><br><span class="line">[root@localhost yum.repos.d]# yum makecache</span><br><span class="line">Loaded plugins: fastestmirror</span><br><span class="line">Determining fastest mirrors</span><br><span class="line">private                                                             | 2.9 kB  00:00:00</span><br><span class="line">(1/3): private/filelists_db                                         |  927 B  00:00:00</span><br><span class="line">(2/3): private/other_db                                             | 1.4 kB  00:00:00</span><br><span class="line">(3/3): private/primary_db                                           | 2.0 kB  00:00:00</span><br><span class="line">Metadata Cache Created</span><br><span class="line">[root@localhost yum.repos.d]# yum list available</span><br><span class="line">Loaded plugins: fastestmirror</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line">Available Packages</span><br><span class="line">zip.x86_64            3.0-11.el7                         private</span><br><span class="line">[root@localhost yum.repos.d]# yum install -y zip</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -486,6 +503,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/yum/" rel="tag"># yum</a>
+          
+            <a href="/tags/repo/" rel="tag"># repo</a>
+          
+        </div>
+      
 
       
       
@@ -495,8 +520,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/15/centos/centos-usage/" rel="next" title="centos使用总结">
-                <i class="fa fa-chevron-left"></i> centos使用总结
+              <a href="/2020/06/14/virtualbox/virtualbox-addtions/" rel="next" title="virtualbox增强功能">
+                <i class="fa fa-chevron-left"></i> virtualbox增强功能
               </a>
             
           </div>
@@ -505,8 +530,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/23/maven/maven-usage/" rel="prev" title="maven 使用总结">
-                maven 使用总结 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/06/15/jenkins/jenkins-script-approval/" rel="prev" title="jenkins pipeline的groovy脚本执行权限问题">
+                jenkins pipeline的groovy脚本执行权限问题 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -551,8 +576,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -567,7 +601,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">67</span>
+                    <span class="site-state-item-count">73</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -646,7 +680,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">30</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -699,6 +741,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本地源配置"><span class="nav-number">1.</span> <span class="nav-text">本地源配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建局域网HTTP服务的私有源"><span class="nav-number">2.</span> <span class="nav-text">搭建局域网HTTP服务的私有源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生成repodata"><span class="nav-number">2.1.</span> <span class="nav-text">生成repodata</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搭建http服务"><span class="nav-number">2.2.</span> <span class="nav-text">搭建http服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改yum-repo验证"><span class="nav-number">2.3.</span> <span class="nav-text">修改yum.repo验证</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       

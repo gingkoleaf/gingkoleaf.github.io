@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Gingko Leaf">
 <meta property="og:description" content="非docker安装通过设置jenkins官方repo仓库下载1234sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.reposudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.keyyum i">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-06-10T14:39:55.479Z">
+<meta property="og:updated_time" content="2020-06-10T16:42:19.120Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Centos下jenkins的安装">
 <meta name="twitter:description" content="非docker安装通过设置jenkins官方repo仓库下载1234sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.reposudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.keyyum i">
@@ -400,7 +400,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-06-10 22:39:55" itemprop="dateModified" datetime="2020-06-10T22:39:55+08:00">2020-06-10</time>
+                <time title="修改时间：2020-06-11 00:42:19" itemprop="dateModified" datetime="2020-06-11T00:42:19+08:00">2020-06-11</time>
               
             
           </span>
@@ -448,9 +448,9 @@
 <h3 id="下载rpm安装"><a href="#下载rpm安装" class="headerlink" title="下载rpm安装"></a>下载rpm安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://pkg.jenkins.io/redhat-stable/jenkins-2.176.1-1.1.noarch.rpm</span><br><span class="line">rpm -ivh jenkins-2.176.1-1.1.noarch.rpm</span><br></pre></td></tr></table></figure>
 <h3 id="下载war包"><a href="#下载war包" class="headerlink" title="下载war包"></a>下载war包</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://mirrors.huaweicloud.com/jenkins/war-stable/latest/jenkins.war</span><br><span class="line"><span class="meta">#</span><span class="bash">wget http://mirrors.jenkins.io/war-stable/latest/jenkins.war</span></span><br><span class="line">java -jar jenkins.war</span><br></pre></td></tr></table></figure>
 <p>常用的启动参数为:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">java -Duser.timezone=GMT+08 \</span><br><span class="line"> -Djava.util.logging.config.file=/var/jenkins_home/jenkins.logging.properties \</span><br><span class="line"> -Dgroovy.grape.report.downloads=true -Divy.message.logger.level=4 \</span><br><span class="line"> -Dhudson.model.ParametersAction.keepUndefinedParameters=true \</span><br><span class="line"> -Dhudson.security.ArtifactsPermission=true -Djava.awt.headless=true \</span><br><span class="line"> -Dorg.apache.commons.jelly.tags.fmt.timeZone=Asia/Shanghai \</span><br><span class="line"> -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 \</span><br><span class="line"> -Dhudson.slaves.NodeProvisioner.MARGIN=50 \</span><br><span class="line"> -Dhudson.slaves.NodeProvisioner.MARGIN0=0.85 \</span><br><span class="line"> -Dhudson.slaves.NodeProvisioner.initialDelay=0 \</span><br><span class="line"> -Dhudson.slaves.NodeProvisioner.recurrencePeriod=2 \</span><br><span class="line"> -Dhudson.model.LoadStatistics.clock=2 \</span><br><span class="line"> -Dhudson.model.LoadStatistics.decay=0.1 \</span><br><span class="line"> -server -Xms10g -Xmx32g -XX:MaxPermSize=4g -XX:+HeapDumpOnOutOfMemoryError \</span><br><span class="line"> -Xloggc:/var/jenkins_home/jenkins_gc.log \</span><br><span class="line"> -DJENKINS_HOME=/var/jenkins_home \</span><br><span class="line"> -jar jenkins.war --logfile=/var/jenkins_home/jenkins.log</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">java -Duser.timezone=GMT+08 \</span><br><span class="line"> -Djava.util.logging.config.file=/var/jenkins_home/jenkins.logging.properties \</span><br><span class="line"> -Dgroovy.grape.report.downloads=true -Divy.message.logger.level=4 \</span><br><span class="line"> -Dhudson.model.ParametersAction.keepUndefinedParameters=true \</span><br><span class="line"> -Dhudson.security.ArtifactsPermission=true -Djava.awt.headless=true \</span><br><span class="line"> -Dorg.apache.commons.jelly.tags.fmt.timeZone=Asia/Shanghai \</span><br><span class="line"> -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 \</span><br><span class="line"> -Dhudson.slaves.NodeProvisioner.MARGIN=50 \</span><br><span class="line"> -Dhudson.slaves.NodeProvisioner.MARGIN0=0.85 \</span><br><span class="line"> -Dhudson.slaves.NodeProvisioner.initialDelay=0 \</span><br><span class="line"> -Dhudson.slaves.NodeProvisioner.recurrencePeriod=2 \</span><br><span class="line"> -Dhudson.model.LoadStatistics.clock=2 \</span><br><span class="line"> -Dhudson.model.LoadStatistics.decay=0.1 \</span><br><span class="line"> -Dpermissive-script-security.enabled=true \</span><br><span class="line"> -server -Xms10g -Xmx32g -XX:MaxPermSize=4g -XX:+HeapDumpOnOutOfMemoryError \</span><br><span class="line"> -Xloggc:/var/jenkins_home/jenkins_gc.log \</span><br><span class="line"> -DJENKINS_HOME=/var/jenkins_home \</span><br><span class="line"> -jar jenkins.war --logfile=/var/jenkins_home/jenkins.log</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>jenkins.logging.properties 的内容参见<a href="/2019/11/15/jenkins-log-config">说明</a></p>
+<p>jenkins.logging.properties 的内容参见<a href="/2019/11/15/jenkins-log-config">说明</a><br>permissive-script-security.enabled=true表示默认允许执行unsecured脚本，不再提示需要审核</p>
 </blockquote>
 <h3 id="虚拟机中启动jenkins后不能访问"><a href="#虚拟机中启动jenkins后不能访问" class="headerlink" title="虚拟机中启动jenkins后不能访问"></a>虚拟机中启动jenkins后不能访问</h3><ol>
 <li><p>关闭防火墙</p>
@@ -623,7 +623,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">67</span>
+                    <span class="site-state-item-count">73</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -702,7 +702,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">30</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
