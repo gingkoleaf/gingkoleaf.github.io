@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="bash版本号 12bash --versionGNU bash, version 4.2.46(2)-release bash中字典使用举例 字典声明赋值 与数组不同，字典使用前必须先声明  12345# Declare dict person 必须先声明declare -A person# 使用 () 赋值person=([name]=&quot;john&quot; [age]=&quot;18&quot;) 字典读取及遍历123">
-<meta name="keywords" content="linux,bash">
+  <meta name="description" content="yaml的模板build_template.yaml如下 123repos:  - url: &quot;$&amp;#123;REPO_URL&amp;#125;&quot;    branch: &quot;$&amp;#123;BRANCH&amp;#125;&quot; REPO_URL和BRANCH定义在环境变量中或写入config.ini文件 123# cat config.iniREPO_URL=&quot;https://github.com/etcd-io/e">
+<meta name="keywords" content="linux,bash,yaml">
 <meta property="og:type" content="article">
-<meta property="og:title" content="bash中字典使用">
-<meta property="og:url" content="http://yoursite.com/2019/08/08/linux/bash-dict/index.html">
+<meta property="og:title" content="通过shell实现yaml目标变量替换">
+<meta property="og:url" content="http://yoursite.com/2019/08/08/bash/shell-replace-yaml-template/index.html">
 <meta property="og:site_name" content="Gingko Leaf">
-<meta property="og:description" content="bash版本号 12bash --versionGNU bash, version 4.2.46(2)-release bash中字典使用举例 字典声明赋值 与数组不同，字典使用前必须先声明  12345# Declare dict person 必须先声明declare -A person# 使用 () 赋值person=([name]=&quot;john&quot; [age]=&quot;18&quot;) 字典读取及遍历123">
+<meta property="og:description" content="yaml的模板build_template.yaml如下 123repos:  - url: &quot;$&amp;#123;REPO_URL&amp;#125;&quot;    branch: &quot;$&amp;#123;BRANCH&amp;#125;&quot; REPO_URL和BRANCH定义在环境变量中或写入config.ini文件 123# cat config.iniREPO_URL=&quot;https://github.com/etcd-io/e">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-23T06:59:04.433Z">
+<meta property="og:updated_time" content="2019-11-23T06:59:35.642Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="bash中字典使用">
-<meta name="twitter:description" content="bash版本号 12bash --versionGNU bash, version 4.2.46(2)-release bash中字典使用举例 字典声明赋值 与数组不同，字典使用前必须先声明  12345# Declare dict person 必须先声明declare -A person# 使用 () 赋值person=([name]=&quot;john&quot; [age]=&quot;18&quot;) 字典读取及遍历123">
+<meta name="twitter:title" content="通过shell实现yaml目标变量替换">
+<meta name="twitter:description" content="yaml的模板build_template.yaml如下 123repos:  - url: &quot;$&amp;#123;REPO_URL&amp;#125;&quot;    branch: &quot;$&amp;#123;BRANCH&amp;#125;&quot; REPO_URL和BRANCH定义在环境变量中或写入config.ini文件 123# cat config.iniREPO_URL=&quot;https://github.com/etcd-io/e">
 
 
 
@@ -115,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/08/08/linux/bash-dict/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/08/bash/shell-replace-yaml-template/">
 
 
 
@@ -125,7 +125,7 @@
   };
 </script>
 
-  <title>bash中字典使用 | Gingko Leaf</title>
+  <title>通过shell实现yaml目标变量替换 | Gingko Leaf</title>
   
 
 
@@ -340,7 +340,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/08/linux/bash-dict/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/08/bash/shell-replace-yaml-template/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="daybreak.gx">
@@ -357,7 +357,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">bash中字典使用
+          <h1 class="post-title" itemprop="name headline">通过shell实现yaml目标变量替换
 
               
             
@@ -383,7 +383,7 @@
                 
               
 
-              <time title="创建时间：2019-08-08 23:46:02" itemprop="dateCreated datePublished" datetime="2019-08-08T23:46:02+08:00">2019-08-08</time>
+              <time title="创建时间：2019-08-08 23:21:28" itemprop="dateCreated datePublished" datetime="2019-08-08T23:21:28+08:00">2019-08-08</time>
             
 
             
@@ -400,7 +400,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-11-23 14:59:04" itemprop="dateModified" datetime="2019-11-23T14:59:04+08:00">2019-11-23</time>
+                <time title="修改时间：2019-11-23 14:59:35" itemprop="dateModified" datetime="2019-11-23T14:59:35+08:00">2019-11-23</time>
               
             
           </span>
@@ -441,16 +441,14 @@
       
 
       
-        <p>bash版本号</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bash --version</span><br><span class="line">GNU bash, version 4.2.46(2)-release</span><br></pre></td></tr></table></figure>
-<p>bash中字典使用举例</p>
-<h3 id="字典声明赋值"><a href="#字典声明赋值" class="headerlink" title="字典声明赋值"></a>字典声明赋值</h3><blockquote>
-<p>与数组不同，字典使用前必须先声明</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Declare dict person 必须先声明</span></span><br><span class="line"><span class="built_in">declare</span> -A person</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 () 赋值</span></span><br><span class="line">person=([name]=<span class="string">"john"</span> [age]=<span class="string">"18"</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="字典读取及遍历"><a href="#字典读取及遍历" class="headerlink" title="字典读取及遍历"></a>字典读取及遍历</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">declare</span> -A person</span><br><span class="line"><span class="comment"># 根据key读取字典内容</span></span><br><span class="line">person=([name]=<span class="string">"lucy"</span> [age]=<span class="string">"22"</span>)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;person["name"]&#125;</span>      <span class="comment"># lucy</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取不存在的key时，返回为空</span></span><br><span class="line"><span class="keyword">if</span> [[ <span class="variable">$&#123;person["phone"]&#125;</span> =~ <span class="string">""</span> ]]; <span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">"empty"</span>; <span class="keyword">else</span> <span class="built_in">echo</span> <span class="string">"not empty"</span>; <span class="keyword">fi</span>   <span class="comment"># empty</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印字典中的所有value, 返回值为数组</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;person[@]&#125;</span>       <span class="comment">#lucy 22</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;person[@]:0:1&#125;</span>   <span class="comment">#lucy</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印字典中的所有key，返回值为数组</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;!person[@]&#125;</span>      <span class="comment">#name age</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取字典中键值对的数量</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;#person[@]&#125;</span>   <span class="comment"># 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># for循环遍历字典</span></span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> <span class="variable">$&#123;!person[@]&#125;</span>;<span class="keyword">do</span> <span class="built_in">echo</span> <span class="string">"key: <span class="variable">$&#123;key&#125;</span>, value: <span class="variable">$&#123;person[$key]&#125;</span>"</span>; <span class="keyword">done</span></span><br><span class="line"><span class="comment">#key: name, value: lucy</span></span><br><span class="line"><span class="comment">#key: age, value: 22</span></span><br></pre></td></tr></table></figure>
-<h3 id="字典中增加删除元素"><a href="#字典中增加删除元素" class="headerlink" title="字典中增加删除元素"></a>字典中增加删除元素</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#增加字典元素两种方式</span></span><br><span class="line"><span class="built_in">declare</span> -A person</span><br><span class="line">person=([name]=<span class="string">"hanmeimei"</span> [age]=<span class="string">"23"</span>)</span><br><span class="line">person+=([phoneNumber]=<span class="string">"13920380998"</span>)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;person[@]&#125;</span>       <span class="comment"># hanmeimei 23 13920380998</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;!person[@]&#125;</span>      <span class="comment"># name age phoneNumber</span></span><br><span class="line"></span><br><span class="line">person[addr]=<span class="string">"shanghai"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;person[@]&#125;</span>       <span class="comment">#hanmeimei 23 shanghai 13920380998</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;!person[@]&#125;</span>      <span class="comment">#name age addr phoneNumber</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#删除字典元素</span></span><br><span class="line"><span class="built_in">unset</span> person[phoneNumber]</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;person[@]&#125;</span>       <span class="comment">#hanmeimei 23 shanghai</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;!person[@]&#125;</span>      <span class="comment">#name age addr</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#删除不存在的字典元素时无影响</span></span><br><span class="line"><span class="built_in">unset</span> person[phoneNumber]</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;person[@]&#125;</span>       <span class="comment">#hanmeimei 23 shanghai</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;!person[@]&#125;</span>      <span class="comment">#name age addr</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#删除整个字典</span></span><br><span class="line"><span class="built_in">unset</span> person</span><br><span class="line"><span class="keyword">if</span> [[ <span class="variable">$&#123;person&#125;</span> =~ <span class="string">""</span> ]]; <span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">"empty"</span>; <span class="keyword">else</span> <span class="built_in">echo</span> <span class="string">"not empty"</span>; <span class="keyword">fi</span>   <span class="comment">#empty</span></span><br></pre></td></tr></table></figure>
-<h3 id="字典元素值替换"><a href="#字典元素值替换" class="headerlink" title="字典元素值替换"></a>字典元素值替换</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">declare</span> -A person</span><br><span class="line">person=([name]=<span class="string">"lilei"</span> [age]=<span class="string">"12"</span>)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;person[name]&#125;</span>    <span class="comment">#lilei</span></span><br><span class="line">person[name]=<span class="string">"lucy"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;person[name]&#125;</span>    <span class="comment">#lucy</span></span><br></pre></td></tr></table></figure>
+        <p>yaml的模板<code>build_template.yaml</code>如下</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">repos:</span></span><br><span class="line"><span class="attr">  - url:</span> <span class="string">"$&#123;REPO_URL&#125;"</span></span><br><span class="line"><span class="attr">    branch:</span> <span class="string">"$&#123;BRANCH&#125;"</span></span><br></pre></td></tr></table></figure>
+<p><code>REPO_URL</code>和<code>BRANCH</code>定义在环境变量中或写入<code>config.ini</code>文件</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cat config.ini</span></span><br><span class="line"><span class="attr">REPO_URL</span>=<span class="string">"https://github.com/etcd-io/etcd.git"</span></span><br><span class="line"><span class="attr">BRANCH</span>=<span class="string">"master'</span></span><br></pre></td></tr></table></figure>
+<p>替换脚本如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">configContent=$(cat config.ini)</span><br><span class="line">yamlTemplate=$(cat build_template.yaml)</span><br><span class="line">printf "$configContent\ncat &lt;&lt; EOF\n$&#123;yamlTemplate&#125;\nEOF" |bash &gt; ./build.yaml</span><br></pre></td></tr></table></figure>
+<p>生成的build.yaml文件内容如下:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">repos:</span></span><br><span class="line"><span class="attr">  - url:</span> <span class="string">"https://github.com/etcd-io/etcd.git"</span></span><br><span class="line"><span class="attr">    branch:</span> <span class="string">"master"</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -502,6 +500,8 @@
           
             <a href="/tags/bash/" rel="tag"># bash</a>
           
+            <a href="/tags/yaml/" rel="tag"># yaml</a>
+          
         </div>
       
 
@@ -513,8 +513,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/08/linux/shell-replace-yaml-template/" rel="next" title="通过shell实现yaml目标变量替换">
-                <i class="fa fa-chevron-left"></i> 通过shell实现yaml目标变量替换
+              <a href="/2019/07/23/bash/bash-array/" rel="next" title="bash数组">
+                <i class="fa fa-chevron-left"></i> bash数组
               </a>
             
           </div>
@@ -523,8 +523,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/30/linux/shell/" rel="prev" title="bash启动介绍">
-                bash启动介绍 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/08/bash/bash-dict/" rel="prev" title="bash中字典使用">
+                bash中字典使用 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -569,17 +569,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -594,7 +585,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-count">87</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -707,7 +698,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">47</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">49</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -760,23 +755,6 @@
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#字典声明赋值"><span class="nav-number">1.</span> <span class="nav-text">字典声明赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字典读取及遍历"><span class="nav-number">2.</span> <span class="nav-text">字典读取及遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字典中增加删除元素"><span class="nav-number">3.</span> <span class="nav-text">字典中增加删除元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字典元素值替换"><span class="nav-number">4.</span> <span class="nav-text">字典元素值替换</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       

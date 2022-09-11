@@ -336,6 +336,336 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/02/jenkins/jenkins-script-pipeline-failfast/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="daybreak.gx">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gingko Leaf">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/11/02/jenkins/jenkins-script-pipeline-failfast/" class="post-title-link" itemprop="url">脚本式pipeline中failFast使用</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-02 17:08:43" itemprop="dateCreated datePublished" datetime="2019-11-02T17:08:43+08:00">2019-11-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-11-23 14:58:33" itemprop="dateModified" datetime="2019-11-23T14:58:33+08:00">2019-11-23</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>
+              def generateJobStage(String jobName) &#123;    return &#123;        node('master') &#123;            echo "$&#123;jobName&#125; start"            slee
+              ...
+            </p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/11/02/jenkins/jenkins-script-pipeline-failfast/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/22/jenkins/jenkins-pipeline-stage-log/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="daybreak.gx">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gingko Leaf">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/10/22/jenkins/jenkins-pipeline-stage-log/" class="post-title-link" itemprop="url">pipeline中任务分段日志获取</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-22 23:33:17" itemprop="dateCreated datePublished" datetime="2019-10-22T23:33:17+08:00">2019-10-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-11-23 14:58:28" itemprop="dateModified" datetime="2019-11-23T14:58:28+08:00">2019-11-23</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>
+              脚本式pipelineimport hudson.model.Actionimport org.jenkinsci.plugins.workflow.cps.nodes.StepStartNodeimport org.jenkinsci.plugins.workflow.graph.FlowNode
+              ...
+            </p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/10/22/jenkins/jenkins-pipeline-stage-log/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/03/linux/linux-cmd-free/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -669,7 +999,7 @@ Building in workspace /var/lib/jenkins/workspace/jen
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/01/linux/shell-parameter/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/01/bash/shell-parameter/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="daybreak.gx">
@@ -689,7 +1019,7 @@ Building in workspace /var/lib/jenkins/workspace/jen
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/09/01/linux/shell-parameter/" class="post-title-link" itemprop="url">bash参数说明</a>
+                <a href="/2019/09/01/bash/shell-parameter/" class="post-title-link" itemprop="url">bash参数说明</a>
               
             
           </h1>
@@ -775,7 +1105,7 @@ Building in workspace /var/lib/jenkins/workspace/jen
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/09/01/linux/shell-parameter/#more" rel="contents">
+              <a class="btn" href="/2019/09/01/bash/shell-parameter/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -835,7 +1165,7 @@ Building in workspace /var/lib/jenkins/workspace/jen
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/30/linux/shell/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/30/bash/shell/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="daybreak.gx">
@@ -855,7 +1185,7 @@ Building in workspace /var/lib/jenkins/workspace/jen
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/08/30/linux/shell/" class="post-title-link" itemprop="url">bash启动介绍</a>
+                <a href="/2019/08/30/bash/shell/" class="post-title-link" itemprop="url">bash启动介绍</a>
               
             
           </h1>
@@ -941,7 +1271,7 @@ UID        PID  PPID  C STIME TTY      TIME     CMDroot         1     0  0 Aug08
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/08/30/linux/shell/#more" rel="contents">
+              <a class="btn" href="/2019/08/30/bash/shell/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1001,7 +1331,7 @@ UID        PID  PPID  C STIME TTY      TIME     CMDroot         1     0  0 Aug08
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/08/linux/bash-dict/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/08/bash/bash-dict/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="daybreak.gx">
@@ -1021,7 +1351,7 @@ UID        PID  PPID  C STIME TTY      TIME     CMDroot         1     0  0 Aug08
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/08/08/linux/bash-dict/" class="post-title-link" itemprop="url">bash中字典使用</a>
+                <a href="/2019/08/08/bash/bash-dict/" class="post-title-link" itemprop="url">bash中字典使用</a>
               
             
           </h1>
@@ -1112,7 +1442,7 @@ bash中字典使用举例
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/08/08/linux/bash-dict/#more" rel="contents">
+              <a class="btn" href="/2019/08/08/bash/bash-dict/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1172,7 +1502,7 @@ bash中字典使用举例
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/08/linux/shell-replace-yaml-template/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/08/bash/shell-replace-yaml-template/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="daybreak.gx">
@@ -1192,7 +1522,7 @@ bash中字典使用举例
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/08/08/linux/shell-replace-yaml-template/" class="post-title-link" itemprop="url">通过shell实现yaml目标变量替换</a>
+                <a href="/2019/08/08/bash/shell-replace-yaml-template/" class="post-title-link" itemprop="url">通过shell实现yaml目标变量替换</a>
               
             
           </h1>
@@ -1280,7 +1610,7 @@ REPO_URL和BRANCH定义在环境变量中或写入config.ini文件
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/08/08/linux/shell-replace-yaml-template/#more" rel="contents">
+              <a class="btn" href="/2019/08/08/bash/shell-replace-yaml-template/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1340,7 +1670,7 @@ REPO_URL和BRANCH定义在环境变量中或写入config.ini文件
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/23/linux/bash-array/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/23/bash/bash-array/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="daybreak.gx">
@@ -1360,7 +1690,7 @@ REPO_URL和BRANCH定义在环境变量中或写入config.ini文件
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/07/23/linux/bash-array/" class="post-title-link" itemprop="url">bash数组</a>
+                <a href="/2019/07/23/bash/bash-array/" class="post-title-link" itemprop="url">bash数组</a>
               
             
           </h1>
@@ -1448,7 +1778,7 @@ bash数组使用举例
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/07/23/linux/bash-array/#more" rel="contents">
+              <a class="btn" href="/2019/07/23/bash/bash-array/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1508,7 +1838,7 @@ bash数组使用举例
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/23/linux/bash-usage/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/23/bash/bash-usage/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="daybreak.gx">
@@ -1528,7 +1858,7 @@ bash数组使用举例
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/07/23/linux/bash-usage/" class="post-title-link" itemprop="url">bash使用总结</a>
+                <a href="/2019/07/23/bash/bash-usage/" class="post-title-link" itemprop="url">bash使用总结</a>
               
             
           </h1>
@@ -1618,356 +1948,7 @@ Unix系统中的Shebang符号
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/07/23/linux/bash-usage/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/22/jenkins/jenkins-serialization/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="daybreak.gx">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Gingko Leaf">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/22/jenkins/jenkins-serialization/" class="post-title-link" itemprop="url">pipeline序列化问题</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-07-22 23:23:25" itemprop="dateCreated datePublished" datetime="2019-07-22T23:23:25+08:00">2019-07-22</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-11-23 14:58:37" itemprop="dateModified" datetime="2019-11-23T14:58:37+08:00">2019-11-23</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              Jenkins支持所有运行的job都可以在服务重启时中断、暂停在服务重启后恢复运行。为了实现这一点，Jenkins pipeline中定义的所有变量都必须是可序列化的。类似的，Jenkins也必须能序列化构建中节点和子job之间的全局变量的状态。
-遇到java.io.NotSerializableE
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/07/22/jenkins/jenkins-serialization/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/22/git/git-cmd-log/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="daybreak.gx">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Gingko Leaf">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/22/git/git-cmd-log/" class="post-title-link" itemprop="url">git-log命令</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-07-22 22:39:00" itemprop="dateCreated datePublished" datetime="2019-07-22T22:39:00+08:00">2019-07-22</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-11-23 14:57:09" itemprop="dateModified" datetime="2019-11-23T14:57:09+08:00">2019-11-23</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              命令格式git log [&lt;options&gt;] [&lt;revision range&gt;] [[--] &lt;path&gt;…​]
-命令参数选项
-
-
-选项
-说明
-
-
-
-
--p
-以补丁格式显示每次提交之间的差异
-
-
-–stat
-显示每次提交的文件修改统计信息
-
-
-–shortst
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/07/22/git/git-cmd-log/#more" rel="contents">
+              <a class="btn" href="/2019/07/23/bash/bash-usage/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -2058,7 +2039,7 @@ Unix系统中的Shebang符号
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-count">87</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2171,7 +2152,11 @@ Unix系统中的Shebang符号
                     
                       
                     
-                    <span class="site-state-item-count">47</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">49</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

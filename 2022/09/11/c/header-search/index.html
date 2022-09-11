@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="特殊参数$$当前Shell进程ID。对于 Shell 脚本，就是这些脚本所在的进程ID。 12345678910111213#显示当前shell的PID[root@localhost ~]# echo $$7338[root@localhost ~]# cat test.shecho $$     # 此处打印 test.sh 脚本运行的 PIDsleep 10# 运行shell脚本程序test.">
-<meta name="keywords" content="linux,bash">
+  <meta name="description" content="运行环境OS: Ubuntu 22.04.1gcc: 11.2.0glibc: 2.35  #include “header.h” 与 #include &amp;lt;header.h&amp;gt; 区别#include “header.h” 引入的头文件，默认会首先在 .c 当前目录查找；而#include &amp;lt;header.h&amp;gt; 则不会。 123456789101112131415161718">
+<meta name="keywords" content="c,gcc">
 <meta property="og:type" content="article">
-<meta property="og:title" content="bash参数说明">
-<meta property="og:url" content="http://yoursite.com/2019/09/01/linux/shell-parameter/index.html">
+<meta property="og:title" content="gcc头文件搜索">
+<meta property="og:url" content="http://yoursite.com/2022/09/11/c/header-search/index.html">
 <meta property="og:site_name" content="Gingko Leaf">
-<meta property="og:description" content="特殊参数$$当前Shell进程ID。对于 Shell 脚本，就是这些脚本所在的进程ID。 12345678910111213#显示当前shell的PID[root@localhost ~]# echo $$7338[root@localhost ~]# cat test.shecho $$     # 此处打印 test.sh 脚本运行的 PIDsleep 10# 运行shell脚本程序test.">
+<meta property="og:description" content="运行环境OS: Ubuntu 22.04.1gcc: 11.2.0glibc: 2.35  #include “header.h” 与 #include &amp;lt;header.h&amp;gt; 区别#include “header.h” 引入的头文件，默认会首先在 .c 当前目录查找；而#include &amp;lt;header.h&amp;gt; 则不会。 123456789101112131415161718">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-23T06:59:29.639Z">
+<meta property="og:updated_time" content="2022-09-11T08:52:48.683Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="bash参数说明">
-<meta name="twitter:description" content="特殊参数$$当前Shell进程ID。对于 Shell 脚本，就是这些脚本所在的进程ID。 12345678910111213#显示当前shell的PID[root@localhost ~]# echo $$7338[root@localhost ~]# cat test.shecho $$     # 此处打印 test.sh 脚本运行的 PIDsleep 10# 运行shell脚本程序test.">
+<meta name="twitter:title" content="gcc头文件搜索">
+<meta name="twitter:description" content="运行环境OS: Ubuntu 22.04.1gcc: 11.2.0glibc: 2.35  #include “header.h” 与 #include &amp;lt;header.h&amp;gt; 区别#include “header.h” 引入的头文件，默认会首先在 .c 当前目录查找；而#include &amp;lt;header.h&amp;gt; 则不会。 123456789101112131415161718">
 
 
 
@@ -115,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/09/01/linux/shell-parameter/">
+  <link rel="canonical" href="http://yoursite.com/2022/09/11/c/header-search/">
 
 
 
@@ -125,7 +125,7 @@
   };
 </script>
 
-  <title>bash参数说明 | Gingko Leaf</title>
+  <title>gcc头文件搜索 | Gingko Leaf</title>
   
 
 
@@ -340,7 +340,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/01/linux/shell-parameter/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/11/c/header-search/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="daybreak.gx">
@@ -357,7 +357,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">bash参数说明
+          <h1 class="post-title" itemprop="name headline">gcc头文件搜索
 
               
             
@@ -383,24 +383,12 @@
                 
               
 
-              <time title="创建时间：2019-09-01 00:59:29" itemprop="dateCreated datePublished" datetime="2019-09-01T00:59:29+08:00">2019-09-01</time>
+              <time title="创建时间：2022-09-11 13:55:24 / 修改时间：16:52:48" itemprop="dateCreated datePublished" datetime="2022-09-11T13:55:24+08:00">2022-09-11</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-11-23 14:59:29" itemprop="dateModified" datetime="2019-11-23T14:59:29+08:00">2019-11-23</time>
               
             
           </span>
@@ -441,8 +429,36 @@
       
 
       
-        <h2 id="特殊参数"><a href="#特殊参数" class="headerlink" title="特殊参数"></a>特殊参数</h2><h3 id><a href="#" class="headerlink" title="$$"></a>$$</h3><p>当前Shell进程ID。对于 Shell 脚本，就是这些脚本所在的进程ID。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">显示当前shell的PID</span></span><br><span class="line">[root@localhost ~]# echo $$</span><br><span class="line">7338</span><br><span class="line">[root@localhost ~]# cat test.sh</span><br><span class="line">echo $$     # 此处打印 test.sh 脚本运行的 PID</span><br><span class="line">sleep 10</span><br><span class="line"><span class="meta">#</span><span class="bash"> 运行shell脚本程序test.sh时，系统将创建一个子shell，它的父shell为 7338</span></span><br><span class="line">[root@localhost ~]# /bin/bash test.sh &amp;</span><br><span class="line">[1] 16371</span><br><span class="line">[root@localhost ~]# 16371</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# ps -ef |grep -i test.sh</span><br><span class="line">root     16371  7338  0 05:13 pts/0    00:00:00 /bin/bash test.sh</span><br></pre></td></tr></table></figure>
+        <blockquote>
+<p>运行环境<br>OS: Ubuntu 22.04.1<br>gcc: 11.2.0<br>glibc: 2.35</p>
+</blockquote>
+<h3 id="include-“header-h”-与-include-lt-header-h-gt-区别"><a href="#include-“header-h”-与-include-lt-header-h-gt-区别" class="headerlink" title="#include “header.h” 与 #include &lt;header.h&gt; 区别"></a>#include “header.h” 与 #include &lt;header.h&gt; 区别</h3><p><b>#include “header.h” 引入的头文件，默认会首先在 .c 当前目录查找；而#include &lt;header.h&gt; 则不会。</b></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">$ cat 004_header_search.c </span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &quot;my_header.h&quot;</span><br><span class="line"></span><br><span class="line">void main() &#123;</span><br><span class="line">    printf(&quot;macro: %s\n&quot;, MY_TEST_MACRO_0911);</span><br><span class="line">&#125;</span><br><span class="line">$ cat my_header.h </span><br><span class="line">#ifndef __MY_HEADER__</span><br><span class="line">#define __MY_HEADER__</span><br><span class="line"></span><br><span class="line">#define MY_TEST_MACRO_0911   &quot;in current dir&quot;</span><br><span class="line"></span><br><span class="line">#endif //__MY_HEADER__</span><br><span class="line">$ gcc 004_header_search.c </span><br><span class="line">$ ./a.out </span><br><span class="line">macro: in current dir</span><br><span class="line">$ </span><br><span class="line">$ vim 004_header_search.c </span><br><span class="line">$ cat 004_header_search.c </span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;my_header.h&gt;</span><br><span class="line"></span><br><span class="line">void main() &#123;</span><br><span class="line">    printf(&quot;macro: %s\n&quot;, MY_TEST_MACRO_0911);</span><br><span class="line">&#125;</span><br><span class="line">$ gcc 004_header_search.c </span><br><span class="line">004_header_search.c:2:10: fatal error: my_header.h: No such file or directory</span><br><span class="line">    2 | #include &lt;my_header.h&gt;</span><br><span class="line">      |          ^~~~~~~~~~~~~</span><br><span class="line">compilation terminated.</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+<h3 id="头文件搜索相关的command-option-和环境变量"><a href="#头文件搜索相关的command-option-和环境变量" class="headerlink" title="头文件搜索相关的command option 和环境变量"></a>头文件搜索相关的command option 和环境变量</h3><ul>
+<li>-I dir: 可以同时指定多个，优先级从左到右，可以使用.表示当前目录(-I. -I/special/include)</li>
+<li>-iquota dir: 只适用于以引号 “” 导入的头文件</li>
+<li>-isystem dir</li>
+<li>-idirafter dir</li>
+<li>CPATH: 可以指定多个，优先级从左到右，冒号分割，适用于C/C++/objc语言；可以包含空的元素(:/special/include)表示当前目录</li>
+<li>C_INCLUDE_PATH: 只适用于C语言</li>
+<li>CPLUS_INCLUDE_PATH: 只适用于C++语言</li>
+<li>OBJC_INCLUDE_PATH: 只适用于objc语言</li>
+</ul>
+<p><strong>查找顺序为：</strong></p>
+<ol>
+<li>对于用 #include “” 引号形式引入的头文件，首先搜索当前程序文件所在的目录，其次再前往 -iquote 选项指定的目录中查找；</li>
+<li>搜索 -I 选项指定的目录</li>
+<li>搜索 CPATH 环境变量指定的目录</li>
+<li>搜索 -isystem 选项指定的目录</li>
+<li>搜索C_INCLUDE_PATH/CPLUS_INCLUDE_PATH/OBJC_INCLUDE_PATH 环境变量指定的目录</li>
+<li>搜索默认的系统路径；<br>  1) /usr/lib/gcc/x86_64-linux-gnu/11/include<br>  2) /usr/local/include/x86_64-linux-gnu<br>  3) /usr/local/include<br>  4) /usr/lib/gcc/x86_64-linux-gnu/11/include-fixed<br>  5) /usr/x86_64-linux-gnu/include<br>  6) /usr/include/x86_64-linux-gnu<br>  7) /usr/include</li>
+<li>搜索-idirafter 选项指定的目录。</li>
+</ol>
+<blockquote>
+<p>如果默认的系统路径或-isystem指定的路径，也被指定在了-I的参数中时，-I里面的不生效。</p>
+</blockquote>
+<h3 id="gcc编译命令查看头文件查找顺序"><a href="#gcc编译命令查看头文件查找顺序" class="headerlink" title="gcc编译命令查看头文件查找顺序"></a>gcc编译命令查看头文件查找顺序</h3><p><strong>gcc 命令的-v参数可以显示编译过程中的调用的程序以及相关的日志信息</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">$ cat 004_header_search.c </span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &quot;my_header.h&quot;</span><br><span class="line"></span><br><span class="line">void main() &#123;</span><br><span class="line">    printf(&quot;macro: %s\n&quot;, MY_TEST_MACRO_0911);</span><br><span class="line">&#125;</span><br><span class="line">$ ls include |xargs -I dir -t cat include/dir/my_header.h |grep -i macro</span><br><span class="line">cat include/c_include_path/my_header.h</span><br><span class="line">#define MY_TEST_MACRO_0911   &quot;in c_include_path  dir&quot;</span><br><span class="line">cat include/c_path/my_header.h</span><br><span class="line">#define MY_TEST_MACRO_0911   &quot;in c_path  dir&quot;</span><br><span class="line">cat include/cplus_include_path/my_header.h</span><br><span class="line">#define MY_TEST_MACRO_0911   &quot;in cplus_include_path  dir&quot;</span><br><span class="line">cat include/dirafter/my_header.h</span><br><span class="line">#define MY_TEST_MACRO_0911   &quot;in dirafter dir&quot;</span><br><span class="line">cat include/include_1/my_header.h</span><br><span class="line">#define MY_TEST_MACRO_0911   &quot;in -I dir1&quot;</span><br><span class="line">cat include/include_2/my_header.h</span><br><span class="line">#define MY_TEST_MACRO_0911   &quot;in -I dir2&quot;</span><br><span class="line">cat include/objc_include_path/my_header.h</span><br><span class="line">#define MY_TEST_MACRO_0911   &quot;in objc_include_path  dir&quot;</span><br><span class="line">cat include/quote/my_header.h</span><br><span class="line">#define MY_TEST_MACRO_0911   &quot;in quote dir&quot;</span><br><span class="line">cat include/system/my_header.h</span><br><span class="line">#define MY_TEST_MACRO_0911   &quot;in system dir&quot;</span><br><span class="line">$ </span><br><span class="line">$ CPATH=./include/c_path/ C_INCLUDE_PATH=./include/c_include_path/ CPLUS_INCLUDE_PATH=./include/cplus_include_path/ OBJC_INCLUDE_PATH=./include/objc_include_path/ gcc 004_header_search.c  -I ./include/include_1/ -I ./include/include_2/ -iquote ./include/quote/ -isystem ./include/system/ -idirafter ./include/dirafter/ -v</span><br><span class="line"></span><br><span class="line">......</span><br><span class="line">#include &quot;...&quot; search starts here:</span><br><span class="line"> ./include/quote/</span><br><span class="line">#include &lt;...&gt; search starts here:</span><br><span class="line"> ./include/include_1/</span><br><span class="line"> ./include/include_2/</span><br><span class="line"> ./include/c_path/</span><br><span class="line"> ./include/system/</span><br><span class="line"> ./include/c_include_path/</span><br><span class="line"> /usr/lib/gcc/x86_64-linux-gnu/11/include</span><br><span class="line"> /usr/local/include/x86_64-linux-gnu</span><br><span class="line"> /usr/local/include</span><br><span class="line"> /usr/lib/gcc/x86_64-linux-gnu/11/include-fixed</span><br><span class="line"> /usr/x86_64-linux-gnu/include</span><br><span class="line"> /usr/include/x86_64-linux-gnu</span><br><span class="line"> /usr/include</span><br><span class="line"> ./include/dirafter/</span><br><span class="line">End of search list.</span><br><span class="line">......</span><br><span class="line">$ </span><br><span class="line">$ CPATH=./include/c_path/ gcc 004_header_search.c  -I ./include/system/ -isystem ./include/system/</span><br><span class="line">$ ./a.out </span><br><span class="line">macro: in c_path  dir</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -490,9 +506,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/linux/" rel="tag"># linux</a>
+            <a href="/tags/c/" rel="tag"># c</a>
           
-            <a href="/tags/bash/" rel="tag"># bash</a>
+            <a href="/tags/gcc/" rel="tag"># gcc</a>
           
         </div>
       
@@ -505,8 +521,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/30/linux/shell/" rel="next" title="bash启动介绍">
-                <i class="fa fa-chevron-left"></i> bash启动介绍
+              <a href="/2022/09/11/kernel/kernel/" rel="next" title="linux内核总结">
+                <i class="fa fa-chevron-left"></i> linux内核总结
               </a>
             
           </div>
@@ -515,8 +531,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/09/01/jenkins/jenkins-sh-read-env/" rel="prev" title="jenkins运行shell脚本时读取系统环境变量">
-                jenkins运行shell脚本时读取系统环境变量 <i class="fa fa-chevron-right"></i>
+              <a href="/2022/09/11/c/c/" rel="prev" title="C语言blog列表">
+                C语言blog列表 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -586,7 +602,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-count">87</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -699,7 +715,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">47</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">49</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -763,7 +783,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#特殊参数"><span class="nav-number">1.</span> <span class="nav-text">特殊参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">1.1.</span> <span class="nav-text">$$</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#include-“header-h”-与-include-lt-header-h-gt-区别"><span class="nav-number">1.</span> <span class="nav-text">#include “header.h” 与 #include &lt;header.h&gt; 区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#头文件搜索相关的command-option-和环境变量"><span class="nav-number">2.</span> <span class="nav-text">头文件搜索相关的command option 和环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gcc编译命令查看头文件查找顺序"><span class="nav-number">3.</span> <span class="nav-text">gcc编译命令查看头文件查找顺序</span></a></li></ol></div>
             
 
           </div>

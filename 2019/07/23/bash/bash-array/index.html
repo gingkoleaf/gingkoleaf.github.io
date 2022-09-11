@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="bash启动简介bash参数 Bash官网 Bash数组Bash字典 通过shell实现yaml模板变量替换 Unix系统中的Shebang符号">
-<meta name="keywords" content="总结,linux,bash">
+  <meta name="description" content="bash版本号 12bash --versionGNU bash, version 4.2.46(2)-release bash数组使用举例 数组声明赋值1234567891011# Declare array namesdeclare -a names   # 也可以不用声明，直接采用数组的赋值方式赋值，bash能自动识别为数组# 使用 [] 赋值names[0]=&quot;john&quot;names[1]=">
+<meta name="keywords" content="linux,bash">
 <meta property="og:type" content="article">
-<meta property="og:title" content="bash使用总结">
-<meta property="og:url" content="http://yoursite.com/2019/07/23/linux/bash-usage/index.html">
+<meta property="og:title" content="bash数组">
+<meta property="og:url" content="http://yoursite.com/2019/07/23/bash/bash-array/index.html">
 <meta property="og:site_name" content="Gingko Leaf">
-<meta property="og:description" content="bash启动简介bash参数 Bash官网 Bash数组Bash字典 通过shell实现yaml模板变量替换 Unix系统中的Shebang符号">
+<meta property="og:description" content="bash版本号 12bash --versionGNU bash, version 4.2.46(2)-release bash数组使用举例 数组声明赋值1234567891011# Declare array namesdeclare -a names   # 也可以不用声明，直接采用数组的赋值方式赋值，bash能自动识别为数组# 使用 [] 赋值names[0]=&quot;john&quot;names[1]=">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-05-20T05:24:21.960Z">
+<meta property="og:updated_time" content="2019-11-23T06:59:00.488Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="bash使用总结">
-<meta name="twitter:description" content="bash启动简介bash参数 Bash官网 Bash数组Bash字典 通过shell实现yaml模板变量替换 Unix系统中的Shebang符号">
+<meta name="twitter:title" content="bash数组">
+<meta name="twitter:description" content="bash版本号 12bash --versionGNU bash, version 4.2.46(2)-release bash数组使用举例 数组声明赋值1234567891011# Declare array namesdeclare -a names   # 也可以不用声明，直接采用数组的赋值方式赋值，bash能自动识别为数组# 使用 [] 赋值names[0]=&quot;john&quot;names[1]=">
 
 
 
@@ -115,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/07/23/linux/bash-usage/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/23/bash/bash-array/">
 
 
 
@@ -125,7 +125,7 @@
   };
 </script>
 
-  <title>bash使用总结 | Gingko Leaf</title>
+  <title>bash数组 | Gingko Leaf</title>
   
 
 
@@ -340,7 +340,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/23/linux/bash-usage/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/23/bash/bash-array/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="daybreak.gx">
@@ -357,7 +357,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">bash使用总结
+          <h1 class="post-title" itemprop="name headline">bash数组
 
               
             
@@ -383,7 +383,7 @@
                 
               
 
-              <time title="创建时间：2019-07-23 22:43:17" itemprop="dateCreated datePublished" datetime="2019-07-23T22:43:17+08:00">2019-07-23</time>
+              <time title="创建时间：2019-07-23 22:53:29" itemprop="dateCreated datePublished" datetime="2019-07-23T22:53:29+08:00">2019-07-23</time>
             
 
             
@@ -400,7 +400,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-05-20 13:24:21" itemprop="dateModified" datetime="2020-05-20T13:24:21+08:00">2020-05-20</time>
+                <time title="修改时间：2019-11-23 14:59:00" itemprop="dateModified" datetime="2019-11-23T14:59:00+08:00">2019-11-23</time>
               
             
           </span>
@@ -441,11 +441,14 @@
       
 
       
-        <p><a href="/2019/08/30/linux/shell">bash启动简介</a><br><a href="/2019/09/01/linux/shell-parameter">bash参数</a></p>
-<p><a href="https://www.gnu.org/software/bash/" target="_blank" rel="noopener">Bash官网</a></p>
-<p><a href="/2019/07/23/linux/bash-array">Bash数组</a><br><a href="/2019/08/08/linux/bash-dict">Bash字典</a></p>
-<p><a href="/2019/08/08/linux/shell-replace-yaml-template">通过shell实现yaml模板变量替换</a></p>
-<p><a href="https://blog.csdn.net/u012294618/article/details/78427864" target="_blank" rel="noopener">Unix系统中的Shebang符号</a></p>
+        <p>bash版本号</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bash --version</span><br><span class="line">GNU bash, version 4.2.46(2)-release</span><br></pre></td></tr></table></figure>
+<p>bash数组使用举例</p>
+<h3 id="数组声明赋值"><a href="#数组声明赋值" class="headerlink" title="数组声明赋值"></a>数组声明赋值</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Declare array names</span></span><br><span class="line"><span class="built_in">declare</span> -a names   <span class="comment"># 也可以不用声明，直接采用数组的赋值方式赋值，bash能自动识别为数组</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 [] 赋值</span></span><br><span class="line">names[0]=<span class="string">"john"</span></span><br><span class="line">names[1]=<span class="string">"lucy"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 () 赋值</span></span><br><span class="line">names=(<span class="string">"john"</span> <span class="string">"lucy"</span>)</span><br><span class="line">names=([0]=<span class="string">"john"</span> [1]=<span class="string">"lucy"</span>)</span><br><span class="line">names=([1]=<span class="string">"jessica"</span> [3]=<span class="string">"hanmeimei"</span>) <span class="comment"># 可以指定下标不连续</span></span><br></pre></td></tr></table></figure>
+<h3 id="数组读取及遍历"><a href="#数组读取及遍历" class="headerlink" title="数组读取及遍历"></a>数组读取及遍历</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 根据下标读取数组内容</span></span><br><span class="line">names=([0]=<span class="string">"lily"</span> [1]=<span class="string">"lucy"</span> [3]=<span class="string">"hanmeimei"</span>)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;names[1]&#125;</span>   <span class="comment"># lucy</span></span><br><span class="line"><span class="keyword">if</span> [[ <span class="variable">$&#123;names[2]&#125;</span> =~ <span class="string">""</span> ]]; <span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">"empty"</span>; <span class="keyword">else</span> <span class="built_in">echo</span> <span class="string">"not empty"</span>; <span class="keyword">fi</span>   <span class="comment"># empty</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印数组中所有元素， 此时打印出来的内容的是字符串列表</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;names[@]&#125;</span>    <span class="comment">#lily lucy hanmeimei</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印数组中元素的索引列表</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;!names[@]&#125;</span>   <span class="comment"># 0 1 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取数组长度</span></span><br><span class="line"><span class="comment"># 上面定义的数组下标虽然不连续，但是数组长度仍为 3</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;#names[@]&#125;</span>   <span class="comment"># 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 遍历数组</span></span><br><span class="line"><span class="keyword">for</span> name <span class="keyword">in</span> <span class="variable">$&#123;names[@]&#125;</span>;<span class="keyword">do</span> <span class="built_in">echo</span> <span class="variable">$name</span>; <span class="keyword">done</span></span><br><span class="line"><span class="comment"># lily</span></span><br><span class="line"><span class="comment"># lucy</span></span><br><span class="line"><span class="comment"># hanmeimei</span></span><br></pre></td></tr></table></figure>
+<h3 id="数组截取及组合"><a href="#数组截取及组合" class="headerlink" title="数组截取及组合"></a>数组截取及组合</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">names=(<span class="string">'lilei'</span> <span class="string">'jack'</span> <span class="string">'hanmeimei'</span> <span class="string">'lily'</span> <span class="string">'lucy'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 截取从索引 1 开始（包含索引 1）的后面 3 个元素</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;names[@]:1:3&#125;</span>    <span class="comment"># jack hanmeimei lily</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果未指定元素个数，则表示后面所有元素</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;names[@]:2&#125;</span>      <span class="comment"># hanmeimei lily lucy</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 两个数组组合</span></span><br><span class="line">names1=(<span class="string">'name1_1'</span> <span class="string">'name1_2'</span>)</span><br><span class="line">names2=(<span class="string">'name2_1'</span> <span class="string">'name2_2'</span> <span class="string">'name2_3'</span>)</span><br><span class="line">names=(<span class="variable">$&#123;names1[@]&#125;</span> <span class="variable">$&#123;names2[@]&#125;</span>)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;names[@]&#125;</span>    <span class="comment"># name1_1 name1_2 name2_1 name2_2 name2_3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 数组中增加元素</span></span><br><span class="line">names=(<span class="string">'lily'</span> <span class="string">'lucy'</span>)</span><br><span class="line">names=(<span class="string">"<span class="variable">$&#123;names[@]&#125;</span>"</span> <span class="string">"hanmeimei"</span>)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;names[@]&#125;</span>    <span class="comment"># lily lucy hanmeimei</span></span><br></pre></td></tr></table></figure>
+<h3 id="删除数据中元素"><a href="#删除数据中元素" class="headerlink" title="删除数据中元素"></a>删除数据中元素</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">names=(<span class="string">'lily'</span> <span class="string">'lucy'</span> <span class="string">'hanmeimei'</span> <span class="string">'lilei'</span> <span class="string">'jack'</span>)</span><br><span class="line"><span class="comment"># 删除数组中索引为 1 的元素</span></span><br><span class="line"><span class="built_in">unset</span> names[1]</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;names[@]&#125;</span>    <span class="comment"># lily hanmeimei lilei jack</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;!names[@]&#125;</span>   <span class="comment"># 0 2 3 4</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除整个数组</span></span><br><span class="line"><span class="built_in">unset</span> names</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用数组截取然后重新组合方式删除元素</span></span><br><span class="line">names=(<span class="string">'lily'</span> <span class="string">'lucy'</span> <span class="string">'hanmeimei'</span> <span class="string">'lilei'</span> <span class="string">'jack'</span>)</span><br><span class="line">names=(<span class="variable">$&#123;names[@]:0:1&#125;</span> <span class="variable">$&#123;names[@]:2&#125;</span>)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;names[@]&#125;</span>    <span class="comment"># lily hanmeimei lilei jack</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;!names[@]&#125;</span>   <span class="comment"># 0 1 2 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用模式操作符删除数组中的元素</span></span><br><span class="line">names=(<span class="string">'lily'</span> <span class="string">'lucy'</span> <span class="string">'hanmeimei'</span> <span class="string">'lilei'</span> <span class="string">'jack'</span>)</span><br><span class="line">names=(@&#123;names[@]/lucy/&#125;)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;names[@]&#125;</span>    <span class="comment"># lily hanmeimei lilei jack</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;!names[@]&#125;</span>   <span class="comment"># 0 1 2 3</span></span><br></pre></td></tr></table></figure>
+<h3 id="数组元素值替换"><a href="#数组元素值替换" class="headerlink" title="数组元素值替换"></a>数组元素值替换</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用数组下标赋值</span></span><br><span class="line">names=(<span class="string">'lilei'</span> <span class="string">'hanmeimei'</span> <span class="string">'lucy'</span> <span class="string">'lily'</span>)</span><br><span class="line">names[1]=<span class="string">'jessica'</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;names[@]&#125;</span>    <span class="comment"># lilei jessica lucy lily</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用模式操作符进行内容替换</span></span><br><span class="line">names=(<span class="string">'lilei'</span> <span class="string">'hanmeimei'</span> <span class="string">'lucy'</span> <span class="string">'lily'</span>)</span><br><span class="line">names=(<span class="variable">$&#123;names[@]/hanmeimei/jessica&#125;</span>)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;names[@]&#125;</span>    <span class="comment"># lilei jessica lucy lily</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -493,8 +496,6 @@
       
         <div class="post-tags">
           
-            <a href="/tags/总结/" rel="tag"># 总结</a>
-          
             <a href="/tags/linux/" rel="tag"># linux</a>
           
             <a href="/tags/bash/" rel="tag"># bash</a>
@@ -510,8 +511,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/22/jenkins/jenkins-serialization/" rel="next" title="pipeline序列化问题">
-                <i class="fa fa-chevron-left"></i> pipeline序列化问题
+              <a href="/2019/07/23/bash/bash-usage/" rel="next" title="bash使用总结">
+                <i class="fa fa-chevron-left"></i> bash使用总结
               </a>
             
           </div>
@@ -520,8 +521,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/23/linux/bash-array/" rel="prev" title="bash数组">
-                bash数组 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/08/bash/shell-replace-yaml-template/" rel="prev" title="通过shell实现yaml目标变量替换">
+                通过shell实现yaml目标变量替换 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -566,8 +567,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -582,7 +592,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-count">87</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -695,7 +705,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">47</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">49</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -748,6 +762,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数组声明赋值"><span class="nav-number">1.</span> <span class="nav-text">数组声明赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组读取及遍历"><span class="nav-number">2.</span> <span class="nav-text">数组读取及遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组截取及组合"><span class="nav-number">3.</span> <span class="nav-text">数组截取及组合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除数据中元素"><span class="nav-number">4.</span> <span class="nav-text">删除数据中元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组元素值替换"><span class="nav-number">5.</span> <span class="nav-text">数组元素值替换</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
