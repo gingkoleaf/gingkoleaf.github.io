@@ -336,6 +336,163 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/13/c/system-limits/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="daybreak.gx">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gingko Leaf">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2022/09/13/c/system-limits/" class="post-title-link" itemprop="url">获取linux系统限制</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2022-09-13 20:36:34 / 修改时间：22:52:31" itemprop="dateCreated datePublished" datetime="2022-09-13T20:36:34+08:00">2022-09-13</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>
+              
+OS: Ubuntu 22.04.1gcc: 11.2.0glibc: 2.35
+
+概述资源是有限的，所以在程序运行时，操作系统会对程序的很多行为都做了限制，可以把这些限制内容硬编码到程序中，但是很明显会影响程序的可移植性。因为在不同的场景下，某些限制的大小可能是不一样的。
+系统限制类型可以分为以
+              ...
+            </p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2022/09/13/c/system-limits/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/11/c/c/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -381,12 +538,24 @@
                 
               
 
-              <time title="创建时间：2022-09-11 13:55:49 / 修改时间：17:21:59" itemprop="dateCreated datePublished" datetime="2022-09-11T13:55:49+08:00">2022-09-11</time>
+              <time title="创建时间：2022-09-11 13:55:49" itemprop="dateCreated datePublished" datetime="2022-09-11T13:55:49+08:00">2022-09-11</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2022-09-13 20:37:28" itemprop="dateModified" datetime="2022-09-13T20:37:28+08:00">2022-09-13</time>
               
             
           </span>
@@ -423,7 +592,7 @@
         
           
             <p>
-              C语言标准gcc头文件搜索
+              C语言标准gcc头文件搜索系统限制
 
               
             </p>
@@ -535,12 +704,24 @@
                 
               
 
-              <time title="创建时间：2022-09-11 13:55:24 / 修改时间：16:52:48" itemprop="dateCreated datePublished" datetime="2022-09-11T13:55:24+08:00">2022-09-11</time>
+              <time title="创建时间：2022-09-11 13:55:24" itemprop="dateCreated datePublished" datetime="2022-09-11T13:55:24+08:00">2022-09-11</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2022-09-13 21:01:39" itemprop="dateModified" datetime="2022-09-13T21:01:39+08:00">2022-09-13</time>
               
             
           </span>
@@ -578,9 +759,9 @@
           
             <p>
               
-运行环境OS: Ubuntu 22.04.1gcc: 11.2.0glibc: 2.35
+OS: Ubuntu 22.04.1gcc: 11.2.0glibc: 2.35
 
-#include “header.h” 与 #include &lt;header.h&gt; 区别#include “header.h” 引入的头文件，默认会首先在 .c 当前目录查找；而#include
+#include “header.h” 与 #include &lt;header.h&gt; 区别#include “header.h” 引入的头文件，默认会首先在 .c 当前目录查找；而#include &lt
               ...
             </p>
           <!--noindex-->
@@ -1173,7 +1354,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2022-09-11 10:12:57" itemprop="dateModified" datetime="2022-09-11T10:12:57+08:00">2022-09-11</time>
+                <time title="修改时间：2022-09-13 20:35:38" itemprop="dateModified" datetime="2022-09-13T20:35:38+08:00">2022-09-13</time>
               
             
           </span>
@@ -1758,180 +1939,6 @@ iterator迭代器，用于表示一连串数据流的对象。
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/04/python/python3-doc-buildin-type/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="daybreak.gx">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Gingko Leaf">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2020/07/04/python/python3-doc-buildin-type/" class="post-title-link" itemprop="url">python3内置类型</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-07-04 20:55:16" itemprop="dateCreated datePublished" datetime="2020-07-04T20:55:16+08:00">2020-07-04</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-07-18 18:18:19" itemprop="dateModified" datetime="2020-07-18T18:18:19+08:00">2020-07-18</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              Python中主要的内置类型有
-
-数值类型(numberic)
-序列(sequence)
-字典(mapping)
-类(class)
-实例(instance)
-异常(exception)
-
-序列
-              
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2020/07/04/python/python3-doc-buildin-type/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1978,7 +1985,7 @@ iterator迭代器，用于表示一连串数据流的对象。
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">87</span>
+                    <span class="site-state-item-count">88</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2095,7 +2102,13 @@ iterator迭代器，用于表示一连串数据流的对象。
                     
                       
                     
-                    <span class="site-state-item-count">49</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">52</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

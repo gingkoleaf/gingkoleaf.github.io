@@ -105,7 +105,7 @@
 <meta property="og:description" content="ISO: International Organization for Standardization，国际化标准组织IEC: International Electrotechnical Commission，国际电子技术委员会ANSI: American National Standards Institute，美国国家标准学会。ANSI是ISO中代表美国的成员。IEEE: Institut">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/img/standard-graph.JPG">
-<meta property="og:updated_time" content="2022-09-11T02:12:57.664Z">
+<meta property="og:updated_time" content="2022-09-13T12:35:38.261Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言标准">
 <meta name="twitter:description" content="ISO: International Organization for Standardization，国际化标准组织IEC: International Electrotechnical Commission，国际电子技术委员会ANSI: American National Standards Institute，美国国家标准学会。ANSI是ISO中代表美国的成员。IEEE: Institut">
@@ -402,7 +402,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2022-09-11 10:12:57" itemprop="dateModified" datetime="2022-09-11T10:12:57+08:00">2022-09-11</time>
+                <time title="修改时间：2022-09-13 20:35:38" itemprop="dateModified" datetime="2022-09-13T20:35:38+08:00">2022-09-13</time>
               
             
           </span>
@@ -759,7 +759,7 @@
 <p>实线表示标准间的直接过渡，虚线则表示标准间有一定的瓜葛，这无非有两种情况：其一，一个标准被并入了另一标准；其二，一个标准依附于另一个标准。</p>
 </blockquote>
 <p><img src="/img/standard-graph.JPG" alt="各种标准之间的关系"></p>
-<h3 id="查看使用的POSIX-1标准"><a href="#查看使用的POSIX-1标准" class="headerlink" title="查看使用的POSIX.1标准"></a>查看使用的POSIX.1标准</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ ldd --version |grep -i ldd</span><br><span class="line">ldd (Ubuntu GLIBC 2.35-0ubuntu3.1) 2.35</span><br><span class="line">$ gcc --version |grep -i gcc</span><br><span class="line">gcc (Ubuntu 11.2.0-19ubuntu1) 11.2.0</span><br><span class="line">$ cat 002_standard.c </span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line"></span><br><span class="line">void main() &#123;</span><br><span class="line">    printf(&quot;posix standard: %ld\n&quot;, _POSIX_VERSION);</span><br><span class="line">&#125;</span><br><span class="line">$ gcc 002_standard.c </span><br><span class="line">$ ./a.out </span><br><span class="line">posix standard: 200809</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+<h3 id="查看使用的POSIX-1标准"><a href="#查看使用的POSIX-1标准" class="headerlink" title="查看使用的POSIX.1标准"></a>查看使用的POSIX.1标准</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ getconf _POSIX_VERSION</span><br><span class="line">200809</span><br><span class="line">$ ldd --version |grep -i ldd</span><br><span class="line">ldd (Ubuntu GLIBC 2.35-0ubuntu3.1) 2.35</span><br><span class="line">$ gcc --version |grep -i gcc</span><br><span class="line">gcc (Ubuntu 11.2.0-19ubuntu1) 11.2.0</span><br><span class="line">$ cat 002_standard.c </span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line"></span><br><span class="line">void main() &#123;</span><br><span class="line">    printf(&quot;posix standard: %ld\n&quot;, _POSIX_VERSION);</span><br><span class="line">&#125;</span><br><span class="line">$ gcc 002_standard.c </span><br><span class="line">$ ./a.out </span><br><span class="line">posix standard: 200809</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
 <h3 id="POSIX-1-2008-标准头文件"><a href="#POSIX-1-2008-标准头文件" class="headerlink" title="POSIX.1-2008 标准头文件"></a>POSIX.1-2008 标准头文件</h3><table>
 <thead>
 <tr>
@@ -1267,7 +1267,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">87</span>
+                    <span class="site-state-item-count">88</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1384,7 +1384,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">49</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">52</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
