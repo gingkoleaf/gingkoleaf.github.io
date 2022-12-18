@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="vscode + RemoteSSH插件/WSL插件 + clangd插件 + 编译数据库 编译数据库采用bear工具，在执行内核编译的make命令前添加bear命令即可（编译kernel前，先使用make menuconfig选择各种特性）。 注意clangd与vscode默认推荐的microsoft的c/c++插件C/C++ Extension Pack有冲突，如果有安装该插件，请先禁用 cl">
+  <meta name="description" content="vscode + RemoteSSH插件/WSL插件 + clangd插件 + 编译数据库 编译数据库采用bear工具，在执行内核编译的make命令前添加bear命令即可（编译kernel前，先使用make menuconfig选择各种特性）。 注意clangd与vscode默认推荐的microsoft的c/c++插件C/C++ Extension Pack有冲突，如果有安装该插件，请先禁用。cl">
 <meta name="keywords" content="vscode,kernel">
 <meta property="og:type" content="article">
 <meta property="og:title" content="内核代码阅读">
 <meta property="og:url" content="http://yoursite.com/2022/12/18/kernel/kernel-read-tool/index.html">
 <meta property="og:site_name" content="Gingko Leaf">
-<meta property="og:description" content="vscode + RemoteSSH插件/WSL插件 + clangd插件 + 编译数据库 编译数据库采用bear工具，在执行内核编译的make命令前添加bear命令即可（编译kernel前，先使用make menuconfig选择各种特性）。 注意clangd与vscode默认推荐的microsoft的c/c++插件C/C++ Extension Pack有冲突，如果有安装该插件，请先禁用 cl">
+<meta property="og:description" content="vscode + RemoteSSH插件/WSL插件 + clangd插件 + 编译数据库 编译数据库采用bear工具，在执行内核编译的make命令前添加bear命令即可（编译kernel前，先使用make menuconfig选择各种特性）。 注意clangd与vscode默认推荐的microsoft的c/c++插件C/C++ Extension Pack有冲突，如果有安装该插件，请先禁用。cl">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2022-12-18T03:48:14.197Z">
+<meta property="og:updated_time" content="2022-12-18T04:07:09.313Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="内核代码阅读">
-<meta name="twitter:description" content="vscode + RemoteSSH插件/WSL插件 + clangd插件 + 编译数据库 编译数据库采用bear工具，在执行内核编译的make命令前添加bear命令即可（编译kernel前，先使用make menuconfig选择各种特性）。 注意clangd与vscode默认推荐的microsoft的c/c++插件C/C++ Extension Pack有冲突，如果有安装该插件，请先禁用 cl">
+<meta name="twitter:description" content="vscode + RemoteSSH插件/WSL插件 + clangd插件 + 编译数据库 编译数据库采用bear工具，在执行内核编译的make命令前添加bear命令即可（编译kernel前，先使用make menuconfig选择各种特性）。 注意clangd与vscode默认推荐的microsoft的c/c++插件C/C++ Extension Pack有冲突，如果有安装该插件，请先禁用。cl">
 
 
 
@@ -383,7 +383,7 @@
                 
               
 
-              <time title="创建时间：2022-12-18 11:40:11 / 修改时间：11:48:14" itemprop="dateCreated datePublished" datetime="2022-12-18T11:40:11+08:00">2022-12-18</time>
+              <time title="创建时间：2022-12-18 11:40:11 / 修改时间：12:07:09" itemprop="dateCreated datePublished" datetime="2022-12-18T11:40:11+08:00">2022-12-18</time>
             
 
             
@@ -431,8 +431,9 @@
       
         <p>vscode + RemoteSSH插件/WSL插件 + clangd插件 + 编译数据库</p>
 <p>编译数据库采用bear工具，在执行内核编译的make命令前添加bear命令即可（编译kernel前，先使用make menuconfig选择各种特性）。</p>
-<p>注意clangd与vscode默认推荐的microsoft的c/c++插件<code>C/C++ Extension Pack</code>有冲突，如果有安装该插件，请先禁用</p>
-<p>clangd配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">--compile-commands-dir=$&#123;workspaceFolder&#125;</span><br><span class="line">--background-index</span><br><span class="line">--completion-style=detailed</span><br><span class="line">-log=info</span><br></pre></td></tr></table></figure></p>
+<p>注意clangd与vscode默认推荐的microsoft的c/c++插件<code>C/C++ Extension Pack</code>有冲突，如果有安装该插件，请先禁用。<br>clangd依赖后台的<code>clangd server</code>，通常情况下vscode会自动提示下载。</p>
+<p>clangd配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">--compile-commands-dir=$&#123;workspaceFolder&#125;</span><br><span class="line">--background-index</span><br><span class="line">--completion-style=detailed</span><br><span class="line">--header-insertion=never</span><br><span class="line">-log=info</span><br></pre></td></tr></table></figure></p>
+<p><a href="https://howardlau.me/programming/debugging-linux-kernel-with-vscode-qemu.html" target="_blank" rel="noopener">使用 VSCode + qemu 搭建 Linux 内核调试环境</a></p>
 
       
     </div>
