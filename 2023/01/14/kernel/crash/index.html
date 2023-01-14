@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="ubuntu 版本: Ubuntu 22.04.1 LTS   5.15.0-58.64-generic 5.15.74  crash白皮书crash githubUbuntu安装Kernel-debuginfo配置安装源12345678910111213141516baoze@baoze:~/workspace$ cat &amp;lt;&amp;lt;EOF | sudo tee /etc/apt/sour">
+<meta name="keywords" content="kernel,crash">
+<meta property="og:type" content="article">
+<meta property="og:title" content="crash">
+<meta property="og:url" content="http://yoursite.com/2023/01/14/kernel/crash/index.html">
+<meta property="og:site_name" content="Gingko Leaf">
+<meta property="og:description" content="ubuntu 版本: Ubuntu 22.04.1 LTS   5.15.0-58.64-generic 5.15.74  crash白皮书crash githubUbuntu安装Kernel-debuginfo配置安装源12345678910111213141516baoze@baoze:~/workspace$ cat &amp;lt;&amp;lt;EOF | sudo tee /etc/apt/sour">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2023-01-14T07:25:23.690Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="crash">
+<meta name="twitter:description" content="ubuntu 版本: Ubuntu 22.04.1 LTS   5.15.0-58.64-generic 5.15.74  crash白皮书crash githubUbuntu安装Kernel-debuginfo配置安装源12345678910111213141516baoze@baoze:~/workspace$ cat &amp;lt;&amp;lt;EOF | sudo tee /etc/apt/sour">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2023/01/14/kernel/crash/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>crash | Gingko Leaf</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gingko Leaf</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">我们趋行在人生这个亘古的旅途，在坎坷中奔跑，在挫折里涅槃，忧愁缠满全身，痛苦飘洒一地。我们累，却无从止歇；我们苦，却无法回避。</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/01/14/kernel/crash/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="daybreak.gx">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gingko Leaf">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">crash
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2023-01-14 11:03:22 / 修改时间：15:25:23" itemprop="dateCreated datePublished" datetime="2023-01-14T11:03:22+08:00">2023-01-14</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>ubuntu 版本: Ubuntu 22.04.1 LTS   5.15.0-58.64-generic 5.15.74</p>
+</blockquote>
+<h2 id="crash白皮书"><a href="#crash白皮书" class="headerlink" title="crash白皮书"></a><a href="https://crash-utility.github.io/crash_whitepaper.html" target="_blank" rel="noopener">crash白皮书</a></h2><h2 id="crash-github"><a href="#crash-github" class="headerlink" title="crash github"></a><a href="https://github.com/crash-utility/crash" target="_blank" rel="noopener">crash github</a></h2><h2 id="Ubuntu安装Kernel-debuginfo"><a href="#Ubuntu安装Kernel-debuginfo" class="headerlink" title="Ubuntu安装Kernel-debuginfo"></a>Ubuntu安装Kernel-debuginfo</h2><h3 id="配置安装源"><a href="#配置安装源" class="headerlink" title="配置安装源"></a>配置安装源</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">baoze@baoze:~/workspace$ cat &lt;&lt;EOF | sudo tee /etc/apt/sources.list.d/ddebs.list</span><br><span class="line">deb http://ddebs.ubuntu.com $(lsb_release -cs) main restricted universe multiverse</span><br><span class="line">#deb http://ddebs.ubuntu.com $(lsb_release -cs)-security main restricted universe multiverse</span><br><span class="line">deb http://ddebs.ubuntu.com $(lsb_release -cs)-updates main restricted universe multiverse</span><br><span class="line">deb http://ddebs.ubuntu.com $(lsb_release -cs)-proposed main restricted universe multiverse</span><br><span class="line">EOF</span><br><span class="line">baoze@baoze:~/workspace$ sudo apt update   #### 更新时提示没有公钥无法验证签名，需要添加公钥信息</span><br><span class="line">......</span><br><span class="line">W: GPG error: http://ddebs.ubuntu.com jammy Release: The following signatures couldn&apos;t be verified because the public key is not available: NO_PUBKEY C8CAB6595FDFF622</span><br><span class="line">E: The repository &apos;http://ddebs.ubuntu.com jammy Release&apos; is not signed.</span><br><span class="line">N: Updating from such a repository can&apos;t be done securely, and is therefore disabled by default.</span><br><span class="line">N: See apt-secure(8) manpage for repository creation and user configuration details.</span><br><span class="line">......</span><br><span class="line">baoze@baoze:~/workspace$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C8CAB6595FDFF622</span><br><span class="line">baoze@baoze:~/workspace$ sudo apt update</span><br><span class="line">baoze@baoze:~/workspace$ sudo apt install linux-image-unsigned-$(uname -r)-dbgsym</span><br></pre></td></tr></table></figure>
+<h3 id="直接下载安装"><a href="#直接下载安装" class="headerlink" title="直接下载安装"></a>直接下载安装</h3><p>到网站 <code>http://ddebs.ubuntu.com/pool/main/l/linux/</code> 下载对应的debug-info包，然后进行安装，<code>vmlinux</code>默认安装在<code>/usr/lib/debug/boot/vmlinux-5.15.0-58-generic</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">baoze@baoze:~/workspace$ wget http://ddebs.ubuntu.com/pool/main/l/linux/linux-image-unsigned-5.15.0-58-generic-dbgsym_5.15.0-58.64_amd64.ddeb</span><br><span class="line">baoze@baoze:~/workspace$ sudo dpkg -i linux-image-unsigned-5.15.0-58-generic-dbgsym_5.15.0-58.64_amd64.ddeb</span><br><span class="line">baoze@baoze:~/workspace$ sudo crash /usr/lib/debug/boot/vmlinux-5.15.0-58-generic </span><br><span class="line"></span><br><span class="line">crash 8.0.0</span><br><span class="line">Copyright (C) 2002-2021  Red Hat, Inc.</span><br><span class="line">Copyright (C) 2004, 2005, 2006, 2010  IBM Corporation</span><br><span class="line">Copyright (C) 1999-2006  Hewlett-Packard Co</span><br><span class="line">Copyright (C) 2005, 2006, 2011, 2012  Fujitsu Limited</span><br><span class="line">Copyright (C) 2006, 2007  VA Linux Systems Japan K.K.</span><br><span class="line">Copyright (C) 2005, 2011, 2020-2021  NEC Corporation</span><br><span class="line">Copyright (C) 1999, 2002, 2007  Silicon Graphics, Inc.</span><br><span class="line">Copyright (C) 1999, 2000, 2001, 2002  Mission Critical Linux, Inc.</span><br><span class="line">Copyright (C) 2015, 2021  VMware, Inc.</span><br><span class="line">This program is free software, covered by the GNU General Public License,</span><br><span class="line">and you are welcome to change it and/or distribute copies of it under</span><br><span class="line">certain conditions.  Enter &quot;help copying&quot; to see the conditions.</span><br><span class="line">This program has absolutely no warranty.  Enter &quot;help warranty&quot; for details.</span><br><span class="line"> </span><br><span class="line">GNU gdb (GDB) 10.2</span><br><span class="line">Copyright (C) 2021 Free Software Foundation, Inc.</span><br><span class="line">License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;</span><br><span class="line">This is free software: you are free to change and redistribute it.</span><br><span class="line">There is NO WARRANTY, to the extent permitted by law.</span><br><span class="line">Type &quot;show copying&quot; and &quot;show warranty&quot; for details.</span><br><span class="line">This GDB was configured as &quot;x86_64-pc-linux-gnu&quot;.</span><br><span class="line">Type &quot;show configuration&quot; for configuration details.</span><br><span class="line">Find the GDB manual and other documentation resources online at:</span><br><span class="line">    &lt;http://www.gnu.org/software/gdb/documentation/&gt;.</span><br><span class="line"></span><br><span class="line">For help, type &quot;help&quot;.</span><br><span class="line">Type &quot;apropos word&quot; to search for commands related to &quot;word&quot;...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">      KERNEL: /usr/lib/debug/boot/vmlinux-5.15.0-58-generic</span><br><span class="line">    DUMPFILE: /proc/kcore</span><br><span class="line">        CPUS: 2</span><br><span class="line">        DATE: Sat Jan 14 03:00:56 UTC 2023</span><br><span class="line">      UPTIME: 00:33:55</span><br><span class="line">LOAD AVERAGE: 0.77, 0.64, 0.56</span><br><span class="line">       TASKS: 441</span><br><span class="line">    NODENAME: baoze</span><br><span class="line">     RELEASE: 5.15.0-58-generic</span><br><span class="line">     VERSION: #64-Ubuntu SMP Thu Jan 5 11:43:13 UTC 2023</span><br><span class="line">     MACHINE: x86_64  (2399 Mhz)</span><br><span class="line">      MEMORY: 8 GB</span><br><span class="line">         PID: 3333</span><br><span class="line">     COMMAND: &quot;crash&quot;</span><br><span class="line">        TASK: ffff9a01d1994b00  [THREAD_INFO: ffff9a01d1994b00]</span><br><span class="line">         CPU: 1</span><br><span class="line">       STATE: TASK_RUNNING (ACTIVE)</span><br><span class="line"></span><br><span class="line">crash&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="安装crash"><a href="#安装crash" class="headerlink" title="安装crash"></a>安装crash</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">baoze@baoze:~/workspace$ sudo apt install crash</span><br><span class="line">baoze@baoze:~/workspace$ sudo crash /usr/lib/debug/boot/vmlinux-5.15.0-58-generic </span><br><span class="line"></span><br><span class="line">crash 8.0.0</span><br><span class="line">Copyright (C) 2002-2021  Red Hat, Inc.</span><br><span class="line">Copyright (C) 2004, 2005, 2006, 2010  IBM Corporation</span><br><span class="line">Copyright (C) 1999-2006  Hewlett-Packard Co</span><br><span class="line">Copyright (C) 2005, 2006, 2011, 2012  Fujitsu Limited</span><br><span class="line">Copyright (C) 2006, 2007  VA Linux Systems Japan K.K.</span><br><span class="line">Copyright (C) 2005, 2011, 2020-2021  NEC Corporation</span><br><span class="line">Copyright (C) 1999, 2002, 2007  Silicon Graphics, Inc.</span><br><span class="line">Copyright (C) 1999, 2000, 2001, 2002  Mission Critical Linux, Inc.</span><br><span class="line">Copyright (C) 2015, 2021  VMware, Inc.</span><br><span class="line">This program is free software, covered by the GNU General Public License,</span><br><span class="line">and you are welcome to change it and/or distribute copies of it under</span><br><span class="line">certain conditions.  Enter &quot;help copying&quot; to see the conditions.</span><br><span class="line">This program has absolutely no warranty.  Enter &quot;help warranty&quot; for details.</span><br><span class="line"> </span><br><span class="line">GNU gdb (GDB) 10.2</span><br><span class="line">Copyright (C) 2021 Free Software Foundation, Inc.</span><br><span class="line">License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;</span><br><span class="line">This is free software: you are free to change and redistribute it.</span><br><span class="line">There is NO WARRANTY, to the extent permitted by law.</span><br><span class="line">Type &quot;show copying&quot; and &quot;show warranty&quot; for details.</span><br><span class="line">This GDB was configured as &quot;x86_64-pc-linux-gnu&quot;.</span><br><span class="line">Type &quot;show configuration&quot; for configuration details.</span><br><span class="line">Find the GDB manual and other documentation resources online at:</span><br><span class="line">    &lt;http://www.gnu.org/software/gdb/documentation/&gt;.</span><br><span class="line"></span><br><span class="line">For help, type &quot;help&quot;.</span><br><span class="line">Type &quot;apropos word&quot; to search for commands related to &quot;word&quot;...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">      KERNEL: /usr/lib/debug/boot/vmlinux-5.15.0-58-generic</span><br><span class="line">    DUMPFILE: /proc/kcore</span><br><span class="line">        CPUS: 2</span><br><span class="line">        DATE: Sat Jan 14 03:00:56 UTC 2023</span><br><span class="line">      UPTIME: 00:33:55</span><br><span class="line">LOAD AVERAGE: 0.77, 0.64, 0.56</span><br><span class="line">       TASKS: 441</span><br><span class="line">    NODENAME: baoze</span><br><span class="line">     RELEASE: 5.15.0-58-generic</span><br><span class="line">     VERSION: #64-Ubuntu SMP Thu Jan 5 11:43:13 UTC 2023</span><br><span class="line">     MACHINE: x86_64  (2399 Mhz)</span><br><span class="line">      MEMORY: 8 GB</span><br><span class="line">         PID: 3333</span><br><span class="line">     COMMAND: &quot;crash&quot;</span><br><span class="line">        TASK: ffff9a01d1994b00  [THREAD_INFO: ffff9a01d1994b00]</span><br><span class="line">         CPU: 1</span><br><span class="line">       STATE: TASK_RUNNING (ACTIVE)</span><br><span class="line"></span><br><span class="line">crash&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="crash常用调试命令"><a href="#crash常用调试命令" class="headerlink" title="crash常用调试命令"></a>crash常用调试命令</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>help <command></td>
+<td>查看&lt;某个命令&gt;帮助信息</td>
+</tr>
+<tr>
+<td>log</td>
+<td>查看系统的日志</td>
+</tr>
+<tr>
+<td>bt</td>
+<td>查看堆栈信息</td>
+</tr>
+<tr>
+<td>set <pid></pid></td>
+<td>切换调试进程</td>
+</tr>
+<tr>
+<td>struct task_struct ffff8b7df3cdae00 -x</td>
+<td>把指定地址的内容以task_struct结构体解析打印，如果不带地址会显示结构体定义和大小</td>
+</tr>
+<tr>
+<td>dis -r ffffffff9a6010ae</td>
+<td>dis命令进行返汇编，查看对应地址的代码逻辑</td>
+</tr>
+<tr>
+<td>ps</td>
+<td>查看所有进程信息</td>
+</tr>
+<tr>
+<td>mod</td>
+<td>查看当前加载的module，通过其他参数也可以加载对应的module</td>
+</tr>
+<tr>
+<td>files</td>
+<td>查看打开的文件信息</td>
+</tr>
+<tr>
+<td>p init_task</td>
+<td>查看init_task变量的值</td>
+</tr>
+<tr>
+<td>vm</td>
+<td>查看虚拟内存</td>
+</tr>
+<tr>
+<td>list</td>
+<td>查看链表信息，可以遍历数据结构中的链表数据</td>
+</tr>
+</tbody>
+</table>
+<h3 id="list命令使用"><a href="#list命令使用" class="headerlink" title="list命令使用"></a>list命令使用</h3><blockquote>
+<p>list [[-o] offset][-e end][-[s|S] struct[.member[,member] [-l offset]] -[x|d]] [-r|-B] [-h [-O head_offset]|-H] start</p>
+</blockquote>
+<p>list命令解析链表的内容。内核中链表的方式通常有两种</p>
+<ul>
+<li>包含<code>next</code>指针的单链表</li>
+<li>使用<code>struct list_head</code>的双链表</li>
+</ul>
+<p><code>-o</code>参数： 结构体中执行<code>next</code>指针的偏移量（默认为0），通常可以采用<code>struct.member</code>来表示。<code>-o</code>可以省略输入<br><code>-e</code>参数： list的结束地址，通常情况下crash根据链表的规则自动结束<br><code>-s</code>参数： 需要输出的结构体中的成员，采用<code>struct.member1,member2</code>来表示，需要输出多个成员时，用<code>,</code>隔开。如果不输入该参数，则只打印地址信息。<br><code>-S</code>参数： 类似于<code>-s</code>，但不是解析gdb输出，而是直接从内存中读取成员值，因此该命令对于1-、2-、4-和8字节成员的工作速度要快得多<br><code>-x</code>参数： 将默认输出格式改为十六进制格式<br><code>-d</code>参数： 使用十进制格式覆盖默认输出格式<br><code>-r</code>参数： 对于一个链接到list_head结构的列表，使用“prev”指针而不是“next”，以相反的顺序遍历列表<br><code>start</code>参数： 第一个数据结构的地址。可以用十六进制的形式表示，也可以用表达式求值为一个地址，它取决于-h或-h选项是否在前面<br><code>-h start</code>参数： 包含嵌入list_head的数据结构的地址。<br><code>-H start</code>参数： list_head结构的地址，通常是外部独立的list_head()的地址。</p>
+<p>示例一</p>
+<p>全局变量<code>struct file_system_type file_systems</code>通过<code>next</code>指针来保存下一个文件系统的类型的数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">struct file_system_type &#123;</span><br><span class="line">  struct file_system_type * next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">crash&gt; p file_systems</span><br><span class="line">file_systems = $5 = (struct file_system_type *) 0xffffffffa3065620 &lt;sysfs_fs_type&gt;</span><br><span class="line">crash&gt; list file_system_type.next -s file_system_type.name,fs_flags 0xffffffffa3065620</span><br><span class="line">ffffffffa3065620</span><br><span class="line">  name = 0xffffffffa264a1c8 &quot;sysfs&quot;,</span><br><span class="line">  fs_flags = 8,</span><br><span class="line">ffffffffa300b760</span><br><span class="line">  name = 0xffffffffa267e0ef &quot;tmpfs&quot;,</span><br><span class="line">  fs_flags = 8200,</span><br><span class="line">ffffffffa30aebc0</span><br><span class="line">  name = 0xffffffffa260b14a &quot;bdev&quot;,</span><br><span class="line">  fs_flags = 0,</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+<p>示例二：</p>
+<p>全局变量<code>super_blocks</code>是<code>struct list_head</code>类型，链表中保存的是<code>struct super_block</code>类型的数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">static LIST_HEAD(super_blocks);</span><br><span class="line">struct super_block &#123;</span><br><span class="line">	struct list_head	s_list;</span><br><span class="line">  struct file_system_type	*s_type;</span><br><span class="line">  ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">crash&gt; p super_blocks</span><br><span class="line">super_blocks = $7 = &#123;</span><br><span class="line">  next = 0xffff9a01c004b800,</span><br><span class="line">  prev = 0xffff9a01cbe74800</span><br><span class="line">&#125;</span><br><span class="line">crash&gt; list super_block.s_list -s super_block.s_type -H super_blocks</span><br><span class="line">ffff9a01c004b800</span><br><span class="line">  s_type = 0xffffffffa300b760 &lt;shmem_fs_type&gt;,</span><br><span class="line">ffff9a01c004c000</span><br><span class="line">  s_type = 0xffffffffa2e1aea0 &lt;rootfs_fs_type&gt;,</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div></div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/img/WeChatQR.png" alt="daybreak.gx 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/kernel/" rel="tag"># kernel</a>
+          
+            <a href="/tags/crash/" rel="tag"># crash</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/01/14/ubuntu/ubuntu/" rel="next" title="ubuntu系统使用总结">
+                <i class="fa fa-chevron-left"></i> ubuntu系统使用总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2023/01/14/kernel/filesystem/" rel="prev" title="linux文件系统">
+                linux文件系统 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">daybreak.gx</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">93</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">57</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://opsx.alibaba.com/?lang=zh-CN" title="https://opsx.alibaba.com/?lang=zh-CN" rel="noopener" target="_blank">阿里巴巴开源镜像站</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mirrors.huaweicloud.com/" title="https://mirrors.huaweicloud.com/" rel="noopener" target="_blank">华为开源镜像站</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://mirrors.ustc.edu.cn/" title="http://mirrors.ustc.edu.cn/" rel="noopener" target="_blank">中国科学技术大学开源软件镜像</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mirror.tuna.tsinghua.edu.cn/" title="https://mirror.tuna.tsinghua.edu.cn/" rel="noopener" target="_blank">清华大学开源软件镜像站</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#crash白皮书"><span class="nav-number">1.</span> <span class="nav-text">crash白皮书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#crash-github"><span class="nav-number">2.</span> <span class="nav-text">crash github</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ubuntu安装Kernel-debuginfo"><span class="nav-number">3.</span> <span class="nav-text">Ubuntu安装Kernel-debuginfo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置安装源"><span class="nav-number">3.1.</span> <span class="nav-text">配置安装源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直接下载安装"><span class="nav-number">3.2.</span> <span class="nav-text">直接下载安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装crash"><span class="nav-number">4.</span> <span class="nav-text">安装crash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#crash常用调试命令"><span class="nav-number">5.</span> <span class="nav-text">crash常用调试命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#list命令使用"><span class="nav-number">5.1.</span> <span class="nav-text">list命令使用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">daybreak.gx</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
