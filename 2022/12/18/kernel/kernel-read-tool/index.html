@@ -105,7 +105,7 @@
 <meta property="og:description" content="环境: Ubuntu 22.04.1编译kernel版本: 5.15.86  官网资料clangd官网busybox官网qemu官网最新文档qemu 6.2.0文档代码阅读vscode + RemoteSSH插件/WSL插件 + clangd插件 + 编译数据库 编译数据库采用bear工具，在执行内核编译的make命令前添加bear命令即可（编译kernel前，先使用make menuconfi">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/img/gdb-multiarch-simple001.png">
-<meta property="og:updated_time" content="2023-01-24T14:07:21.248Z">
+<meta property="og:updated_time" content="2023-01-24T14:09:57.654Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="内核代码阅读与调试">
 <meta name="twitter:description" content="环境: Ubuntu 22.04.1编译kernel版本: 5.15.86  官网资料clangd官网busybox官网qemu官网最新文档qemu 6.2.0文档代码阅读vscode + RemoteSSH插件/WSL插件 + clangd插件 + 编译数据库 编译数据库采用bear工具，在执行内核编译的make命令前添加bear命令即可（编译kernel前，先使用make menuconfi">
@@ -402,7 +402,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2023-01-24 22:07:21" itemprop="dateModified" datetime="2023-01-24T22:07:21+08:00">2023-01-24</time>
+                <time title="修改时间：2023-01-24 22:09:57" itemprop="dateModified" datetime="2023-01-24T22:09:57+08:00">2023-01-24</time>
               
             
           </span>
@@ -470,7 +470,7 @@
 <p>arm64的rootfs采用initramfs方式编译到内核文件中，剩余操作在内核时执行</p>
 </blockquote>
 <h3 id="x86-64内核编译"><a href="#x86-64内核编译" class="headerlink" title="x86_64内核编译"></a>x86_64内核编译</h3><p>拷贝ubuntu系统的config文件到内核根目录 <code>cp /boot/config-5.15.0-58-generic .config</code></p>
-<p>执行 <code>make menuconfig</code> 命令修改编译配置</p>
+<p>执行 <code>make menuconfig</code> 命令</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Processor type and features--&gt;</span><br><span class="line">  [ ]   Randomize the address of the kernel image (KASLR)  </span><br><span class="line">Kernel hacking  ---&gt;</span><br><span class="line">  [*] Kernel debugging</span><br><span class="line">  Compile-time checks and compiler options  ---&gt;</span><br><span class="line">      [*] Compile the kernel with debug info</span><br><span class="line">      [*] Provide GDB scripts for kernel debugging</span><br><span class="line">-*- Cryptographic API  ---&gt;</span><br><span class="line">  Certificates for signature checking  ---&gt; </span><br><span class="line">    ()    Additional X.509 keys for default system keyrin</span><br><span class="line">    ()    X.509 certificates to be preloaded into the system blacklist keyring</span><br></pre></td></tr></table></figure>
 <p>执行 <code>make</code> 命令</p>
 <h3 id="arm64内核编译"><a href="#arm64内核编译" class="headerlink" title="arm64内核编译"></a>arm64内核编译</h3><p>通过<code>make defconfig</code>获取arm64的默认配置</p>
@@ -485,22 +485,25 @@
 <li><p>qemu启动arm内核</p>
 <p><code>qemu-system-aarch64 -m 2G -smp 1 -cpu cortex-a57 -machine virt --nographic -kernel arch/arm64/boot/Image -append &quot;rdinit=/linuxrc nokaslr console=ttyAMA0 loglevel=8&quot;</code></p>
 </li>
+<li><p>qemu启动x86_64内核</p>
+<p><code>qemu-system-x86_64 -m 2G -smp 1 -kernel arch/x86_64/boot/bzImage -hda ./rootfs.img  -append &quot;root=/dev/sda console=ttyS0&quot; -nographic</code></p>
+</li>
 </ul>
 <h2 id="内核调试"><a href="#内核调试" class="headerlink" title="内核调试"></a>内核调试</h2><p>安装多架构的gdb <code>apt install gdb-multiarch</code></p>
-<h3 id="qemu启动内核时调试"><a href="#qemu启动内核时调试" class="headerlink" title="qemu启动内核时调试"></a>qemu启动内核时调试</h3><p>  qemu启动内核时，添加 <code>-S</code> 和 <code>-s</code> 参数 <code>qemu-system-aarch64 -m 512M -smp 1 -cpu cortex-a57 -machine virt -kernel arch/arm64/boot/Image -append &quot;rdinit=/linuxrc nokaslr earlyprintk console=ttyAMA0 loglevel=8&quot; -nographic -S -s</code></p>
+<h3 id="qemu启动内核时调试"><a href="#qemu启动内核时调试" class="headerlink" title="qemu启动内核时调试"></a>qemu启动内核时调试</h3><p>qemu启动内核时，添加 <code>-S</code> 和 <code>-s</code> 参数 <code>qemu-system-aarch64 -m 512M -smp 1 -cpu cortex-a57 -machine virt -kernel arch/arm64/boot/Image -append &quot;rdinit=/linuxrc nokaslr earlyprintk console=ttyAMA0 loglevel=8&quot; -nographic -S -s</code></p>
 <blockquote>
 <p>-s shorthand for -gdb tcp::1234<br>-S freeze CPU at startup (use ‘c’ to start execution)</p>
 </blockquote>
-<p>  打开另外一个窗口<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">baoze@baoze:~/workspace/kernel/linux-5.15.86-arm64$ gdb-multiarch -tui ./vmlinux</span><br><span class="line">(gdb)target remote localhost:1234</span><br><span class="line">(gbd)b start_kernel</span><br><span class="line">(gdb)c</span><br></pre></td></tr></table></figure></p>
-<p>  <img src="/img/gdb-multiarch-simple001.png" alt="gdb-multiarch-simple001"></p>
-<h3 id="qemu正常启动内核后调试"><a href="#qemu正常启动内核后调试" class="headerlink" title="qemu正常启动内核后调试"></a>qemu正常启动内核后调试</h3><p>  qemu根据命令（不带<code>-S</code> 和 <code>-s</code>）正常启动内核后，可以通过组合键 <code>ctrl + a -&gt; c</code> 进入qemu的monitor控制台，然后执行<code>gdbserver</code>命令</p>
-<p>  在另外一个窗口中执行gdb-multiarch命令，然后链接到qemu端就可以了，操作同前。</p>
+<p>打开另外一个窗口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">baoze@baoze:~/workspace/kernel/linux-5.15.86-arm64$ gdb-multiarch -tui ./vmlinux</span><br><span class="line">(gdb)target remote localhost:1234</span><br><span class="line">(gbd)b start_kernel</span><br><span class="line">(gdb)c</span><br></pre></td></tr></table></figure></p>
+<p><img src="/img/gdb-multiarch-simple001.png" alt="gdb-multiarch-simple001"></p>
+<h3 id="qemu正常启动内核后调试"><a href="#qemu正常启动内核后调试" class="headerlink" title="qemu正常启动内核后调试"></a>qemu正常启动内核后调试</h3><p>qemu根据命令（不带<code>-S</code> 和 <code>-s</code>）正常启动内核后，可以通过组合键 <code>ctrl + a -&gt; c</code> 进入qemu的monitor控制台，然后执行<code>gdbserver</code>命令</p>
+<p>在另外一个窗口中执行gdb-multiarch命令，然后链接到qemu端就可以了，操作同前。</p>
 <blockquote>
 <p>从monitor控制台切换回终端也是 <code>ctrl + a -&gt; c</code>组合键</p>
 </blockquote>
-<h3 id="vscode调试"><a href="#vscode调试" class="headerlink" title="vscode调试"></a>vscode调试</h3><p>  安装<code>C/C++</code>插件，在.vscode/launch.json中添加以下内容</p>
-  <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"0.2.0"</span>,</span><br><span class="line">  <span class="attr">"configurations"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">          <span class="attr">"name"</span>: <span class="string">"kernel debug"</span>,</span><br><span class="line">          <span class="attr">"type"</span>: <span class="string">"cppdbg"</span>,</span><br><span class="line">          <span class="attr">"request"</span>: <span class="string">"launch"</span>,</span><br><span class="line">          <span class="attr">"program"</span>: <span class="string">"$&#123;workspaceFolder&#125;/vmlinux"</span>,</span><br><span class="line">          <span class="attr">"cwd"</span>: <span class="string">"$&#123;workspaceFolder&#125;"</span>,</span><br><span class="line">          <span class="attr">"MIMode"</span>: <span class="string">"gdb"</span>,</span><br><span class="line">          <span class="attr">"miDebuggerPath"</span>:<span class="string">"/usr/bin/gdb-multiarch"</span>,</span><br><span class="line">          <span class="attr">"miDebuggerServerAddress"</span>: <span class="string">"localhost:1234"</span></span><br><span class="line">      &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>  在vscode启动debug，打断点后，再执行qemu命令。</p>
+<h3 id="vscode调试"><a href="#vscode调试" class="headerlink" title="vscode调试"></a>vscode调试</h3><p>安装<code>C/C++</code>插件，在.vscode/launch.json中添加以下内容</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"0.2.0"</span>,</span><br><span class="line">  <span class="attr">"configurations"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">          <span class="attr">"name"</span>: <span class="string">"kernel debug"</span>,</span><br><span class="line">          <span class="attr">"type"</span>: <span class="string">"cppdbg"</span>,</span><br><span class="line">          <span class="attr">"request"</span>: <span class="string">"launch"</span>,</span><br><span class="line">          <span class="attr">"program"</span>: <span class="string">"$&#123;workspaceFolder&#125;/vmlinux"</span>,</span><br><span class="line">          <span class="attr">"cwd"</span>: <span class="string">"$&#123;workspaceFolder&#125;"</span>,</span><br><span class="line">          <span class="attr">"MIMode"</span>: <span class="string">"gdb"</span>,</span><br><span class="line">          <span class="attr">"miDebuggerPath"</span>:<span class="string">"/usr/bin/gdb-multiarch"</span>,</span><br><span class="line">          <span class="attr">"miDebuggerServerAddress"</span>: <span class="string">"localhost:1234"</span></span><br><span class="line">      &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在vscode启动debug，打断点后，再执行qemu命令。</p>
 <blockquote>
 <p>C/C++ 插件与clangd插件冲突，使用C/C++插件的时候要先将clangd插件禁用。</p>
 </blockquote>
