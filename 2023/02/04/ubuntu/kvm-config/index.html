@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Gingko Leaf">
 <meta property="og:description" content="测试环境 Ubuntu 22.04 (Ubuntu 5.15.0-58.64-generic 5.15.74) server版本  ubuntu server虚拟化官方文档suse 15sp2 虚拟化官方文档 概述KVM: Kernel-based Virtual Machine，基于内核的虚拟机，是全虚拟化的解决方案。 硬件要求 X86_64体系架构：  AMD系列中支持AMD-V（svm）">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2023-02-12T05:28:58.995Z">
+<meta property="og:updated_time" content="2023-02-20T14:57:39.414Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kvm虚拟化">
 <meta name="twitter:description" content="测试环境 Ubuntu 22.04 (Ubuntu 5.15.0-58.64-generic 5.15.74) server版本  ubuntu server虚拟化官方文档suse 15sp2 虚拟化官方文档 概述KVM: Kernel-based Virtual Machine，基于内核的虚拟机，是全虚拟化的解决方案。 硬件要求 X86_64体系架构：  AMD系列中支持AMD-V（svm）">
@@ -400,7 +400,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2023-02-12 13:28:58" itemprop="dateModified" datetime="2023-02-12T13:28:58+08:00">2023-02-12</time>
+                <time title="修改时间：2023-02-20 22:57:39" itemprop="dateModified" datetime="2023-02-20T22:57:39+08:00">2023-02-20</time>
               
             
           </span>
@@ -452,14 +452,13 @@
 <li><p>AMD系列中支持AMD-V（svm） 和 Intel系列中支持VT-x（vmx）的处理器 </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">baoze@baoze:~$ cat /proc/cpuinfo |grep -Eoc &quot;(svm|vmx)&quot;</span><br><span class="line">8</span><br><span class="line">baoze@baoze:~$</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
+<li><p>BIOS中未禁用虚拟化功能</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">baoze@baoze:~$ sudo apt install cpu-checker</span><br><span class="line">baoze@baoze:~$ kvm-ok</span><br><span class="line">INFO: /dev/kvm exists</span><br><span class="line">KVM acceleration can be used</span><br><span class="line">baoze@baoze:~$</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<pre><code>+ BIOS中未禁用虚拟化功能
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">baoze@baoze:~$ sudo apt install cpu-checker</span><br><span class="line">baoze@baoze:~$ kvm-ok</span><br><span class="line">INFO: /dev/kvm exists</span><br><span class="line">KVM acceleration can be used</span><br><span class="line">baoze@baoze:~$</span><br></pre></td></tr></table></figure>
-</code></pre><ul>
-<li>arm体系架构：最初是从 Arm Cortex-A15 开始向 Armv7-A 处理器添加虚拟化支持的，其中包括 Cortex-A7 和 Cortex-A17。Armv8-A 处理器包含虚拟化支持</li>
+</li>
+<li><p>arm体系架构：最初是从 Arm Cortex-A15 开始向 Armv7-A 处理器添加虚拟化支持的，其中包括 Cortex-A7 和 Cortex-A17。Armv8-A 处理器包含虚拟化支持</p>
+</li>
 </ul>
 <h2 id="kvm相关组件"><a href="#kvm相关组件" class="headerlink" title="kvm相关组件"></a>kvm相关组件</h2><p>包括两个主要组件：</p>
 <ul>
@@ -632,7 +631,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">96</span>
+                    <span class="site-state-item-count">97</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
